@@ -1,7 +1,5 @@
 window.onload = () => {
-  new Vue({ el: '#app' });
+    new Vue({ el: '#app1' });
+    new Vue({ el: '#app2' });
+    new Vue({ el: '#app3' });
 };
-
-function getResultStatus() {
-  document.getElementById('resultBlock').style.diplay = "inline";
-}
