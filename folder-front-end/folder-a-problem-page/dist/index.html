@@ -80,20 +80,24 @@ int main()
     return 0;
 }</pre>
             </div>
-            <div id="app3" style="position: relative; height: 60px">
-                <b-button pill variant="outline-secondary" style="position: absolute; right: 80px">Test</b-button>
-                <b-button pill variant="outline-secondary" style="position: absolute; right: 0">Submit</b-button>
-            </div>
-            <!-- change resultBlcok -->
-            <div id="resultBlock" style="display: none">
-                <p id="resultStatus">AC</p>
+            <div id="app3">
+                <div style="position: relative; height: 60px">
+                    <b-button v-on:click="counter = (counter % 2) + 1" pill variant="outline-secondary" style="position: absolute; right: 80px">Test</b-button>
+                    <b-button pill variant="outline-secondary" style="position: absolute; right: 0">Submit</b-button>
+                </div>
+                <!-- resultBlcok -->
+                <div v-bind:class="resultClassByCt" v-show="showResultByCt">
+                    <p>{{ counter }}</p>
+                    <p id="resultStatus">{{ msgByCt }}</p>
+                    <p id="resultDetail">Detail</p>
+                </div>
             </div>
         </div>
         <!-- mainBlock2 end -->
     </body>
     <!-- partial -->
     <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
-    <script src='http://unpkg.com/vue@2.6.10/dist/vue.min.js'></script>
+    <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
     <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
     <script src="script.js"></script>
     <!-- set ace -->
