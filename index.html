@@ -1,5 +1,5 @@
 <!--
-  這裡是首頁哦
+  這裡是首頁
   圖片都放在image資料夾中
 -->
 <!doctype html>
@@ -10,16 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!--連接index.css-->
+      <!--連接index.css-->
     <link rel = "stylesheet" type="text/css"  href = "css/index.css">
     <title>首頁</title>
   </head>
-
   <body>
 
-
     <!--網頁上方的navbar, 格式設定在index.css檔中-->
-    <nav class="navbar navbar-expand-lg navbar-light BackColor" >
+    <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
       <a class="navbar-brand" href="#">GreenTeam</a>
       <button class="navbar-toggler" type="button" >
         <span class="navbar-toggler-icon"></span>
@@ -27,31 +25,36 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="index.html"><img class="NavbarImage" src="image/home.svg"> 首頁 <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="index.html"><img class="navbarimage" src="image/home.svg"> Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="NavbarImage" src="image/file.svg"> 題目庫 </a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="image/file.svg"> Problems </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="NavbarImage" src="image/list-ordered.svg"> 排行榜 </a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="image/list-ordered.svg"> Ranking </a>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-              <a class="nav-link" href="#"><img class="NavbarImage" src="image/address-book-regular.svg"> 註冊 </a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="image/address-book-regular.svg"> Register </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="#"><img class="NavbarImage" src="image/sign-in-alt-solid.svg"> 登錄 </a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="image/sign-in-alt-solid.svg"> Login </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="#"><img class="NavbarImage" src="image/user-circle-solid.svg"></a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="image/user-circle-solid.svg"></a>
           </li>
         </ul>
       </div>
     </nav>
 
-
-
+    <!--內文區域-->
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1>GreenTeam Online-Judge System</h1>      
+        <p>it's good veryverygood system</p>
+      </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

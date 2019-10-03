@@ -1,7 +1,11 @@
-.BackColor {
-    background-color: #2ecc71
+body{
+  background-color: lightgray
 }
 
-.NavbarImage{
-    width: 23px
+.navbarset{
+  background-color: #56fd96
+}
+
+.navbarimage{
+  width: 23px
 }
