@@ -1,5 +1,5 @@
 <!--
-  這裡是首頁
+  這裡是排行榜
   圖片都放在image資料夾中
 -->
 <!doctype html>
@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <!--連接index.css-->
     <link rel = "stylesheet" type="text/css"  href = "css/index.css">
-    <title>GreenTeam Online-Judge</title>
+    <title>Ranking</title>
   </head>
   <body>
 
-    <!--網頁上方的navbar, 格式設定在index.css檔中-->
+    <!--navbar, 格式設定在index.css檔中-->
     <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
       <a class="navbar-brand" href="#">GreenTeam</a>
       <button class="navbar-toggler" type="button" >
@@ -48,14 +48,37 @@
       </div>
     </nav>
 
-    <!--內文區域-->
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1>GreenTeam Online-Judge System</h1>      
-        <p>it's good veryverygood system</p>
-      </div>
-    </div>
-
+    <!--排名表區域-->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
