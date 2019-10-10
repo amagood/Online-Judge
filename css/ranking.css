@@ -1,7 +1,11 @@
 .navbarset{
     background-color: #56fd96
-  }
-  
-  .navbarimage{
+}
+
+.navbarimage{
     width: 23px
-  }
+}
+
+.botton{
+    margin: 10px 5px 5px
+}

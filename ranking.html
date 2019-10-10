@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-      <!--連接index.css-->
-    <link rel = "stylesheet" type="text/css"  href = "css/index.css">
+      <!--連接ranking.css-->
+    <link rel = "stylesheet" type="text/css"  href = "css/ranking.css">
     <title>Ranking</title>
   </head>
   <body>
 
-    <!--navbar, 格式設定在index.css檔中-->
+    <!--navbar, 格式設定在ranking.css檔中-->
     <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
       <a class="navbar-brand" href="#">GreenTeam</a>
       <button class="navbar-toggler" type="button" >
@@ -48,34 +48,38 @@
       </div>
     </nav>
 
+    <!--選擇是否加入排名-->
+    <button type="button" class="btn btn-primary botton">attend</button>
+    <button type="button" class="btn btn-primary botton">not attend</button>
+
     <!--排名表區域-->
     <table class="table">
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <th scope="col">Name</th>
+          <th scope="col">Rate</th>
+          <th scope="col">AC/Commit</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th scope="row">1</th>
           <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <td>80%</td>
+          <td>40/50</td>
         </tr>
         <tr>
           <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
+          <td>Ted</td>
+          <td>60%</td>
+          <td>30/50</td>
         </tr>
         <tr>
           <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
+          <td>Ian</td>
+          <td>30%</td>
+          <td>15/50</td>
         </tr>
       </tbody>
     </table>
