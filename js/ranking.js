@@ -1,0 +1,3 @@
+fuction = addParticipants{
+    if()
+}
