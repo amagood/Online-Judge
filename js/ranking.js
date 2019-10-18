@@ -5,6 +5,7 @@ var userData={
     attendStatus:false,
 }
 
+//在叫出ranking.html時就呼叫下列函式
 //window.onload=callUserRank
 
 /*fuction=callUserRank{
@@ -13,7 +14,7 @@ var userData={
 */
 
 //參加排名後按鈕隱藏
-$('#attend').click(function(){
-    $('#attend').hide()
+$("#attend").click(function(){
+    $("#attend").hide()
     userData.attendStatus=true
 })
