@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>A Problem Page</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
+  <link rel="stylesheet" href="css/problem.css">
+</head>
+
+<body>
+  <!-- partial:index.partial.html -->
+
+  <body>
+    <!-- navbar -->
+    <div id="app1" style="border-bottom: 4px solid MediumSeaGreen">
+      <b-navbar toggleable="lg" type="light" variant="light">
+        <b-navbar-brand href="#">GreenTeam</b-navbar-brand>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+            <b-nav-item href="#">Problems</b-nav-item>
+            <b-nav-item href="#">Ranking</b-nav-item>
+          </b-navbar-nav>
+          <!-- Right aligned nav items -->
+          <b-navbar-nav class="ml-auto">
+            <!-- change Login and Register to button -->
+            <b-nav-item href="#">Login</b-nav-item>
+            <b-nav-item href="#">Register</b-nav-item>
+          </b-navbar-nav>
+
+        </b-collapse>
+      </b-navbar>
+    </div>
+    <!-- navbar end -->
+    <!-- mainBlock1 -->
+    <div class="mainBlock1">
+      <h1 class="bigTitle">Title</h1>
+      <!-- change, tag href -->
+      <p>#Tag1 #Tag2</p>
+      <h4 class="smallTitle">Description</h4>
+      <p class="content">Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A
+        plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B.
+        Calculate A plus B. Calculate A plus B.Calculate A plus B. </p>
+      <h4 class="smallTitle">Input</h4>
+      <p class="content">Two integers seperated by a space.</p>
+      <h4 class="smallTitle">Output</h4>
+      <p class="content">Sum of the two integers.</p>
+
+      <div>
+        <div class="sampleInOut">
+          <h4 class="smallTitle">Sample Input</h4>
+          <pre class="samplePre">1 2</pre>
+        </div>
+        <div class="sampleInOut">
+          <h4 class="smallTitle">Sample Out</h4>
+          <pre class="samplePre">3</pre>
+        </div>
+      </div>
+
+    </div>
+    <!-- mainBlock1 end -->
+    <!-- mainBlock2 -->
+    <div class="mainBlock2">
+      <div id="app2">
+        <span style="font-size: 18px; position: relative; top: 3px">Language:</span>
+        <b-dropdown text="C++" variant="light">
+          <b-dropdown-item>C++</b-dropdown-item>
+          <b-dropdown-item>C</b-dropdown-item>
+          <b-dropdown-item>Python</b-dropdown-item>
+        </b-dropdown>
+      </div>
+      <div class="aceEditorContainer">
+        <pre id="aceEditor">
+#include < iostream>
+using namespace std;
+
+int main()
+{
+    int a, b;
+    cin >> a >> b;
+    cout << a+b;
+    return 0;
+}</pre>
+      </div>
+      <div id="app3">
+        <div style="position: relative; height: 60px">
+          <b-button v-on:click="counter = (counter % 2) + 1" pill variant="outline-secondary"
+            style="position: absolute; right: 80px">Test</b-button>
+          <b-button pill variant="outline-secondary" style="position: absolute; right: 0">Submit</b-button>
+        </div>
+        <!-- resultBlcok -->
+        <div v-bind:class="resultClassByCt" v-show="showResultByCt">
+          <p>{{ counter }}</p>
+          <p id="resultStatus">{{ msgByCt }}</p>
+          <p id="resultDetail">Detail</p>
+        </div>
+      </div>
+    </div>
+    <!-- mainBlock2 end -->
+  </body>
+  <!-- partial -->
+  <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
+  <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
+  <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
+  <script src="js/problem.js"></script>
+  <!-- set ace -->
+  <script src="js/lib/ace-builds-master/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    var editor = ace.edit("aceEditor");
+    editor.setTheme("ace/theme/tomorrow");
+    editor.session.setMode("ace/mode/c_cpp");
+  </script>
+</body>
+
+</html>
