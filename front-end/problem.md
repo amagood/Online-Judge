@@ -1,3 +1,11 @@
+### 2019/10/19 Commit: Change Paths and Filenames
+	delete the folder src
+	delete the file license.txt
+	move the file index.html to front-end/problem.html
+	move the file style.css to front-end/css/problem.css
+	move the file script.js to front-end/js/problem.js
+	move the folder ace-builds-master to front-end/js/lib/ace-builds-master
+	move the file README.markdown to front-end/problem.md
 ### 2019/10/01 Commit: Show Tmp Test Result
 	only update flies in the folder "dist"
 	index.html
