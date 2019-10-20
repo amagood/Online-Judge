@@ -1,9 +1,12 @@
-### Commit: Test Post
+### 2019/10/20 Commit: Test Post 2
+	problem.js
+		successfully store response
+### 2019/10/19 Commit: Test Post
 	problem.html
 		add axios by using cdn
 	problem.js
-		restore encoding
-		post
+		restore the encoding
+		successfully send a test request, including code
 ### 2019/10/19 Commit: Change Paths and Filenames
 	delete the folder src
 	delete the file license.txt
@@ -12,6 +15,7 @@
 	move the file script.js to front-end/js/problem.js
 	move the folder ace-builds-master to front-end/js/lib/ace-builds-master
 	move the file README.markdown to front-end/problem.md
+	formate documents. mistake: change the encoding of problem.js
 ### 2019/10/01 Commit: Show Tmp Test Result
 	only update flies in the folder "dist"
 	index.html

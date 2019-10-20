@@ -1,5 +1,5 @@
-﻿new Vue({ el: "#app1" });
-new Vue({ el: "#app2" });
+﻿new Vue({ el: "#app1" })
+new Vue({ el: "#app2" })
 
 
 var submitObj = {
@@ -9,9 +9,11 @@ var submitObj = {
   "file":
   {
     "file1": "nothing in the editor",
+    /*comment test*/
   },
   "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9" //SHA3_512
 }
+var responseObj = null
 
 
 var app3 = new Vue({
@@ -20,9 +22,7 @@ var app3 = new Vue({
     counter: 0,
     showResult: true,
     resultClass: "resultBlockAC",
-    msg: "AC",
-    responseRst: null,
-    submitObj: submitObj
+    msg: "AC"
   },
   computed: {
     showResultByCt: function () {
@@ -47,18 +47,19 @@ var app3 = new Vue({
   methods: {
     // change url
     submitCode() {
-      this.getEditorValue();
-      axios.post("url", this.submitObj)
+      submitObj.file.file1 = editor.getValue();
+      axios.post("https://httpbin.org/anything", submitObj)
         .then(function (response) {
-          this.responseRst = response;
+          responseObj = response;
+          console.log(response);      // dbg msg
+          console.log(responseObj);   // dbg msg
         })
         .catch(function (error) {
-          this.responseRst = { err: "error! post failed." };
+          console.log(error);
         })
     },
-    getEditorValue() {
-      this.submitObj.file.file1 = editor.getValue();
-    }
-  }
-
-});
+    // getEditorValue() {  // dbg method
+    //   submitObj.file.file1 = editor.getValue();
+    // }
+  },
+})
