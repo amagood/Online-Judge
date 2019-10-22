@@ -1,5 +1,5 @@
-﻿new Vue({ el: "#app1" });
-new Vue({ el: "#app2" });
+﻿new Vue({ el: "#app1" })
+new Vue({ el: "#app2" })
 
 
 var submitObj = {
@@ -9,56 +9,79 @@ var submitObj = {
   "file":
   {
     "file1": "nothing in the editor",
+    /*if this message show up in object or JSON, error occur!*/
   },
   "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9" //SHA3_512
 }
-
+var responseObj = null
 
 var app3 = new Vue({
   el: "#app3",
   data: {
-    counter: 0,
-    showResult: true,
-    resultClass: "resultBlockAC",
-    msg: "AC",
-    responseRst: null,
-    submitObj: submitObj
+    showResult: false,
+    responseObj: {
+      "codeStats": "AC",
+      "errorMessage": "string of errorMessage..........",
+      "exeTime": "99999ms",
+      "errorOutputCompare": "size",
+      "wrongOutput": "your output",
+      "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9" //SHA3_512
+    }
   },
   computed: {
-    showResultByCt: function () {
-      if (this.counter > 0)
-        return true
+    resultClass: function () {
+      if (this.responseObj.codeStats == "AC")
+        return "resultAC"
       else
-        return false
-    },
-    resultClassByCt: function () {
-      if (this.counter == 2)
-        return "resultBlockWA"
-      else
-        return "resultBlockAC"
-    },
-    msgByCt: function () {
-      if (this.counter == 2)
-        return "WA"
-      else
-        return "AC"
+        return "resultWA"
     }
   },
   methods: {
     // change url
     submitCode() {
-      this.getEditorValue();
-      axios.post("url", this.submitObj)
+      submitObj.file.file1 = editor.getValue();
+      axios.post("https://httpbin.org/anything", submitObj)
         .then(function (response) {
-          this.responseRst = response;
+          responseObj = response;
+          console.log("responseObj:");
+          console.log(responseObj);   // dbg msg
         })
         .catch(function (error) {
-          this.responseRst = { err: "error! post failed." };
+          console.log(error);
         })
     },
-    getEditorValue() {
-      this.submitObj.file.file1 = editor.getValue();
-    }
-  }
+    // getEditorValue() {  // dbg method
+    //   submitObj.file.file1 = editor.getValue();
+    // },
+    copyResponseObj() {
+      this.responseObj.codeStats = responseObj.codeStats;
+      this.responseObj.errorMessage = responseObj.errorMessage;
+      this.responseObj.exeTime = responseObj.exeTime;
+      this.responseObj.errorOutputCompare = responseObj.errorOutputCompare;
+      this.responseObj.wrongOutput = responseObj.wrongOutput;
+      this.responseObj.hash = responseObj.hash;
+    },
+    testPost() {
+      submitObj.file.file1 = editor.getValue();
+      console.log("editor value:");
+      console.log(submitObj.file.file1);
+      console.log("如果上面的結果跟使用者輸入的程式碼不同則發生錯誤");
 
-});
+      axios.post("https://httpbin.org/anything", submitObj)
+        .then(function (response) {
+          var tmpResponse = JSON.parse(JSON.stringify(response));
+          console.log("tmpResponse:");
+          console.log(tmpResponse);
+          console.log("tmpResponse.data.json.file.file1:");
+          console.log(tmpResponse.data.json.file.file1);
+          console.log("如果上面的結果跟使用者輸入的程式碼不同則發生錯誤");
+          console.log("end\n\n\n\n\n\n\n");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      this.showResult = true;
+    }
+  },
+})

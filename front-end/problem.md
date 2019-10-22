@@ -1,9 +1,23 @@
-### Commit: Test Post
+### 2019/10/22 Commit: Test Post 3
+	problem.html
+		disabled test button, add it to a class
+		add event to submit button, add it to a class
+		change content of resultBlock, add a slide-fade transition
+	problem.css
+		rename resultBlockAC/WA to resultAC/WA
+		add .btnTest .btnSubmit and transition
+	problem.js
+		delete variables related to counter in app3.data and app3.computed. add other data
+		add copyResponseObj(), testPost()
+### 2019/10/20 Commit: Test Post 2
+	problem.js
+		successfully store response
+### 2019/10/19 Commit: Test Post
 	problem.html
 		add axios by using cdn
 	problem.js
-		restore encoding
-		post
+		restore the encoding
+		successfully send a test request, including code
 ### 2019/10/19 Commit: Change Paths and Filenames
 	delete the folder src
 	delete the file license.txt
@@ -12,6 +26,7 @@
 	move the file script.js to front-end/js/problem.js
 	move the folder ace-builds-master to front-end/js/lib/ace-builds-master
 	move the file README.markdown to front-end/problem.md
+	formate documents. mistake: change the encoding of problem.js
 ### 2019/10/01 Commit: Show Tmp Test Result
 	only update flies in the folder "dist"
 	index.html
