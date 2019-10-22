@@ -99,7 +99,7 @@ body {
   font-family: Consolas, Monaco, monospace;
 }
 
-.resultBlockAC {
+.resultAC {
   margin: 0px 30px;
   border-left: 8px solid MediumSeaGreen;
   padding-left: 12px;
@@ -107,10 +107,34 @@ body {
   box-shadow: 0px 0px 3px green;
 }
 
-.resultBlockWA {
+.resultWA {
   margin: 0px 30px;
   border-left: 8px solid #ff6666;
   padding-left: 12px;
   background-color: #fce9e9;
   box-shadow: 0px 0px 3px red;
 }
+
+.btnTest {
+  position: absolute;
+  right: 80px;
+}
+
+.btnSubmit {
+  position: absolute;
+  right: 0;
+}
+
+
+/* transition */
+.slide-fade-enter-active {
+  transition: all .8s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateY(-40px);
+  opacity: 0;
+}
+/* end of transition */

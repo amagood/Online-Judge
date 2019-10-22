@@ -87,16 +87,18 @@ int main()
       </div>
       <div id="app3">
         <div style="position: relative; height: 60px">
-          <b-button v-on:click="counter = (counter % 2) + 1" pill variant="outline-secondary"
-            style="position: absolute; right: 80px">Test</b-button>
-          <b-button pill variant="outline-secondary" style="position: absolute; right: 0">Submit</b-button>
+          <b-button disabled class="btnTest" pill variant="outline-secondary">Test</b-button>
+          <b-button class="btnSubmit" v-on:click="testPost()" pill variant="outline-secondary">Submit</b-button>
         </div>
         <!-- resultBlcok -->
-        <div v-bind:class="resultClassByCt" v-show="showResultByCt">
-          <p>{{ counter }}</p>
-          <p id="resultStatus">{{ msgByCt }}</p>
-          <p id="resultDetail">Detail</p>
-        </div>
+        <transition name="slide-fade">
+          <div v-bind:class="resultClass" v-if="showResult">
+            <!-- <p>{{ responseObj.codeStats }}</p>
+            <p>execution time: {{ responseObj.exeTime }}</p>
+            <p>error message: {{ responseObj.errorMessage }}</p> -->
+            <p>sent a request. Open DevTools and look for console.</p>
+          </div>
+        </transition>
       </div>
     </div>
     <!-- mainBlock2 end -->
