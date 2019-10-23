@@ -1,10 +1,12 @@
+### 2019/10/23 Commit: Show Correct Content of Lang Dropdown
+	problem.html  problem.js
+		show correct content of lang dropdown
 ### 2019/10/22 Commit: Test Post 3
 	problem.html
 		disabled test button, add it to a class
 		add event to submit button, add it to a class
 		change content of resultBlock, add a slide-fade transition
 	problem.css
-		rename resultBlockAC/WA to resultAC/WA
 		add .btnTest .btnSubmit and transition
 	problem.js
 		delete variables related to counter in app3.data and app3.computed. add other data

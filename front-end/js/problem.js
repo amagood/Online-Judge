@@ -1,5 +1,24 @@
 ﻿new Vue({ el: "#app1" })
-new Vue({ el: "#app2" })
+
+
+var codeLang = "C++"
+var app2 = new Vue({
+  el: "#app2",
+  data: {
+    codeLang: codeLang
+  },
+  methods: {
+    clickCpp() {
+      this.codeLang = "C++"
+    },
+    clickC() {
+      this.codeLang = "C"
+    },
+    clickPy() {
+      this.codeLang = "Python"
+    }
+  }
+})
 
 
 var submitObj = {
