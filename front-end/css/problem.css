@@ -66,10 +66,16 @@ body {
   /*   line-height: 24px; */
 }
 
+.sampleInOutContainer {
+  display: flex;
+  width: 100%;
+}
+
 .sampleInOut {
+  flex: 1;
   width: 40%;
   margin-right: 5%;
-  display: inline-block;
+  /* display: inline-block; */
 }
 
 .samplePre {
