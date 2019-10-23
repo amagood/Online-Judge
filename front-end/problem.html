@@ -66,10 +66,10 @@
     <div class="mainBlock2">
       <div id="app2">
         <span style="font-size: 18px; position: relative; top: 3px">Language:</span>
-        <b-dropdown variant="light" v-bind:text="codeLang">
-          <b-dropdown-item v-on:click="clickCpp()">C++</b-dropdown-item>
-          <b-dropdown-item v-on:click="clickC()">C</b-dropdown-item>
-          <b-dropdown-item v-on:click="clickPy()">Python</b-dropdown-item>
+        <b-dropdown variant="light" v-bind:text="langDisplay">
+          <b-dropdown-item v-on:click="clickLang('C++', 'cpp')">C++</b-dropdown-item>
+          <b-dropdown-item v-on:click="clickLang('C','c')">C</b-dropdown-item>
+          <b-dropdown-item v-on:click="clickLang('Python', 'python')">Python</b-dropdown-item>
         </b-dropdown>
       </div>
       <div class=" aceEditorContainer">

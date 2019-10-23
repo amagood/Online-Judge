@@ -1,3 +1,6 @@
+### 2019/10/23 Commit: Sync Lang and Request.language
+	problem.html  problem.js
+		rewrite a method.
 ### 2019/10/23 Commit: Show Correct Content of Lang Dropdown
 	problem.html  problem.js
 		show correct content of lang dropdown

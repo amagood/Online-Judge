@@ -1,21 +1,15 @@
 ﻿new Vue({ el: "#app1" })
 
 
-var codeLang = "C++"
 var app2 = new Vue({
   el: "#app2",
   data: {
-    codeLang: codeLang
+    langDisplay: "C++"
   },
   methods: {
-    clickCpp() {
-      this.codeLang = "C++"
-    },
-    clickC() {
-      this.codeLang = "C"
-    },
-    clickPy() {
-      this.codeLang = "Python"
+    clickLang(langDisplay, selectedLang) {
+      this.langDisplay = langDisplay;
+      submitObj.language = selectedLang;
     }
   }
 })
