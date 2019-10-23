@@ -66,10 +66,7 @@
     <div class="mainBlock2">
       <div id="app2">
         <span style="font-size: 18px; position: relative; top: 3px">Language:</span>
-        <b-dropdown variant="light">
-          <template v-slot:button-content>
-            {{codeLang}}
-          </template>
+        <b-dropdown variant="light" v-bind:text="codeLang">
           <b-dropdown-item v-on:click="clickCpp()">C++</b-dropdown-item>
           <b-dropdown-item v-on:click="clickC()">C</b-dropdown-item>
           <b-dropdown-item v-on:click="clickPy()">Python</b-dropdown-item>
