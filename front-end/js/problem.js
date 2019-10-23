@@ -1,10 +1,21 @@
 ﻿new Vue({ el: "#app1" })
 
 
+function copyFn(id) {
+  var val = document.getElementById(id);
+  window.getSelection().selectAllChildren(val);
+  document.execCommand("Copy");
+  // alert("Copy success!")
+  app2.showCopyPopup = true;
+  setTimeout(function () { app2.showCopyPopup = false; }, 1500);
+}
+
+
 var app2 = new Vue({
   el: "#app2",
   data: {
-    langDisplay: "C++"
+    langDisplay: "C++",
+    showCopyPopup: false
   },
   methods: {
     clickLang(langDisplay, selectedLang) {

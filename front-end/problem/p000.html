@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width">
   <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
   <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
-  <link rel="stylesheet" href="css/problem.css">
+  <link rel="stylesheet" href="../css/problem.css">
 </head>
 
 <body>
@@ -52,12 +52,14 @@
 
       <div class="sampleInOutContainer">
         <div class="sampleInOut">
-          <h4 class="smallTitle">Sample Input</h4>
-          <pre class="samplePre">1 2</pre>
+          <span class="smallTitle">Sample Input</span>
+          <img id="imgCopyIn" src="../image/copy.svg" alt="" onclick="copyFn('sampleIn')">
+          <pre id="sampleIn" class="samplePre">1 2</pre>
         </div>
         <div class="sampleInOut">
-          <h4 class="smallTitle">Sample Out</h4>
-          <pre class="samplePre">3</pre>
+          <span class="smallTitle">Sample Out</span>
+          <img id="imgCopyOut" src="../image/copy.svg" alt="" onclick="copyFn('sampleOut')">
+          <pre id="sampleOut" class="samplePre">3</pre>
         </div>
       </div>
 
@@ -66,6 +68,15 @@
     <!-- mainBlock2 -->
     <div class="mainBlock2">
       <div id="app2">
+        <!-- tooltip for copy SampleInOut -->
+        <b-tooltip target="imgCopyIn" title="Copy the sample input"></b-tooltip>
+        <b-tooltip target="imgCopyOut" title="Copy the sample output"></b-tooltip>
+        <transition name="slide-fade">
+          <div class="copyPopup" v-if="showCopyPopup">
+            <p>Copied!</p>
+          </div>
+        </transition>
+        <!-- tooltip for copy SampleInOut end -->
         <span style="font-size: 18px; position: relative; top: 3px">Language:</span>
         <b-dropdown variant="light" v-bind:text="langDisplay">
           <b-dropdown-item v-on:click="clickLang('C++', 'cpp')">C++</b-dropdown-item>
@@ -109,9 +120,9 @@ int main()
   <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
   <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="js/problem.js"></script>
+  <script src="../js/problem.js"></script>
   <!-- set ace -->
-  <script src="js/lib/ace-builds-master/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/lib/ace-builds-master/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
   <script>
     var editor = ace.edit("aceEditor");
     editor.setTheme("ace/theme/tomorrow");
