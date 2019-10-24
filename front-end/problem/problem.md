@@ -1,8 +1,12 @@
+### 2019/10/24 Hide Copy Popup When Init Render
+	p000.html  proble.js
+		hide copy popup when init render by using class binding and v-html directive
 ### 2019/10/23 Add Copy Img
 	move problem.html to front-end/problem/p000.html
 	add front-end/image/copy.svg
 	p000.html  problem.css  problem.js
 		add images next to sampleInOut
+		hover on it will show a tooltip
 		onclick will copy the content of sampleInOut and show a popup on top of page
 ### 2019/10/23 Improving Display of SampleInOut
 	problem.html  problem.css

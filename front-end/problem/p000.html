@@ -72,8 +72,8 @@
         <b-tooltip target="imgCopyIn" title="Copy the sample input"></b-tooltip>
         <b-tooltip target="imgCopyOut" title="Copy the sample output"></b-tooltip>
         <transition name="slide-fade">
-          <div class="copyPopup" v-if="showCopyPopup">
-            <p>Copied!</p>
+          <div v-bind:class="copyPopupClass" v-show="showCopyPopup">
+            <p v-html="rawHtml"></p>
           </div>
         </transition>
         <!-- tooltip for copy SampleInOut end -->

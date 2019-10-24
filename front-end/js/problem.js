@@ -15,7 +15,9 @@ var app2 = new Vue({
   el: "#app2",
   data: {
     langDisplay: "C++",
-    showCopyPopup: false
+    copyPopupClass: "copyPopup",
+    showCopyPopup: false,
+    rawHtml: "<p>Copied!</p>"
   },
   methods: {
     clickLang(langDisplay, selectedLang) {
