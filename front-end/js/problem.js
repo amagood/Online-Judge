@@ -1,15 +1,18 @@
-﻿new Vue({ el: "#app1" })
+﻿// app1
 
+new Vue({ el: "#app1" })
+
+// copy function
 
 function copyFn(id) {
   var val = document.getElementById(id);
   window.getSelection().selectAllChildren(val);
   document.execCommand("Copy");
-  // alert("Copy success!")
   app2.showCopyPopup = true;
   setTimeout(function () { app2.showCopyPopup = false; }, 1500);
 }
 
+// app2 for lang and copy toolip and copy popup
 
 var app2 = new Vue({
   el: "#app2",
@@ -23,10 +26,15 @@ var app2 = new Vue({
     clickLang(langDisplay, selectedLang) {
       this.langDisplay = langDisplay;
       submitObj.language = selectedLang;
+      if (selectedLang == "python")
+        editor.session.setMode("ace/mode/python");
+      else
+        editor.session.setMode("ace/mode/c_cpp");
     }
   }
 })
 
+// request and response object
 
 var submitObj = {
   "action": "submit_code",
@@ -40,6 +48,8 @@ var submitObj = {
   "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9" //SHA3_512
 }
 var responseObj = null
+
+// app3 for submit
 
 var app3 = new Vue({
   el: "#app3",
