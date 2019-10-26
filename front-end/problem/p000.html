@@ -123,12 +123,17 @@ int main()
   <script src="../js/problem.js"></script>
   <!-- set ace -->
   <script src="../js/lib/ace-builds-master/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/lib/ace-builds-master/src-min-noconflict/ext-language_tools.js" type="text/javascript"
+    charset="utf-8"></script>
   <script>
     var editor = ace.edit("aceEditor");
     editor.setTheme("ace/theme/tomorrow");
     editor.session.setMode("ace/mode/c_cpp");
     editor.session.setUseSoftTabs(true);
     editor.setShowPrintMargin(false);
+    editor.setOption("scrollPastEnd", 0.5)
+    editor.setOption("enableBasicAutocompletion", true)
+    editor.setOption("enableLiveAutocompletion", true)
   </script>
 </body>
 

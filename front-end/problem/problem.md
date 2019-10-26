@@ -1,3 +1,16 @@
+#### Feature
+	highlight selected word
+	multiselect
+	indent guides
+	fold
+	overscroll
+	search (regular expression, case sensitive, whole word, replace)
+	ctrl + / to comment and uncomment
+	live autocompletion
+### 2019/10/26 Set Ace Options
+	p000.html
+		ext-language_tools.js
+		scrollPastEnd, enableBasicAutocompletion, enableLiveAutocompletion
 ### 2019/10/26 Adjust Styling
 	p000.html
 		use soft tab in editor
