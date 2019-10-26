@@ -40,7 +40,7 @@
       <h1 class="bigTitle">Title</h1>
       <!-- change, tag href -->
       <p>#Tag1 #Tag2</p>
-      <h4 class="smallTitle">Description</h4>
+      <p class="smallTitle">Description</p>
       <p class="content">Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A
         plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B.
         Calculate A plus B. Calculate A plus B.Calculate A plus B. Input: Two integers seperated by a space. Output: Sum
@@ -127,6 +127,8 @@ int main()
     var editor = ace.edit("aceEditor");
     editor.setTheme("ace/theme/tomorrow");
     editor.session.setMode("ace/mode/c_cpp");
+    editor.session.setUseSoftTabs(true);
+    editor.setShowPrintMargin(false);
   </script>
 </body>
 

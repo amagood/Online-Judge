@@ -1,3 +1,10 @@
+### 2019/10/26 Adjust Styling
+	p000.html
+		use soft tab in editor
+		hide print margin of editor
+	problem.css
+		center copy popup horizontally, and set the stack order
+		trifle
 ### 2019/10/26 Set Mode Of Editor When Lang Selected
 	problem.js
 		set mode
