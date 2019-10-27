@@ -90,6 +90,12 @@
       </thead>
       <tbody>
         <rankList id="app1" v-for="userData in userData">
+          <tr>
+            <th scope="row">{{ userData.rank }}</th>
+            <td>{{ userData.name }}</td>
+            <td>{{ userData.passRate }}</td>
+            <td>{{ userData.ACTimes }} / {{ userData.commitTimes }}</td>
+          </tr>
         </rankList>
       </tbody>
     </table>
@@ -114,8 +120,10 @@
     <!--axios-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!--vue.js-->
-    <script src='http://unpkg.com/vue@2.6.10/dist/vue.js%27%3E</script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10"></script>
     <!--js檔-->
     <script src="js/ranking.js"></script>
+    <!--polyfill-->
+    <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-Vue.component("rankList",{
+/*Vue.component("rankList",{
   props: ["userData"],
   template: "
     <tr>
@@ -8,7 +8,7 @@ Vue.component("rankList",{
       <td>{{ userData.ACTimes }} / {{ userData.commitTimes }}</td>
     </tr>
   "
-})
+})*/
 
 //----app1 post請求的發送值, hash值還不知----
 var rankAction = {
