@@ -1,5 +1,10 @@
+### 2019/10/17 Commit: new add ranking bottom
+        ranking.html
+                1.新增按鈕
+        ranking.js
+                1.按下後隱藏功能
 ### 2019/10/10 Commit: new ranking page
-        ranking page
+        ranking.html
                 1.增加排行表
 ### 2019/10/3 Commit: modify indexpage
         index.html
