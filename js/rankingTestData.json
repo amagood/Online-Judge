@@ -1,7 +1,12 @@
-
-n001userData:[
-  n001Name:aaa,
-  n001ACTimes:0,
-  n001CommitTimes:0,
-  n001AttendStatus:true,
+"userData": [
+  {"Name": "aaa",
+  "ACTimes": "0",
+  "CommitTimes": "0",
+  "rank": "1",
+  "AttendStatus": "true",},
+  {"Name": "aaa",
+    "ACTimes": "0",
+    "CommitTimes": "0",
+    "rank": "1",
+    "AttendStatus": "true",}
 ]

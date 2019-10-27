@@ -2,54 +2,81 @@
   這裡是排行榜
   圖片都放在image資料夾中
 -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-Hant-TW">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <!--連接CSS-->
-    <link rel = "stylesheet" type="text/css"  href = "css/ranking.css">
+    <link rel="stylesheet" type="text/css" href="css/ranking.css" />
     <title>Ranking</title>
   </head>
   <body>
-
     <!--navbar, 格式設定在ranking.css檔中-->
-    <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+    <nav
+      class="navbar navbar-expand-lg navbar-light navbarset"
+      style="border-bottom: 4px solid MediumSeaGreen"
+    >
       <a class="navbar-brand" href="#">GreenTeam</a>
-      <button class="navbar-toggler" type="button" >
+      <button class="navbar-toggler" type="button">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="index.html"><img class="navbarimage" src="image/home.svg"> Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="index.html"
+              ><img class="navbarimage" src="image/home.svg" /> Home
+              <span class="sr-only">(current)</span></a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="image/file.svg"> Problems </a>
+            <a class="nav-link" href="#"
+              ><img class="navbarimage" src="image/file.svg" /> Problems
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="image/list-ordered.svg"> Ranking </a>
+            <a class="nav-link" href="#"
+              ><img class="navbarimage" src="image/list-ordered.svg" /> Ranking
+            </a>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="image/address-book-regular.svg"> Register </a>
+            <a class="nav-link" href="#"
+              ><img class="navbarimage" src="image/address-book-regular.svg" />
+              Register
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="image/sign-in-alt-solid.svg"> Login </a>
+            <a class="nav-link" href="#"
+              ><img class="navbarimage" src="image/sign-in-alt-solid.svg" />
+              Login
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="image/user-circle-solid.svg"></a>
+            <a class="nav-link" href="#"
+              ><img class="navbarimage" src="image/user-circle-solid.svg"
+            /></a>
           </li>
         </ul>
       </div>
     </nav>
 
     <!--選擇是否加入排名-->
-    <button id="app2" type="button" class="btn btn-primary botton">attend</button>
+    <button id="app2" type="button" class="btn btn-primary botton">
+      attend
+    </button>
 
     <!--排名表區域-->
     <table class="table">
@@ -62,8 +89,14 @@
         </tr>
       </thead>
       <tbody>
-        <app1List id="app1" v-for="(userData.rank, userDate.name, userDate.ACTimes, userDate.commitTimes, userDate.passRate) in userData">
-        </app1List>
+        <template id="app1" v-for="userData in userData">
+          <tr>
+            <th scope="row">{{ userData.rank }}</th>
+            <td>{{ userDate.name }}</td>
+            <td>{{ userDate.passRate }}</td>
+            <td>{{ userDate.ACTimes }} / {{ userDate.commitTimes }}</td>
+          </tr>
+        </template>
         <!--<tr>
           <th scope="row">2</th>
           <td>Ted</td>
@@ -81,14 +114,26 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
     <!--axios-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!--vue.js-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
     <!--js檔-->
-    <script src = "js/ranking.js"></script>
+    <script src="js/ranking.js"></script>
   </body>
 </html>
