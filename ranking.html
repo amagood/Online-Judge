@@ -92,9 +92,9 @@
         <template id="app1" v-for="userData in userData">
           <tr>
             <th scope="row">{{ userData.rank }}</th>
-            <td>{{ userDate.name }}</td>
-            <td>{{ userDate.passRate }}</td>
-            <td>{{ userDate.ACTimes }} / {{ userDate.commitTimes }}</td>
+            <td>{{ userData.name }}</td>
+            <td>{{ userData.passRate }}</td>
+            <td>{{ userData.ACTimes }} / {{ userData.commitTimes }}</td>
           </tr>
         </template>
       </tbody>
@@ -122,6 +122,6 @@
     <!--vue.js-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
     <!--js檔-->
-    <script src="js/ranking.vue"></script>
+    <script src="js/ranking.js"></script>
   </body>
 </html>
