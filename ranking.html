@@ -49,7 +49,7 @@
     </nav>
 
     <!--選擇是否加入排名-->
-    <button id="attend" type="button" class="btn btn-primary botton">attend</button>
+    <button id="app2" type="button" class="btn btn-primary botton">attend</button>
 
     <!--排名表區域-->
     <table class="table">
@@ -61,14 +61,10 @@
           <th scope="col">AC/Commit</th>
         </tr>
       </thead>
-      <tbody id="app">
-   <!-- <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>80%</td>
-          <td>40/50</td>
-        </tr>
-        <tr>
+      <tbody>
+        <app1List id="app1" v-for="(userData.rank, userDate.name, userDate.ACTimes, userDate.commitTimes, userDate.passRate) in userData">
+        </app1List>
+        <!--<tr>
           <th scope="row">2</th>
           <td>Ted</td>
           <td>60%</td>
