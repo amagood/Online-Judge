@@ -1,12 +1,26 @@
 #### Feature
+	live autocompletion
+	automatic indent and outdent
+	highlight matching parentheses
 	highlight selected word
-	multiselect
+	multiple cursors and selections
 	indent guides
-	fold
+	code folding
 	overscroll
 	search (regular expression, case sensitive, whole word, replace)
-	ctrl + / to comment and uncomment
-	live autocompletion
+	https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts
+	Line Operations:
+	Ctrl-/ : comment or uncomment
+	Ctrl-D : remove line
+	Alt-Shift-Down/Up : Copy lines down/up
+	Alt-Delete/Backspace : Remove to line end/start
+	Ctrl-Delete/Backspace : Remove word right/left
+	Go to:
+	Ctrl-L : Go to line
+	Ctrl-Down/Up : Scroll line down/up
+### 2019/10/27 Delete Ace Files, Add CDN Links
+	https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js
+	https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ext-language_tools.js
 ### 2019/10/26 Set Ace Options
 	p000.html
 		ext-language_tools.js
