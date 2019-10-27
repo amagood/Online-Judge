@@ -89,14 +89,8 @@
         </tr>
       </thead>
       <tbody>
-        <template id="app1" v-for="userData in userData">
-          <tr>
-            <th scope="row">{{ userData.rank }}</th>
-            <td>{{ userData.name }}</td>
-            <td>{{ userData.passRate }}</td>
-            <td>{{ userData.ACTimes }} / {{ userData.commitTimes }}</td>
-          </tr>
-        </template>
+        <rankList id="app1" v-for="userData in userData">
+        </rankList>
       </tbody>
     </table>
 

@@ -1,15 +1,27 @@
+Vue.component("rankList",{
+  props: ["userData"],
+  template: "
+    <tr>
+      <th scope="row">{{ userData.rank }}</th>
+      <td>{{ userData.name }}</td>
+      <td>{{ userData.passRate }}</td>
+      <td>{{ userData.ACTimes }} / {{ userData.commitTimes }}</td>
+    </tr>
+  "
+})
+
 //----app1 post請求的發送值, hash值還不知----
 var rankAction = {
   action: "rank",
   hash: "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
-};
+}
 
 //----app2 post請求的發送值, 改變學生參加排名狀態(預設應該為notAttend)----
 var attendRankList = {
   action: "attend_rank",
   attendStatus: "attend",
   hash: "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
-};
+}
 
 //----執行創建排名列表----
 var app1 = new Vue({
@@ -57,14 +69,18 @@ var app1 = new Vue({
     }
     */
   }
-});
+})
 
 //----執行使用者是否加入排名----
 var app2 = new Vue({
   el: "#app2",
-  data: {},
-  mounted: {}
-});
+  data: {
+
+  },
+  mounted: {
+
+  }
+})
 
 /*參加排名後按鈕隱藏
 $("#attend").click(function(){
