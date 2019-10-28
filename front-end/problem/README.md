@@ -1,3 +1,5 @@
+p000.html for server
+p000_local.html for local test
 #### Feature
 	live autocompletion
 	automatic indent and outdent
@@ -18,6 +20,10 @@
 	Go to:
 	Ctrl-L : Go to line
 	Ctrl-Down/Up : Scroll line down/up
+----
+### 2019/10/28 Server-Specific File
+	p000.html for server
+	p000_local.html for local test
 ### 2019/10/27 Delete Ace Files, Add CDN Links
 	https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js
 	https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ext-language_tools.js

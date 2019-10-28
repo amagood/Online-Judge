@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width">
   <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
   <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
-  <link rel="stylesheet" href={% static "polls/css/problem.css" %}>
+  <link rel="stylesheet" href="../css/problem.css">
 </head>
 
 <body>
@@ -53,12 +53,12 @@
       <div class="sampleInOutContainer">
         <div class="sampleInOut">
           <span class="smallTitle">Sample Input</span>
-          <img id="imgCopyIn" src={% static "polls/image/copy.svg" %} alt="" onclick="copyFn('sampleIn')">
+          <img id="imgCopyIn" src="../image/copy.svg" alt="" onclick="copyFn('sampleIn')">
           <pre id="sampleIn" class="samplePre">1 2</pre>
         </div>
         <div class="sampleInOut">
           <span class="smallTitle">Sample Out</span>
-          <img id="imgCopyOut" src={% static "polls/image/copy.svg" %} alt="" onclick="copyFn('sampleOut')">
+          <img id="imgCopyOut" src="../image/copy.svg" alt="" onclick="copyFn('sampleOut')">
           <pre id="sampleOut" class="samplePre">3</pre>
         </div>
       </div>
@@ -120,7 +120,7 @@ int main()
   <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
   <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src={% static "polls/js/problem.js" %}></script>
+  <script src="../js/problem.js"></script>
   <!-- set ace -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js"
     integrity="sha256-CVkji/u32aj2TeC+D13f7scFSIfphw2pmu4LaKWMSY8=" crossorigin="anonymous"></script>
