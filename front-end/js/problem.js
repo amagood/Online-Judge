@@ -2,7 +2,9 @@
 
 new Vue({ el: "#app1" })
 
+
 // copy function
+
 
 function copyFn(id) {
   var val = document.getElementById(id);
@@ -12,7 +14,9 @@ function copyFn(id) {
   setTimeout(function () { app2.showCopyPopup = false; }, 1500);
 }
 
-// app2 for lang and copy toolip and copy popup
+
+// app2 for lang, copy toolip, copy popup, theme
+
 
 var app2 = new Vue({
   el: "#app2",
@@ -20,7 +24,49 @@ var app2 = new Vue({
     langDisplay: "C++",
     copyPopupClass: "copyPopup",
     showCopyPopup: false,
-    rawHtml: "<p>Copied!</p>"
+    rawHtml: "<p>Copied!</p>",
+    themeSelected: "tomorrow",
+    themeOptions: [
+      { text: "----------Bright----------", disabled: true },
+      { text: "chrome" },
+      { text: "clouds" },
+      { text: "crimson_editor" },
+      { text: "dawn" },
+      { text: "dreamweaver" },
+      { text: "eclipse" },
+      { text: "github" },
+      { text: "iplastic" },
+      { text: "solarized_light" },
+      { text: "textmate" },
+      { text: "tomorrow" },
+      { text: "xcode" },
+      { text: "kuroir" },
+      { text: "katzenmilch" },
+      { text: "sqlserver" },
+      { text: "-----------Dark-----------", disabled: true },
+      { text: "ambiance" },
+      { text: "chaos" },
+      { text: "clouds_midnight" },
+      { text: "dracula" },
+      { text: "cobalt" },
+      { text: "gruvbox" },
+      { text: "gob" },
+      { text: "idle_fingers" },
+      { text: "kr_theme" },
+      { text: "merbivore" },
+      { text: "merbivore_soft" },
+      { text: "mono_industrial" },
+      { text: "monokai" },
+      { text: "pastel_on_dark" },
+      { text: "solarized_dark" },
+      { text: "terminal" },
+      { text: "tomorrow_night" },
+      { text: "tomorrow_night_blue" },
+      { text: "tomorrow_night_bright" },
+      { text: "tomorrow_night_eighties" },
+      { text: "twilight" },
+      { text: "vibrant_ink" }
+    ]
   },
   methods: {
     clickLang(langDisplay, selectedLang) {
@@ -30,11 +76,17 @@ var app2 = new Vue({
         editor.session.setMode("ace/mode/python");
       else
         editor.session.setMode("ace/mode/c_cpp");
+    },
+    clickTheme() {
+      let acePath = 'ace/theme/' + this.themeSelected;
+      editor.setTheme(acePath);
     }
   }
 })
 
+
 // request and response object
+
 
 var submitObj = {
   "action": "submit_code",
@@ -49,7 +101,9 @@ var submitObj = {
 }
 var responseObj = null
 
+
 // app3 for submit
+
 
 var app3 = new Vue({
   el: "#app3",
@@ -73,22 +127,16 @@ var app3 = new Vue({
     }
   },
   methods: {
-    // change url
     submitCode() {
       submitObj.file.file1 = editor.getValue();
       axios.post("https://httpbin.org/anything", submitObj)
         .then(function (response) {
           responseObj = response;
-          console.log("responseObj:");
-          console.log(responseObj);   // dbg msg
         })
         .catch(function (error) {
           console.log(error);
         })
     },
-    // getEditorValue() {  // dbg method
-    //   submitObj.file.file1 = editor.getValue();
-    // },
     copyResponseObj() {
       this.responseObj.codeStats = responseObj.codeStats;
       this.responseObj.errorMessage = responseObj.errorMessage;
@@ -121,3 +169,63 @@ var app3 = new Vue({
     }
   },
 })
+
+
+// set aceEditor
+
+
+ace.config.set("basePath", "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/");
+var editor = ace.edit("aceEditor");
+editor.setTheme("ace/theme/tomorrow");
+editor.session.setMode("ace/mode/c_cpp");
+editor.session.setUseSoftTabs(true);
+editor.setShowPrintMargin(false);
+editor.setOption("scrollPastEnd", 0.5)
+editor.setOption("enableBasicAutocompletion", true)
+editor.setOption("enableLiveAutocompletion", true)
+var aceEditorFontSize = 18;
+editor.commands.addCommand({
+  name: 'myCommandInc',
+  bindKey: { win: 'Ctrl-+', mac: 'Command-+' },
+  exec: function (editor) {
+    if (aceEditorFontSize < 40) {
+      aceEditorFontSize += 2;
+      document.getElementById('aceEditor').style.fontSize = aceEditorFontSize + 'px';
+    }
+  },
+  readOnly: true
+});
+editor.commands.addCommand({
+  name: 'myCommandInc2',
+  bindKey: { win: 'Ctrl-=', mac: 'Command-=' },
+  exec: function (editor) {
+    if (aceEditorFontSize < 40) {
+      aceEditorFontSize += 2;
+      document.getElementById('aceEditor').style.fontSize = aceEditorFontSize + 'px';
+    }
+  },
+  readOnly: true
+});
+editor.commands.addCommand({
+  name: 'myCommandDec',
+  bindKey: { win: 'Ctrl--', mac: 'Command--' },
+  exec: function (editor) {
+    if (aceEditorFontSize > 2) {
+      aceEditorFontSize -= 2;
+      document.getElementById('aceEditor').style.fontSize = aceEditorFontSize + 'px';
+    }
+  },
+  readOnly: true
+});
+var dom = require("ace/lib/dom");
+editor.commands.addCommand({
+  name: 'Toggle Fullscreen',
+  bindKey: "F11",
+  exec: function (editor) {
+    var fullScreen = dom.toggleCssClass(document.body, "fullScreen")
+    dom.setCssClass(editor.container, "fullScreen", fullScreen)
+    editor.setAutoScrollEditorIntoView(!fullScreen)
+    editor.resize()
+  },
+  readOnly: true
+});

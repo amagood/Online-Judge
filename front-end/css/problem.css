@@ -1,7 +1,7 @@
 /*
   mainColor: MediumSeaGreen / #01f97d
   backgroundColor: lightgray
-  whiteColor: #9fafb
+  whiteColor: #f9fafb
   titleBackgroundColor: #eee
   smallTitleColor: DodgerBlue
   grayBorderColor: #e9eaec
@@ -44,7 +44,6 @@ body {
 .bigTitle {
   border-left: 8px solid MediumSeaGreen;
   padding-left: 12px;
-  /*   line-height: 50px; */
   background-color: #eee;
   font-size: 40px;
   font-weight: 600;
@@ -63,7 +62,6 @@ body {
   font-size: 18px;
   font-weight: 400;
   text-indent: 40px;
-  /*   line-height: 24px; */
 }
 
 .sampleInOutContainer {
@@ -75,7 +73,6 @@ body {
   flex: 1;
   width: 40%;
   margin-right: 3%;
-  /* display: inline-block; */
 }
 
 .samplePre {
@@ -87,9 +84,6 @@ body {
 }
 
 .copyPopup {
-  /* position: fixed;
-  top: 0;
-  left: 46%; */
   position: fixed;
   width: 100px;
   height: 60px;
@@ -153,6 +147,7 @@ body {
 
 
 /* transition */
+
 .slide-fade-enter-active {
   transition: all .8s ease;
 }
@@ -163,4 +158,22 @@ body {
   transform: translateY(-40px);
   opacity: 0;
 }
-/* end of transition */
+
+/* aceEditor fullScreen */
+
+.ace_editor.fullScreen {
+  height: auto;
+  width: auto;
+  border: 0;
+  margin: 0;
+  position: fixed !important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+body.fullScreen {
+  overflow: hidden;
+  transform: none!important;
+}
