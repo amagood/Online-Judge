@@ -1,5 +1,10 @@
-
-### 2019/10/27 Commit: new ranking list
+### 2019/10/30 Commit: rankList work
+        ranking.html
+                1.改變boostraps,vue等的連結位置
+                2.<table>在沒有和後端連結的情況下可以運作
+        ranking.js
+                1.app1可以運作
+### 2019/10/27 Commit: new rankList
         ranking.html
                 1.新增個人排名列表模板
         ranking.js
