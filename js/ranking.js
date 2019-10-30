@@ -1,15 +1,3 @@
-/*Vue.component("rankList",{
-  props: ["userData"],
-  template: "
-    <tr>
-      <th scope="row">{{ userData.rank }}</th>
-      <td>{{ userData.name }}</td>
-      <td>{{ userData.passRate }}</td>
-      <td>{{ userData.ACTimes }} / {{ userData.commitTimes }}</td>
-    </tr>
-  "
-})*/
-
 //----app1 post請求的發送值, hash值還不知----
 var rankAction = {
   action: "rank",
@@ -27,34 +15,37 @@ var attendRankList = {
 var app1 = new Vue({
   el: "#app1",
   data: {
-    userData: [],
-    fakeUserData: [
+    userData: [
       {
-        Name: "aaa",
+        name: "aaa",
         ACTimes: "0",
-        CommitTimes: "0",
+        commitTimes: "0",
         rank: "1",
         AttendStatus: "true"
       },
       {
-        Name: "aaa",
-        ACTimes: "0",
-        CommitTimes: "0",
-        rank: "1",
+        name: "aaa22",
+        ACTimes: "1",
+        commitTimes: "2",
+        rank: "2",
         AttendStatus: "true"
       }
     ]
   },
-  /*computed: {
-    var fakeUserData.passRate = function(){
-      var rate = (userData.ACTimes*100)/userData.commitTimes
-      return rate
+  created: function() {
+    this.aaa()
+    //this.getRankList()
+  },
+  methods: {
+    aaa(){
+      for(let i=0; i<2; i++){
+        if(this.userData[i].commitTimes == 0)
+          this.userData[i].passRate = 0;
+        else
+          this.userData[i].passRate = (this.userData[i].ACTimes*100)/this.userData[i].commitTimes
+      }
     }
-  },*/
-  created: {
-    fakeGetRankList() {
-      this.userData = fakeUserData;
-    }
+
     /*真正用到的function
     getRankList(){
       axios.post("https://whereshouldIconnect",JSON.stringify(rankAction))
@@ -64,14 +55,18 @@ var app1 = new Vue({
           console.log(response.statusText)
           console.log(response.headers)
           console.log(response.config)
-          this.userData = JSON.parse(response)
+          this.userData = response.userData
+          for(let i=0; i<100; i++){
+            this.userData[i].passRate = (this.userData[i].ACTimes*100)/this.userData.commitTimes
+          }
         })
     }
     */
-  }
+  },
 })
 
 //----執行使用者是否加入排名----
+/*
 var app2 = new Vue({
   el: "#app2",
   data: {
@@ -81,6 +76,7 @@ var app2 = new Vue({
 
   }
 })
+*/
 
 /*參加排名後按鈕隱藏
 $("#attend").click(function(){
