@@ -1,29 +1,31 @@
 p000.html for server  
 p000_local.html for local test
-#### Feature
-	live autocompletion
-	automatic indent and outdent
-	highlight matching parentheses
-	highlight selected word
-	multiple cursors and selections
-	indent guides
-	code folding
-	overscroll
-	search (regular expression, case sensitive, whole word, replace)
-	https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts
-		Ctrl-+/= : Increase font-size
-		Ctrl-- : Decrease font-size
-		F11 : Toggle FullScreen
-	Line Operations:
-		Ctrl-/ : comment or uncomment
-		Ctrl-D : remove line
-		Alt-Shift-Down/Up : Copy lines down/up
-		Alt-Delete/Backspace : Remove to line end/start
-		Ctrl-Delete/Backspace : Remove word right/left
-	Go to:
-		Ctrl-L : Go to line
-		Ctrl-Down/Up : Scroll line down/up
+# Feature
+- live autocompletion
+- automatic indent and outdent
+- highlight matching parentheses
+- highlight selected word
+- multiple cursors and selections
+- indent guides
+- code folding
+- overscroll
+- search (regular expression, case sensitive, whole word, replace)
+- [Shortcuts](https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts)  
+`Ctrl-+/=` : Increase font-size  
+`Ctrl--` : Decrease font-size  
+`F11` : Toggle FullScreen  
+- Line Operations:  
+`Ctrl-/` : comment or uncomment  
+`Ctrl-D` : remove line  
+`Alt-Shift-Down/Up` : Copy lines down/up  
+`Alt-Delete/Backspace` : Remove to line end/start  
+`Ctrl-Delete/Backspace` : Remove word right/left  
+- Go to:  
+`Ctrl-L` : Go to line  
+`Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/10/31 Change Paths
+	move the files in the folder front-end out
 ### 2019/10/29 Add Keybinding to Font-size and FullScreen of Editor. Add Theme Menu.
 	Ctrl-+/= : Increase font-size
 	Ctrl-- : Decrease font-size
