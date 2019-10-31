@@ -24,6 +24,9 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/10/31 Fix Omission of White-Space in Description
+	problem.css
+		.content add property white-space: pre-line;
 ### 2019/10/31 Change Paths
 	move the files in the folder front-end out
 ### 2019/10/29 Add Keybinding to Font-size and FullScreen of Editor. Add Theme Menu.
