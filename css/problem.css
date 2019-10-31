@@ -62,7 +62,7 @@ body {
   font-size: 18px;
   font-weight: 400;
   text-indent: 40px;
-  white-space: pre-line;
+  white-space: pre-wrap;
 }
 
 .sampleInOutContainer {
