@@ -26,7 +26,7 @@ var app1 = new Vue({
       {
         name: "aaa22",
         ACTimes: "1",
-        commitTimes: "2",
+        commitTimes: "3",
         rank: "2",
         AttendStatus: "true"
       }
@@ -42,7 +42,7 @@ var app1 = new Vue({
         if(this.userData[i].commitTimes == 0)
           this.userData[i].passRate = 0;
         else
-          this.userData[i].passRate = (this.userData[i].ACTimes*100)/this.userData[i].commitTimes
+          this.userData[i].passRate = ((this.userData[i].ACTimes*100)/this.userData[i].commitTimes).toFixed(2)
       }
     }
 
