@@ -35,52 +35,42 @@
       </button>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html"><img class="navbarimage" src="../image/home.svg" /> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><img class="navbarimage" src="../image/file.svg" /> Problems</a>
+          </li>
           <li class="nav-item active">
-            <a class="nav-link" href="index.html">
-              <img class="navbarimage" src="image/home.svg" /> Home
-            </a>
+            <a class="nav-link" href="ranking.html"><img class="navbarimage" src="../image/list-ordered.svg" /> Ranking<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <img class="navbarimage" src="image/file.svg" /> Problems
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <img class="navbarimage" src="image/list-ordered.svg" /> Ranking
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <img class="navbarimage" src="image/list-ordered.svg" /> Comments
-            </a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="../image/comments-regular.svg" /> Comments</a>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <img class="navbarimage" src="image/address-book-regular.svg" /> Register
-            </a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="../image/address-book-regular.svg" /> Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login
-            </a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="../image/sign-in-alt-solid.svg" /> Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <img class="navbarimage" src="image/user-circle-solid.svg"/>
-            </a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="../image/user-circle-solid.svg"/></a>
           </li>
         </ul>
       </div>
     </nav>
 
     <!--選擇是否加入排名-->
-    <button id="app2" type="button" class="btn btn-primary botton">
-      attend
-    </button>
+    <div id="app2" >
+      <button type="button" v-show="isShow" v-on:click="sendAttendMSG" class="btn btn-outline-success attendButton">
+        Attend Rating
+      </button>
+      <button type="button" v-show="isShow" v-on:click="sendNotAttendMSG" class="btn btn-outline-success attendButton">
+        Not Attend
+      </button>
+    </div>
 
     <!--排名表區域-->
     <div id="app1">
