@@ -24,6 +24,10 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/11/09 Improve Styling on Lang and Theme
+	p000.html  problem.css
+		responsive styling by using flexbox, @media
+		add box-shadow
 ### 2019/10/31 Fix Omission of White-Space in Description
 	problem.css
 		.content add property white-space: pre-wrap;

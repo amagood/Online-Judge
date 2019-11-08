@@ -101,6 +101,29 @@ body {
   z-index: 5;
 }
 
+.langLbl {
+  font-size: 18px;
+  position: relative;
+  top: 3px;
+}
+
+.dropdown .dropdown-toggle {
+  box-shadow: 0px 0px 2px 1px #e0e0e0 inset;
+}
+
+.themeLbl {
+  font-size: 18px;
+  position: relative;
+  top: 3px;
+}
+
+.themeSelect {
+  width: 150px;
+  box-shadow: 0px 0px 2px 1px #e0e0e0 inset;
+  border-color: #f9fafb;
+  background-color: #f9fafb;
+}
+
 .aceEditorContainer {
   position: relative;
   width: 100%;
@@ -177,4 +200,16 @@ body {
 body.fullScreen {
   overflow: hidden;
   transform: none!important;
+}
+
+/* @media */
+
+@media only screen and (max-width: 500px) {
+  .langThemeFlexBox {
+    flex-direction: column !important;
+  }
+
+  .themeFlexBox {
+    margin-top: 8px;
+  }
 }

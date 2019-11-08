@@ -39,10 +39,9 @@
       <h1 class="bigTitle">Title</h1>
       <p>#Tag1 #Tag2</p>
       <p class="smallTitle">Description</p>
-      <p class="content">Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A
-        plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B.
-        Calculate A plus B. Calculate A plus B.Calculate A plus B. Input: Two integers seperated by a space. Output: Sum
-        of the two integers.</p>
+      <p class="content">Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B.Calculate A plus B. Input: Two integers seperated by a space. Output: Sum of the two integers.
+        white-space test              white-space test
+      </p>
       <div class="sampleInOutContainer">
         <div class="sampleInOut">
           <span class="smallTitle">Sample Input</span>
@@ -70,20 +69,25 @@
           </div>
         </transition>
         <!-- tooltip for copy SampleInOut end -->
-        <!-- Lang dropdown -->
-        <span style="font-size: 18px; position: relative; top: 3px">Language:</span>
-        <b-dropdown variant="light" v-bind:text="langDisplay">
-          <b-dropdown-item v-on:click="clickLang('C++', 'cpp')">C++</b-dropdown-item>
-          <b-dropdown-item v-on:click="clickLang('C','c')">C</b-dropdown-item>
-          <b-dropdown-item v-on:click="clickLang('Python', 'python')">Python</b-dropdown-item>
-        </b-dropdown>
-        <!-- Lang dropdown end -->
-        <!-- select form -->
-        <span style="font-size: 18px; position: absolute; right: 210px">Theme:</span>
-        <b-form-select v-model="themeSelected" v-on:change="clickTheme()" :options="themeOptions"
-          style="width: 200px; position: absolute; right: 0; background-color: #f9fafb">
-        </b-form-select>
-        <!-- select form end -->
+        <div class="d-flex langThemeFlexBox">
+          <!-- Lang dropdown -->
+          <div class="flex-fill">
+            <span class="langLbl">Language:</span>
+            <b-dropdown variant="light" v-bind:text="langDisplay">
+              <b-dropdown-item v-on:click="clickLang('C++', 'cpp')">C++</b-dropdown-item>
+              <b-dropdown-item v-on:click="clickLang('C','c')">C</b-dropdown-item>
+              <b-dropdown-item v-on:click="clickLang('Python', 'python')">Python</b-dropdown-item>
+            </b-dropdown>
+          </div>
+          <!-- Lang dropdown end -->
+          <!-- select form -->
+          <div class="themeFlexBox">
+            <span class="themeLbl">Theme:</span>
+            <b-form-select class="themeSelect" v-model="themeSelected" v-on:change="clickTheme()" :options="themeOptions">
+            </b-form-select>
+          </div>
+          <!-- select form end -->
+          </div>
       </div>
       <div class=" aceEditorContainer">
         <pre id="aceEditor">
@@ -122,10 +126,8 @@ int main()
   <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <!-- set ace -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js"
-    integrity="sha256-CVkji/u32aj2TeC+D13f7scFSIfphw2pmu4LaKWMSY8=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ext-language_tools.js"
-    integrity="sha256-5GsAp93HE/XYlhrUPMw4VBAoawG9n3c7+DbQE4tRwW0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js" integrity="sha256-CVkji/u32aj2TeC+D13f7scFSIfphw2pmu4LaKWMSY8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ext-language_tools.js" integrity="sha256-5GsAp93HE/XYlhrUPMw4VBAoawG9n3c7+DbQE4tRwW0=" crossorigin="anonymous"></script>
   <script src="../js/problem.js"></script>
 </body>
 
