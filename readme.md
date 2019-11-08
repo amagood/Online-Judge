@@ -1,3 +1,5 @@
+### 2019/11/01 Commit: replace files
+        inedx.js,ranking.js,comments.js>>js
 ### 2019/10/30 Commit: rankList work
         ranking.html
                 1.改變boostraps,vue等的連結位置
