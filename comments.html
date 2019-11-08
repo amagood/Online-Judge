@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
     />
     <!--連接CSS-->
-    <link rel="stylesheet" type="text/css" href="../css/ranking.css" />
+    <link rel="stylesheet" type="text/css" href="css/ranking.css" />
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -29,74 +29,40 @@
   <body>
     <!--navbar, 格式設定在ranking.css檔中-->
     <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href="#">GreenTeam</a>
+      <a class="navbar-brand" href="index.html">GreenTeam</a>
       <button class="navbar-toggler" type="button">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html"><img class="navbarimage" src="../image/home.svg" /> Home</a>
+            <a class="nav-link" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="../image/file.svg" /> Problems</a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="image/file.svg" /> Problems</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ranking.html"><img class="navbarimage" src="image/list-ordered.svg" /> Ranking</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="ranking.html"><img class="navbarimage" src="../image/list-ordered.svg" /> Ranking<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="../image/comments-regular.svg" /> Comments</a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="image/comments-regular.svg" /> Comments<span class="sr-only">(current)</span></a>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="../image/address-book-regular.svg" /> Register</a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="../image/sign-in-alt-solid.svg" /> Login</a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="../image/user-circle-solid.svg"/></a>
+            <a class="nav-link" href="#"><img class="navbarimage" src="image/user-circle-solid.svg"/></a>
           </li>
         </ul>
       </div>
     </nav>
 
-    <!--選擇是否加入排名-->
-    <div id="app2" >
-      <button type="button" v-show="isShow" v-on:click="sendAttendMSG" class="btn btn-outline-success attendButton">
-        Attend Rating
-      </button>
-      <button type="button" v-show="isShow" v-on:click="sendNotAttendMSG" class="btn btn-outline-success attendButton">
-        Not Attend
-      </button>
-    </div>
-
-    <!--排名表區域-->
-    <div id="app1">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Rate</th>
-            <th scope="col">AC/Commit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <template v-for="user in userData">
-            <tr>
-              <th scope="row">{{ user.rank }}</th>
-              <td>{{ user.name }}</td>
-              <td>{{ user.passRate }} %</td>
-              <td>{{ user.ACTimes }} / {{ user.commitTimes }}</td>
-            </tr>
-          </template>
-        </tbody>
-      </table>
-    </div>
-
     <!--js-->
-    <script src="../js/ranking.js"></script>
+    <script src="js/ranking.js"></script>
   </body>
 </html>
