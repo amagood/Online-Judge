@@ -1,12 +1,24 @@
 import os
+import json
 
-def RunCode(language):
+def RunCode(id, language):
+    with open("config.json") as file:
+        config = json.load(file)
+    containerId = config["containerId"]
+    code = id + "_code"
+    input = id + "_input"
+    output = id + "_output"
     if language == "c":
-        os.system("docker cp ./input.c 6b:/")
+        code += ".c"
     elif language == "c++":
-        os.system("docker cp ./input.cpp 6b:/")
+        code += ".cpp"
     elif language == "python":
-        os.system("docker cp ./input.py 6b:/")
-    os.system("docker exec 6b bash -c \"./compile.sh " + language + "\"")
-    os.system("docker cp 6b:/output.txt ./")
+        code += ".py"
+    else:
+        return 0
+    os.system("docker cp ./" + code + " " + containerId + ":/")
+    os.system("docker cp ./" + input + " " + containerId + ":/")
+    os.system("docker exec " + containerId + " bash -c \"./runCode.sh " \
+    + id + " " + language + "\"")
+    os.system("docker cp " + containerId + ":/" + output + " ./")
     return 0
