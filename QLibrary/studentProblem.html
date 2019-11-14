@@ -6,8 +6,11 @@
   <!-- Bootstrap css-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.css">
   <!--studentProblem.css-->
   <link rel="stylesheet" type="text/css" href="css/studentProblem.css">
+  <meta name="viewport" content="width=device-width">
 </head>
 
 <body>
@@ -48,15 +51,15 @@
       </nav>
       <!--navbar end-->
 
-      <div class="mainBlockStudentProblem">
+      <div id="app-1" class="mainBlockStudentProblem">
         <!--block 1 sortMenu-->
         <div>
           <b-dropdown dropup text="Target" variant="secondary">
-            <b-dropdown-item>迴圈</b-dropdown-item>
-            <b-dropdown-item>陣列</b-dropdown-item>
-            <b-dropdown-item>字串</b-dropdown-item>
-            <b-dropdown-item>函式</b-dropdown-item>
-            <b-dropdown-item>指標</b-dropdown-item>
+            <b-dropdown-item >Loop</b-dropdown-item>
+            <b-dropdown-item>Array</b-dropdown-item>
+            <b-dropdown-item>String</b-dropdown-item>
+            <b-dropdown-item>Function</b-dropdown-item>
+            <b-dropdown-item>Pointer</b-dropdown-item>
           </b-dropdown>
           <b-dropdown dropup text="Degree" variant="secondary" style="margin-left: 10px">
             <b-dropdown-item>easy</b-dropdown-item>
@@ -67,60 +70,8 @@
 
         <!--block 2 Problem-->
         <div style="margin-top: 20px; min-height: 480px;">
-          <table class="table table-hover" class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Target</th>
-                <th scope="col">Degree</th>
-                <th scope="col">Percentage Passing</th>
-                <th scope="col">Respondent</th>
-                <th scope="col">Input Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">001problem1</th>
-                <td>Target</td>
-                <td>Degree</td>
-                <td>Percentage Passing</td>
-                <td>Respondent</td>
-                <td>Input Time</td>
-              </tr>
-              <tr>
-                <th scope="row">002problem2</th>
-                <td>Target</td>
-                <td>Degree</td>
-                <td>Percentage Passing</td>
-                <td>Respondent</td>
-                <td>Input Time</td>
-              </tr>
-              <tr>
-                <th scope="row">003problem3</th>
-                <td>Target</td>
-                <td>Degree</td>
-                <td>Percentage Passing</td>
-                <td>Respondent</td>
-                <td>Input Time</td>
-              </tr>
-              <tr>
-                <th scope="row">004problem4</th>
-                <td>Target</td>
-                <td>Degree</td>
-                <td>Percentage Passing</td>
-                <td>Respondent</td>
-                <td>Input Time</td>
-              </tr>
-              <tr>
-                <th scope="row">005problem5</th>
-                <td>Target</td>
-                <td>Degree</td>
-                <td>Percentage Passing</td>
-                <td>Respondent</td>
-                <td>Input Time</td>
-              </tr>
-            </tbody>
-          </table>
+          <b-table  sticky hover :items="items" :fields="fields">
+          </b-table>
         </div>
 
         <!--block 3 Page-->
@@ -146,6 +97,7 @@
   <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
   <script src='http://unpkg.com/vue@2.6.10/dist/vue.min.js'></script>
   <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
+  <script src='http://unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.js'></script>
   <script src="js/studentProblem.js"></script>
 </body>
 

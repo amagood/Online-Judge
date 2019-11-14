@@ -23,6 +23,7 @@ body{
   border-radius: 10px;
 }
 
+body { padding: 1rem; }
 /* Table設定 
 .problemTable{
   width:100% ;
