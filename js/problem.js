@@ -83,9 +83,10 @@ var submitObj = {
   {
     "file1": "nothing in the editor", /*if this message show up in object or JSON, error occur!*/
   },
-  "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9" //SHA3_512
+  "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
-var httpPostURL = "https://httpbin.org/response-headers?freeform=%7B%22codeStats%22%20%3A%20%22AC%22%2C%22errorMessage%22%20%3A%20%22string..........%22%2C%22exeTime%22%20%3A%20%2299999ms%22%2C%22errorOutputCompare%22%20%3A%20%22size%22%2C%22wrongOutput%22%20%3A%20%22your%20output%22%2C%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%7D";
+var postURL = "http://127.0.0.1:8000/submit/"
+var testMode = false
 var tmpObj = {}
 
 
@@ -119,16 +120,19 @@ var app3 = new Vue({
       this.showWA = false;
       this.showMLE = false;
       this.showERR = false;
-      axios.post(httpPostURL, submitObj)
+      axios.post(postURL, submitObj)
         .then(function (response) {
           app3.showSpinner = false;
-          tmpObj = JSON.parse(response.data.freeform); console.log(tmpObj);
-          app3.codeStats = tmpObj.codeStats;
-          app3.errorMessage = tmpObj.errorMessage;
-          app3.exeTime = tmpObj.exeTime;
-          app3.errorOutputCompare = tmpObj.errorOutputCompare;
-          app3.wrongOutput = tmpObj.wrongOutput;
-          app3.hash = tmpObj.hash;
+          if (testMode)
+            tmpObj = JSON.parse(response.data.freeform);
+          else
+            tmpObj = JSON.parse(response.data); console.log(tmpObj);
+          app3.codeStats           = tmpObj.codeStats;
+          app3.errorMessage        = tmpObj.errorMessage;
+          app3.exeTime             = tmpObj.exeTime;
+          app3.errorOutputCompare  = tmpObj.errorOutputCompare;
+          app3.wrongOutput         = tmpObj.wrongOutput;
+          app3.hash                = tmpObj.hash;
           app3["show" + tmpObj.codeStats] = true;
         })
         .catch(function (error) {

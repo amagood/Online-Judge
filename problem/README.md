@@ -24,6 +24,10 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/11/15 postURL, testMode
+	css js
+	improve display of result when submit after the first time
+	variables postURL, testMode(bool)
 ### 2019/11/15 Submit, Transition, Visibility, Spinner, Overflow
 	html css js
 	show corresponding result after submit
