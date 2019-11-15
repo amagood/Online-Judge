@@ -1,4 +1,4 @@
-﻿<!-- version: 1911152 -->
+﻿<!-- version: 191116 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,12 +45,12 @@
     <div class="sampleInOutContainer">
       <div class="sampleInOut">
         <span class="smallTitle">Sample Input</span>
-        <img id="imgCopyIn" src={% static "polls/image/copy.svg" %} alt="" onclick="copyFn('sampleIn')">
+        <img id="imgCopyIn" src={% static "polls/image/copy.svg" %} alt="" onclick="copyFn('sampleIn')" style="cursor: pointer;">
         <pre id="sampleIn" class="samplePre">1 2</pre>
       </div>
       <div class="sampleInOut">
         <span class="smallTitle">Sample Out</span>
-        <img id="imgCopyOut" src={% static "polls/image/copy.svg" %} alt="" onclick="copyFn('sampleOut')">
+        <img id="imgCopyOut" src={% static "polls/image/copy.svg" %} alt="" onclick="copyFn('sampleOut')" style="cursor: pointer;">
         <pre id="sampleOut" class="samplePre">3</pre>
       </div>
     </div>
@@ -102,6 +102,7 @@ int main()
   return 0;
 }</pre>
     </div>
+    <div class="dragbar" id="dragbar"></div>
     <!-- <b-spinner variant="secondary" label="Spinning"></b-spinner> -->
     <div id="app3">
       <div class="d-flex justify-content-end mb-3">
@@ -114,30 +115,30 @@ int main()
       <!-- resultBlcok -->
       <transition name="slide-fade">
         <div class="resultGreen" v-if="showAC">
-          <span class="codeStats">{{ codeStats }}</span>
-          <span>( {{ exeTime }} )</span>
+          <span class="codeStats">${ codeStats }</span>
+          <span>( ${ exeTime } )</span>
         </div>
       </transition>
       <transition name="slide-fade">
         <div class="resultRed" v-if="showCE">
-          <span class="codeStats">{{ codeStats }}</span>
-          <p>{{ errorMessage }}</p>
+          <span class="codeStats">${ codeStats }</span>
+          <p>${ errorMessage }</p>
         </div>
       </transition>
       <transition name="slide-fade">
         <div class="resultRed" v-if="showTLE">
-          <span class="codeStats">{{ codeStats }}</span>
-          <span>( {{ exeTime }} )</span>
+          <span class="codeStats">${ codeStats }</span>
+          <span>( ${ exeTime } )</span>
         </div>
       </transition>
       <transition name="slide-fade">
         <div class="resultRed" v-if="showWA">
-          <span class="codeStats">{{ codeStats }}</span>
+          <span class="codeStats">${ codeStats }</span>
         </div>
       </transition>
       <transition name="slide-fade">
         <div class="resultRed" v-if="showMLE">
-          <span class="codeStats">{{ codeStats }}</span>
+          <span class="codeStats">${ codeStats }</span>
         </div>
       </transition>
       <transition name="slide-fade">

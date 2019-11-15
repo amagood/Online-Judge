@@ -94,6 +94,7 @@ var tmpObj = {}
 
 
 var app3 = new Vue({
+  delimiters: ['${', '}'],
   el: "#app3",
   data: {
     showSpinner: false,

@@ -1,4 +1,4 @@
-﻿<!-- version: 1911152 -->
+﻿<!-- version: 191116 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -115,30 +115,30 @@ int main()
       <!-- resultBlcok -->
       <transition name="slide-fade">
         <div class="resultGreen" v-if="showAC">
-          <span class="codeStats">{{ codeStats }}</span>
-          <span>( {{ exeTime }} )</span>
+          <span class="codeStats">${ codeStats }</span>
+          <span>( ${ exeTime } )</span>
         </div>
       </transition>
       <transition name="slide-fade">
         <div class="resultRed" v-if="showCE">
-          <span class="codeStats">{{ codeStats }}</span>
-          <p>{{ errorMessage }}</p>
+          <span class="codeStats">${ codeStats }</span>
+          <p>${ errorMessage }</p>
         </div>
       </transition>
       <transition name="slide-fade">
         <div class="resultRed" v-if="showTLE">
-          <span class="codeStats">{{ codeStats }}</span>
-          <span>( {{ exeTime }} )</span>
+          <span class="codeStats">${ codeStats }</span>
+          <span>( ${ exeTime } )</span>
         </div>
       </transition>
       <transition name="slide-fade">
         <div class="resultRed" v-if="showWA">
-          <span class="codeStats">{{ codeStats }}</span>
+          <span class="codeStats">${ codeStats }</span>
         </div>
       </transition>
       <transition name="slide-fade">
         <div class="resultRed" v-if="showMLE">
-          <span class="codeStats">{{ codeStats }}</span>
+          <span class="codeStats">${ codeStats }</span>
         </div>
       </transition>
       <transition name="slide-fade">

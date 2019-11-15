@@ -24,6 +24,8 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/11/15 Post Test 3
+	html js change delimiters: ['${', '}']
 ### 2019/11/15 Post Test 2
 	postURL "submit/"
 	tmpObj = response.data
