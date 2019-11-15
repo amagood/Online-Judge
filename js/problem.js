@@ -1,18 +1,7 @@
 ﻿// app1
 
+
 new Vue({ el: "#app1" })
-
-
-// copy function
-
-
-function copyFn(id) {
-  var val = document.getElementById(id);
-  window.getSelection().selectAllChildren(val);
-  document.execCommand("Copy");
-  app2.showCopyPopup = true;
-  setTimeout(function () { app2.showCopyPopup = false; }, 1500);
-}
 
 
 // app2 for lang, copy toolip, copy popup, theme
@@ -22,9 +11,7 @@ var app2 = new Vue({
   el: "#app2",
   data: {
     langDisplay: "C++",
-    copyPopupClass: "copyPopup",
     showCopyPopup: false,
-    rawHtml: "<p>Copied!</p>",
     themeSelected: "tomorrow",
     themeOptions: [
       { text: "----------Bright----------", disabled: true },
@@ -94,12 +81,12 @@ var submitObj = {
   "language": "cpp",
   "file":
   {
-    "file1": "nothing in the editor",
-    /*if this message show up in object or JSON, error occur!*/
+    "file1": "nothing in the editor", /*if this message show up in object or JSON, error occur!*/
   },
   "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9" //SHA3_512
 }
-var responseObj = null
+var httpPostURL = "https://httpbin.org/response-headers?freeform=%7B%22codeStats%22%20%3A%20%22AC%22%2C%22errorMessage%22%20%3A%20%22string..........%22%2C%22exeTime%22%20%3A%20%2299999ms%22%2C%22errorOutputCompare%22%20%3A%20%22size%22%2C%22wrongOutput%22%20%3A%20%22your%20output%22%2C%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%7D";
+var tmpObj = {}
 
 
 // app3 for submit
@@ -108,67 +95,70 @@ var responseObj = null
 var app3 = new Vue({
   el: "#app3",
   data: {
-    showResult: false,
-    responseObj: {
-      "codeStats": "AC",
-      "errorMessage": "string of errorMessage..........",
-      "exeTime": "99999ms",
-      "errorOutputCompare": "size",
-      "wrongOutput": "your output",
-      "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9" //SHA3_512
-    }
-  },
-  computed: {
-    resultClass: function () {
-      if (this.responseObj.codeStats == "AC")
-        return "resultAC"
-      else
-        return "resultWA"
-    }
+    showSpinner: false,
+    codeStats: "AC",
+    errorMessage: "errorMessage....",
+    exeTime: "99999ms",
+    errorOutputCompare: "",
+    wrongOutput: "",
+    hash: "",
+    showAC: false,
+    showCE: false,
+    showTLE: false,
+    showWA: false,
+    showMLE: false,
+    showERR: false
   },
   methods: {
     submitCode() {
+      this.showSpinner = true;
       submitObj.file.file1 = editor.getValue();
-      axios.post("https://httpbin.org/anything", submitObj)
+      this.showAC = false;
+      this.showCE = false;
+      this.showTLE = false;
+      this.showWA = false;
+      this.showMLE = false;
+      this.showERR = false;
+      axios.post(httpPostURL, submitObj)
         .then(function (response) {
-          responseObj = response;
+          app3.showSpinner = false;
+          tmpObj = JSON.parse(response.data.freeform); console.log(tmpObj);
+          app3.codeStats = tmpObj.codeStats;
+          app3.errorMessage = tmpObj.errorMessage;
+          app3.exeTime = tmpObj.exeTime;
+          app3.errorOutputCompare = tmpObj.errorOutputCompare;
+          app3.wrongOutput = tmpObj.wrongOutput;
+          app3.hash = tmpObj.hash;
+          app3["show" + tmpObj.codeStats] = true;
         })
         .catch(function (error) {
+          app3.showSpinner = false;
           console.log(error);
+          app3.showERR = true;
         })
-    },
-    copyResponseObj() {
-      this.responseObj.codeStats = responseObj.codeStats;
-      this.responseObj.errorMessage = responseObj.errorMessage;
-      this.responseObj.exeTime = responseObj.exeTime;
-      this.responseObj.errorOutputCompare = responseObj.errorOutputCompare;
-      this.responseObj.wrongOutput = responseObj.wrongOutput;
-      this.responseObj.hash = responseObj.hash;
-    },
-    testPost() {
-      submitObj.file.file1 = editor.getValue();
-      console.log("editor value:");
-      console.log(submitObj.file.file1);
-      console.log("如果上面的結果跟使用者輸入的程式碼不同則發生錯誤");
-
-      axios.post("https://httpbin.org/anything", submitObj)
-        .then(function (response) {
-          var tmpResponse = JSON.parse(JSON.stringify(response));
-          console.log("tmpResponse:");
-          console.log(tmpResponse);
-          console.log("tmpResponse.data.json.file.file1:");
-          console.log(tmpResponse.data.json.file.file1);
-          console.log("如果上面的結果跟使用者輸入的程式碼不同則發生錯誤");
-          console.log("end\n\n\n\n\n\n\n");
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
-      this.showResult = true;
     }
   },
 })
+
+
+// html visibility
+
+
+window.onload = function() {
+  document.getElementsByTagName("html")[0].style.visibility = "visible";
+}
+
+
+// copy function
+
+
+function copyFn(id) {
+  var val = document.getElementById(id);
+  window.getSelection().selectAllChildren(val);
+  document.execCommand("Copy");
+  app2.showCopyPopup = true;
+  setTimeout(function () { app2.showCopyPopup = false; }, 1500);
+}
 
 
 // set aceEditor

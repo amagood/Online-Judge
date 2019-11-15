@@ -24,6 +24,13 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/11/15 Submit, Transition, Visibility, Spinner, Overflow
+	html css js
+	show corresponding result after submit
+	init transition
+	hide html tag until window.onload
+	show spinner when submit
+	set max-height of Description, SampleIn/Out
 ### 2019/11/09 Improve Styling on Lang and Theme
 	p000.html  problem.css
 		responsive styling by using flexbox, @media

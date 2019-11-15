@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿<!-- version: 191115 -->
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,119 +8,147 @@
   <meta name="viewport" content="width=device-width">
   <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
   <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="../css/problem.css">
 </head>
 
-<body>
+<body class="w3-animate-opacity">
   <!-- partial:index.partial.html -->
+  <!-- navbar -->
+  <div id="app1" class="w3-animate-top" style="border-bottom: 4px solid MediumSeaGreen">
+    <b-navbar toggleable="lg" type="light" variant="light">
+      <b-navbar-brand href="#">GreenTeam</b-navbar-brand>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item href="#">Problems</b-nav-item>
+          <b-nav-item href="#">Ranking</b-nav-item>
+        </b-navbar-nav>
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item href="#">Login</b-nav-item>
+          <b-nav-item href="#">Register</b-nav-item>
+        </b-navbar-nav>
 
-  <body>
-    <!-- navbar -->
-    <div id="app1" style="border-bottom: 4px solid MediumSeaGreen">
-      <b-navbar toggleable="lg" type="light" variant="light">
-        <b-navbar-brand href="#">GreenTeam</b-navbar-brand>
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-        <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav>
-            <b-nav-item href="#">Problems</b-nav-item>
-            <b-nav-item href="#">Ranking</b-nav-item>
-          </b-navbar-nav>
-          <!-- Right aligned nav items -->
-          <b-navbar-nav class="ml-auto">
-            <b-nav-item href="#">Login</b-nav-item>
-            <b-nav-item href="#">Register</b-nav-item>
-          </b-navbar-nav>
-
-        </b-collapse>
-      </b-navbar>
-    </div>
-    <!-- navbar end -->
-    <!-- mainBlock1 -->
-    <div class="mainBlock1">
-      <h1 class="bigTitle">Title</h1>
-      <p>#Tag1 #Tag2</p>
-      <p class="smallTitle">Description</p>
-      <p class="content">Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B.Calculate A plus B. Input: Two integers seperated by a space. Output: Sum of the two integers.
-        white-space test              white-space test
-      </p>
-      <div class="sampleInOutContainer">
-        <div class="sampleInOut">
-          <span class="smallTitle">Sample Input</span>
-          <img id="imgCopyIn" src="../image/copy.svg" alt="" onclick="copyFn('sampleIn')">
-          <pre id="sampleIn" class="samplePre">1 2</pre>
-        </div>
-        <div class="sampleInOut">
-          <span class="smallTitle">Sample Out</span>
-          <img id="imgCopyOut" src="../image/copy.svg" alt="" onclick="copyFn('sampleOut')">
-          <pre id="sampleOut" class="samplePre">3</pre>
-        </div>
+      </b-collapse>
+    </b-navbar>
+  </div>
+  <!-- navbar end -->
+  <!-- mainBlock1 -->
+  <div class="mainBlock1 w3-animate-zoom">
+    <h1 class="bigTitle">Title</h1>
+    <p>#Tag1 #Tag2</p>
+    <p class="smallTitle">Description</p>
+    <p class="content">Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B. Calculate A plus B.Calculate A plus B. Input: Two integers seperated by a space. Output: Sum of the two integers.
+      white-space test              white-space test
+    </p>
+    <div class="sampleInOutContainer">
+      <div class="sampleInOut">
+        <span class="smallTitle">Sample Input</span>
+        <img id="imgCopyIn" src="../image/copy.svg" alt="" onclick="copyFn('sampleIn')">
+        <pre id="sampleIn" class="samplePre">1 2</pre>
       </div>
-
-    </div>
-    <!-- mainBlock1 end -->
-    <!-- mainBlock2 -->
-    <div class="mainBlock2">
-      <div id="app2" style="position: relative;">
-        <!-- tooltip for copy SampleInOut -->
-        <b-tooltip target="imgCopyIn" title="Copy the sample input"></b-tooltip>
-        <b-tooltip target="imgCopyOut" title="Copy the sample output"></b-tooltip>
-        <transition name="slide-fade">
-          <div v-bind:class="copyPopupClass" v-show="showCopyPopup">
-            <p v-html="rawHtml"></p>
-          </div>
-        </transition>
-        <!-- tooltip for copy SampleInOut end -->
-        <div class="d-flex langThemeFlexBox">
-          <!-- Lang dropdown -->
-          <div class="flex-fill">
-            <span class="langLbl">Language:</span>
-            <b-dropdown variant="light" v-bind:text="langDisplay">
-              <b-dropdown-item v-on:click="clickLang('C++', 'cpp')">C++</b-dropdown-item>
-              <b-dropdown-item v-on:click="clickLang('C','c')">C</b-dropdown-item>
-              <b-dropdown-item v-on:click="clickLang('Python', 'python')">Python</b-dropdown-item>
-            </b-dropdown>
-          </div>
-          <!-- Lang dropdown end -->
-          <!-- select form -->
-          <div class="themeFlexBox">
-            <span class="themeLbl">Theme:</span>
-            <b-form-select class="themeSelect" v-model="themeSelected" v-on:change="clickTheme()" :options="themeOptions">
-            </b-form-select>
-          </div>
-          <!-- select form end -->
-          </div>
+      <div class="sampleInOut">
+        <span class="smallTitle">Sample Out</span>
+        <img id="imgCopyOut" src="../image/copy.svg" alt="" onclick="copyFn('sampleOut')">
+        <pre id="sampleOut" class="samplePre">3</pre>
       </div>
-      <div class=" aceEditorContainer">
-        <pre id="aceEditor">
+    </div>
+
+  </div>
+  <!-- mainBlock1 end -->
+  <!-- mainBlock2 -->
+  <div class="mainBlock2 w3-animate-bottom">
+    <div id="app2" style="position: relative;">
+      <!-- tooltip for copy SampleInOut -->
+      <b-tooltip target="imgCopyIn" title="Copy the sample input"></b-tooltip>
+      <b-tooltip target="imgCopyOut" title="Copy the sample output"></b-tooltip>
+      <transition name="slide-fade">
+        <div class="copyPopup" v-show="showCopyPopup">
+          <p>Copied!</p>
+        </div>
+      </transition>
+      <!-- tooltip for copy SampleInOut end -->
+      <div class="d-flex langThemeFlexBox">
+        <!-- Lang dropdown -->
+        <div class="flex-fill">
+          <span class="langLbl">Language:</span>
+          <b-dropdown variant="light" v-bind:text="langDisplay">
+            <b-dropdown-item v-on:click="clickLang('C++', 'cpp')">C++</b-dropdown-item>
+            <b-dropdown-item v-on:click="clickLang('C','c')">C</b-dropdown-item>
+            <b-dropdown-item v-on:click="clickLang('Python', 'python')">Python</b-dropdown-item>
+          </b-dropdown>
+        </div>
+        <!-- Lang dropdown end -->
+        <!-- select form -->
+        <div class="themeFlexBox">
+          <span class="themeLbl">Theme:</span>
+          <b-form-select class="themeSelect" v-model="themeSelected" v-on:change="clickTheme()" :options="themeOptions">
+          </b-form-select>
+        </div>
+        <!-- select form end -->
+        </div>
+    </div>
+    <div class=" aceEditorContainer">
+      <pre id="aceEditor">
 #include < iostream>
 using namespace std;
 
 int main()
 {
-    int a, b;
-    cin >> a >> b;
-    cout << a+b;
-    return 0;
+  int a, b;
+  cin >> a >> b;
+  cout << a+b;
+  return 0;
 }</pre>
-      </div>
-      <div id="app3">
-        <div style="position: relative; height: 60px">
-          <b-button disabled class="btnTest" pill variant="outline-secondary">Test</b-button>
-          <b-button class="btnSubmit" v-on:click="testPost()" pill variant="outline-secondary">Submit</b-button>
-        </div>
-        <!-- resultBlcok -->
-        <transition name="slide-fade">
-          <div v-bind:class="resultClass" v-if="showResult">
-            <!-- <p>{{ responseObj.codeStats }}</p>
-            <p>execution time: {{ responseObj.exeTime }}</p>
-            <p>error message: {{ responseObj.errorMessage }}</p> -->
-            <p>sent a request. Open DevTools and look for console.</p>
-          </div>
-        </transition>
-      </div>
     </div>
-    <!-- mainBlock2 end -->
-  </body>
+    <!-- <b-spinner variant="secondary" label="Spinning"></b-spinner> -->
+    <div id="app3">
+      <div class="d-flex justify-content-end mb-3">
+        <transition name="fade">
+          <b-spinner v-if="showSpinner" variant="secondary" label="Spinning"></b-spinner>
+        </transition>
+        <b-button class="mr-1 ml-3" disabled pill variant="outline-secondary">Test</b-button>
+        <b-button class="mx-1" v-on:click="submitCode()" pill variant="outline-secondary">Submit</b-button>
+      </div>
+      <!-- resultBlcok -->
+      <transition name="slide-fade">
+        <div class="resultGreen" v-if="showAC">
+          <span class="codeStats">{{ codeStats }}</span>
+          <span>( {{ exeTime }} )</span>
+        </div>
+      </transition>
+      <transition name="slide-fade">
+        <div class="resultRed" v-if="showCE">
+          <span class="codeStats">{{ codeStats }}</span>
+          <p>{{ errorMessage }}</p>
+        </div>
+      </transition>
+      <transition name="slide-fade">
+        <div class="resultRed" v-if="showTLE">
+          <span class="codeStats">{{ codeStats }}</span>
+          <span>( {{ exeTime }} )</span>
+        </div>
+      </transition>
+      <transition name="slide-fade">
+        <div class="resultRed" v-if="showWA">
+          <span class="codeStats">{{ codeStats }}</span>
+        </div>
+      </transition>
+      <transition name="slide-fade">
+        <div class="resultRed" v-if="showMLE">
+          <span class="codeStats">{{ codeStats }}</span>
+        </div>
+      </transition>
+      <transition name="slide-fade">
+        <div v-if="showERR">
+          <p class="codeStats">Network error! Please try again.</p>
+        </div>
+      </transition>
+      <!-- resultBlcok end -->
+    </div>
+  </div>
+  <!-- mainBlock2 end -->
   <!-- partial -->
   <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
   <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
