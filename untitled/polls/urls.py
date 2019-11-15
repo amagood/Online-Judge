@@ -4,7 +4,10 @@ from . import views
 
 from django.http import HttpResponse
 
+from django.http import HttpRequest
+
 from .models import Question
+
 
 
 
@@ -25,4 +28,6 @@ urlpatterns = [
     path('<int:question_id>/vote/', views.vote, name='vote'),
     #
     path('problem/p000/', views.get_code_string, name='p000'),
+    #
+    path('problem/p000/submit/', views.submit_status, name='submit')
 ]
