@@ -24,6 +24,11 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/11/15 Post Test
+	html css js
+	pointer cursor on copy img
+	adjust copy popup width
+	console.log
 ### 2019/11/15 postURL, testMode
 	css js
 	improve display of result when submit after the first time

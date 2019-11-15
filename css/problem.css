@@ -93,11 +93,11 @@ body {
 
 .copyPopup {
   position: fixed;
-  width: 100px;
+  width: 110px;
   height: 60px;
   top: 0;
   left: 0;
-  right: 0px;
+  right: 0;
   margin: auto;
   padding: 10px 15px 0 15px;
   border-radius: 0 0 15px 15px;
@@ -224,4 +224,14 @@ body.fullScreen {
   .themeFlexBox {
     margin-top: 8px;
   }
+}
+
+/* dragbar */
+
+.dragbar {
+  padding: 6px;
+  margin-bottom: 6px;
+  cursor: copy;
+  /* cursor: row-resize; */
+  background: silver;
 }

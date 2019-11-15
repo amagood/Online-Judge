@@ -45,12 +45,12 @@
     <div class="sampleInOutContainer">
       <div class="sampleInOut">
         <span class="smallTitle">Sample Input</span>
-        <img id="imgCopyIn" src="../image/copy.svg" alt="" onclick="copyFn('sampleIn')">
+        <img id="imgCopyIn" src="../image/copy.svg" alt="" onclick="copyFn('sampleIn')" style="cursor: pointer;">
         <pre id="sampleIn" class="samplePre">1 2</pre>
       </div>
       <div class="sampleInOut">
         <span class="smallTitle">Sample Out</span>
-        <img id="imgCopyOut" src="../image/copy.svg" alt="" onclick="copyFn('sampleOut')">
+        <img id="imgCopyOut" src="../image/copy.svg" alt="" onclick="copyFn('sampleOut')" style="cursor: pointer;">
         <pre id="sampleOut" class="samplePre">3</pre>
       </div>
     </div>
@@ -102,6 +102,7 @@ int main()
   return 0;
 }</pre>
     </div>
+    <div class="dragbar" id="dragbar"></div>
     <!-- <b-spinner variant="secondary" label="Spinning"></b-spinner> -->
     <div id="app3">
       <div class="d-flex justify-content-end mb-3">

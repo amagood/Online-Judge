@@ -122,6 +122,7 @@ var app3 = new Vue({
       this.showERR = false;
       axios.post(postURL, submitObj)
         .then(function (response) {
+          console.log(response);
           app3.showSpinner = false;
           if (testMode)
             tmpObj = JSON.parse(response.data.freeform);
