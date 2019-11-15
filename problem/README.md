@@ -24,6 +24,9 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/11/15 Post Test 2
+	postURL "submit/"
+	tmpObj = response.data
 ### 2019/11/15 Post Test
 	html css js
 	pointer cursor on copy img

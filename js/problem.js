@@ -85,7 +85,7 @@ var submitObj = {
   },
   "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
-var postURL = "http://127.0.0.1:8000/submit/"
+var postURL = "submit/"
 var testMode = false
 var tmpObj = {}
 
@@ -127,7 +127,7 @@ var app3 = new Vue({
           if (testMode)
             tmpObj = JSON.parse(response.data.freeform);
           else
-            tmpObj = JSON.parse(response.data); console.log(tmpObj);
+            tmpObj = response.data; console.log(tmpObj);
           app3.codeStats           = tmpObj.codeStats;
           app3.errorMessage        = tmpObj.errorMessage;
           app3.exeTime             = tmpObj.exeTime;
