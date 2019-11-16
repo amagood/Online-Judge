@@ -1,3 +1,6 @@
+
+html { visibility: hidden; }
+
 ::-moz-selection {
   background: #01f9bb;
 }
@@ -98,27 +101,6 @@ body {
   box-shadow: unset;
 }
 
-
-/* transition */
-/* 
-.bounce-enter-active {
-  animation: bounce-in .3s;
-}
-.bounce-leave-active {
-  animation: bounce-in .3s reverse;
-}
-@keyframes bounce-in {
-  0% {
-    transform: scale(0.9);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-} */
-
 .bounce-enter-active {
   animation: bounce-in .3s;
 }
@@ -134,4 +116,13 @@ body {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }

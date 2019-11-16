@@ -8,7 +8,6 @@
   <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
   <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
   <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="css/login.css">
 </head>
 
@@ -35,30 +34,32 @@
   </div> -->
   <!-- navbar end -->
   <!-- main block -->
-  <div id="app1" class="mainBlockContainer w3-animate-opacity">
-    <div class="mainBlock">
-      <form>
-        <span class="loginFormTitle">Account Login</span>
-        <span class="inputLbl">Username</span>
-        <div class="inputContainer">
-          <input class="loginInput" type="text" v-on:focus="showFocus1 = true" v-on:blur="showFocus1 = false" spellcheck="false">
-          <transition name="bounce">
-            <span class="inputFocus" v-if="showFocus1"></span>
-          </transition>
-        </div>
-        <span class="inputLbl">Password</span>
-        <div class="inputContainer">
-          <input class="loginInput" type="password" v-on:focus="showFocus2 = true" v-on:blur="showFocus2 = false" spellcheck="false">
-          <transition name="bounce">
-            <span class="inputFocus" v-if="showFocus2"></span>
-          </transition>
-        </div>
-        <div style="height: 30px;"></div>
-        <div>
-          <b-button pill size="lg" variant="dark">Login</b-button>
-        </div>
-      </form>
-    </div>
+  <div id="app1" class="mainBlockContainer">
+    <transition name="fade">
+      <div class="mainBlock" v-if="showContent">
+        <form>
+          <span class="loginFormTitle">Account Login</span>
+          <span class="inputLbl">Username</span>
+          <div class="inputContainer">
+            <input id="inputAccount" class="loginInput" type="text" v-on:focus="showFocus1 = true" v-on:blur="showFocus1 = false" spellcheck="false" maxlength="20" pattern="[A-Za-z0-9].{6,}" required>
+            <transition name="bounce">
+              <span class="inputFocus" v-if="showFocus1"></span>
+            </transition>
+          </div>
+          <span class="inputLbl">Password</span>
+          <div class="inputContainer">
+            <input id="inputPassword" class="loginInput" type="password" v-on:focus="showFocus2 = true" v-on:blur="showFocus2 = false" spellcheck="false" maxlength="20">
+            <transition name="bounce">
+              <span class="inputFocus" v-if="showFocus2"></span>
+            </transition>
+          </div>
+          <div style="height: 30px;"></div>
+          <div>
+            <b-button pill size="lg" variant="dark">Login</b-button>
+          </div>
+        </form>
+      </div>
+    </transition>
   </div>
   <!-- main block end -->
   <!-- partial -->
