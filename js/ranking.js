@@ -82,7 +82,7 @@ var app2 = new Vue({
       this.isShow = false
     },
     sendNotAttendMSG(){
-      alert("Congratulations! You success attend!")
+      alert("OK! Maybe next time!")
       this.isShow = false
     },
     /*真正用到的function
@@ -112,7 +112,7 @@ var app2 = new Vue({
         console.log(response.headers)
         console.log(response.config)
         if(response.status == "success"){
-          alert("What a pity! Attend 一下啦!")
+          alert("OK! Maybe next time!")
         }
         else{
           alert("Sorry! Maybe next time.")

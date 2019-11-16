@@ -24,7 +24,7 @@
     <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
     <!--polyfill-->
     <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
-    <title>Ranking</title>
+    <title>GreenTeam Online-Judge</title>
   </head>
   <body>
     <!--navbar, 格式設定在ranking.css檔中-->
@@ -64,29 +64,45 @@
 
     <!--留言板區域-->
     <div id="app1">
-      <div class="message">
-        <div>
-          <span>名稱: </span>
-          <input type="text" value="" placeholder="請輸入內容">
-        </div>
-        <div>
-            <span>留言板內容: </span>
-            <textarea></textarea>
-        </div>
-        <button>送出</button>
+			<div class="message">
+				<v-input v-model="username" ref="input-com"></v-input>
+				<v-textarea v-model="message"></v-textarea>
+				<button @click="handleSend" type="button" class="btn btn-success">Next</button>
+			</div>
+			<div class="list">
+				<v-list :list="list" @reply="handleReply" @delete="handleDelete"></v-list>
+			</div>
+		</div>
+
+    <!--comments template-->
+    <script type="text/template" id="v-input">
+			<div>
+				<span>Username：</span>
+				<input type="text" :value="value" @input="$emit('input', $event.target.value)" 
+					ref="input-ref">
       </div>
-      <div class="list">
-        <div>
-          <div class="list-item">
-            <span>名稱</span>
-            <div class="list-msg">
-              <p>留言內容</p>
-              <a class="list-reply">回覆</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </script>
+    
+		<script type="text/template" id="v-textarea">
+			<div>
+				<span>Comment：</span>
+				<textarea :value="value" @input="$emit('input', $event.target.value)"></textarea>
+			</div>
+		</script>
+		
+		<script type="text/template" id="v-list">
+			<div>
+				<div class="list-item" v-for="(item, index) in itemlist">
+					<span>{{ item.name }}</span>
+					<div class="list-msg">
+						<p>{{ item.message }}</p>
+            <button type="button" @click="handleDelete(index)" class="list-reply btn btn-outline-success">Delete</button>
+            <button type="button" @click="handleReply(index)" class="list-reply btn btn-outline-success">Reply</button>
+					</div>
+				</div>
+			</div>
+		</script>
+
     <!--js-->
     <script src="js/comments.js"></script>
   </body>
