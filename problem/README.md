@@ -24,6 +24,8 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/11/16 Fix Code Editor Fullscreen Bug
+	css body.fullScreen height 100vh
 ### 2019/11/16 Dragbar, Popup Transition
 	html css js
 	dragbar for resize code editor
