@@ -225,3 +225,25 @@ editor.commands.addCommand({
   },
   readOnly: true
 });
+
+
+// dragbar
+
+
+var aceEditorContainer = document.getElementById("aceEditorContainer")
+var bar = document.getElementById("dragbar")
+
+const drag = (e) => {
+  document.selection ? document.selection.empty() : window.getSelection().removeAllRanges();
+  let aceTop = window.scrollY + aceEditorContainer.getBoundingClientRect().top;
+  aceEditorContainer.style.height = (e.pageY - aceTop) + 'px';
+  editor.resize();
+}
+
+bar.addEventListener('mousedown', () => {
+  document.addEventListener('mousemove', drag);
+});
+
+bar.addEventListener('mouseup', () => {
+  document.removeEventListener('mousemove', drag);
+});

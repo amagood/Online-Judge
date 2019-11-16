@@ -1,4 +1,4 @@
-﻿<!-- version: 191116 -->
+﻿<!-- version: 1911162 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,7 +63,7 @@
       <!-- tooltip for copy SampleInOut -->
       <b-tooltip target="imgCopyIn" title="Copy the sample input"></b-tooltip>
       <b-tooltip target="imgCopyOut" title="Copy the sample output"></b-tooltip>
-      <transition name="slide-fade">
+      <transition name="slide-fade-popup">
         <div class="copyPopup" v-show="showCopyPopup">
           <p>Copied!</p>
         </div>
@@ -89,7 +89,7 @@
         <!-- select form end -->
         </div>
     </div>
-    <div class=" aceEditorContainer">
+    <div id="aceEditorContainer" class=" aceEditorContainer">
       <pre id="aceEditor">
 #include < iostream>
 using namespace std;
@@ -102,8 +102,9 @@ int main()
   return 0;
 }</pre>
     </div>
+    <!-- dragbar -->
     <div class="dragbar" id="dragbar"></div>
-    <!-- <b-spinner variant="secondary" label="Spinning"></b-spinner> -->
+    <!-- dragbar end -->
     <div id="app3">
       <div class="d-flex justify-content-end mb-3">
         <transition name="fade">
