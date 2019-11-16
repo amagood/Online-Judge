@@ -19,7 +19,7 @@ body{
   box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
   border-radius: 10px;
 }
-/* Table設定 */
+/* Table設定 
 .problemTable{
   width:100% ;
   border-collapse:collapse ;
@@ -54,5 +54,4 @@ body{
 }
 .problemTable td:nth-child(7){
   width:5%;
-}
-/* Table設定 end */
+}*/

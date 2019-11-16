@@ -4,10 +4,12 @@
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width">
   <!-- Bootstrap、Bootstrap-Vue -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.css">
   <!--teacherProblem.css-->
   <link rel="stylesheet" type="text/css" href="css/teacherProblem.css">
   <title>teacherProblem</title>
@@ -51,15 +53,15 @@
       </nav>
       <!--navbar end-->
 
-      <div class="mainBlockStudentProblem">
+      <div id="app-1" class="mainBlockStudentProblem">
         <!--block 1 sortMenu-->
         <div>
           <b-dropdown dropup text="Target" variant="secondary">
-            <b-dropdown-item>迴圈</b-dropdown-item>
-            <b-dropdown-item>陣列</b-dropdown-item>
-            <b-dropdown-item>字串</b-dropdown-item>
-            <b-dropdown-item>函式</b-dropdown-item>
-            <b-dropdown-item>指標</b-dropdown-item>
+            <b-dropdown-item>Loop</b-dropdown-item>
+            <b-dropdown-item>Array</b-dropdown-item>
+            <b-dropdown-item>String</b-dropdown-item>
+            <b-dropdown-item>Function</b-dropdown-item>
+            <b-dropdown-item>Pointer</b-dropdown-item>
           </b-dropdown>
           <b-dropdown dropup text="Degree" variant="secondary" style="margin-left: 10px">
             <b-dropdown-item>easy</b-dropdown-item>
@@ -74,78 +76,21 @@
           </b-dropdown>
           <b-dropdown dropup text="Add" variant="outline-secondary" style="margin-left: 10px">
             <!--turn right-->
-            <b-dropdown-item onclick="clickClass();">Class</b-dropdown-item>
+            <b-dropdown-item @click="addClass">Class</b-dropdown-item>
             <b-dropdown-item>Problem</b-dropdown-item>
           </b-dropdown>
         </div>
 
         <!--block 2 Problem-->
         <div style="margin-top: 20px; min-height: 480px;">
-          <table class="problemTable" id="addProblem">
-            <tr>
-              <td>Title</td>
-              <td>Target</td>
-              <td>Degree</td>
-              <td>Percentage Passing</td>
-              <td>Respondent</td>
-              <td>Input Time</td>
-              <td>Add</td>
-            </tr>
-            <tr>
-              <td><span onmouseover="titleLinkOver(this)" onmouseout="titleLinkOut(this)">題目</span></td>
-              <td>學習目標</td>
-              <td>難易度</td>
-              <td>答對比例</td>
-              <td>作答人數</td>
-              <td>加入時間</td>
-              <td><input type="checkbox"></td>
-            </tr>
-            <tr>
-              <td><span onmouseover="titleLinkOver(this)" onmouseout="titleLinkOut(this)">題目</span></td>
-              <td>學習目標</td>
-              <td>難易度</td>
-              <td>答對比例</td>
-              <td>作答人數</td>
-              <td>加入時間</td>
-              <td><input type="checkbox"></td>
-            </tr>
-            <tr>
-              <td><span onmouseover="titleLinkOver(this)" onmouseout="titleLinkOut(this)">題目</span></td>
-              <td>學習目標</td>
-              <td>難易度</td>
-              <td>答對比例</td>
-              <td>作答人數</td>
-              <td>加入時間</td>
-              <td><input type="checkbox"></td>
-            </tr>
-            <tr>
-              <td><span onmouseover="titleLinkOver(this)" onmouseout="titleLinkOut(this)">題目</span></td>
-              <td>學習目標</td>
-              <td>難易度</td>
-              <td>答對比例</td>
-              <td>作答人數</td>
-              <td>加入時間</td>
-              <td><input type="checkbox"></td>
-            </tr>
-            <tr>
-              <td><span onmouseover="titleLinkOver(this)" onmouseout="titleLinkOut(this)">題目</span></td>
-              <td>學習目標</td>
-              <td>難易度</td>
-              <td>答對比例</td>
-              <td>作答人數</td>
-              <td>加入時間</td>
-              <td><input type="checkbox"></td>
-            </tr>
-            <tr>
-              <td><span onmouseover="titleLinkOver(this)" onmouseout="titleLinkOut(this)">題目</span></td>
-              <td>學習目標</td>
-              <td>難易度</td>
-              <td>答對比例</td>
-              <td>作答人數</td>
-              <td>加入時間</td>
-              <td><input type="checkbox"></td>
-            </tr>
-          </table>
+          <div v-if="clickAddClass">
+            <b-table  selectable sticky hover :items="items" :select-mode="selectMode" :fields="fields">
+            </b-table>
+          </div>
+          <div v-else>
+            <b-table sticky hover :items="items" :fields="fields">
+            </b-table>
+          </div>
         </div>
 
         <!--block 3 Page-->
@@ -171,6 +116,7 @@
   <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
   <script src='http://unpkg.com/vue@2.6.10/dist/vue.min.js'></script>
   <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
+  <script src='http://unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.js'></script>
   <script src="js/teacherProblem.js"></script>
 </body>
 
