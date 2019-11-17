@@ -1,3 +1,6 @@
+### 2019/11/17 Commit: create comment page
+        comments.html
+                1.留言板的模板
 ### 2019/11/01 Commit: replace files
         inedx.js,ranking.js,comments.js>>js
 ### 2019/10/30 Commit: rankList work
