@@ -83,7 +83,7 @@ window.onload = () => {
     methods: {
       addClass(fields){
         this.clickAddClass=!this.clickAddClass;
-        //showDismissibleAlert=!this.clickAddClass;
+        //showDismissibleAlert=!showDismissibleAlert;
         
         /*if(this.clickAddClass){
           document.getElementById("addClassBar").style.display="block";

@@ -54,6 +54,8 @@
       <div id="app-1" class="mainBlockStudentProblem">
         <!--block 1 sortMenu-->
         <div>
+        <b-row>
+          <b-col>
           <b-dropdown dropup text="Target" variant="secondary">
             <b-dropdown-item @click="filter = 'loop'">Loop</b-dropdown-item>
             <b-dropdown-item @click="filter = 'array'">Array</b-dropdown-item>
@@ -66,14 +68,19 @@
             <b-dropdown-item @click="filter = 'medium'">medium</b-dropdown-item>
             <b-dropdown-item @click="filter = 'hard'">hard</b-dropdown-item>
           </b-dropdown>
-          <b-form-group label="Search" label-cols-sm="3" label-align-sm="right" label-for="filterInput" class="mb-0">
-              <b-input-group size="sm">
+        </b-col>
+        <!--search/filter bar-->
+        <b-col sm="5">
+          <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput" class="mb-0">
+              <b-input-group size="">
                 <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search"></b-form-input>
                 <b-input-group-append>
                   <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
                 </b-input-group-append>
               </b-input-group>
             </b-form-group>
+          </b-col>
+          </b-row>
         </div>
 
         <!--block 2 Problem-->
