@@ -55,50 +55,75 @@
 
       <div id="app-1" class="mainBlockStudentProblem">
         <!--block 1 sortMenu-->
-        <div>
-          <b-dropdown dropup text="Target" variant="secondary">
-            <b-dropdown-item @click="filter = 'loop'">Loop</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'array'">Array</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'string'">String</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'function'">Function</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'pointer'">Pointer</b-dropdown-item>
-          </b-dropdown>
-          <b-dropdown dropup text="Degree" variant="secondary" style="margin-left: 10px">
-            <b-dropdown-item @click="filter = 'easy'">easy</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'medium'">medium</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'hard'">hard</b-dropdown-item>
-          </b-dropdown>
-          <b-dropdown dropup text="Class" variant="outline-secondary" style="margin-left: 10px">
-            <!--turn right-->
-            <b-dropdown-item>Class A</b-dropdown-item>
-            <b-dropdown-item>Class B</b-dropdown-item>
-            <b-dropdown-item>Class C</b-dropdown-item>
-          </b-dropdown>
-          <b-dropdown dropup text="Add" variant="outline-secondary" style="margin-left: 10px">
-            <!--turn right-->
-            <b-dropdown-item @click="addClass">Class</b-dropdown-item>
-            <b-dropdown-item>Problem</b-dropdown-item>
-          </b-dropdown>
-          <b-form-group label="Search" label-cols-sm="3" label-align-sm="right" label-for="filterInput" class="mb-0">
-            <b-input-group size="sm">
-              <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search"></b-form-input>
-              <b-input-group-append>
-                <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
-              </b-input-group-append>
-            </b-input-group>
-          </b-form-group>
+        <b-row>
+          <b-col>
+            <b-dropdown dropup text="Target" variant="secondary">
+              <b-dropdown-item @click="filter = 'loop'">Loop</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'array'">Array</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'string'">String</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'function'">Function</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'pointer'">Pointer</b-dropdown-item>
+            </b-dropdown>
+            <b-dropdown dropup text="Degree" variant="secondary" style="margin-left: 10px">
+              <b-dropdown-item @click="filter = 'easy'">easy</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'medium'">medium</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'hard'">hard</b-dropdown-item>
+            </b-dropdown>
+            <b-dropdown dropup text="Class" variant="outline-secondary" style="margin-left: 10px">
+              <!--turn right-->
+              <b-dropdown-item>Class A</b-dropdown-item>
+              <b-dropdown-item>Class B</b-dropdown-item>
+              <b-dropdown-item>Class C</b-dropdown-item>
+            </b-dropdown>
+            <b-dropdown dropup text="Add" variant="outline-secondary" style="margin-left: 10px">
+              <!--turn right-->
+              <b-dropdown-item @click="addClass">Class</b-dropdown-item>
+              <b-dropdown-item>Problem</b-dropdown-item>
+            </b-dropdown>
+          </b-col>
+          <!--search/filter bar-->
+          <b-col sm="5">
+            <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput" class="mb-0">
+              <b-input-group size="">
+                <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
+                </b-form-input>
+                <b-input-group-append>
+                  <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                </b-input-group-append>
+              </b-input-group>
+            </b-form-group>
+          </b-col>
+        </b-row>
+
+        <!--block 2.5 add class bar-->
+        <div style="margin-top: 15px;" id="addClassBar" >
+          <b-alert show variant="secondary" dismissible :show="0">
+            <span style="margin-right: 5px;">add ? problem </span>
+            <b-button variant="outline-secondary" size="sm">Add to</b-button>
+          </b-alert>
         </div>
+
 
         <!--block 2 Problem-->
         <div style="margin-top: 20px; min-height: 480px;">
           <div v-if="clickAddClass">
-            <b-table selectable sticky hover :items="items" :select-mode="selectMode" :fields="fields" id="problemTable"
+            <b-table selectable :select-mode="selectMode" sticky hover :items="items" :fields="fields" id="problemTable"
               :per-page="perPage" :current-page="currentPage" :filter="filter">
+              <template v-slot:cell(selected)="{ rowSelected }">
+                <template v-if="rowSelected">
+                  <span aria-hidden="true">&check;</span>
+                  <span class="sr-only">Selected</span>
+                </template>
+                <template v-else>
+                  <span aria-hidden="true">&nbsp;</span>
+                  <span class="sr-only">Not selected</span>
+                </template>
+              </template>
             </b-table>
           </div>
           <div v-else>
             <b-table sticky hover :items="items" :fields="fields" id="problemTable" :per-page="perPage"
-              :current-page="currentPage">
+              :current-page="currentPage" :filter="filter">
             </b-table>
           </div>
         </div>
