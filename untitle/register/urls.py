@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
+from . import Register_View
 
 app_name='register'
 urlpatterns=[
-	path('',views.index,name='index'),
+	path('',Register_View.ResponseRegisterStatus,name='index'),
 ]

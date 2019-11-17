@@ -2,12 +2,12 @@ import json
 
 from django.test import TestCase
 
-from . import Register_View
+from . import Register
 # Create your tests here.
 
 class TestRegister(TestCase):
 	
-	def test_ResponseRegisterStaus(self):
+	def test_CheckAccountData(self):
 		pass_data_a = {
 			'action':'register',
 			'account':'TestCase01',
@@ -77,21 +77,18 @@ class TestRegister(TestCase):
 		err_data_c = {
 			'stupid':'input'
 		}
-		
-		true = {'stats':'success'}
-		false = {'stats':'error'}
 		#happy case
-		self.assertEqual(Register_View.ResponseRegisterStatus(pass_data_a), true)
-		self.assertEqual(Register_View.ResponseRegisterStatus(pass_data_b), true)
-		self.assertEqual(Register_View.ResponseRegisterStatus(pass_data_c), true)
+		self.assertIs(Register.CheckAccountData(pass_data_a), True)
+		self.assertIs(Register.CheckAccountData(pass_data_b), True)
+		self.assertIs(Register.CheckAccountData(pass_data_c), True)
 		#sad case
-		self.assertEqual(Register_View.ResponseRegisterStatus(special_chr_data_a), false)
-		self.assertEqual(Register_View.ResponseRegisterStatus(special_chr_data_b), false)
-		self.assertEqual(Register_View.ResponseRegisterStatus(special_chr_data_c), false)
-		self.assertEqual(Register_View.ResponseRegisterStatus(idtf_does_not_exsist_data), false)
-		self.assertEqual(Register_View.ResponseRegisterStatus(mail_err_data), false)
+		self.assertIs(Register.CheckAccountData(special_chr_data_a), False)
+		self.assertIs(Register.CheckAccountData(special_chr_data_b), False)
+		self.assertIs(Register.CheckAccountData(special_chr_data_c), False)
+		self.assertIs(Register.CheckAccountData(idtf_does_not_exsist_data), False)
+		self.assertIs(Register.CheckAccountData(mail_err_data), False)
 		#bad case
-		self.assertEqual(Register_View.ResponseRegisterStatus(post_action_err), false)
-		self.assertEqual(Register_View.ResponseRegisterStatus(err_data_a), false)
-		self.assertEqual(Register_View.ResponseRegisterStatus(err_data_b), false)
-		self.assertEqual(Register_View.ResponseRegisterStatus(err_data_c), false)
+		self.assertIs(Register.CheckAccountData(post_action_err), False)
+		self.assertIs(Register.CheckAccountData(err_data_a), False)
+		self.assertIs(Register.CheckAccountData(err_data_b), False)
+		self.assertIs(Register.CheckAccountData(err_data_c), False)

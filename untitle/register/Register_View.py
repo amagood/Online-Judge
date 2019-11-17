@@ -1,7 +1,20 @@
-from . import Register
+import json
 
-def ResponseRegisterStatus(jsonPost):
-	retDict = {'stats':'error'}
-	if Register.AddAccount(jsonPost):
-		retDict['stats'] = 'success'
-	return retDict
+from django.shortcuts import render
+from django.http import JsonResponse,HttpResponse
+
+from . import Register
+# Create your views here.	
+def ResponseRegisterStatus(request):
+	if request.method == 'POST':
+		try:
+			jsonPost = json.loads(request.body)
+		except:
+			jsonPost = {}	
+		if Register.AddAccount(jsonPost):
+			retDict = {'stats':'success'}
+		else:
+			retDict = {'stats':'error'}
+		return JsonResponse(retDict)
+	elif request.method == 'GET':
+		return render(request, 'register/index.html',{})
