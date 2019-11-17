@@ -1,6 +1,6 @@
 from reaccount.models import  Group
 from reaccount.models import  User
-import reaccount.Account_Login
+import reaccount.Account_Login      #reaccount要改成資料夾的名稱 也就是app的名稱
 import hashlib
 import time
 import json
