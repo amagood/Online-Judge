@@ -10,7 +10,7 @@ def AddAccount(jsonPost):
 def CheckAccountData(jsonPost):
 	return _Is_Legal_Data(jsonPost)
 
-def RsponseRegisterStatus(jsonPost):
+def ResponseRegisterStatus(jsonPost):
 	retDict = {'stats':'error'}
 	if AddAccount(jsonPost):
 		retDict['stats'] = 'success'
