@@ -1,4 +1,5 @@
-
+### 2019/11/18 load static
+	html {% load static %}
 ### 2019/11/18 Server-Specific File 
 	html
 ### 2019/11/18/ Post
