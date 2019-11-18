@@ -15,4 +15,4 @@ def responseLoginStatus(request):
         req=json.loads(request.body)
         data=login.Account_Login_View.responseLoginStatus(req['account'],req['password'])
         return HttpResponse(data)
-    return render(request,'login.html',{})    
+    return render(request,'login/login.html',{})    
