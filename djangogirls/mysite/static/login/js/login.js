@@ -5,7 +5,7 @@ var loginObj = {
   "account" : "",
   "password" : ""
 }
-var postURL = "login/"
+var postURL = "http://127.0.0.1:8000/login/"
 var testMode = false
 var tmpObj = {};
 
