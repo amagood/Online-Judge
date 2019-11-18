@@ -113,6 +113,7 @@ var app3 = new Vue({
   },
   methods: {
     submitCode() {
+      document.getElementById("submitBtn").setAttribute("disabled", "disabled");
       this.showSpinner = true;
       submitObj.file.file1 = editor.getValue();
       this.showAC = false;
@@ -142,6 +143,7 @@ var app3 = new Vue({
           console.log(error);
           app3.showERR = true;
         })
+      setTimeout(function () {document.getElementById("submitBtn").removeAttribute("disabled");}, 2000);
     }
   },
 })
@@ -151,6 +153,10 @@ var app3 = new Vue({
 
 
 window.onload = function() {
+  document.getElementsByTagName("body")[0].className = "w3-animate-opacity";
+  document.getElementById("app1").className = "w3-animate-top";
+  document.getElementById("mainBlock1").className = "mainBlock1 w3-animate-zoom";
+  document.getElementById("mainBlock2").className = "mainBlock2 w3-animate-bottom";
   document.getElementsByTagName("html")[0].style.visibility = "visible";
 }
 

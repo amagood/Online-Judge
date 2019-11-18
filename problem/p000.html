@@ -1,4 +1,4 @@
-﻿<!-- version: 1911162 -->
+﻿<!-- version: 191118 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,10 +12,10 @@
   <link rel="stylesheet" href={% static "polls/css/problem.css" %}>
 </head>
 
-<body class="w3-animate-opacity">
+<body>
   <!-- partial:index.partial.html -->
   <!-- navbar -->
-  <div id="app1" class="w3-animate-top" style="border-bottom: 4px solid MediumSeaGreen">
+  <div id="app1" style="border-bottom: 4px solid MediumSeaGreen">
     <b-navbar toggleable="lg" type="light" variant="light">
       <b-navbar-brand href="#">GreenTeam</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -35,7 +35,7 @@
   </div>
   <!-- navbar end -->
   <!-- mainBlock1 -->
-  <div class="mainBlock1 w3-animate-zoom">
+  <div id="mainBlock1" class="mainBlock1">
     <h1 class="bigTitle">Title</h1>
     <p>#Tag1 #Tag2</p>
     <p class="smallTitle">Description</p>
@@ -58,7 +58,7 @@
   </div>
   <!-- mainBlock1 end -->
   <!-- mainBlock2 -->
-  <div class="mainBlock2 w3-animate-bottom">
+  <div id="mainBlock2" class="mainBlock2">
     <div id="app2" style="position: relative;">
       <!-- tooltip for copy SampleInOut -->
       <b-tooltip target="imgCopyIn" title="Copy the sample input"></b-tooltip>
@@ -111,7 +111,7 @@ int main()
           <b-spinner v-if="showSpinner" variant="secondary" label="Spinning"></b-spinner>
         </transition>
         <b-button class="mr-1 ml-3" disabled pill variant="outline-secondary">Test</b-button>
-        <b-button class="mx-1" v-on:click="submitCode()" pill variant="outline-secondary">Submit</b-button>
+        <b-button id="submitBtn" class="mx-1" v-on:click="submitCode()" pill variant="outline-secondary">Submit</b-button>
       </div>
       <!-- resultBlcok -->
       <transition name="slide-fade">
