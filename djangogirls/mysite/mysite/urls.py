@@ -16,11 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 # Import view functions from trips app.
-from account.Account_Login_View import responseLoginStatuss
-from login.view import responseLoginStatus
+from login.views import responseLoginStatus
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('account/', responseLoginStatuss ),
     path('login/', responseLoginStatus ),
 ]
