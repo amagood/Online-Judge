@@ -1,8 +1,0 @@
-<h1>{{ question.question_text }}</h1>
-<ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }}</li>
-{% endfor %}
-<input type="text" name="question_text" value="Input your code here..." class="vTextField" maxlength="20000" required="" id="id_question_text">
-<input type="submit" value="Save" class="default" name="_save">
-</ul>
