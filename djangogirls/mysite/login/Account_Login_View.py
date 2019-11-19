@@ -1,4 +1,4 @@
-from login.models import  Group
+
 from login.models import  User
 import login.Account_Login      #reaccount要改成資料夾的名稱 也就是app的名稱
 import hashlib

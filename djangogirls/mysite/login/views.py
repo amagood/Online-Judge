@@ -2,7 +2,6 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
-from login.models import  Group
 from login.models import  User
 import login.Account_Login_View
 import hashlib

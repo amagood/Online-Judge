@@ -1,4 +1,4 @@
-from login.models import  Group
+
 from login.models import  User #reaccount要改成資料夾的名稱 也就是app的名稱 models是db名稱
 import hashlib
 import time
@@ -15,9 +15,9 @@ class account:
         hash.update(str(time.time()).encode(encoding='UTF-8',errors='strict'))  #將時間放入hash
         userName=self.account
         try:
-            loginData=User.objects.get(name=self.account) #讀取資料庫符合的資料
-            if loginData.password==self.password: #比對密碼
-                who=loginData.identification
+            loginData=User.objects.get(User_Name=self.account) #讀取資料庫符合的資料
+            if loginData.User_Password==self.password: #比對密碼
+                who=loginData.User_Identification
                 stats='success'
             else:
                 who='error'
