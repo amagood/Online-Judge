@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+  {% load static %}
+  <link rel="stylesheet" href={% static "login/css/login.css" %}>
+</head>
+
+<body>
+  <!-- partial:index.partial.html -->
+  <!-- navbar -->
+  <!-- <div id="app1" style="border-bottom: 4px solid MediumSeaGreen">
+    <b-navbar toggleable="lg" type="light" variant="light">
+      <b-navbar-brand href="#">GreenTeam</b-navbar-brand>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item href="#">Problems</b-nav-item>
+          <b-nav-item href="#">Ranking</b-nav-item>
+        </b-navbar-nav> -->
+        <!-- Right aligned nav items -->
+        <!-- <b-navbar-nav class="ml-auto">
+          <b-nav-item href="#">Login</b-nav-item>
+          <b-nav-item href="#">Register</b-nav-item>
+        </b-navbar-nav>
+
+      </b-collapse>
+    </b-navbar>
+  </div> -->
+  <!-- navbar end -->
+  <!-- main block -->
+  <div id="app1" class="mainBlockContainer">
+    <transition name="fade">
+      <div class="mainBlock" v-if="showContent">
+        <form>
+          <span class="loginFormTitle">Account Login</span>
+          <span class="inputLbl">Username</span>
+          <div class="inputContainer">
+            <input id="inputAccount" class="loginInput" type="text" v-on:focus="showFocus1 = true" v-on:blur="showFocus1 = false" spellcheck="false" maxlength="20" pattern="[A-Za-z0-9].{6,}" required>
+            <transition name="bounce">
+              <span class="inputFocus" v-if="showFocus1"></span>
+            </transition>
+          </div>
+          <span class="inputLbl">Password</span>
+          <div class="inputContainer">
+            <input id="inputPassword" class="loginInput" type="password" v-on:focus="showFocus2 = true" v-on:blur="showFocus2 = false" spellcheck="false" maxlength="20">
+            <transition name="bounce">
+              <span class="inputFocus" v-if="showFocus2"></span>
+            </transition>
+          </div>
+          <div style="height: 30px;"></div>
+          <div>
+            <b-button v-on:click="loginPost()" pill size="lg" variant="dark">Login</b-button>
+          </div>
+        </form>
+      </div>
+    </transition>
+  </div>
+  <!-- main block end -->
+  <!-- partial -->
+  <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
+  <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
+  <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src={% static "login/js/login.js" %}></script>
+</body>
+
+</html>
