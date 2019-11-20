@@ -26,14 +26,14 @@ elif [ "${language}" == "c++" ]; then
 	exit 0
 	
 elif [ "${language}" == "python" ]; then
-	error=$(python3 ./${id}/code.py < ./${id}/input.txt 2>&1)
+	output=$(python3 ./${id}/code.py < ./${id}/input.txt 2>&1)
 	if [ "$?" == "1" ]; then
 		printf "CE\n" > ./${id}/output.txt
-		printf "${error}" >> ./${id}/output.txt
+		printf "${output}" >> ./${id}/output.txt
 		exit 0
 	fi
 	printf "\n" > ./${id}/output.txt
-	python3 ./${id}/code.py < ./${id}/input.txt >> ./${id}/output.txt
+	printf "${output}" >> ./${id}/output.txt
 	exit 0
 fi
 
