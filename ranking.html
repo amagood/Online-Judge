@@ -56,14 +56,13 @@
             <a class="nav-link" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" id="logout" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
+              <a class="nav-link" onclick="clearSession()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
           </li>
         </ul>
       </div>
       <script>
-        var clean=document.getElementById("#logout")
-        clean.onclick=function(){
-          sessionStorage.clear();
+        clearSession = function(){
+          sessionStorage.clear()
         }
       </script>
     </nav>

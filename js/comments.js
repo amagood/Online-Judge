@@ -1,6 +1,14 @@
-messages= {
+var showAction= {
     "action" : "show_message",
-    "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9" //SHA3_512
+    "hash" : ""
+}
+var handleSend= {
+	"action" : "send_message",
+	"userName" : "",
+	"date" : "",
+	"time" : "",
+	"content" : "",
+	"hash" : ""
 }
 
 //留言者名稱
@@ -56,16 +64,40 @@ Vue.component("v-list", {
 
 //留言區域父組件
 var app1 = new Vue({
-	el : "#app1",
-	data : function(){
-		return {
-			username : '',
-			message : '',
-			list : []
-		}
+	el: "#app1",
+	data: {
+		function(){
+			return {
+				username: '',
+				message: '',
+				list: []
+			}
+		},
+		msgList: [],
 	},
-	methods : {
-		handleSend : function(){
+	created: function() {
+    this.showMessages()
+  },
+	methods: {
+		showMessages(){
+			let self = this;
+			axios.post("https://httpbin.org/post",showAction)
+				.then(function(response){
+					console.log(response.data)
+					console.log(response.status)
+					console.log(response.statusText)
+					console.log(response.headers)
+					console.log(response.config)
+					self.msgList = response.data.json.message
+					for(let i=0; i<self.message.length; i++){
+						
+					}
+				})
+				.catch(function(error){
+					console.log(error);
+				})
+		},
+		handleSend(){
 			if (this.username === ''){
 				alert("Please enter your name")
 				return
@@ -75,18 +107,18 @@ var app1 = new Vue({
 				return
 			}
 			this.list.push({
-				name : this.username,
-				message : this.message
+				name: this.username,
+				message: this.message
 			})
 			this.message = ''
 			this.username = ''
 		},
-		handleReply : function(index){
+		handleReply: function(index){
 			var name = this.list[index].name
 			this.message = "reply@" + name + ": "
 			this.$refs['input-com'].fouceEvent()
 		},
-		handleDelete : function(index){
+		handleDelete: function(index){
 			this.list.splice(index, 1)
 		}
 	}

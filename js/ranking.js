@@ -71,7 +71,7 @@ var app1 = new Vue({
               self.userData[i].passRate = ((self.userData[i].ACTimes*100)/self.userData[i].commitTimes).toFixed(2)
           }
         })
-        .catch(function (error) {
+        .catch(function(error){
           console.log(error);
         })
     }
@@ -100,7 +100,7 @@ var app2 = new Vue({
           alert("Sorry! Maybe next time.")
         }
       })
-      .catch(function (error) {
+      .catch(function(error){
         console.log(error);
       })
       this.isShow = false
@@ -120,7 +120,7 @@ var app2 = new Vue({
           alert("Sorry! Maybe next time.")
         }
       })
-      .catch(function (error) {
+      .catch(function(error){
         console.log(error);
       })
       this.isShow = false
