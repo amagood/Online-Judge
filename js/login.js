@@ -29,6 +29,7 @@ var app1 = new Vue({
           else
             tmpObj = response.data;
           console.log(tmpObj);
+          setTimeout(loginSuccess, 3000);
         })
         .catch(function (error) {
           console.log(error);
@@ -41,4 +42,15 @@ var app1 = new Vue({
 window.onload = function() {
   document.getElementsByTagName("html")[0].style.visibility = "visible";
   this.app1.showContent = true;
+}
+
+
+// Login System
+
+
+function loginSuccess() {
+  localStorage.setItem("who", tmpObj.who);
+  localStorage.setItem("userName", tmpObj.userName);
+  localStorage.setItem("hash", tmpObj.hash);
+  window.location.replace("problem/p000");
 }

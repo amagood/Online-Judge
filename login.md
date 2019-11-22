@@ -1,3 +1,5 @@
+### 2019/11/22 Redirect
+	js store data and redirct after login
 ### 2019/11/18 load static
 	html {% load static %}
 ### 2019/11/18 Server-Specific File 

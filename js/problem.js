@@ -65,7 +65,7 @@ var app2 = new Vue({
         editor.session.setMode("ace/mode/c_cpp");
     },
     clickTheme() {
-      let acePath = 'ace/theme/' + this.themeSelected;
+      var acePath = 'ace/theme/' + this.themeSelected;
       editor.setTheme(acePath);
     }
   }
@@ -149,8 +149,14 @@ var app3 = new Vue({
 })
 
 
-// html visibility
+// Onload
 
+
+var userInfo = {
+  "who" : "",
+  "userName" : "",
+  "hash" : ""
+}
 
 window.onload = function() {
   document.getElementsByTagName("body")[0].className = "w3-animate-opacity";
@@ -158,6 +164,11 @@ window.onload = function() {
   document.getElementById("mainBlock1").className = "mainBlock1 w3-animate-zoom";
   document.getElementById("mainBlock2").className = "mainBlock2 w3-animate-bottom";
   document.getElementsByTagName("html")[0].style.visibility = "visible";
+  // Login System
+  userInfo.who = localStorage.getItem("who");
+  userInfo.userName = localStorage.getItem("userName");
+  userInfo.hash = localStorage.getItem("hash");
+  this.console.log(userInfo);
 }
 
 
@@ -241,8 +252,7 @@ var bar = document.getElementById("dragbar")
 
 const drag = (e) => {
   document.selection ? document.selection.empty() : window.getSelection().removeAllRanges();
-  let aceTop = window.scrollY + aceEditorContainer.getBoundingClientRect().top;
-  aceEditorContainer.style.height = (e.pageY - aceTop) + 'px';
+  aceEditorContainer.style.height = (e.clientY - aceEditorContainer.getBoundingClientRect().top) + 'px';
   editor.resize();
 }
 

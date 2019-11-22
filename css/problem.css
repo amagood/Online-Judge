@@ -147,6 +147,7 @@ body {
   left: 0;
   font-size: 18px;
   font-family: Consolas, Monaco, monospace;
+  margin-bottom: 0;
 }
 
 .resultGreen {
@@ -242,8 +243,8 @@ body.fullScreen {
 /* dragbar */
 
 .dragbar {
-  padding: 8px;
+  padding: 4px;
   margin-bottom: 14px;
   cursor: row-resize;
-  border-top: 1px solid silver;
+  border-bottom: 1px solid #f0f0f0;
 }
