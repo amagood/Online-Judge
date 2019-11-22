@@ -1,3 +1,8 @@
+messages= {
+    "action" : "show_message",
+    "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9" //SHA3_512
+}
+
 //留言者名稱
 Vue.component('v-input', {
 	template : "#v-input",

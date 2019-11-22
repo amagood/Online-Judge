@@ -1,20 +1,22 @@
-attendRank= {
+var hash=""
+var username=""
+var attendRank= {
   action: "attend_rank",
   attendStatus: "attend",
-  hash: "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9",
+  hash: "",
 
   status : "success",
 }
-notAttendRank= {
+var notAttendRank= {
   action: "attend_rank",
   attendStatus: "notAttend",
-  hash: "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9",
+  hash: "",
 
   status : "success",
 }
-rankAction= {
+var rankAction= {
   action: "rank",
-  hash: "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9",
+  hash: "",
 
   userData: [
     {
@@ -40,6 +42,7 @@ rankAction= {
     },
   ]
 }
+
 //----執行創建排名列表----
 var app1 = new Vue({
   el: "#app1",
@@ -68,6 +71,9 @@ var app1 = new Vue({
               self.userData[i].passRate = ((self.userData[i].ACTimes*100)/self.userData[i].commitTimes).toFixed(2)
           }
         })
+        .catch(function (error) {
+          console.log(error);
+        })
     }
   },
 })
@@ -94,6 +100,9 @@ var app2 = new Vue({
           alert("Sorry! Maybe next time.")
         }
       })
+      .catch(function (error) {
+        console.log(error);
+      })
       this.isShow = false
     },
     sendNotAttendMSG(){
@@ -110,6 +119,9 @@ var app2 = new Vue({
         else{
           alert("Sorry! Maybe next time.")
         }
+      })
+      .catch(function (error) {
+        console.log(error);
       })
       this.isShow = false
     }

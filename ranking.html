@@ -39,7 +39,7 @@
             <a class="nav-link" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="image/file.svg" /> Problems</a>
+            <a class="nav-link" href="teacherProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="ranking.html"><img class="navbarimage" src="image/list-ordered.svg" /> Ranking<span class="sr-only">(current)</span></a>
@@ -50,16 +50,22 @@
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
+            <a class="nav-link" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
+            <a class="nav-link" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><img class="navbarimage" src="image/user-circle-solid.svg"/></a>
+              <a class="nav-link" id="logout" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
           </li>
         </ul>
       </div>
+      <script>
+        var clean=document.getElementById("#logout")
+        clean.onclick=function(){
+          sessionStorage.clear();
+        }
+      </script>
     </nav>
 
     <!--選擇是否加入排名-->
