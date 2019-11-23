@@ -11,13 +11,13 @@ if [ "${language}" == "c" ]; then
 		printf "${error}" >> ./${id}/output.txt
 		exit 0
 	fi
-	printf "\n" > ./${id}/output.txt
-	timeout ${maxTime} ./${id}/a.out < ./${id}/input.txt >> ./${id}/output.txt
+	output=$((time timeout ${maxTime} ./${id}/a.out < ./${id}/input.txt) 2>./${id}/output.txt)
 	if [ "$?" == "124" ]; then
 		printf "TLE\n" > ./${id}/output.txt
 		printf "Timeout" >> ./${id}/output.txt
 		exit 0
 	fi
+	printf "${output}" >> ./${id}/output.txt
 	exit 0
 	
 elif [ "${language}" == "c++" ]; then
@@ -27,17 +27,17 @@ elif [ "${language}" == "c++" ]; then
 		printf "${error}" >> ./${id}/output.txt
 		exit 0
 	fi
-	printf "\n" > ./${id}/output.txt
-	timeout ${maxTime} ./${id}/a.out < ./${id}/input.txt >> ./${id}/output.txt
+	output=$((time timeout ${maxTime} ./${id}/a.out < ./${id}/input.txt) 2>./${id}/output.txt)
 	if [ "$?" == "124" ]; then
 		printf "TLE\n" > ./${id}/output.txt
 		printf "Timeout" >> ./${id}/output.txt
 		exit 0
 	fi
+	printf "${output}" >> ./${id}/output.txt
 	exit 0
 	
 elif [ "${language}" == "python" ]; then
-	output=$(timeout ${maxTime} python3 ./${id}/code.py < ./${id}/input.txt 2>&1)
+	output=$((time timeout ${maxTime} python3 ./${id}/code.py < ./${id}/input.txt 2>&1) 2>./${id}/output.txt)
 	status=$?
 	if [ "${status}" == "1" ]; then
 		printf "CE\n" > ./${id}/output.txt
@@ -48,7 +48,6 @@ elif [ "${language}" == "python" ]; then
 		printf "Timeout" >> ./${id}/output.txt
 		exit 0
 	fi
-	printf "\n" > ./${id}/output.txt
 	printf "${output}" >> ./${id}/output.txt
 	exit 0
 fi
