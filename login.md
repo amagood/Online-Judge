@@ -1,3 +1,5 @@
+### 2019/11/24 Validation
+	html css js change color to red when value is invalid
 ### 2019/11/22 Redirect
 	js store data and redirct after login
 ### 2019/11/18 load static
