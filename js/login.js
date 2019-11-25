@@ -53,6 +53,8 @@ var app1 = new Vue({
           })
           .catch(function (error) {
             app1.showSpinner = false;
+            app1.msg = "Network error! Please try again."
+            app1.showMsg = true;
             console.log(error);
           })
       }
