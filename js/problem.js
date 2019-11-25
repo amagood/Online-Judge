@@ -98,7 +98,7 @@ var app3 = new Vue({
   el: "#app3",
   data: {
     showSpinner: false,
-    codeStats: "AC",
+    codeState: "AC",
     errorMessage: "errorMessage....",
     exeTime: "99999ms",
     errorOutputCompare: "",
@@ -130,13 +130,13 @@ var app3 = new Vue({
             tmpObj = JSON.parse(response.data.freeform);
           else
             tmpObj = response.data; console.log(tmpObj);
-          app3.codeStats           = tmpObj.codeStats;
+          app3.codeState           = tmpObj.codeState;
           app3.errorMessage        = tmpObj.errorMessage;
           app3.exeTime             = tmpObj.exeTime;
           app3.errorOutputCompare  = tmpObj.errorOutputCompare;
           app3.wrongOutput         = tmpObj.wrongOutput;
           app3.hash                = tmpObj.hash;
-          app3["show" + tmpObj.codeStats] = true;
+          app3["show" + tmpObj.codeState] = true;
         })
         .catch(function (error) {
           app3.showSpinner = false;

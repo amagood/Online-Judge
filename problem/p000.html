@@ -106,35 +106,35 @@
       <!-- resultBlcok -->
       <transition name="slide-fade">
         <div class="resultGreen" v-if="showAC">
-          <span class="codeStats">${ codeStats }</span>
+          <span class="codeState">${ codeState }</span>
           <span>( ${ exeTime } )</span>
         </div>
       </transition>
       <transition name="slide-fade">
         <div class="resultRed" v-if="showCE">
-          <span class="codeStats">${ codeStats }</span>
+          <span class="codeState">${ codeState }</span>
           <p>${ errorMessage }</p>
         </div>
       </transition>
       <transition name="slide-fade">
         <div class="resultRed" v-if="showTLE">
-          <span class="codeStats">${ codeStats }</span>
+          <span class="codeState">${ codeState }</span>
           <span>( ${ exeTime } )</span>
         </div>
       </transition>
       <transition name="slide-fade">
         <div class="resultRed" v-if="showWA">
-          <span class="codeStats">${ codeStats }</span>
+          <span class="codeState">${ codeState }</span>
         </div>
       </transition>
       <transition name="slide-fade">
         <div class="resultRed" v-if="showMLE">
-          <span class="codeStats">${ codeStats }</span>
+          <span class="codeState">${ codeState }</span>
         </div>
       </transition>
       <transition name="slide-fade">
         <div v-if="showERR">
-          <p class="codeStats">Network error! Please try again.</p>
+          <p class="codeState">Network error! Please try again.</p>
         </div>
       </transition>
       <!-- resultBlcok end -->
