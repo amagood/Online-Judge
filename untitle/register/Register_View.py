@@ -16,5 +16,3 @@ def ResponseRegisterStatus(request):
 		else:
 			retDict = {'stats':'error'}
 		return JsonResponse(retDict)
-	elif request.method == 'GET':
-		return render(request, 'register/index.html',{})
