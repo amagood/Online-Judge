@@ -2,17 +2,17 @@ window.onload = () => {
   new Vue({ el: '#app' })
 }
 
-var selectField = document.getElementById("id_exampleImput");
-function selectLanguage(selectLanguageValue) {
-	alert("selectLanguageValue");
-	if (selectLanguageValue == "1") {
-  		document.getElementById("id_selectFileType").innerHTML = '<input size="40" name="account" type="file" id="id_pdf" autocomplete="off" value="" required="" accept = ".c">'
+var selectField = document.getElementById("selectLanguage");
+
+selectField.onchange = function() {
+	if (document.getElementById("selectLanguage").selectedIndex == "0") {
+  		document.getElementById("id_selectFileType").innerHTML = '<input size="40" name="account" type="file" id="id_pdf" autocomplete="off" value="" required="" accept = ".c">';
 	}
-	else if (selectLanguageValue == "2"){
-		document.getElementById("id_selectFileType").innerHTML = '<input size="40" name="account" type="file" id="id_pdf" autocomplete="off" value="" required="" accept = ".cpp,.cc">'
+	else if (document.getElementById("selectLanguage").selectedIndex == "1"){
+		document.getElementById("id_selectFileType").innerHTML = '<input size="40" name="account" type="file" id="id_pdf" autocomplete="off" value="" required="" accept = ".cpp,.cc">';
 	}
 	else{
-		document.getElementById("id_selectFileType").innerHTML = '<input size="40" name="account" type="file" id="id_pdf" autocomplete="off" value="" required="" accept = ".py">'
+		document.getElementById("id_selectFileType").innerHTML = '<input size="40" name="account" type="file" id="id_pdf" autocomplete="off" value="" required="" accept = ".py">';
 	}
 }
 
