@@ -5,7 +5,7 @@ var loginObj = {
   "account" : "",
   "password" : ""
 }
-var postURL = "login/"
+var postURL = ""
 var testMode = false
 var tmpObj = {};
 
@@ -14,15 +14,15 @@ var app1 = new Vue({
   el: "#app1",
   data: {
     showContent: false,
-    showFocus1: false,
-    showFocus2: false,
-    focus1Class: "inputFocusGreen",
-    focus2Class: "inputFocusGreen"
+    showFocusAcct: false,
+    showFocusPw: false,
+    focusAcctClass: "inputFocusGreen",
+    focusPwClass: "inputFocusGreen"
   },
   methods: {
     LoginPost() {
-      loginObj.account  = document.getElementById("inputAccount").value;
-      loginObj.password = document.getElementById("inputPassword").value;
+      loginObj.account  = document.getElementById("inputAcct").value;
+      loginObj.password = document.getElementById("inputPw").value;
       axios.post(postURL, loginObj)
         .then(function (response) {
           console.log(response);
@@ -37,30 +37,30 @@ var app1 = new Vue({
           console.log(error);
         })
     },
-    Validation1() {
-      var el = document.getElementById("inputAccount");
-      if (el.validity.patternMismatch | el.validity.valueMissing)
+    ValidateAcct() {
+      var el = document.getElementById("inputAcct");
+      if (el.validity.valid)
       {
-        el.parentElement.style.borderColor = "red";
-        this.focus1Class = "inputFocusRed";
+        el.parentElement.style.borderColor = "#e6e6e6";
+        this.focusAcctClass = "inputFocusGreen";
       }
       else
       {
-        el.parentElement.style.borderColor = "#e6e6e6";
-        this.focus1Class = "inputFocusGreen";
+        el.parentElement.style.borderColor = "red";
+        this.focusAcctClass = "inputFocusRed";
       }
     },
-    Validation2() {
-      var el = document.getElementById("inputPassword");
-      if (el.validity.patternMismatch | el.validity.valueMissing)
+    ValidatePw() {
+      var el = document.getElementById("inputPw");
+      if (el.validity.valid)
       {
-        el.parentElement.style.borderColor = "red";
-        this.focus2Class = "inputFocusRed";
+        el.parentElement.style.borderColor = "#e6e6e6";
+        this.focusPwClass = "inputFocusGreen";
       }
       else
       {
-        el.parentElement.style.borderColor = "#e6e6e6";
-        this.focus2Class = "inputFocusGreen";
+        el.parentElement.style.borderColor = "red";
+        this.focusPwClass = "inputFocusRed";
       }
     }
   }

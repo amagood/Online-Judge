@@ -1,3 +1,8 @@
+### 2019/11/25 Validation and Naming
+	html js
+	revise validate functions and improve readability
+	postURL = ""
+	change path of external js in login.html
 ### 2019/11/24 Validation
 	html css js change color to red when value is invalid
 ### 2019/11/22 Redirect
