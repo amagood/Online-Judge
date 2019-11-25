@@ -11,31 +11,56 @@ var tmpObj = {};
 
 
 var app1 = new Vue({
+  delimiters: ['${', '}'],
   el: "#app1",
   data: {
     showContent: false,
     showFocusAcct: false,
     showFocusPw: false,
     focusAcctClass: "inputFocusGreen",
-    focusPwClass: "inputFocusGreen"
+    focusPwClass: "inputFocusGreen",
+    showSpinner: false,
+    showMsg: false,
+    msg: ""
   },
   methods: {
     LoginPost() {
-      loginObj.account  = document.getElementById("inputAcct").value;
-      loginObj.password = document.getElementById("inputPw").value;
-      axios.post(postURL, loginObj)
-        .then(function (response) {
-          console.log(response);
-          if (testMode)
-            tmpObj = JSON.parse(response.data.freeform);
-          else
-            tmpObj = response.data;
-          console.log(tmpObj);
-          setTimeout(loginSuccess, 3000);
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
+      app1.showMsg = false;
+      if (document.getElementById("inputAcct").validity.valid
+         && document.getElementById("inputPw").validity.valid)
+      {
+        app1.showSpinner = true;
+        loginObj.account  = document.getElementById("inputAcct").value;
+        loginObj.password = document.getElementById("inputPw").value;
+        axios.post(postURL, loginObj)
+          .then(function (response) {
+            app1.showSpinner = false;
+            console.log(response);
+            if (testMode) tmpObj = JSON.parse(response.data.freeform);
+            else tmpObj = response.data;
+            console.log(tmpObj);
+            if (tmpObj.stats == "success")
+            {
+              app1.msg = "Success!"
+              app1.showMsg = true;
+              setTimeout(loginSuccess, 3000);
+            }
+            else
+            {
+              app1.msg = "Account and password are incorrect!"
+              app1.showMsg = true;
+            }
+          })
+          .catch(function (error) {
+            app1.showSpinner = false;
+            console.log(error);
+          })
+      }
+      else
+      {
+        app1.msg = "Input is invalid!"
+        app1.showMsg = true;
+      }
     },
     ValidateAcct() {
       var el = document.getElementById("inputAcct");

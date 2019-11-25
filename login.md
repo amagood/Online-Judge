@@ -1,3 +1,5 @@
+### 2019/11/25 Validation Message
+	html js add login message and spinner
 ### 2019/11/25 Validation and Naming
 	html js
 	revise validate functions and improve readability
