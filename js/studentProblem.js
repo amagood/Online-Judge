@@ -10,6 +10,8 @@ window.onload = () => {
         perPage: 20,//一頁幾行
         currentPage: 1,//當前頁數
         filter: null,//Search
+        Target:"Target",
+        Degree:"Degree",
         fields: [
           {
             key: "title",
@@ -62,6 +64,16 @@ window.onload = () => {
           .map(f => {
             return { text: f.label, value: f.key }
           })
+      }
+    },
+    methods:{
+      clickTarget(Target){
+        this.Target=Target;
+        this.Degree="Degree";
+      },
+      clickDegree(Degree){
+        this.Degree=Degree;
+        this.Target="Target";
       }
     }
   })

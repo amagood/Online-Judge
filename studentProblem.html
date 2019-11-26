@@ -56,17 +56,17 @@
         <div>
         <b-row>
           <b-col>
-          <b-dropdown dropup text="Target" variant="secondary">
-            <b-dropdown-item @click="filter = 'loop'">Loop</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'array'">Array</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'string'">String</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'function'">Function</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'pointer'">Pointer</b-dropdown-item>
+          <b-dropdown dropup  v-bind:text="Target" variant="secondary">
+            <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTarget('Loop')">Loop</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'array'" v-on:click="clickTarget('Array')">Array</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'string'" v-on:click="clickTarget('String')">String</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'function'" v-on:click="clickTarget('Function')">Function</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTarget('Pointer')">Pointer</b-dropdown-item>
           </b-dropdown>
-          <b-dropdown dropup text="Degree" variant="secondary" style="margin-left: 10px">
-            <b-dropdown-item @click="filter = 'easy'">easy</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'medium'">medium</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'hard'">hard</b-dropdown-item>
+          <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
+            <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
           </b-dropdown>
         </b-col>
         <!--search/filter bar-->
