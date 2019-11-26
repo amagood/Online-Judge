@@ -1,3 +1,6 @@
+### 2019/11/26 Path and Redirect
+	login.html js link path
+	js redirct url
 ### 2019/11/25 Validation Message
 	html js add login message and spinner
 ### 2019/11/25 Validation and Naming
