@@ -95,37 +95,35 @@
           </b-col>
         </b-row>
 
-        <!--block 2.5 add class bar-->
+        <!--block 2.5 add class bar
         <div style="margin-top: 15px;" id="addClassBar" >
           <b-alert show variant="secondary" dismissible :show="showDismissibleAlert">
             <span style="margin-right: 5px;">add ? problem </span>
             <b-button variant="outline-secondary" size="sm">Add to</b-button>
           </b-alert>
-        </div>
+        </div>-->
 
 
         <!--block 2 Problem-->
         <div style="margin-top: 20px; min-height: 480px;">
-          <div v-if="clickAddClass">
-            <b-table selectable :select-mode="selectMode" sticky hover :items="items" :fields="fields" id="problemTable"
-              :per-page="perPage" :current-page="currentPage" :filter="filter">
-              <template v-slot:cell(selected)="{ rowSelected }">
-                <template v-if="rowSelected">
-                  <span aria-hidden="true">&check;</span>
-                  <span class="sr-only">Selected</span>
-                </template>
-                <template v-else>
-                  <span aria-hidden="true">&nbsp;</span>
-                  <span class="sr-only">Not selected</span>
-                </template>
+          <b-table selectable :select-mode="selectMode" sticky hover :items="items" :fields="fields" id="problemTable"
+            :per-page="perPage" :current-page="currentPage" :filter="filter">
+            <template v-slot:cell(selected)="{ rowSelected }">
+              <template v-if="rowSelected">
+                <span aria-hidden="true">&check;</span>
+                <span class="sr-only">Selected</span>
               </template>
-            </b-table>
-          </div>
-          <div v-else>
+              <template v-else>
+                <span aria-hidden="true">&nbsp;</span>
+                <span class="sr-only">Not selected</span>
+              </template>
+            </template>
+          </b-table>
+          <!--<div v-else>
             <b-table sticky hover :items="items" :fields="fields" id="problemTable" :per-page="perPage"
               :current-page="currentPage" :filter="filter">
             </b-table>
-          </div>
+          </div>-->
         </div>
 
         <!--block 3 Page-->

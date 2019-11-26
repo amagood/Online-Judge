@@ -77,7 +77,7 @@ window.onload = () => {
             { title: "question024", target: "count", degree: "hard", pp: "50%", respondent: "100", time: "20170101" },
             { title: "question025", target: "array", degree: "easy", pp: "50%", respondent: "100", time: "20190501" },
           ],
-          selectMode: 'multi',//選擇模式，<b-table :select-mode="selectMode">
+          selectMode: 'range',//選擇模式，<b-table :select-mode="selectMode">
         }
     },//data end
     methods: {
