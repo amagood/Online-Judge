@@ -14,27 +14,6 @@
 
 <body>
   <!-- partial:index.partial.html -->
-  <!-- navbar -->
-  <!-- <div id="app1" style="border-bottom: 4px solid MediumSeaGreen">
-    <b-navbar toggleable="lg" type="light" variant="light">
-      <b-navbar-brand href="#">GreenTeam</b-navbar-brand>
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item href="#">Problems</b-nav-item>
-          <b-nav-item href="#">Ranking</b-nav-item>
-        </b-navbar-nav> -->
-        <!-- Right aligned nav items -->
-        <!-- <b-navbar-nav class="ml-auto">
-          <b-nav-item href="#">Login</b-nav-item>
-          <b-nav-item href="#">Register</b-nav-item>
-        </b-navbar-nav>
-
-      </b-collapse>
-    </b-navbar>
-  </div> -->
-  <!-- navbar end -->
-  <!-- main block -->
   <div id="app1" class="mainBlockContainer">
     <transition name="fade">
       <div class="mainBlock" v-if="showContent">
@@ -42,27 +21,34 @@
           <span class="loginFormTitle">Account Login</span>
           <span class="inputLbl">Username</span>
           <div class="inputContainer">
-            <input id="inputAccount" class="loginInput" type="text" v-on:focus="showFocus1 = true" v-on:blur="showFocus1 = false" spellcheck="false" maxlength="20" pattern="[A-Za-z0-9].{6,}" required>
+            <input id="inputAcct" class="loginInput" type="text" spellcheck="false" maxlength="40" pattern="[a-zA-Z0-9]+" required
+                   v-on:focus="showFocusAcct = true" v-on:blur="showFocusAcct = false" v-on:input="ValidateAcct()">
             <transition name="bounce">
-              <span class="inputFocus" v-if="showFocus1"></span>
+              <span v-bind:class="focusAcctClass" v-if="showFocusAcct"></span>
             </transition>
           </div>
           <span class="inputLbl">Password</span>
           <div class="inputContainer">
-            <input id="inputPassword" class="loginInput" type="password" v-on:focus="showFocus2 = true" v-on:blur="showFocus2 = false" spellcheck="false" maxlength="20">
+            <input id="inputPw" class="loginInput" type="password" spellcheck="false" maxlength="40" pattern="[a-zA-Z0-9]+" required
+                   v-on:focus="showFocusPw = true" v-on:blur="showFocusPw = false" v-on:input="ValidatePw()">
             <transition name="bounce">
-              <span class="inputFocus" v-if="showFocus2"></span>
+              <span v-bind:class="focusPwClass" v-if="showFocusPw"></span>
             </transition>
           </div>
           <div style="height: 30px;"></div>
-          <div>
-            <b-button v-on:click="loginPost()" pill size="lg" variant="dark">Login</b-button>
+          <div class="d-flex align-items-center">
+            <b-button v-on:click="LoginPost()" pill size="lg" variant="dark">Login</b-button>
+            <transition name="fade">
+              <b-spinner v-if="showSpinner" class="ml-3" variant="secondary" label="Spinning"></b-spinner>
+            </transition>
           </div>
+          <transition name="fade">
+            <div v-if="showMsg" class="mt-3">${ msg }</div>
+          </transition>
         </form>
       </div>
     </transition>
   </div>
-  <!-- main block end -->
   <!-- partial -->
   <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
   <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
