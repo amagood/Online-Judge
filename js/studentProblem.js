@@ -42,6 +42,10 @@ window.onload = () => {
             key: "time",
             label: "Input Time",
             sortable: true
+          },
+          { 
+            key: "problem", 
+            label:"",
           }
         ],
         items: [
@@ -50,7 +54,12 @@ window.onload = () => {
           { title: "question003", target: "count", degree: "hard", pp: "50%", respondent: "100", time: "20170101" },
           { title: "question004", target: "array", degree: "easy", pp: "50%", respondent: "100", time: "20190501" },
           { title: "question005", target: "function", degree: "midium", pp: "50%", respondent: "100", time: "20190131" }, 
-        ]
+        ],
+        problemButton: {
+          id: 'problemButton',
+          title: '',
+          content: ''
+        }
       }
     },
     computed: {
@@ -74,7 +83,16 @@ window.onload = () => {
       clickDegree(Degree){
         this.Degree=Degree;
         this.Target="Target";
-      }
+      },
+      info(item, index, button) {
+        this.problemButton.title = `Row index: ${index}`
+        this.problemButton.content = JSON.stringify(item, null, 2)
+        this.$root.$emit('bv::show::modal', this.problemButton.id, button)
+      },
+      resetProblemButton() {
+        this.problemButton.title = ''
+        this.problemButton.content = ''
+      },
     }
   })
 }

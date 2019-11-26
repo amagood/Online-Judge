@@ -54,46 +54,58 @@
       <div id="app-1" class="mainBlockStudentProblem">
         <!--block 1 sortMenu-->
         <div>
-        <b-row>
-          <b-col>
-          <b-dropdown dropup  v-bind:text="Target" variant="secondary">
-            <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTarget('Loop')">Loop</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'array'" v-on:click="clickTarget('Array')">Array</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'string'" v-on:click="clickTarget('String')">String</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'function'" v-on:click="clickTarget('Function')">Function</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTarget('Pointer')">Pointer</b-dropdown-item>
-          </b-dropdown>
-          <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
-            <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
-          </b-dropdown>
-        </b-col>
-        <!--search/filter bar-->
-        <b-col sm="5">
-          <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput" class="mb-0">
-              <b-input-group size="">
-                <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search"></b-form-input>
-                <b-input-group-append>
-                  <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
-                </b-input-group-append>
-              </b-input-group>
-            </b-form-group>
-          </b-col>
+          <b-row>
+            <b-col>
+              <b-dropdown dropup v-bind:text="Target" variant="secondary">
+                <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTarget('Loop')">Loop</b-dropdown-item>
+                <b-dropdown-item @click="filter = 'array'" v-on:click="clickTarget('Array')">Array</b-dropdown-item>
+                <b-dropdown-item @click="filter = 'string'" v-on:click="clickTarget('String')">String</b-dropdown-item>
+                <b-dropdown-item @click="filter = 'function'" v-on:click="clickTarget('Function')">Function
+                </b-dropdown-item>
+                <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTarget('Pointer')">Pointer
+                </b-dropdown-item>
+              </b-dropdown>
+              <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
+                <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
+                <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
+                <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
+              </b-dropdown>
+            </b-col>
+            <!--search/filter bar-->
+            <b-col sm="5">
+              <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput" class="mb-0">
+                <b-input-group size="">
+                  <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
+                  </b-form-input>
+                  <b-input-group-append>
+                    <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                  </b-input-group-append>
+                </b-input-group>
+              </b-form-group>
+            </b-col>
           </b-row>
         </div>
 
         <!--block 2 Problem-->
         <div style="margin-top: 20px; min-height: 480px;">
-          <b-table sticky hover :items="items" :fields="fields" 
-          id="problemTable" :per-page="perPage" :current-page="currentPage" :filter="filter">
+          <b-table sticky hover :items="items" :fields="fields" id="problemTable" :per-page="perPage"
+            :current-page="currentPage" :filter="filter">
+            <template v-slot:cell(problem)="row">
+              <b-button size="sm" @click="info(row.item, row.index, $event.target)">
+                Go
+              </b-button>
+            </template>
           </b-table>
+          <!--problemButton-->
+          <b-modal :id="problemButton.id" :title="problemButton.title" ok-only @hide="resetProblemButton">
+            <pre>{{ problemButton.content }}</pre>
+          </b-modal>
         </div>
 
         <!--block 3 Page-->
         <div style="margin-block-end:10px;">
           <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="problemTable"
-           align="center">
+            align="center">
           </b-pagination>
         </div>
       </div>
