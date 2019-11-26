@@ -107,5 +107,5 @@ function loginSuccess() {
   localStorage.setItem("who", tmpObj.who);
   localStorage.setItem("userName", tmpObj.userName);
   localStorage.setItem("hash", tmpObj.hash);
-  window.location.replace("problem/p000");
+  window.location.replace("../problem/p000");
 }
