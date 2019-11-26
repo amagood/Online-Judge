@@ -1,15 +1,16 @@
 from django.db import models
 
 '''
-    Before using new version of models.py is better to flush the original database data (if you have any) to decrease the problem you might meet
+Before using new version of models.py is better to flush the original database data (if you have any) to decrease the problem you might meet
    
    Version Note:
-    Current Version: V1.1
+    Current Version: V1.2
    
-        V1.0 inital release for V 1 judge demo with no group functionality
+        V1.0 inital release for V.1 judge demo with no group functionality
         V1.1 adding Rank for ranking in question
              adding Group class but no real funtionality
              change Summary's and Summit's Question to one way relation
+        V1.2 create Chat class for Group
     
     If you encounter any problem you can't solve or want to change anything please contact me
     
@@ -21,11 +22,10 @@ class Group(models.Model):
     Group_Name = models.CharField(max_length = 40) # no name longer than 40
     # Group_User_List with relation of 'User' <- not yet finish
     # Group_Question_List with relation of 'Question' <- not yet finish
-    # Group_Chat_List with relation of 'Chat' <- not yet finish
+    # Group_Chat_History with relation of 'Chat'
     Group_Chat_Maximum = models.PositiveIntegerField(default = 100)
     def __str__(self):
         return self.Group_Name
-
 
 class User(models.Model):
     User_Name = models.CharField(max_length = 40) # no name longer than 40
@@ -49,11 +49,21 @@ class Question(models.Model):
     Question_AC_Count = models.PositiveIntegerField(default = 0)
     Question_Summit_Time = models.PositiveIntegerField(default = 0)
     Question_Create_Time = models.DateTimeField(auto_now_add=True)
-    Question_Html_Filename = models.CharField(blank = True, max_length = 100)
-    Question_Js_Filename = models.CharField(blank = True, max_length = 100)
+    Question_Html_Filename = models.CharField(blank=True, max_length = 100)
+    Question_Js_Filename = models.CharField(blank=True, max_length = 100)
     # Question_Ranking_List with relation of 'Rank'
     def __str__(self):
         return self.Question_Name
+
+# subclass for Group
+
+class Chat(models.Model):
+    Chat_Group = models.ForeignKey(Group, related_name='Chat', blank=True, null=True, on_delete=models.CASCADE) # two way relation with Group
+    Chat_Message = models.CharField(blank=True, max_length = 255) # might be changing
+    Chat_User = models.ForeignKey(User, related_name='+', blank=True, null=True, on_delete=models.CASCADE) # one way relation with User
+    Chat_Time = models.DateTimeField(auto_now_add=True) # time on create
+    def __str__(self):
+        return self.Chat_Message # for debug ,can be change for your own purpose
 
 # subclass for User
 
@@ -63,7 +73,7 @@ class Summit(models.Model):
     Summit_Time = models.DateTimeField(auto_now_add=True) # will be it's creation time
     Summit_Output = models.CharField(default = 'WA',max_length = 10) # no output longer than 10
     def __str__(self):
-        return self.Summit_Question
+        return self.Summit_Question # for debug ,can be change for your own purpose
 
 class Summary(models.Model):
     Summary_User = models.ForeignKey(User, related_name='Summary', blank=True, null=True, on_delete=models.CASCADE) # two way relation with User
@@ -71,7 +81,7 @@ class Summary(models.Model):
     Summary_Count = models.PositiveIntegerField(default = 0)
     Summary_AC_Count = models.PositiveIntegerField(default = 0) # Summary Count >= Summary AC Count
     def __str__(self):
-        return self.Summary_Question
+        return self.Summary_Question # for debug ,can be change for your own purpose
 
 # subclass for Question
 
@@ -82,5 +92,4 @@ class Rank(models.Model):
     # Rank_Summary_Count it should be able to access User relation 'Summary' to  get the data
     # Rank_AC_count it should be able to access User relation 'Summary' to  get the data
     def __str__(self):
-        return self.Rank_User.User_Name
-
+        return self.Rank_User.User_Name # for debug ,can be change for your own purpose
