@@ -1,11 +1,10 @@
-{% load static %}
-
+{%load static%}
 <div id="app">
 
     <head>
         <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
         <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
-        <link rel="stylesheet" href="{% static 'register/index.css' %}">
+        <link rel="stylesheet" href="{% static 'register/index.css'%}">
     </head>
 
     <body>
@@ -42,7 +41,7 @@
 
 
             <div class="container">
-                <form class="form-horizontal" data-toggle="validator" role="form" method="post" novalidate="true">{% csrf_token %}
+                <form class="form-horizontal" data-toggle="validator" role="form" method="post" novalidate="true">{%csrf_token%}
 
                     <div class="form-group">
                         <label for="id_username" class="col-sm-2 control-label">帳號 :</label>
@@ -50,6 +49,15 @@
                             <input size="40" name="account" type="text" id="id_account" autocomplete="off" value=""
                                 required="">
                             <input type="hidden" name="CSRF_KEY" value="2050849946">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="id_username" class="col-sm-2 control-label">使用者名稱 :</label>
+                        <div class="col-sm-10">
+                            <input size="40" name="username" type="text" id="id_username" autocomplete="off"
+                                required="">
                         </div>
                     </div>
 
@@ -73,14 +81,6 @@
                         <label for="id_email" class="col-sm-2 control-label">電子郵件信箱 :</label>
                         <div class="col-sm-10">
                             <input size="40" name="email" type="text" id="id_email" autocomplete="off" required="">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="id_username" class="col-sm-2 control-label">使用者名稱 :</label>
-                        <div class="col-sm-10">
-                            <input size="40" name="username" type="text" id="id_username" autocomplete="off"
-                                required="">
                         </div>
                     </div>
 
@@ -112,5 +112,5 @@
     <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
     <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
     <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
-    <script src="{% static 'register/index.js' %}"></script>
+    <script src="{% static 'register/index.css'%}"></script>
 </div>
