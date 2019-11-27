@@ -29,7 +29,7 @@ def _Is_Register_Action(jsonDict):
 
 def _Is_Account_Legal(jsonDict):
 	try:
-		if not re.search('^[a-zA-Z0-9]{8,20}$',jsonDict['account']):
+		if not re.search('^[a-zA-Z0-9]{8,40}$',jsonDict['account']):
 			return False
 		return True
 	except:
@@ -37,7 +37,7 @@ def _Is_Account_Legal(jsonDict):
 
 def _Is_Password_Legal(jsonDict):
 	try:
-		if not re.search('^[a-zA-Z0-9]{8,20}$',jsonDict['password']):
+		if not re.search('^[a-zA-Z0-9]{8,40}$',jsonDict['password']):
 			return False
 		return True
 	except:

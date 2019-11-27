@@ -16,3 +16,5 @@ def ResponseRegisterStatus(request):
 		else:
 			retDict = {'stats':'error'}
 		return JsonResponse(retDict)
+'''	else:#for test
+		return render(request,'register/index.html',{})'''

@@ -1,11 +1,12 @@
 import json
+import unittest
 
 from django.test import TestCase
 
-from . import Register
+import Register
 # Create your tests here.
 
-class TestRegister(TestCase):
+class Test_on_Register(unittest.TestCase):
 	
 	def test_CheckAccountData(self):
 		pass_data_a = {
@@ -92,3 +93,6 @@ class TestRegister(TestCase):
 		self.assertIs(Register.CheckAccountData(err_data_a), False)
 		self.assertIs(Register.CheckAccountData(err_data_b), False)
 		self.assertIs(Register.CheckAccountData(err_data_c), False)
+
+if __name__ == '__main__':
+	unittest.main()
