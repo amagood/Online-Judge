@@ -1,3 +1,7 @@
+### 2019/11/28 Commit: comment page, ranklist, index 1version
+        comments:顯示先前留言,按照使用者名稱留言
+        ranklist:顯示依照所搜尋題目的使用者ac次數進行排名
+        index:首頁依照登入者身分顯示上方navbar
 ### 2019/11/17 Commit: create comment page
         comments.html
                 1.留言板的模板

@@ -36,7 +36,7 @@
 	margin-top: 20px;
 }
 
-.message input, .message textarea{
+.message textarea{
 	width:300px;
 	height: 32px;
 	padding: 0 6px;
@@ -48,7 +48,7 @@
 	outline: none;
 }
 
-.message input:focus, .message textarea:focus{
+.message textarea:focus{
 	border: 1px solid #3399ff;
 }
 

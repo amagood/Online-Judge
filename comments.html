@@ -28,7 +28,7 @@
   </head>
   <body>
     <!--navbar, 格式設定在ranking.css檔中-->
-    <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
       <a class="navbar-brand" href="index.html">GreenTeam</a>
       <button class="navbar-toggler" type="button">
         <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,8 @@
             <a class="nav-link" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="teacherProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="ranking.html"><img class="navbarimage" src="image/list-ordered.svg" /> Ranking</a>
@@ -60,37 +61,50 @@
           </li>
         </ul>
       </div>
-      <script>
-        clearStorage = function(){
-          localStorage.clear();
-        }
-      </script>
     </nav>
+    <script>
+      clearStorage = function(){
+        localStorage.clear();
+      }
+      var navapp = new Vue({
+        el: "#navapp",
+        data:{
+          whichShow:"",
+          userid: "",
+        },
+        created() {
+          this.checkId()
+        },
+        methods: {
+          checkId(){
+            let self = this
+            self.userid = localStorage.getItem("who")
+            if(self.userid === "admin"||self.userid === "teacher"){
+              self.whichShow = "teacher"
+            }
+            else if(self.userid === "student"){
+              self.whichShow = "student"
+            }
+          }
+        },
+      })
+    </script>
 
     <!--留言板區域-->
     <div id="app1">
 			<div class="message">
-				<v-input v-model="username" ref="input-com"></v-input>
 				<v-textarea v-model="message"></v-textarea>
 				<button @click="handleSend" type="button" class="btn btn-success">Next</button>
 			</div>
 			<div class="list">
-				<v-list :list="list" @reply="handleReply" @delete="handleDelete"></v-list>
+				<v-list :list="list" :userid="id" @reply="handleReply" @delete="handleDelete"></v-list>
 			</div>
 		</div>
 
-    <!--comments template-->
-    <script type="text/template" id="v-input">
-			<div>
-				<span>Username：</span>
-				<input type="text" :value="value" @input="$emit('input', $event.target.value)" 
-					ref="input-ref">
-      </div>
-    </script>
-    
+    <!--comments template-->   
 		<script type="text/template" id="v-textarea">
 			<div>
-				<span>Comment：</span>
+				<span>${ username } : </span>
 				<textarea :value="value" @input="$emit('input', $event.target.value)"></textarea>
 			</div>
 		</script>
@@ -98,10 +112,10 @@
 		<script type="text/template" id="v-list">
 			<div>
 				<div class="list-item" v-for="(item, index) in itemlist">
-					<span>{{ item.name }}</span>
+					<span>${ item.name }</span>
 					<div class="list-msg">
-						<p>{{ item.message }}</p>
-            <button type="button" @click="handleDelete(index)" class="list-reply btn btn-outline-success">Delete</button>
+						<p>${ item.message }</p>
+            <button v-show="userid" type="button" @click="handleDelete(index)" class="list-reply btn btn-outline-success">Delete</button>
             <button type="button" @click="handleReply(index)" class="list-reply btn btn-outline-success">Reply</button>
 					</div>
 				</div>

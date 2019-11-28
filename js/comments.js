@@ -1,62 +1,61 @@
-var showAction= {
-    "action" : "show_message",
-    "hash" : ""
+var showAction = {
+	"action" : "show_message",
+	"hash" : localStorage.getItem("hash"),
+	
+	"message" :[ 
+		{"userName" :　"Ian", "date" : "20191015", "time" : "1159", "content" : "aaa"},
+		{"userName" :　"charlie", "date" : "20191016", "time" : "1900", "content" : "aeaa"},
+		{"userName" :　"Iann", "date" : "20191126", "time" : "1915", "content" : "aaeqwa"}
+	],
 }
-var handleSend= {
+var handleSend = {
 	"action" : "send_message",
 	"userName" : "",
 	"date" : "",
 	"time" : "",
 	"content" : "",
-	"hash" : ""
+	"hash" : localStorage.getItem("hash"),
 }
-
-//留言者名稱
-Vue.component('v-input', {
-	template : "#v-input",
-	props : {
-		value : {
-			type : String,
-			default : ''
-		}
-	},
-	methods : {
-		fouceEvent : function(){
-			this.$refs['input-ref'].focus()
-		}
-	}
-});
 
 //留言內容輸入
 Vue.component('v-textarea', {
-	template : '#v-textarea',
-	props : {
-		value : {
-			type : String,
-			default : ''
+	delimiters: ['${', '}'],
+	template: '#v-textarea',
+	props: {
+		value: {
+			type: String,
+			default: ""
+		},
+		username: {
+			type: String,
+			default: localStorage.getItem("userName")
 		}
-	}
+	},
 });
 
 //留言結果顯示
 Vue.component("v-list", {
-	template : '#v-list',
-	props : {
-		list : {
-			type : Array,
-			default : []
+	delimiters: ['${', '}'],
+	template: '#v-list',
+	props: {
+		list: {
+			type: Array,
+			default: []
+		},
+		userid: {
+			type: Boolean
 		}
 	},
-	data : function(){
+	data: function(){
 		return {
-			itemlist : this.list
+			itemlist: this.list
 		}
 	},
-	methods : {
-		handleReply : function(index){
+	methods: {
+		handleReply: function(index){
 			this.$emit("reply", index)
 		},
-		handleDelete : function(index){
+		handleDelete: function(index){
 			this.$emit("delete", index)
 		}
 	}
@@ -64,23 +63,31 @@ Vue.component("v-list", {
 
 //留言區域父組件
 var app1 = new Vue({
+	delimiters: ['${', '}'],
 	el: "#app1",
 	data: {
-		function(){
-			return {
-				username: '',
-				message: '',
-				list: []
+		message: "",
+		list: [],
+		msgList: [],
+		username: localStorage.getItem("userName"),
+		id: false,
+	},
+	created: function(){
+		this.checkId()
+    //this.showMessages()
+	},
+	methods: {
+		checkId(){
+			localStorage.setItem("userName","Ian")//測試
+			localStorage.setItem("who","admin")//測試
+			let self = this
+			let who = localStorage.getItem("who")
+			if(who == "admin"){
+				self.id = true
 			}
 		},
-		msgList: [],
-	},
-	created: function() {
-    this.showMessages()
-  },
-	methods: {
-		showMessages(){
-			let self = this;
+		/*showMessages(){
+			let self = this
 			axios.post("https://httpbin.org/post",showAction)
 				.then(function(response){
 					console.log(response.data)
@@ -96,13 +103,9 @@ var app1 = new Vue({
 				.catch(function(error){
 					console.log(error);
 				})
-		},
+		},*/
 		handleSend(){
-			if (this.username === ''){
-				alert("Please enter your name")
-				return
-			}
-			if(this.message === ''){
+			if(this.message === ""){
 				alert("Please enter comments")
 				return
 			}
@@ -110,13 +113,11 @@ var app1 = new Vue({
 				name: this.username,
 				message: this.message
 			})
-			this.message = ''
-			this.username = ''
+			this.message = ""
 		},
-		handleReply: function(index){
-			var name = this.list[index].name
-			this.message = "reply@" + name + ": "
-			this.$refs['input-com'].fouceEvent()
+		handleReply : function(index){
+			var name = this.list[index].name;
+			this.message = "reply@" + name + ": ";
 		},
 		handleDelete: function(index){
 			this.list.splice(index, 1)
