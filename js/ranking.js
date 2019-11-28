@@ -44,49 +44,19 @@ var rankAction= {
   ]
 }
 
-//----依照輸入的題目號碼創建列表----
-var app2 = new Vue({
-  delimiters: ['${', '}'],
-  el: "#app2",
-  data: {
-    userData: []
-  },
-  mounted() {
-    //JSON.stringify(rankAction)
-    this.$root.$on("createRank", ()=>{
-      let self = this;
-      axios.post("https://httpbin.org/post",rankAction)
-        .then(function(response){
-          console.log(response.data)
-          console.log(response.status)
-          console.log(response.statusText)
-          console.log(response.headers)
-          console.log(response.config)
-          console.log(response.data.questionNum)
-          self.userData = response.data.json.userData
-          for(let i=0; i<self.userData.length; i++){
-            if(self.userData[i].commitTimes == 0)
-              self.userData[i].passRate = 0
-            else
-              self.userData[i].passRate = ((self.userData[i].ACTimes*100)/self.userData[i].commitTimes).toFixed(2)
-          }
-        })
-        .catch(function(error){
-          console.log(error);
-        })
-    });
-  },
-})
-
-//----執行使用者是否加入排名, 連線後註解要換掉----
+//----執行使用者是否加入排名,並根據輸入題號列表----
 var app1 = new Vue({
+  delimiters: ['${', '}'],
   el: "#app1",
   data: {
+    userdata: [],
     isShow: true,
     qsNumber:"",
+    clock:"",
   },
   created: function() {
     this.idCheck()
+    this.setTime()
   },
   methods: {
     idCheck(){
@@ -96,10 +66,50 @@ var app1 = new Vue({
         self.isShow = false
       }
     },
+    setTime(){
+      this.clock = ""
+      var now = new Date()
+        var year = now.getFullYear()
+        var month = now.getMonth() + 1
+        var day = now.getDate()
+        var hh = now.getHours()
+        var mm = now.getMinutes()
+        this.clock = year + "-"
+        if(month < 10)
+          this.clock += "0"
+        this.clock += month + "-"
+        if(day < 10)
+          this.clock += "0"       
+        this.clock += day + " "       
+        if(hh < 10)
+          this.clock += "0"     
+        this.clock += hh + ":"
+        if (mm < 10) clock += '0' 
+        this.clock += mm
+    },
     createRankList(){
+      let self = this;
       console.log(this.qsNumber)
       rankAction.questionNum = this.qsNumber
-      this.$root.$emit("createRank")
+      axios.post("https://httpbin.org/post",rankAction)
+        .then(function(response){
+          console.log(response.data)
+          console.log(response.status)
+          console.log(response.statusText)
+          console.log(response.headers)
+          console.log(response.config)
+          console.log(response.data.questionNum)
+          self.userdata = response.data.json.userData
+          for(let i=0; i<self.userdata.length; i++){
+            if(self.userdata[i].commitTimes == 0)
+              self.userdata[i].passRate = 0
+            else
+              self.userdata[i].passRate = ((self.userdata[i].ACTimes*100)/self.userdata[i].commitTimes).toFixed(2)
+          }
+        })
+        .catch(function(error){
+          console.log(error);
+        })
     },
     sendAttendMSG(){
       axios.post("https://httpbin.org/post",attendRank)
@@ -120,6 +130,8 @@ var app1 = new Vue({
         console.log(error);
       })
       this.isShow = false
+      this.setTime()
+      this.createRankList()
     },
     sendNotAttendMSG(){
       axios.post("https://httpbin.org/post",notAttendRank)
@@ -140,6 +152,8 @@ var app1 = new Vue({
         console.log(error);
       })
       this.isShow = false
+      this.setTime()
+      this.createRankList()
     }
   }
 })

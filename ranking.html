@@ -90,44 +90,52 @@
       })
     </script>
 
-    <!--選擇是否加入排名-->
     <div id="app1">
-      <button type="button" v-show="isShow" v-on:click="sendAttendMSG" class="btn btn-outline-success attendButton">
-        Attend Ranking
-      </button>
-      <button type="button" v-show="isShow" v-on:click="sendNotAttendMSG" class="btn btn-outline-success attendButton">
-        Not Attend
-      </button>
-      <div id="search-btn" class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">SEARCH</span>
+      <!--上方功能表-->
+      <div>
+        <button type="button" v-show="isShow" v-on:click="sendAttendMSG" class="btn btn-outline-success attendButton">
+          Attend Ranking
+        </button>
+        <button type="button" v-show="isShow" v-on:click="sendNotAttendMSG" class="btn btn-outline-success attendButton">
+          Not Attend
+        </button>
+        <div class="alert alert-success fade show" role="alert">
+          Refresh Time : <strong>${ clock }</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <input type="text" v-model="qsNumber" v-on:keyup.enter="createRankList" class="form-control" placeholder="question number" aria-label="Username" aria-describedby="basic-addon1">
+        <div id="search-btn" class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">SEARCH</span>
+          </div>
+          <input type="text" v-model="qsNumber" v-on:keyup.enter="createRankList" class="form-control" placeholder="question ID" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
       </div>
-    </div>
 
-    <!--排名表區域-->
-    <div id="app2">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Rate</th>
-            <th scope="col">AC/Commit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <template v-for="user in userData">
+      <!--排名表區域-->
+      <div>
+        <table class="table">
+          <thead>
             <tr>
-              <th scope="row">${ user.rank }</th>
-              <td>${ user.name }</td>
-              <td>${ user.passRate } %</td>
-              <td>${ user.ACTimes } / ${ user.commitTimes }</td>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Rate</th>
+              <th scope="col">AC/Commit</th>
             </tr>
-          </template>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <template v-for="user in userdata">
+              <tr>
+                <th scope="row">${ user.rank }</th>
+                <td>${ user.name }</td>
+                <td>${ user.passRate } %</td>
+                <td>${ user.ACTimes } / ${ user.commitTimes }</td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!--js-->
