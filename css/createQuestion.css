@@ -6,13 +6,19 @@
   smallTitleColor: DodgerBlue
   grayBorderColor: #e9eaec
 */
+.navbarset{
+    background-color: #56fd96;
+}
+
+.navbarimage{
+    width: 23px;
+}
 
 ::selection {
-	background: #01f9bb;
+  background: #01f9bb;
 }
 
 body {
-  padding: 1rem;
   background-color: lightgray;
   word-wrap: break-word;
 }

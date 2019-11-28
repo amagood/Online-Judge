@@ -3,38 +3,54 @@
     <head>
         <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
         <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
-        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/register.css">
     </head>
 
     <body>
         <!-- navbar -->
-        <div style="border-bottom: 4px solid MediumSeaGreen">
-            <b-navbar toggleable="lg" type="light" variant="light">
-                <b-navbar-brand href="#">GreenTeam</b-navbar-brand>
-
-                <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-                <b-collapse id="nav-collapse" is-nav>
-                    <b-navbar-nav>
-                        <b-nav-item href="#">Problems</b-nav-item>
-                        <b-nav-item href="#">Ranking</b-nav-item>
-                    </b-navbar-nav>
-
-                    <!-- Right aligned nav items -->
-                    <b-navbar-nav class="ml-auto">
-                        <!-- change Login and Register to button -->
-                        <b-nav-item href="#">Login</b-nav-item>
-                        <b-nav-item href="#">Register</b-nav-item>
-                    </b-navbar-nav>
-
-                </b-collapse>
-            </b-navbar>
-        </div>
+        <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+  <a class="navbar-brand" href="index.html">GreenTeam</a>
+  <button class="navbar-toggler" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="teacherProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="ranking.html"><img class="navbarimage" src="image/list-ordered.svg" /> Ranking<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="comments.html"><img class="navbarimage" src="image/comments-regular.svg" /> Comments</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" onclick="clearStorage()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
+      </li>
+    </ul>
+  </div>
+  <script>
+    clearStorage = function(){
+      localStorage.clear();
+    }
+  </script>
+</nav>
         <!-- navbar end -->
 
         <!-- mainBlock -->
         <div class="mainBlock">
-            <h1 class="bigTitle">Register</h1>
+            <h1 class="bigTitle">註冊帳號</h1>
 
             <!-- change, tag href -->
 
@@ -45,8 +61,7 @@
                     <div class="form-group">
                         <label for="id_username" class="col-sm-2 control-label">帳號 :</label>
                         <div class="col-sm-10">
-                            <input size="40" name="account" type="text" id="id_account" autocomplete="off" value=""
-                                required="">
+                            <input size="40" name="account" type="text" id="id_account" autocomplete="off" value=""required="required">
                             <input type="hidden" name="CSRF_KEY" value="2050849946">
                         </div>
                     </div>
@@ -55,40 +70,37 @@
                     <div class="form-group">
                         <label for="id_username" class="col-sm-2 control-label">使用者名稱 :</label>
                         <div class="col-sm-10">
-                            <input size="40" name="username" type="text" id="id_username" autocomplete="off"
-                                required="">
+                            <input size="40" name="username" type="text" id="id_username" autocomplete="off" required="required">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="id_password" class="col-sm-2 control-label">密碼 :</label>
                         <div class="col-sm-10">
-                            <input size="40" name="password" type="password" id="id_password" autocomplete="off"
-                                value="" required="">
+                            <input size="40" name="password" type="password" id="id_password" autocomplete="off" value="" required="required">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="id_password" class="col-sm-2 control-label">確認密碼 :</label>
                         <div class="col-sm-10">
-                            <input size="40" name="comfirm_password" type="password" id="id_comfirm_password"
-                                autocomplete="off" value="" required="">
+                            <input size="40" name="comfirm_password" type="password" id="id_comfirm_password" autocomplete="off" value="" required="required">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="id_email" class="col-sm-2 control-label">電子郵件信箱 :</label>
                         <div class="col-sm-10">
-                            <input size="40" name="email" type="text" id="id_email" autocomplete="off" required="">
+                            <input size="40" name="email" type="text" id="id_email" autocomplete="off" required="required">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="id_identify" class="col-sm-2 control-label">身份 :</label>
                         <div class="col-sm-10">
-                            &nbsp;&nbsp;&nbsp;<input size="40" name="identify" type="radio" id="id_identify_student"> 學生
+                            &nbsp;&nbsp;<input size="40" name="identify" type="radio" id="id_identify_student" required="required"> 學生
                             <br>
-                            &nbsp;&nbsp;&nbsp;<input size="40" name="identify" type="radio" id="id_identify_teacher"> 教師
+                            &nbsp;&nbsp;<input size="40" name="identify" type="radio" id="id_identify_teacher" required="required"> 教師
                         </div>
                     </div>
 
@@ -111,5 +123,5 @@
     <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
     <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
     <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
-    <script src="js/index.js"></script>
+    <script src="js/register.js"></script>
 </div>
