@@ -6,8 +6,6 @@ from .models import Summit
 from .models import Summary
 from .models import Rank
 
-# Register your models here.
-
 admin.site.register(Group)
 admin.site.register(User)
 admin.site.register(Question)
