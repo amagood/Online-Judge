@@ -27,52 +27,52 @@
   </head>
   <body>
 
-    <!--網頁上方的navbar, 格式設定在index.css檔中-->
-    <nav id="app1" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href="index.html">GreenTeam</a>
-      <button class="navbar-toggler" type="button">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" v-show="isShow" href="ranking.html"><img class="navbarimage" src="image/list-ordered.svg" /> Ranking</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" v-show="isShow" href="comments.html"><img class="navbarimage" src="image/comments-regular.svg" /> Comments</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" onclick="clearStorage()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <script>
-      clearStorage = function(){
-        localStorage.clear();
-      }
-    </script>
+    <div id="app1">
+      <!--網頁上方的navbar, 格式設定在index.css檔中-->
+      <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+        <a class="navbar-brand" href="index.html">GreenTeam</a>
+        <button class="navbar-toggler" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
+              <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-show="isShow" href="ranking.html"><img class="navbarimage" src="image/list-ordered.svg" /> Ranking</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-show="isShow" href="comments.html"><img class="navbarimage" src="image/comments-regular.svg" /> Comments</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="clearStorage()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    <!--內文區域-->
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1>GreenTeam Online-Judge System</h1>      
-        <p>it's good veryverygood system</p>
+      <!--內文區域-->
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1>GreenTeam Online-Judge System</h1>      
+          <p><strong>${ name }</strong>, 歡迎來到綠隊的線上作答環境!</p>
+          <p>如果你是老師, 你可以在這邊盡情出題!</p>
+          <p>如果你是學生, 則可以在這邊享受解題的樂趣!</p>
+          <p>還在等甚麼趕緊註冊帳號開始吧!</p>
+        </div>
       </div>
     </div>
 

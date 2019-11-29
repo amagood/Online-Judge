@@ -105,7 +105,7 @@
 		<script type="text/template" id="v-textarea">
 			<div>
 				<span>${ username } : </span>
-				<textarea :value="value" @input="$emit('input', $event.target.value)"></textarea>
+				<textarea :value="value" placeholder="send a comment" @input="$emit('input', $event.target.value)"></textarea>
 			</div>
 		</script>
 		

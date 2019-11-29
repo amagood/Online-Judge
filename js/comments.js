@@ -74,12 +74,15 @@ var app1 = new Vue({
 	},
 	created: function(){
 		this.checkId()
+		this.test()
     //this.showMessages()
 	},
 	methods: {
+		test(){//測試
+			localStorage.setItem("userName","Ian")
+			localStorage.setItem("who","admin")
+		},
 		checkId(){
-			localStorage.setItem("userName","Ian")//測試
-			localStorage.setItem("who","admin")//測試
 			let self = this
 			let who = localStorage.getItem("who")
 			if(who == "admin"){

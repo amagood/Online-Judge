@@ -57,10 +57,13 @@ var app1 = new Vue({
   created: function() {
     this.idCheck()
     this.setTime()
+    this.test()
   },
   methods: {
+    test(){//測試
+      localStorage.setItem("who","student")
+    },
     idCheck(){
-      localStorage.setItem("who","student")//測試
       let self = this
       if(localStorage.getItem("who") == "admin" ||localStorage.getItem("who") == "teacher"){
         self.isShow = false
@@ -84,7 +87,7 @@ var app1 = new Vue({
         if(hh < 10)
           this.clock += "0"     
         this.clock += hh + ":"
-        if (mm < 10) clock += '0' 
+        if (mm < 10) this.clock += '0' 
         this.clock += mm
     },
     createRankList(){
