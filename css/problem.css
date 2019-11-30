@@ -58,6 +58,12 @@ body {
   font-weight: 400;
 }
 
+.smallTitle2 {
+  color: red;
+  font-size: 18px;
+  font-weight: 400;
+}
+
 .content {
   margin-left: 30px;
   margin-right: 30px;
@@ -83,6 +89,16 @@ body {
 
 .samplePre {
   border: 2px dashed #e9eaec;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-family: Consolas, monospace;
+  max-height: 40vh;
+  overflow: auto;
+}
+
+.samplePre2 {
+  border: 2px dashed #ffaaaa;
   border-radius: 10px;
   padding: 5px 10px;
   font-size: 16px;

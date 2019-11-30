@@ -102,7 +102,10 @@ var app3 = new Vue({
     errorMessage: "errorMessage....",
     exeTime: "99999ms",
     errorOutputCompare: "",
-    wrongOutput: "",
+    htmlWrongOutput: "",
+    htmlExpectedOutput: "",
+    memoryUsage: "",
+    verdictTime: "",
     hash: "",
     showAC: false,
     showCE: false,
@@ -134,7 +137,10 @@ var app3 = new Vue({
           app3.errorMessage        = tmpObj.errorMessage;
           app3.exeTime             = tmpObj.exeTime;
           app3.errorOutputCompare  = tmpObj.errorOutputCompare;
-          app3.wrongOutput         = tmpObj.wrongOutput;
+          app3.htmlWrongOutput     = '<pre id="wrongOutput" class="samplePre2">' + tmpObj.wrongOutput + '</pre>';
+          app3.htmlExpectedOutput  = '<pre id="expectedOutput" class="samplePre2">' + tmpObj.expectedOutput + '</pre>';
+          app3.memoryUsage         = tmpObj.memoryUsage;
+          app3.verdictTime         = tmpObj.verdictTime;
           app3.hash                = tmpObj.hash;
           app3["show" + tmpObj.codeState] = true;
         })

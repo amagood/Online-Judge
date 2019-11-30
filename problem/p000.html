@@ -1,4 +1,4 @@
-﻿<!-- version: 191119 -->
+﻿<!-- version: 191130 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,7 +54,6 @@
         <pre id="sampleOut" class="samplePre">3</pre>
       </div>
     </div>
-
   </div>
   <!-- mainBlock1 end -->
   <!-- mainBlock2 -->
@@ -105,31 +104,71 @@
       </div>
       <!-- resultBlcok -->
       <transition name="slide-fade">
-        <div class="resultGreen" v-if="showAC">
-          <span class="codeState">${ codeState }</span>
-          <span>( ${ exeTime } )</span>
+        <div class="resultGreen d-flex" v-if="showAC">
+          <div class="flex-fill">
+            <span class="codeState">${ codeState }</span>
+            <span>(${ exeTime }, ${ memoryUsage })</span>
+          </div>
+          <div>
+            <span>${ verdictTime }</span>
+          </div>
         </div>
       </transition>
       <transition name="slide-fade">
-        <div class="resultRed" v-if="showCE">
-          <span class="codeState">${ codeState }</span>
-          <p>${ errorMessage }</p>
+        <div class="resultRed d-flex" v-if="showCE">
+          <div class="flex-fill">
+            <span class="codeState">${ codeState }</span>
+            <p>${ errorMessage }</p>
+          </div>
+          <div>
+            <span>${ verdictTime }</span>
+          </div>
         </div>
       </transition>
       <transition name="slide-fade">
-        <div class="resultRed" v-if="showTLE">
-          <span class="codeState">${ codeState }</span>
-          <span>( ${ exeTime } )</span>
+        <div class="resultRed d-flex" v-if="showTLE">
+          <div class="flex-fill">
+            <span class="codeState">${ codeState }</span>
+            <span>(${ exeTime })</span>
+          </div>
+          <div>
+            <span>${ verdictTime }</span>
+          </div>
         </div>
       </transition>
       <transition name="slide-fade">
         <div class="resultRed" v-if="showWA">
-          <span class="codeState">${ codeState }</span>
+          <div class="d-flex">
+            <div class="flex-fill">
+              <span class="codeState">${ codeState }</span>
+            </div>
+            <div>
+              <span>${ verdictTime }</span>
+            </div>
+          </div>
+          <div class="sampleInOutContainer">
+            <div class="sampleInOut">
+              <span class="smallTitle2">Wrong Output</span>
+              <img src={% static "polls/image/copy.svg" %} alt="" onclick="copyFn('wrongOutput')" style="cursor: pointer;">
+              <div v-html="htmlWrongOutput"></div>
+            </div>
+            <div class="sampleInOut">
+              <span class="smallTitle2">Expected Output</span>
+              <img src={% static "polls/image/copy.svg" %} alt="" onclick="copyFn('expectedOutput')" style="cursor: pointer;">
+              <div v-html="htmlExpectedOutput"></div>
+            </div>
+          </div>
         </div>
       </transition>
       <transition name="slide-fade">
-        <div class="resultRed" v-if="showMLE">
-          <span class="codeState">${ codeState }</span>
+        <div class="resultRed d-flex" v-if="showMLE">
+          <div class="flex-fill">
+            <span class="codeState">${ codeState }</span>
+            <span>(${ memoryUsage })</span>
+          </div>
+          <div>
+            <span>${ verdictTime }</span>
+          </div>
         </div>
       </transition>
       <transition name="slide-fade">
