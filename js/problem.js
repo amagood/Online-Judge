@@ -1,7 +1,31 @@
-﻿// app1
+﻿// navbar
 
 
-new Vue({ el: "#app1" })
+clearStorage = function(){
+  localStorage.clear();
+}
+var navapp = new Vue({
+  el: "#navapp",
+  data:{
+    whichShow:"",
+    userid: "",
+  },
+  created() {
+    this.checkId()
+  },
+  methods: {
+    checkId(){
+      let self = this
+      self.userid = localStorage.getItem("who")
+      if(self.userid === "admin"||self.userid === "teacher"){
+        self.whichShow = "teacher"
+      }
+      else if(self.userid === "student"){
+        self.whichShow = "student"
+      }
+    }
+  },
+})
 
 
 // app2 for lang, copy toolip, copy popup, theme
@@ -166,7 +190,7 @@ var userInfo = {
 
 window.onload = function() {
   document.getElementsByTagName("body")[0].className = "w3-animate-opacity";
-  document.getElementById("app1").className = "w3-animate-top";
+  document.getElementById("navapp").className = "navbar navbar-expand-lg navbar-light navbarset w3-animate-top";
   document.getElementById("mainBlock1").className = "mainBlock1 w3-animate-zoom";
   document.getElementById("mainBlock2").className = "mainBlock2 w3-animate-bottom";
   document.getElementsByTagName("html")[0].style.visibility = "visible";

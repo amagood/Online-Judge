@@ -7,6 +7,18 @@
   grayBorderColor: #e9eaec
 */
 
+/* navbar */
+
+.navbarset{
+  background-color: #56fd96;
+}
+
+.navbarimage{
+  width: 23px;
+}
+
+/*  */
+
 html { visibility: hidden; }
 
 ::-moz-selection {
