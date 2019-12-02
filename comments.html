@@ -69,18 +69,18 @@
     <!--留言板區域-->
     <div id="app1">
 			<div class="message">
-				<v-textarea v-model="message"></v-textarea>
-				<button @click="handleSend" type="button" class="btn btn-success">Next</button>
+				<v-textarea :who="who" v-model="message"></v-textarea>
+				<button @click="createMessage" type="button" class="btn btn-success">Next</button>
 			</div>
 			<div class="list">
-				<v-list :list="list" :userid="id" @reply="handleReply" @delete="handleDelete"></v-list>
+				<v-list :clock="clock" :list="list" :authority="authority" @reply="handleReply" @delete="handleDelete"></v-list>
 			</div>
 		</div>
 
     <!--comments template-->   
 		<script type="text/template" id="v-textarea">
 			<div>
-				<span>${ username } : </span>
+        <span>${ username }:<br>(${ who })</span>
 				<textarea :value="value" placeholder="send a comment" @input="$emit('input', $event.target.value)"></textarea>
 			</div>
 		</script>
@@ -88,10 +88,11 @@
 		<script type="text/template" id="v-list">
 			<div>
 				<div class="list-item" v-for="(item, index) in itemlist">
-					<span>${ item.name }</span>
+          <span>${ item.name }:<br>(${ item.who })</span>
 					<div class="list-msg">
-						<p>${ item.message }</p>
-            <button v-show="userid" type="button" @click="handleDelete(index)" class="list-reply btn btn-outline-success">Delete</button>
+						<p id="show-message">${ item.message }</p>
+            <button v-show="authority" type="button" @click="handleDelete(index)" class="list-reply btn btn-outline-success">Delete</button>
+            <span>${ clock }</span>
             <button type="button" @click="handleReply(index)" class="list-reply btn btn-outline-success">Reply</button>
 					</div>
 				</div>

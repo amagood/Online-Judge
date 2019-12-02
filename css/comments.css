@@ -34,6 +34,7 @@
 	width: 100px;
 	vertical-align: top;
 	margin-top: 20px;
+	text-align:right;
 }
 
 .message textarea{
@@ -80,6 +81,7 @@
 	width: 60px;
 	float: left;
 	color: rgb(51, 177, 51);
+	text-align:right;
 }
 
 .list-msg{
@@ -93,6 +95,11 @@
 	float: right;
 }
 
+.list-msg span{
+	float: right;
+	
+}
+
 .list-nothing{
 	text-align: center;
 	color: #9EA7B4;
@@ -102,4 +109,8 @@
 #username{
 	font-size: 20px;
 	line-height: 42px;
-  }
+}
+
+#show-message{
+	word-wrap:break-word;
+}

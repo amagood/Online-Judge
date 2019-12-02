@@ -14,7 +14,7 @@ var notAttendRank= {
 }
 var rankAction= {
   action: "rank",
-  questionNum: "",//待定
+  questionNum: "",
   hash: localStorage.getItem("hash"),
 
   userData: [
@@ -117,28 +117,33 @@ var app1 = new Vue({
         this.clock += mm
     },
     createRankList(){
-      let self = this;
-      console.log(this.qsNumber)
-      rankAction.questionNum = this.qsNumber
-      axios.post("https://httpbin.org/post",rankAction)
-        .then(function(response){
-          console.log(response.data)
-          console.log(response.status)
-          console.log(response.statusText)
-          console.log(response.headers)
-          console.log(response.config)
-          console.log(response.data.questionNum)
-          self.userdata = response.data.json.userData
-          for(let i=0; i<self.userdata.length; i++){
-            if(self.userdata[i].commitTimes == 0)
-              self.userdata[i].passRate = 0
-            else
-              self.userdata[i].passRate = ((self.userdata[i].ACTimes*100)/self.userdata[i].commitTimes).toFixed(2)
-          }
-        })
-        .catch(function(error){
-          console.log(error);
-        })
+      if(this.qsNumber == ""){
+        alert("Please enter questionID.")
+      }
+      else{
+        let self = this;
+        console.log(this.qsNumber)
+        rankAction.questionNum = this.qsNumber
+        axios.post("https://httpbin.org/post",rankAction)
+          .then(function(response){
+            console.log(response.data)
+            console.log(response.status)
+            console.log(response.statusText)
+            console.log(response.headers)
+            console.log(response.config)
+            console.log(response.data.questionNum)
+            self.userdata = response.data.json.userData
+            for(let i=0; i<self.userdata.length; i++){
+              if(self.userdata[i].commitTimes == 0)
+                self.userdata[i].passRate = 0
+              else
+                self.userdata[i].passRate = ((self.userdata[i].ACTimes*100)/self.userdata[i].commitTimes).toFixed(2)
+            }
+          })
+          .catch(function(error){
+            console.log(error);
+          })
+      }
     },
     sendAttendMSG(){
       axios.post("https://httpbin.org/post",attendRank)
@@ -160,7 +165,6 @@ var app1 = new Vue({
       })
       this.isShow = false
       this.setTime()
-      this.createRankList()
     },
     sendNotAttendMSG(){
       axios.post("https://httpbin.org/post",notAttendRank)
@@ -182,7 +186,6 @@ var app1 = new Vue({
       })
       this.isShow = false
       this.setTime()
-      this.createRankList()
     }
   }
 })

@@ -52,6 +52,10 @@ Vue.component('v-textarea', {
 	delimiters: ['${', '}'],
 	template: '#v-textarea',
 	props: {
+		who: {
+			type: String,
+			default: ""
+		},
 		value: {
 			type: String,
 			default: ""
@@ -72,9 +76,13 @@ Vue.component("v-list", {
 			type: Array,
 			default: []
 		},
-		userid: {
+		authority: {
 			type: Boolean
-		}
+		},
+		clock: {
+			type: String,
+			default: ""
+		},
 	},
 	data: function(){
 		return {
@@ -99,8 +107,10 @@ var app1 = new Vue({
 		message: "",
 		list: [],
 		msgList: [],
+		clock:"",
 		username: localStorage.getItem("userName"),
-		id: false,
+		who: localStorage.getItem("who"),
+		authority: false,
 	},
 	created: function(){
     //this.showMessages()
@@ -124,12 +134,38 @@ var app1 = new Vue({
 					console.log(error);
 				})
 		},*/
+		createMessage(){
+			this.setTime()
+			this.handleSend()
+		},
+		setTime(){
+      this.clock = ""
+      var now = new Date()
+        var year = now.getFullYear()
+        var month = now.getMonth() + 1
+        var day = now.getDate()
+        var hh = now.getHours()
+        var mm = now.getMinutes()
+        this.clock = year + "/"
+        if(month < 10)
+          this.clock += "0"
+        this.clock += month + "/"
+        if(day < 10)
+          this.clock += "0"       
+        this.clock += day + " "       
+        if(hh < 10)
+          this.clock += "0"     
+        this.clock += hh + ":"
+        if (mm < 10) this.clock += '0' 
+        this.clock += mm
+    },
 		handleSend(){
 			if(this.message === ""){
 				alert("Please enter comments")
 				return
 			}
 			this.list.push({
+				who: this.who,
 				name: this.username,
 				message: this.message
 			})
