@@ -12,8 +12,8 @@ var app1 = new Vue({
 		whichShow: "",
 	},
 	created() {
-		this.checkId()
 		this.test()
+		this.checkId()
 	},
 	methods: {
 		test(){//測試

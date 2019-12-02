@@ -1,12 +1,15 @@
 <!--
     active 這個class,以及 <span class="sr-only">(current)</span> 這個標籤移到要貼上的頁面的欄位下
+
+    12/02修正: class="navbar-toggler"旁邊增加以下標籤 data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+              class="collapse navbar-collapse"旁邊增加 id="navbarSupportedContent"
   -->
 <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
   <a class="navbar-brand" href="index.html">GreenTeam</a>
-  <button class="navbar-toggler" type="button">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home</a>

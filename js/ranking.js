@@ -55,9 +55,9 @@ var app1 = new Vue({
     clock:"",
   },
   created: function() {
+    this.test()
     this.idCheck()
     this.setTime()
-    this.test()
   },
   methods: {
     test(){//測試

@@ -73,8 +73,8 @@ var app1 = new Vue({
 		id: false,
 	},
 	created: function(){
-		this.checkId()
 		this.test()
+		this.checkId()
     //this.showMessages()
 	},
 	methods: {
