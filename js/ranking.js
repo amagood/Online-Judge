@@ -1,5 +1,3 @@
-var hash=""
-var username=""
 var attendRank= {
   action: "attend_rank",
   attendStatus: "attend",
@@ -44,7 +42,37 @@ var rankAction= {
   ]
 }
 
-//----執行使用者是否加入排名,並根據輸入題號列表----
+//----navbar的設定----
+var navapp = new Vue({
+  delimiters: ['${', '}'],
+  el: "#navapp",
+  data:{
+    whichShow:"",
+    userid: "",
+    name: "",
+  },
+  created() {
+    this.chooseProblems()
+  },
+  methods: {
+    chooseProblems(){
+      let self = this
+      self.name = localStorage.getItem("userName")
+      self.userid = localStorage.getItem("who")
+      if(self.userid === "admin"||self.userid === "teacher"){
+        self.whichShow = "teacher"
+      }
+      else if(self.userid === "student"){
+        self.whichShow = "student"
+      }
+    },
+    clearStorage(){
+      localStorage.clear();
+    },
+  },
+})
+
+//----執行使用者是否加入排名,並根據輸入題號和選擇的班級列表----
 var app1 = new Vue({
   delimiters: ['${', '}'],
   el: "#app1",
@@ -55,14 +83,12 @@ var app1 = new Vue({
     clock:"",
   },
   created: function() {
-    this.test()
-    this.idCheck()
     this.setTime()
   },
+  mounted: function() {
+    this.idCheck()
+  },
   methods: {
-    test(){//測試
-      localStorage.setItem("who","student")
-    },
     idCheck(){
       let self = this
       if(localStorage.getItem("who") == "admin" ||localStorage.getItem("who") == "teacher"){

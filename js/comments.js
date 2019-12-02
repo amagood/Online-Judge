@@ -17,7 +17,37 @@ var handleSend = {
 	"hash" : localStorage.getItem("hash"),
 }
 
-//留言內容輸入
+//----navbar設定----
+var navapp = new Vue({
+	delimiters: ['${', '}'],
+	el: "#navapp",
+	data:{
+		whichShow:"",
+		userid: "",
+		name: "",
+	},
+	created() {
+		this.chooseProblems()
+	},
+	methods: {
+		chooseProblems(){
+			let self = this
+			self.name = localStorage.getItem("userName")
+			self.userid = localStorage.getItem("who")
+			if(self.userid === "admin"||self.userid === "teacher"){
+				self.whichShow = "teacher"
+			}
+			else if(self.userid === "student"){
+				self.whichShow = "student"
+			}
+		},
+		clearStorage(){
+			localStorage.clear();
+		}
+	},
+})
+
+//----留言內容輸入----
 Vue.component('v-textarea', {
 	delimiters: ['${', '}'],
 	template: '#v-textarea',
@@ -33,7 +63,7 @@ Vue.component('v-textarea', {
 	},
 });
 
-//留言結果顯示
+//----留言結果顯示----
 Vue.component("v-list", {
 	delimiters: ['${', '}'],
 	template: '#v-list',
@@ -61,7 +91,7 @@ Vue.component("v-list", {
 	}
 });
 
-//留言區域父組件
+//----留言區域父組件---
 var app1 = new Vue({
 	delimiters: ['${', '}'],
 	el: "#app1",
@@ -73,22 +103,9 @@ var app1 = new Vue({
 		id: false,
 	},
 	created: function(){
-		this.test()
-		this.checkId()
     //this.showMessages()
 	},
 	methods: {
-		test(){//測試
-			localStorage.setItem("userName","Ian")
-			localStorage.setItem("who","admin")
-		},
-		checkId(){
-			let self = this
-			let who = localStorage.getItem("who")
-			if(who == "admin"){
-				self.id = true
-			}
-		},
 		/*showMessages(){
 			let self = this
 			axios.post("https://httpbin.org/post",showAction)

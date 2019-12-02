@@ -51,44 +51,20 @@
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
+            <span id="username">${ name } &nbsp</span>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" onclick="clearStorage()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
+            <a class="nav-link" v-on:click="clearStorage()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
           </li>
         </ul>
       </div>
     </nav>
-    <script>
-      clearStorage = function(){
-        localStorage.clear();
-      }
-      var navapp = new Vue({
-        el: "#navapp",
-        data:{
-          whichShow:"",
-          userid: "",
-        },
-        created() {
-          this.checkId()
-        },
-        methods: {
-          checkId(){
-            let self = this
-            self.userid = localStorage.getItem("who")
-            if(self.userid === "admin"||self.userid === "teacher"){
-              self.whichShow = "teacher"
-            }
-            else if(self.userid === "student"){
-              self.whichShow = "student"
-            }
-          }
-        },
-      })
-    </script>
 
     <!--留言板區域-->
     <div id="app1">

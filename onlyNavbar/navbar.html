@@ -1,8 +1,10 @@
 <!--
     active 這個class,以及 <span class="sr-only">(current)</span> 這個標籤移到要貼上的頁面的欄位下
 
-    12/02修正: class="navbar-toggler"旁邊增加以下標籤 data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-              class="collapse navbar-collapse"旁邊增加 id="navbarSupportedContent"
+    12/02修正: 
+      class="navbar-toggler"旁邊增加以下標籤 data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+      class="collapse navbar-collapse"旁邊增加 id="navbarSupportedContent"
+      用${ name }標記使用者名稱在register按鈕左邊 (理論上使用者在除了首頁、註冊和登入畫面都應該是登入的狀態)
   -->
 <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
   <a class="navbar-brand" href="index.html">GreenTeam</a>
@@ -27,32 +29,33 @@
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item">
+        <span id="username">${ name } &nbsp</span>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" onclick="clearStorage()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
+        <a class="nav-link" v-on:click="clearStorage()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
       </li>
     </ul>
   </div>
 </nav>
 <script>
-  clearStorage = function(){
-    localStorage.clear();
-  }
   var navapp = new Vue({
     el: "#navapp",
     data:{
       whichShow:"",
       userid: "",
+      name: localStorage.getItem(userName),
     },
     created() {
-      this.checkId()
+      this.chooseProblems()
     },
     methods: {
-      checkId(){
+      chooseProblems(){
         let self = this
         self.userid = localStorage.getItem("who")
         if(self.userid === "admin"||self.userid === "teacher"){
@@ -61,7 +64,10 @@
         else if(self.userid === "student"){
           self.whichShow = "student"
         }
-      }
+      },
+      clearStorage(){
+        localStorage.clear();
+      },
     },
   })
 </script>

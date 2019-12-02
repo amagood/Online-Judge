@@ -1,19 +1,15 @@
-function clearStorage(){
-	localStorage.clear();
-}
-
 var app1 = new Vue({
 	delimiters: ['${', '}'],
 	el: "#app1",
 	data: {
 		userid: "",
-		name: localStorage.getItem("userName"),
+		name: "",
 		isShow: false,
 		whichShow: "",
 	},
 	created() {
 		this.test()
-		this.checkId()
+		this.chooseProblems()
 	},
 	methods: {
 		test(){//測試
@@ -22,8 +18,9 @@ var app1 = new Vue({
 			let who = localStorage.getItem("who")
 			console.log(who)
 		},
-		checkId(){
+		chooseProblems(){
 			let self = this
+			self.name = localStorage.getItem("userName")
 			self.userid = localStorage.getItem("who")
 			if(self.userid === "admin"||self.userid === "teacher"){
 				self.isShow = true
@@ -33,6 +30,9 @@ var app1 = new Vue({
 				self.isShow = true
 				self.whichShow = "student"
 			}
-		}
+		},
+		clearStorage(){
+			localStorage.clear();
+		},
 	},
 })
