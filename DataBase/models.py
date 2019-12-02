@@ -6,12 +6,16 @@ from django.db import models
     Version Note:
     Current Version: V1.3
     
-    V1.0 inital release for V.1 judge demo with no group functionality
-    V1.1 adding Rank for ranking in question
-    adding Group class but no real funtionality
-    change Summary's and Summit's Question to one way relation
-    V1.2 create Chat class for Group
-    V1.3 adding Question_ID and Question_Current_Count for Question creation
+    Version 1
+        V1.0 inital release for V.1 judge demo with no group functionality
+        V1.1 adding Rank for ranking in question
+             adding Group class but no real funtionality
+             change Summary's and Summit's Question to one way relation
+        V1.2 create Chat class for Group
+        V1.3 adding Question_ID and Question_Current_Count for Question creation
+    Version 2
+        V2.0 release for V.2 judge for new API requirement and implementation of Group
+             finish Group class funtionality by adding relation with User and Question with relation name Group
     
     If you encounter any problem you can't solve or want to change anything please contact me
     
@@ -21,8 +25,8 @@ from django.db import models
 
 class Group(models.Model):
     Group_Name = models.CharField(max_length = 40) # no name longer than 40
-    # Group_User_List with relation of 'User' <- not yet finish
-    # Group_Question_List with relation of 'Question' <- not yet finish
+    Group_User = models.ManyToManyField('User', blank=True, related_name='Group')
+    Group_Question = models.ManyToManyField('Question', blank=True, related_name='Group')
     # Group_Chat_History with relation of 'Chat'
     Group_Chat_Maximum = models.PositiveIntegerField(default = 100)
     def __str__(self):
@@ -72,8 +76,8 @@ class Chat(models.Model):
 
 class Summit(models.Model):
     Summit_User = models.ForeignKey(User, related_name='Summit', blank=True, null=True, on_delete=models.CASCADE) # two way relation with User
-    # Summit_Question = models.ForeignKey(Question, related_name='+', blank=True, null=True, on_delete=models.CASCADE) # one way relation with Question
-    Summit_Question_ID = models.PositiveIntegerField(default = 0)
+    Summit_Question = models.ForeignKey(Question, related_name='+', blank=True, null=True, on_delete=models.CASCADE) # one way relation with Question
+    # Summit_Question_ID = models.PositiveIntegerField(default = 0)
     Summit_Time = models.DateTimeField(auto_now_add=True) # will be it's creation time
     Summit_Output = models.CharField(default = 'WA',max_length = 10) # no output longer than 10
     def __str__(self):
@@ -81,8 +85,8 @@ class Summit(models.Model):
 
 class Summary(models.Model):
     Summary_User = models.ForeignKey(User, related_name='Summary', blank=True, null=True, on_delete=models.CASCADE) # two way relation with User
-    # Summary_Question = models.ForeignKey(Question, related_name='+', blank=True, null=True, on_delete=models.CASCADE) # one way relation with Question
-    Summary_Question_ID = models.PositiveIntegerField(default = 0)
+    Summary_Question = models.ForeignKey(Question, related_name='+', blank=True, null=True, on_delete=models.CASCADE) # one way relation with Question
+    # Summary_Question_ID = models.PositiveIntegerField(default = 0)
     Summary_Count = models.PositiveIntegerField(default = 0)
     Summary_AC_Count = models.PositiveIntegerField(default = 0) # Summary Count >= Summary AC Count
     def __str__(self):
