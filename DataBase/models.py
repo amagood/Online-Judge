@@ -4,7 +4,7 @@ from django.db import models
     Before using new version of models.py is better to flush the original database data (if you have any) to decrease the problem you might meet
     
     Version Note:
-    Current Version: V1.3
+    Current Version: V2.1
     
     Version 1
         V1.0 inital release for V.1 judge demo with no group functionality
@@ -16,6 +16,9 @@ from django.db import models
     Version 2
         V2.0 release for V.2 judge for new API requirement and implementation of Group
              finish Group class funtionality by adding relation with User and Question with relation name Group
+        V2.1 delete Question Html and Js FileName
+             Change Question ID from int to char
+             adding class Category and manytomany relation to Question with relation name Category
     
     If you encounter any problem you can't solve or want to change anything please contact me
     
@@ -33,6 +36,7 @@ class Group(models.Model):
         return self.Group_Name
 
 class User(models.Model):
+    # User_Group with relation of 'Group'
     User_Name = models.CharField(max_length = 40) # no name longer than 40
     User_ID = models.PositiveIntegerField(default = 0) # range 0 to 2147483647
     User_Email = models.EmailField(max_length = 254, default = '') # will check if the email is vaild
@@ -46,18 +50,17 @@ class User(models.Model):
         return self.User_Name
 
 class Question(models.Model):
+    # Question_Group with relation of 'Group'
     Question_Name = models.CharField(max_length = 40) # no name longer than 40
-    Question_ID = models.PositiveIntegerField(default = 0)
+    Question_ID = models.CharField(max_length = 40) # no name longer than 40
     Question_Current_Count = models.PositiveIntegerField(default = 1)
-    # Question_type = models.CharField(max_length = 20 ,default = 'code') # no name longer than 20  <- not yet finish
+    # Question_type = models.CharField(max_length = 20 ,default = 'code') <- not yet finish
     Question_difficulty = models.CharField(max_length = 10 ,default = 'normal') # no name longer than 10
-    # Question_Category = <- not yet finish
+    Question_Category = models.ManyToManyField('Category', blank=True, related_name='Category')
     # Question_Answer = <- not yet finish
     Question_AC_Count = models.PositiveIntegerField(default = 0)
     Question_Summit_Time = models.PositiveIntegerField(default = 0)
     Question_Create_Time = models.DateTimeField(auto_now_add=True)
-    Question_Html_Filename = models.CharField(blank=True, max_length = 100)
-    Question_Js_Filename = models.CharField(blank=True, max_length = 100)
     # Question_Ranking_List with relation of 'Rank'
     def __str__(self):
         return self.Question_Name
@@ -102,3 +105,10 @@ class Rank(models.Model):
     # Rank_AC_count it should be able to access User relation 'Summary' to  get the data
     def __str__(self):
         return self.Rank_User.User_Name # for debug ,can be change for your own purpose
+
+class Category(models.Model):
+    # Category_Question with relation 'Category'
+    Category_Name = models.CharField(max_length = 40) # no name longer than 40
+    Category_Description = models.CharField(blank=True, max_length = 255) # might be changing
+    def __str__(self):
+        return self.Category_Name # for debug ,can be change for your own purpose
