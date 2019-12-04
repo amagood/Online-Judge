@@ -61,3 +61,9 @@ response:
 }
 ```
 v1.1 2019/12/01
+
+new API
+request remove userIdentity
+response questionLib add id
+
+v1.2 2019/12/05
