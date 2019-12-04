@@ -1,5 +1,30 @@
 window.onload = () => {
-  new Vue({ el: '#app' })
+  new Vue({
+    el: "#navapp",
+    data: {
+      whichShow: "",
+      userid: "",
+      name: localStorage.getItem(userName),
+    },
+    created() {
+      this.chooseProblems()
+    },
+    methods: {
+      chooseProblems() {
+        let self = this
+        self.userid = localStorage.getItem("who")
+        if (self.userid === "admin" || self.userid === "teacher") {
+          self.whichShow = "teacher"
+        }
+        else if (self.userid === "student") {
+          self.whichShow = "student"
+        }
+      },
+      clearStorage() {
+        localStorage.clear();
+      },
+    },
+  })
 }
 
 window.onload = () => {
