@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
+#include <time.h>
 
 // TIMELIMIT for sec
 #define TIMELIMIT 100
@@ -79,14 +80,21 @@ int main(int argc, char *argv[]) {
 		case 0:
 			//printf("child: %d\n", getpid());
 			
-			// redirect stdout
-			;int fdStdout;
-			if((fdStdout = open("tempStdout.txt", O_RDWR | O_CREAT)) == -1) {
+			// redirect stdout, stderr, stdin
+			;int fdOutput, fdInput;
+			if((fdOutput = open("tempOutput.txt", O_WRONLY | O_CREAT, 0644)) == -1) {
 				perror("open");
 				exit(EXIT_FAILURE);
 			}
-			dup2(fdStdout, 1);
-			close(fdStdout);
+			dup2(fdOutput, 1);
+			dup2(fdOutput, 2);
+			close(fdOutput);
+			if((fdInput = open("input.txt", O_RDONLY)) == -1) {
+				perror("open");
+				exit(EXIT_FAILURE);
+			}
+			dup2(fdInput, 0);
+			close(fdInput);
 			
 			execl("./test", "test",  NULL);
 			perror("execl");
@@ -115,10 +123,10 @@ int main(int argc, char *argv[]) {
 			
 			switch(status) {
 				case FINE:
-					/*printf("fine\n");
+					//printf("fine\n");
 					printf("sec: %ld\n", resourceUsage.ru_utime.tv_sec + resourceUsage.ru_stime.tv_sec);
 					printf("usec: %ld\n", resourceUsage.ru_utime.tv_usec + resourceUsage.ru_stime.tv_usec);
-					printf("memory: %d\n", usedMemory);*/
+					printf("memory: %d\n", usedMemory);
 					break;
 				
 				case TLE:
