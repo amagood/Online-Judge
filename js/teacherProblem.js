@@ -42,6 +42,7 @@ var tmpobj = {}
 
 window.onload = () => {
   new Vue({
+    delimiters: ['${', '}'],
     el: "#app-1",
       data() {
         return {
@@ -61,7 +62,8 @@ window.onload = () => {
             {
               key: "title",
               label: "Title",
-              sortable: false
+              sortable: false,
+              formatter:"problemLink"
             },
             {
               key: "tag",
@@ -126,6 +128,9 @@ window.onload = () => {
           .catch(function (error) {
             console.log(error);
           });
+      },
+      problemLink(value){
+        return `${value}`
       },
       addClass(fields){
         this.clickAddClass=!this.clickAddClass;

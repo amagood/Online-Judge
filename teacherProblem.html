@@ -121,6 +121,11 @@
       <div style="margin-top: 20px; min-height: 480px;">
         <b-table selectable :select-mode="selectMode" sticky hover :items="items" :fields="fields" id="problemTable"
           :per-page="perPage" :current-page="currentPage" :filter="filter">
+          <!--problemLink-->
+          <template v-slot:cell(title)="titleData">
+            <a :href="`#${titleData.value.replace(/[^0-9][^a-z]+/i,'-')}`">${ titleData.value }</a>
+          </template>
+          <!--select problem-->
           <template v-slot:cell(selected)="{ rowSelected }">
             <template v-if="rowSelected">
               <span aria-hidden="true">&check;</span>
