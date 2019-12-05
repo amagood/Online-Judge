@@ -95,15 +95,12 @@
         <div style="margin-top: 20px; min-height: 480px;">
           <b-table sticky hover :items="items" :fields="fields" id="problemTable" :per-page="perPage"
             :current-page="currentPage" :filter="filter">
-            <template v-slot:cell(problem)="row">
-              <b-button size="sm" @click="info(row.item, row.index, $event.target)">
-                Go
-              </b-button>
+            <!--problemLink-->
+            <template v-slot:cell(title)="titleData">
+              <a :href="`#${titleData.value.replace(/[^0-9][^a-z]+/i,'-')}`">${ titleData.value }</a>
             </template>
           </b-table>
           <!--problemButton-->
-          <b-modal :id="problemButton.id" :title="problemButton.title" ok-only @hide="resetProblemButton">
-          </b-modal>
         </div>
 
         <!--block 3 Page-->

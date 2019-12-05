@@ -43,7 +43,8 @@ var tmpobj = {}
 
 window.onload = () => {
   new Vue({
-    el: '#app-1',
+    delimiters: ['${', '}'],
+    el: "#app-1",
     data() {
       return {
         perPage: 20,//一頁幾行
@@ -60,7 +61,8 @@ window.onload = () => {
           {
             key: "title",
             label: "Title",
-            sortable: false
+            sortable: false,
+            formatter:"problemLink"
           },
           {
             key: "tag",
@@ -87,20 +89,12 @@ window.onload = () => {
             label: "Input Time",
             sortable: true
           },
-          {
-            key: "problem",
-            label: "",
-          }
         ],
-        items:[],
-        problemButton: {
-          id: 'problemButton',
-          title: '',
-          content: ''
-        }
+        items: [],
       }
     },
     computed: {
+      //mainblock3 changepage
       rows() {
         return this.items.length
       },
@@ -117,6 +111,7 @@ window.onload = () => {
       this.getQuestionData()
     },
     methods: {
+      //mainblock2
       getQuestionData() {
         axios
           .post("https://httpbin.org/response-headers?freeform=%7B%20%20%20%20%20%22questionLib%22%3A%5B%20%20%20%20%20%20%20%7B%22id%22%3A%22a001%22%2C%22title%22%3A%22title01%22%2C%22tag%22%3A%22loop%22%2C%22degree%22%3A%22easy%22%2C%22percentagePassing%22%3A%2250%22%2C%22respondent%22%3A%22100%22%2C%22inputTime%22%3A%2220190101%22%7D%2C%20%20%20%20%20%20%20%7B%22id%22%3A%22a002%22%2C%22title%22%3A%22title01%22%2C%22tag%22%3A%22loop%22%2C%22degree%22%3A%22easy%22%2C%22percentagePassing%22%3A%2250%22%2C%22respondent%22%3A%22100%22%2C%22inputTime%22%3A%2220190101%22%7D%2C%7B%22id%22%3A%22a020%22%2C%22title%22%3A%22title01%22%2C%22tag%22%3A%22loop%22%2C%22degree%22%3A%22easy%22%2C%22percentagePassing%22%3A%2250%22%2C%22respondent%22%3A%22100%22%2C%22inputTime%22%3A%2220190101%22%7D%20%20%20%20%20%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D", questionLibObj)
@@ -130,6 +125,10 @@ window.onload = () => {
             console.log(error);
           });
       },
+      problemLink(value){
+        return `${value}`
+      },
+      //mainblock1
       clickTarget(Target) {
         this.Target = Target;
         this.Degree = "Degree";
@@ -138,15 +137,18 @@ window.onload = () => {
         this.Degree = Degree;
         this.Target = "Target";
       },
-      info(item, index, button) {
-        this.problemButton.title = `Row index: ${index}`
-        this.problemButton.content = JSON.stringify(item, null, 2)
-        this.$root.$emit('bv::show::modal', this.problemButton.id, button)
-      },
-      resetProblemButton() {
-        this.problemButton.title = ''
-        this.problemButton.content = ''
-      },
     }
   })
 }
+/*response example
+{
+  "questionLib": [
+    { "id": "a001", "title": "title01", "tag": "loop", "degree": "easy", "percentagePassing": "50", "respondent": "100", "inputTime": "20190101" },
+    { "id": "a002", "title": "title01", "tag": "loop", "degree": "easy", "percentagePassing": "50", "respondent": "100", "inputTime": "20190101" },
+    { "id": "a020", "title": "title01", "tag": "loop", "degree": "easy", "percentagePassing": "50", "respondent": "100", "inputTime": "20190101" }
+  ],
+  "userName" : "amagood",
+  "Class" : "CSIE110",
+  "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
+} 
+*/
