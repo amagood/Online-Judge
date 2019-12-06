@@ -90,9 +90,9 @@
 				<div class="list-item" v-for="(item, index) in itemlist">
           <span>${ item.name }:<br>(${ item.who })</span>
 					<div class="list-msg">
-						<p id="show-message">${ item.message }</p>
-            <button v-show="authority" type="button" @click="handleDelete(index)" class="list-reply btn btn-outline-success">Delete</button>
+            <p id="show-message">${ item.message }</p>
             <span>${ clock }</span>
+            <button v-show="authority" type="button" @click="handleDelete(index)" class="list-reply btn btn-outline-success">Delete</button>
             <button type="button" @click="handleReply(index)" class="list-reply btn btn-outline-success">Reply</button>
 					</div>
 				</div>

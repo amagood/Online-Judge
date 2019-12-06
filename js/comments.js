@@ -113,9 +113,16 @@ var app1 = new Vue({
 		authority: false,
 	},
 	created: function(){
-    //this.showMessages()
+		this.checkID()
+		//this.showMessages()
 	},
 	methods: {
+		checkID(){
+			let self = this
+			if(self.who === "admin"){
+				self.authority = true
+			}
+		},
 		/*showMessages(){
 			let self = this
 			axios.post("https://httpbin.org/post",showAction)

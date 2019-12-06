@@ -80,7 +80,7 @@
 	display: block;
 	width: 60px;
 	float: left;
-	color: rgb(51, 177, 51);
+	color:rgb(51, 177, 51);
 	text-align:right;
 }
 
@@ -91,13 +91,16 @@
 }
 
 .list-msg button{
+	margin-right: 4px;
 	cursor: pointer;
 	float: right;
 }
 
 .list-msg span{
 	float: right;
-	
+	font-size: 14px;
+	text-align: justify;
+	color: rgb(0, 0, 0);
 }
 
 .list-nothing{
@@ -113,4 +116,5 @@
 
 #show-message{
 	word-wrap:break-word;
+	margin-left: 4px;
 }
