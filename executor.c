@@ -13,9 +13,9 @@
 
 // TODO: Limit the CPU usage of the submit program.
 
-// TODO: Modify the method to prevent the monitor program get too high CPU usage.
-// The method using currently is too rigid. It should adjust itself according to
-// the CPU usage at that moment, rather than set a fixed sleep().
+// TODO: Modify the method to prevent the monitor program getting too high CPU
+// usage. The method using currently is too rigid. It should adjust itself 
+// according to the CPU usage at that moment, rather than set a fixed sleep().
 
 // TIMELIMIT for sec
 #define TIMELIMIT 10
@@ -92,7 +92,7 @@ int main(int argc, char *argv[]) {
 	}
 	
 	// fork process
-	// parent for monitor, child for execute the submit program
+	// parent for monitor, child for executing the submit program
 	pid_t pid = fork();
 	switch(pid) {
 		case -1:
@@ -150,7 +150,7 @@ int main(int argc, char *argv[]) {
 			pid_t pid2;
 			int usedMemory = 0;
 			
-			// set timespec for nanosleep int the while loop
+			// set timespec for nanosleep in the while loop
 			struct timespec req;
 			req.tv_sec = 0;
 			req.tv_nsec = 1000000;
@@ -158,7 +158,7 @@ int main(int argc, char *argv[]) {
 			// set alarm for time limit
 			alarm(TIMELIMIT);
 			
-			// keeping tracking the memory usage of child process
+			// keep tracking the memory usage of child process
 			do {
 				usedMemory = max(usedMemory, getMemoryUsage(pid));
 				if(usedMemory > MEMORYLIMIT)
@@ -166,7 +166,7 @@ int main(int argc, char *argv[]) {
 				if(status == TLE || status == MLE)
 					kill(pid, SIGKILL);
 				
-				// sleep for a while to prevent CPU usage get too high
+				// sleep for a while to prevent CPU usage getting too high
 				nanosleep(&req, NULL);
 				
 				pid2 = wait4(pid, &wstatus, WUNTRACED | WCONTINUED | WNOHANG, &resourceUsage);
