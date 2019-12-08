@@ -96,16 +96,143 @@ var app2 = new Vue({
 })
 
 
+// get content from file object
+
+
+function getMainFileContent() {
+  if (uploadFileApp.mainFile != null)
+  {
+    var read = new FileReader();
+    read.readAsBinaryString(uploadFileApp.mainFile);
+    read.onloadend = function(){
+      uploadFileApp.mainFileString = read.result;
+    }
+  }
+  else
+    uploadFileApp.mainFileString = "";
+}
+function getImplementFile1Content() {
+  if (uploadFileApp.implementFile != null)
+  {
+    var read = new FileReader();
+    read.readAsBinaryString(uploadFileApp.implementFile[0]);
+    read.onloadend = function(){
+      uploadFileApp.implementFile1String = read.result;
+    }
+  }
+  else
+    uploadFileApp.implementFile1String = "";
+}
+function getImplementFile2Content() {
+  if (uploadFileApp.implementFile != null && uploadFileApp.implementFile[1] != undefined)
+  {
+    var read = new FileReader();
+    read.readAsBinaryString(uploadFileApp.implementFile[1]);
+    read.onloadend = function(){
+      uploadFileApp.implementFile2String = read.result;
+    }
+  }
+  else
+    uploadFileApp.implementFile2String = "";
+}
+function getHeaderFile1Content() {
+  if (uploadFileApp.headerFile != null)
+  {
+    var read = new FileReader();
+    read.readAsBinaryString(uploadFileApp.implementFile[0]);
+    read.onloadend = function(){
+      uploadFileApp.headerFile1String = read.result;
+    }
+  }
+  else
+    uploadFileApp.headerFile1String = "";
+}
+function getHeaderFile2Content() {
+  if (uploadFileApp.headerFile != null && uploadFileApp.headerFile[1] != undefined)
+  {
+    var read = new FileReader();
+    read.readAsBinaryString(uploadFileApp.implementFile[1]);
+    read.onloadend = function(){
+      uploadFileApp,headerFile2String = read.result;
+    }
+  }
+  else
+    uploadFileApp,headerFile2String = "";
+}
+
+
+// uploadFileApp
+
+
+var uploadFileApp = new Vue({
+  delimiters: ['${', '}'],
+  el: "#uploadFileApp",
+  data: {
+    showUploadFileBlock: false,
+    mainFile: null,
+    implementFile: null,
+    headerFile: null,
+    showImplementFilesInvalidMsg: false,
+    implementFilesInvalidMsg: "",
+    showHeaderFilesInvalidMsg: false,
+    headerFilesInvalidMsg: "",
+    mainFileString: "",
+    implementFile1String: "",
+    implementFile2String: "",
+    headerFile1String: "",
+    headerFile2String: ""
+  },
+  methods: {
+    checkMainFile() {
+      getMainFileContent();
+    },
+    checkImplementFiles() {
+      if (this.implementFile != null && this.implementFile.length > 2)
+      {
+        this.showImplementFilesInvalidMsg = true;
+        this.implementFilesInvalidMsg = "files: exceed 2 files!";
+      }
+      else
+      {
+        this.showImplementFilesInvalidMsg = false;
+        getImplementFile1Content();
+        getImplementFile2Content();
+      }
+    },
+    checkHeaderFiles() {
+      if (this.headerFile != null && this.headerFile.length > 2)
+      {
+        this.showHeaderFilesInvalidMsg = true;
+        this.headerFilesInvalidMsg = "header files: exceed 2 files!";
+      }
+      else
+      {
+        this.showHeaderFilesInvalidMsg = false;
+        getHeaderFile1Content();
+        getHeaderFile2Content();
+      }
+    }   
+  }
+})
+
+
 // request and response object
 
 
 var submitObj = {
   "action": "submit_code",
-  "qID": "problem000",
+  "qID": "p000",
   "language": "cpp",
   "file":
   {
-    "file1": "nothing in the editor", /*if this message show up in object or JSON, error occur!*/
+    "file1": "",
+    "file2": "",
+    "file3": ""
+  },
+  "headerFile":
+  {
+    "file1": "",
+    "file2": ""
   },
   "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
@@ -122,9 +249,9 @@ var app3 = new Vue({
   el: "#app3",
   data: {
     showSpinner: false,
-    codeState: "AC",
-    errorMessage: "errorMessage....",
-    exeTime: "99999ms",
+    codeState: "",
+    errorMessage: "",
+    exeTime: "",
     errorOutputCompare: "",
     htmlWrongOutput: "",
     htmlExpectedOutput: "",
@@ -142,7 +269,22 @@ var app3 = new Vue({
     submitCode() {
       document.getElementById("submitBtn").setAttribute("disabled", "disabled");
       this.showSpinner = true;
-      submitObj.file.file1 = editor.getValue();
+      if (uploadFileApp.showUploadFileBlock)
+      {
+        submitObj.file.file1 = uploadFileApp.mainFileString;
+        submitObj.file.file2 = uploadFileApp.implementFile1String;
+        submitObj.file.file3 = uploadFileApp.implementFile2String;
+        submitObj.headerFile.file1 = uploadFileApp.headerFile1String;
+        submitObj.headerFile.file2 = uploadFileApp.headerFile2String;
+      }
+      else
+      {
+        submitObj.file.file1 = editor.getValue();
+        submitObj.file.file2 = "";
+        submitObj.file.file3 = "";
+        submitObj.headerFile.file1 = "";
+        submitObj.headerFile.file2 = "";
+      }
       this.showAC = false;
       this.showCE = false;
       this.showTLE = false;

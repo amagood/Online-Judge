@@ -104,6 +104,21 @@
         <!-- select form end -->
         </div>
     </div>
+    <div id="uploadFileApp">
+      <b-button id="uploadFileBtn" v-on:click="showUploadFileBlock = !showUploadFileBlock" :pressed="showUploadFileBlock" size="sm" variant="outline-secondary" title="submit uploaded files when this button is toggled">Upload files</b-button>
+      <transition name="fade">
+        <div class="uploadFileBlock" v-show="showUploadFileBlock">
+          <span>main</span>
+          <b-form-file id="file-default" v-model="mainFile" v-on:input="checkMainFile" accept=".c, .cpp, .py"></b-form-file>
+          <span>files</span>
+          <b-form-file id="file-default" v-model="implementFile" v-on:input="checkImplementFiles" accept=".c, .cpp, .py" multiple></b-form-file>
+          <span>header files</span>
+          <b-form-file id="file-default" v-model="headerFile" v-on:input="checkHeaderFiles" accept=".h" multiple></b-form-file>
+          <span v-show="showImplementFilesInvalidMsg" style="color: red;">${ implementFilesInvalidMsg }</span>
+          <span v-show="showHeaderFilesInvalidMsg" style="color: red;">${ headerFilesInvalidMsg }</span>
+        </div>
+      </transition>
+    </div>
     <div id="aceEditorContainer" class=" aceEditorContainer">
       <pre id="aceEditor"></pre>
     </div>
@@ -115,7 +130,7 @@
         <transition name="fade">
           <b-spinner v-if="showSpinner" variant="secondary" label="Spinning"></b-spinner>
         </transition>
-        <b-button class="mr-1 ml-3" disabled pill variant="outline-secondary">Test</b-button>
+        <!-- <b-button class="mr-1 ml-3" disabled pill variant="outline-secondary">Test</b-button> -->
         <b-button id="submitBtn" class="mx-1" v-on:click="submitCode()" pill variant="outline-secondary">Submit</b-button>
       </div>
       <!-- resultBlcok -->
