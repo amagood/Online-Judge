@@ -1,3 +1,8 @@
+### 2019/12/08 Login CD, Shake, Enter
+	html css js login CD 3s.
+	shake when input is invalid.
+	press enter in username will focus password.
+	press enter in password will click login.
 ### 2019/11/26 Path and Redirect
 	login.html js link path
 	js redirct url

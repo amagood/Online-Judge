@@ -25,6 +25,7 @@ var app1 = new Vue({
   },
   methods: {
     LoginPost() {
+      document.getElementById("loginBtn").setAttribute("disabled", "disabled");
       app1.showMsg = false;
       if (document.getElementById("inputAcct").validity.valid
          && document.getElementById("inputPw").validity.valid)
@@ -60,9 +61,11 @@ var app1 = new Vue({
       }
       else
       {
+        document.getElementById("loginBtn").className = "btn btn-dark btn-lg rounded-pill animated shake";
         app1.msg = "Input is invalid!"
         app1.showMsg = true;
       }
+      setTimeout(function () {document.getElementById("loginBtn").className = "btn btn-dark btn-lg rounded-pill"; document.getElementById("loginBtn").removeAttribute("disabled");}, 3000);
     },
     ValidateAcct() {
       var el = document.getElementById("inputAcct");
@@ -98,6 +101,23 @@ window.onload = function() {
   document.getElementsByTagName("html")[0].style.visibility = "visible";
   this.app1.showContent = true;
 }
+
+
+// trigger a function on enter
+
+
+document.getElementById("inputAcct").addEventListener('keyup', function(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("inputPw").focus();
+  }
+});
+document.getElementById("inputPw").addEventListener('keyup', function(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("loginBtn").click();
+  }
+});
 
 
 // Login System
