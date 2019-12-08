@@ -24,9 +24,6 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
-### 2019/12/8 Submit Uploaded File
-	html css js submit uploaded files when the btn Upload files is toggled.
-	Maximum number of files: 1main, 2files, 2header files.
 ### 2019/11/30 Navbar
 	html css js
 ### 2019/11/30 Result Info
