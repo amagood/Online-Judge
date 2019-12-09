@@ -17,7 +17,7 @@ def Single_Rank(Current_Rank):
     Rank_Single_Json = {
             "name" : Current_User,
             "ACTimes" : Current_AcTime,
-            "CommitTimes" :　Current_CommitTime,
+            "CommitTimes" : Current_CommitTime,
             "rank" : Current_Rank_No
         }
     return Rank_Single_Json
@@ -25,24 +25,32 @@ def Single_Rank(Current_Rank):
 
 
 def Rank_json(Request_Question, UserName, UserHash):
-    search_Question = Question.objects.get(Question_Name = Request_Question)
+    search_Question = Question.objects.get(Question_ID = Request_Question)
     Question_Rank = search_Question.Rank.order_by('Rank_Order').all()
     Return_Data = {}
-    Return_Data['userData'] = []
+    tmp = []
+    
     for i in range(100 if len(Question_Rank) > 100 else len(Question_Rank)):
-        Return_Data['userData'].append(Single_Rank(Question_Rank[i]))
+        tmp.append(Single_Rank(Question_Rank[i]))
+    '''for i in range(100 if len()):
+        tmp.append(Single_Rank(i))'''
+    Return_Data['userData'] = tmp
     Return_Data['userName'] = UserName
     Return_Data['hash'] = UserHash
-    data = json.dumps(Return_data)
-    return data
+    #data = json.dumps(Return_data)
+    return Return_Data
 
 
 
 def RankRequest(request):
     if request.method == "POST":
-        req = json.loads(request.body)
+        req = json.loads(request.body.decode('utf-8'))
         data = Rank_json(req['questionNum'], req['userName'], req['hash'])
+        print(data)
+        
+        data = json.dumps(data)
         return HttpResponse(data)
-    return render(request,'//',{})
+    #return render(request,'Rank.html',{})
+# return HttpResponse()
 
 
