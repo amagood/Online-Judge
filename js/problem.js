@@ -1,4 +1,5 @@
-﻿// navbar
+﻿// 20191209
+// navbar
 
 
 clearStorage = function(){
@@ -223,12 +224,14 @@ var submitObj = {
   "action": "submit_code",
   "qID": "p000",
   "language": "cpp",
+  "fileAmount": 0,
   "file":
   {
     "file1": "",
     "file2": "",
     "file3": ""
   },
+  "headerFileAmount": 0,
   "headerFile":
   {
     "file1": "",
@@ -271,17 +274,35 @@ var app3 = new Vue({
       this.showSpinner = true;
       if (uploadFileApp.showUploadFileBlock)
       {
+        submitObj.fileAmount = 1;
+        if (uploadFileApp.implementFile != null)
+        {
+          if (uploadFileApp.implementFile.length > 2)
+            submitObj.fileAmount = 3;
+          else
+            submitObj.fileAmount = uploadFileApp.implementFile.length + 1;
+        }
         submitObj.file.file1 = uploadFileApp.mainFileString;
         submitObj.file.file2 = uploadFileApp.implementFile1String;
         submitObj.file.file3 = uploadFileApp.implementFile2String;
+        submitObj.headerFileAmount = 0;
+        if (uploadFileApp.headerFile != null)
+        {
+          if (uploadFileApp.headerFile.length > 2)
+            submitObj.headerFileAmount = 2;
+          else
+            submitObj.headerFileAmount = uploadFileApp.headerFile.length;
+        }
         submitObj.headerFile.file1 = uploadFileApp.headerFile1String;
         submitObj.headerFile.file2 = uploadFileApp.headerFile2String;
       }
       else
       {
+        submitObj.fileAmount = 1;
         submitObj.file.file1 = editor.getValue();
         submitObj.file.file2 = "";
         submitObj.file.file3 = "";
+        submitObj.headerFileAmount = 0;
         submitObj.headerFile.file1 = "";
         submitObj.headerFile.file2 = "";
       }
