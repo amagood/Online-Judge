@@ -1,3 +1,5 @@
+### 2019/12/09 Redirect Path and Time
+	js Redirect Path and Time(0.5s)
 ### 2019/12/08 Login CD, Shake, Enter
 	html css js login CD 3s.
 	shake when input is invalid.

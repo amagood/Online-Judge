@@ -1,4 +1,4 @@
-
+// 20191209
 
 var loginObj = {
   "action" : "login",
@@ -44,7 +44,7 @@ var app1 = new Vue({
             {
               app1.msg = "Success!"
               app1.showMsg = true;
-              setTimeout(loginSuccess, 3000);
+              setTimeout(loginSuccess, 500);
             }
             else
             {
@@ -127,6 +127,5 @@ function loginSuccess() {
   localStorage.setItem("who", tmpObj.who);
   localStorage.setItem("userName", tmpObj.userName);
   localStorage.setItem("hash", tmpObj.hash);
-  // window.location.replace("./problem/p000");
-  window.location.href = "./problem/p000";
+  window.location.replace("../IDE/problem/p000");
 }
