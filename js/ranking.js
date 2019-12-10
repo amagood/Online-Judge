@@ -1,60 +1,68 @@
-var attendRank= {
-  action: "attend_rank",
-  attendStatus: "attend",
-  hash: localStorage.getItem("hash"),
+//選擇參加後送出
+var attendRank = {
+  action : "attend_rank",
+  attendStatus : "attend",
+  hash : localStorage.getItem("hash"),
 
-  status : "success",
+  //status : "success",
 }
-var notAttendRank= {
-  action: "attend_rank",
-  attendStatus: "notAttend",
-  hash: localStorage.getItem("hash"),
+//選擇不參加後送出
+var notAttendRank = {
+  action : "attend_rank",
+  attendStatus : "notAttend",
+  hash : localStorage.getItem("hash"),
 
-  status : "fail",
+  //status : "fail",
 }
-var rankAction= {
-  action: "rank",
-  questionNum: "",
-  hash: localStorage.getItem("hash"),
+//填寫題號enter後送出
+var rankAction = {
+  action : "rank",
+  questionNum : "", //題目編號
+  userName : localStorage.getItem("userName"),
+  Class : "", //該學生所選擇班級
+  hash : localStorage.getItem("hash"),
 
-  userData: [
+  /*userData : [
     {
-      name: "abb",
-      ACTimes: 100,
-      commitTimes: 130,
-      rank: 1,
-      AttendStatus: true
+      name : "abb",
+      ACTimes : 100,
+      commitTimes : 130,
+      rank : 1,
+      AttendStatus : true,
+      passTime : "0.0001",
     },
     {
-      name: "aaa22",
-      ACTimes: 1,
-      commitTimes: 3,
-      rank: 2,
-      AttendStatus: true
+      name : "aaa22",
+      ACTimes : 1,
+      commitTimes : 3,
+      rank : 2,
+      AttendStatus : true,
+      passTime : "0.000001",
     },
     {
-      name: "aaa",
-      ACTimes: 0,
-      commitTimes: 0,
-      rank: 3,
-      AttendStatus: true
+      name : "aaa",
+      ACTimes : 0,
+      commitTimes : 0,
+      rank : 3,
+      AttendStatus : true,
+      passTime : "0.00000001",
     },
-  ]
+  ]*/
 }
 
 //----navbar的設定----
 var navapp = new Vue({
-  delimiters: ['${', '}'],
-  el: "#navapp",
-  data:{
-    whichShow:"",
-    userid: "",
-    name: "",
+  delimiters : ['${', '}'],
+  el : "#navapp",
+  data : {
+    whichShow : "",
+    userid : "",
+    name : "",
   },
-  created() {
+  created(){
     this.chooseProblems()
   },
-  methods: {
+  methods:{
     chooseProblems(){
       let self = this
       self.name = localStorage.getItem("userName")
@@ -67,28 +75,28 @@ var navapp = new Vue({
       }
     },
     clearStorage(){
-      localStorage.clear();
+      localStorage.clear()
     },
   },
 })
 
 //----執行使用者是否加入排名,並根據輸入題號和選擇的班級列表----
 var app1 = new Vue({
-  delimiters: ['${', '}'],
-  el: "#app1",
-  data: {
-    userdata: [],
-    isShow: true,
-    qsNumber:"",
-    clock:"",
+  delimiters : ['${', '}'],
+  el : "#app1",
+  data : {
+    userdata : [],
+    isShow : true,
+    qsNumber :"",
+    clock : "",
   },
-  created: function() {
+  created(){
     this.setTime()
   },
-  mounted: function() {
+  mounted(){
     this.idCheck()
   },
-  methods: {
+  methods:{
     idCheck(){
       let self = this
       if(localStorage.getItem("who") == "admin" ||localStorage.getItem("who") == "teacher"){
@@ -141,7 +149,7 @@ var app1 = new Vue({
             }
           })
           .catch(function(error){
-            console.log(error);
+            console.log(error)
           })
       }
     },
@@ -161,7 +169,7 @@ var app1 = new Vue({
         }
       })
       .catch(function(error){
-        console.log(error);
+        console.log(error)
       })
       this.isShow = false
       this.setTime()
@@ -182,7 +190,7 @@ var app1 = new Vue({
         }
       })
       .catch(function(error){
-        console.log(error);
+        console.log(error)
       })
       this.isShow = false
       this.setTime()

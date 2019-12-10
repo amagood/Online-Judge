@@ -1,5 +1,5 @@
 <!--
-  這裡是排行榜
+  這裡是留言區
   圖片都放在image資料夾中
 -->
 <!DOCTYPE html>
@@ -69,6 +69,12 @@
     <!--留言板區域-->
     <div id="app1">
 			<div class="message">
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Class</label>
+          <select v-on:change="showMessages()" class="form-control">
+            <option :selectedClass="classSet.Class" v-for="classSet in classSet">${ classSet.Class }</option>
+          </select>
+        </div>
 				<v-textarea :who="who" v-model="message"></v-textarea>
 				<button @click="createMessage" type="button" class="btn btn-success">Next</button>
 			</div>

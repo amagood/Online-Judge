@@ -1,6 +1,8 @@
-var showAction = {
+//選擇班級後送出
+var showMessageAction = {
 	"action" : "show_message",
 	"hash" : localStorage.getItem("hash"),
+	"Class" : "",
 	
 	"message" :[ 
 		{"userName" :　"Ian", "date" : "20191015", "time" : "1159", "content" : "aaa"},
@@ -8,6 +10,7 @@ var showAction = {
 		{"userName" :　"Iann", "date" : "20191126", "time" : "1915", "content" : "aaeqwa"}
 	],
 }
+//按下next後送出
 var handleSend = {
 	"action" : "send_message",
 	"userName" : "",
@@ -16,20 +19,33 @@ var handleSend = {
 	"content" : "",
 	"hash" : localStorage.getItem("hash"),
 }
+//一開始送出
+var collectClass = {
+	"action" : "selectClass",
+	"userName" : localStorage.getItem("userName"),
+	"hash" : localStorage.getItem("hash"),
+
+	"Classes":
+	[
+		{"Class" : "CSIE110"},
+		{"Class" : "CSIE111"},
+		{"Class" : "LOL201"},
+	]
+}
 
 //----navbar設定----
 var navapp = new Vue({
-	delimiters: ['${', '}'],
-	el: "#navapp",
+	delimiters : ['${', '}'],
+	el : "#navapp",
 	data:{
-		whichShow:"",
-		userid: "",
-		name: "",
+		whichShow : "",
+		userid : "",
+		name : "",
 	},
-	created() {
+	created(){
 		this.chooseProblems()
 	},
-	methods: {
+	methods:{
 		chooseProblems(){
 			let self = this
 			self.name = localStorage.getItem("userName")
@@ -42,58 +58,58 @@ var navapp = new Vue({
 			}
 		},
 		clearStorage(){
-			localStorage.clear();
+			localStorage.clear()
 		}
 	},
 })
 
 //----留言內容輸入----
 Vue.component('v-textarea', {
-	delimiters: ['${', '}'],
+	delimiters : ['${', '}'],
 	template: '#v-textarea',
-	props: {
-		who: {
-			type: String,
-			default: ""
+	props : {
+		who : {
+			type : String,
+			default : ""
 		},
-		value: {
-			type: String,
-			default: ""
+		value : {
+			type : String,
+			default : ""
 		},
-		username: {
-			type: String,
-			default: localStorage.getItem("userName")
+		username : {
+			type : String,
+			default : localStorage.getItem("userName")
 		}
 	},
 });
 
 //----留言結果顯示----
 Vue.component("v-list", {
-	delimiters: ['${', '}'],
-	template: '#v-list',
-	props: {
-		list: {
-			type: Array,
-			default: []
+	delimiters : ['${', '}'],
+	template : '#v-list',
+	props : {
+		list : {
+			type : Array,
+			default : []
 		},
 		authority: {
-			type: Boolean
+			type : Boolean
 		},
-		clock: {
-			type: String,
-			default: ""
+		clock : {
+			type : String,
+			default : ""
 		},
 	},
-	data: function(){
+	data : function(){
 		return {
-			itemlist: this.list
+			itemlist : this.list
 		}
 	},
-	methods: {
-		handleReply: function(index){
+	methods : {
+		handleReply : function(index){
 			this.$emit("reply", index)
 		},
-		handleDelete: function(index){
+		handleDelete : function(index){
 			this.$emit("delete", index)
 		}
 	}
@@ -101,51 +117,69 @@ Vue.component("v-list", {
 
 //----留言區域父組件---
 var app1 = new Vue({
-	delimiters: ['${', '}'],
-	el: "#app1",
-	data: {
-		message: "",
-		list: [],
-		msgList: [],
-		clock:"",
-		username: localStorage.getItem("userName"),
-		who: localStorage.getItem("who"),
-		authority: false,
+	delimiters : ['${', '}'],
+	el : "#app1",
+	data : {
+		message : "",
+		list : [],
+		msgList : [],
+		clock :"",
+		username : localStorage.getItem("userName"),
+		who : localStorage.getItem("who"),
+		authority : false,
+		classSet : [],
+		selectedClass :"",
 	},
-	created: function(){
+	created(){
 		this.checkID()
-		//this.showMessages()
+		this.setClass()
 	},
-	methods: {
+	methods : {
 		checkID(){
 			let self = this
 			if(self.who === "admin"){
 				self.authority = true
 			}
 		},
-		/*showMessages(){
+		setClass(){//取得使用者參加之班級
 			let self = this
-			axios.post("https://httpbin.org/post",showAction)
+			axios.post("https://httpbin.org/post",collectClass)
 				.then(function(response){
 					console.log(response.data)
 					console.log(response.status)
 					console.log(response.statusText)
 					console.log(response.headers)
 					console.log(response.config)
-					self.msgList = response.data.json.message
-					for(let i=0; i<self.message.length; i++){
-						
-					}
+					self.classSet = response.data.json.Classes
 				})
 				.catch(function(error){
-					console.log(error);
+					console.log(error)
 				})
-		},*/
-		createMessage(){
+		},
+		showMessages(){//點擊班級列表時秀出所點擊班級之留言
+			let self = this
+			axios.post("https://httpbin.org/post",showMessageAction)
+				.then(function(response){
+					console.log(response.data)
+					console.log(response.status)
+					console.log(response.statusText)
+					console.log(response.headers)
+					console.log(response.config)
+					console.log(self.selectedClass)
+					self.msgList = response.data.json.message
+					/*for(let i=0; i<self.message.length; i++){
+						
+					}*/
+				})
+				.catch(function(error){
+					console.log(error)
+				})
+		},
+		createMessage(){//從這邊呼叫設定時間,送訊息
 			this.setTime()
 			this.handleSend()
 		},
-		setTime(){
+		setTime(){//設定觸發時的時間
       this.clock = ""
       var now = new Date()
         var year = now.getFullYear()
@@ -164,7 +198,8 @@ var app1 = new Vue({
           this.clock += "0"     
         this.clock += hh + ":"
         if (mm < 10) this.clock += '0' 
-        this.clock += mm
+				this.clock += mm
+				console.log(this.clock)
     },
 		handleSend(){
 			if(this.message === ""){
@@ -172,9 +207,9 @@ var app1 = new Vue({
 				return
 			}
 			this.list.push({
-				who: this.who,
-				name: this.username,
-				message: this.message
+				who : this.who,
+				name : this.username,
+				message : this.message
 			})
 			this.message = ""
 		},
@@ -182,7 +217,7 @@ var app1 = new Vue({
 			var name = this.list[index].name;
 			this.message = "reply@" + name + ": ";
 		},
-		handleDelete: function(index){
+		handleDelete : function(index){
 			this.list.splice(index, 1)
 		}
 	}
