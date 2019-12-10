@@ -8,16 +8,16 @@ var app1 = new Vue({
 		whichShow: "",
 	},
 	created() {
-		this.test()
+		//this.test()
 		this.chooseProblems()
 	},
 	methods: {
-		test(){//測試
+		/*test(){//測試
 			localStorage.setItem("who","student")
 			localStorage.setItem("userName","iannn")
 			let who = localStorage.getItem("who")
 			console.log(who)
-		},
+		},*/
 		chooseProblems(){
 			let self = this
 			self.name = localStorage.getItem("userName")
