@@ -2,13 +2,24 @@ body{
   background-color: lightgray;/*#d3d3d3*/
   font-family: "微軟正黑體";
 }
+
+/*navbar*/
 .navbarset{
   background-color: #56fd96
 }
-
 .navbarimage{
   width: 23px
 }
+p{
+  font-size: 16px;
+}
+
+#username{
+  font-size: 20px;
+  line-height: 42px;
+}
+/*navbar end*/
+
 .mainBlockStudentProblem{
   max-width: 1300px;
   min-height: 600px;

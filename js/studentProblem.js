@@ -1,32 +1,41 @@
-
-window.onload = () => {
-  new Vue({
-    el: "#navapp",
-    data: {
-      whichShow: "",
-      userid: "",
-      name: localStorage.getItem(userName),
-    },
-    created() {
-      this.chooseProblems()
-    },
-    methods: {
-      chooseProblems() {
-        let self = this
-        self.userid = localStorage.getItem("who")
-        if (self.userid === "admin" || self.userid === "teacher") {
-          self.whichShow = "teacher"
-        }
-        else if (self.userid === "student") {
-          self.whichShow = "student"
-        }
-      },
-      clearStorage() {
-        localStorage.clear();
-      },
-    },
-  })
-}
+var navapp = new Vue({
+	delimiters: ['${', '}'],
+	el: "#navapp",
+	data: {
+		userid: "",
+		name: "",
+		isShow: false,
+		whichShow: "",
+	},
+	created() {
+		this.test()
+		this.chooseProblems()
+	},
+	methods: {
+		test(){//測試
+			localStorage.setItem("who","student")
+			localStorage.setItem("userName","i")
+			let who = localStorage.getItem("who")
+			console.log(who)
+		},
+		chooseProblems(){
+			let self = this
+			self.name = localStorage.getItem("userName")
+			self.userid = localStorage.getItem("who")
+			if(self.userid === "admin"||self.userid === "teacher"){
+				self.isShow = true
+				self.whichShow = "teacher"
+			}
+			else if(self.userid === "student"){
+				self.isShow = true
+				self.whichShow = "student"
+			}
+		},
+		clearStorage(){
+			localStorage.clear();
+		},
+	},
+})
 
 var questionLibObj = {
   "action": "questionLib",
@@ -47,7 +56,7 @@ window.onload = () => {
     el: "#app-1",
     data() {
       return {
-        perPage: 20,//一頁幾行
+        perPage: 2,//一頁幾行
         currentPage: 1,//當前頁數
         filter: null,//Search
         Target: "Target",
@@ -114,10 +123,11 @@ window.onload = () => {
       //mainblock2
       getQuestionData() {
         axios
-          .post("https://httpbin.org/response-headers?freeform=%7B%20%20%20%20%20%22questionLib%22%3A%5B%20%20%20%20%20%20%20%7B%22id%22%3A%22a001%22%2C%22title%22%3A%22title01%22%2C%22tag%22%3A%22loop%22%2C%22degree%22%3A%22easy%22%2C%22percentagePassing%22%3A%2250%22%2C%22respondent%22%3A%22100%22%2C%22inputTime%22%3A%2220190101%22%7D%2C%20%20%20%20%20%20%20%7B%22id%22%3A%22a002%22%2C%22title%22%3A%22title01%22%2C%22tag%22%3A%22loop%22%2C%22degree%22%3A%22easy%22%2C%22percentagePassing%22%3A%2250%22%2C%22respondent%22%3A%22100%22%2C%22inputTime%22%3A%2220190101%22%7D%2C%7B%22id%22%3A%22a020%22%2C%22title%22%3A%22title01%22%2C%22tag%22%3A%22loop%22%2C%22degree%22%3A%22easy%22%2C%22percentagePassing%22%3A%2250%22%2C%22respondent%22%3A%22100%22%2C%22inputTime%22%3A%2220190101%22%7D%20%20%20%20%20%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D", questionLibObj)
-          .then(response => {
+        .post("https://httpbin.org/response-headers?freeform=%7B%20%20%20%20%20%22questionLib%22%3A%5B%20%20%20%20%20%20%20%7B%22id%22%3A%22a001%22%2C%22title%22%3A%22title01%22%2C%22tag%22%3A%22loop%22%2C%22degree%22%3A%22easy%22%2C%22percentagePassing%22%3A%2250%22%2C%22respondent%22%3A%22100%22%2C%22inputTime%22%3A%2220190101%22%7D%2C%20%20%20%20%20%20%20%7B%22id%22%3A%22a002%22%2C%22title%22%3A%22title01%22%2C%22tag%22%3A%22loop%22%2C%22degree%22%3A%22easy%22%2C%22percentagePassing%22%3A%2250%22%2C%22respondent%22%3A%22100%22%2C%22inputTime%22%3A%2220190101%22%7D%2C%7B%22id%22%3A%22a020%22%2C%22title%22%3A%22title01%22%2C%22tag%22%3A%22loop%22%2C%22degree%22%3A%22easy%22%2C%22percentagePassing%22%3A%2250%22%2C%22respondent%22%3A%22100%22%2C%22inputTime%22%3A%2220190101%22%7D%20%20%20%20%20%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D",questionLibObj)
+        .then(response => {
+            console.log(response.data.freeform)
             tmpobj = JSON.parse(response.data.freeform);
-            //console.log(tmpobj.questionLib)
+            console.log(tmpobj.questionLib)
             //console.log(this.items)
             this.items = tmpobj.questionLib
           })
@@ -145,7 +155,9 @@ window.onload = () => {
   "questionLib": [
     { "id": "a001", "title": "title01", "tag": "loop", "degree": "easy", "percentagePassing": "50", "respondent": "100", "inputTime": "20190101" },
     { "id": "a002", "title": "title01", "tag": "loop", "degree": "easy", "percentagePassing": "50", "respondent": "100", "inputTime": "20190101" },
-    { "id": "a020", "title": "title01", "tag": "loop", "degree": "easy", "percentagePassing": "50", "respondent": "100", "inputTime": "20190101" }
+    { "id": "a020", "title": "title01", "tag": "loop", "degree": "easy", "percentagePassing": "50", "respondent": "100", "inputTime": "20190101" },
+    { "id": "a001", "title": "title01", "tag": "loop", "degree": "easy", "percentagePassing": "50", "respondent": "100", "inputTime": "20190101" },
+    { "id": "a002", "title": "title01", "tag": "loop", "degree": "easy", "percentagePassing": "50", "respondent": "100", "inputTime": "20190101" },
   ],
   "userName" : "amagood",
   "Class" : "CSIE110",

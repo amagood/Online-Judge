@@ -1,32 +1,41 @@
-window.onload = () => {
-  new Vue({
-    el: "#navapp",
-    data: {
-      whichShow: "",
-      userid: "",
-      name: localStorage.getItem(userName),
-    },
-    created() {
-      this.chooseProblems()
-    },
-    methods: {
-      chooseProblems() {
-        let self = this
-        self.userid = localStorage.getItem("who")
-        if (self.userid === "admin" || self.userid === "teacher") {
-          self.whichShow = "teacher"
-        }
-        else if (self.userid === "student") {
-          self.whichShow = "student"
-        }
-      },
-      clearStorage() {
-        localStorage.clear();
-      },
-    },
-  })
-}
-
+var navapp = new Vue({
+	delimiters: ['${', '}'],
+	el: "#navapp",
+	data: {
+		userid: "",
+		name: "",
+		isShow: false,
+		whichShow: "",
+	},
+	created() {
+		this.test()
+		this.chooseProblems()
+	},
+	methods: {
+		test(){//測試
+			localStorage.setItem("who","student")
+			localStorage.setItem("userName","i")
+			let who = localStorage.getItem("who")
+			console.log(who)
+		},
+		chooseProblems(){
+			let self = this
+			self.name = localStorage.getItem("userName")
+			self.userid = localStorage.getItem("who")
+			if(self.userid === "admin"||self.userid === "teacher"){
+				self.isShow = true
+				self.whichShow = "teacher"
+			}
+			else if(self.userid === "student"){
+				self.isShow = true
+				self.whichShow = "student"
+			}
+		},
+		clearStorage(){
+			localStorage.clear();
+		},
+	},
+})
 var questionLibObj = {
   "action": "questionLib",
   "questionNum": "20",//there are twenty question in one page. 
