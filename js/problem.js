@@ -1,4 +1,4 @@
-﻿// 20191209
+﻿// 20191212
 // navbar
 
 
@@ -140,7 +140,7 @@ function getHeaderFile1Content() {
   if (uploadFileApp.headerFile != null)
   {
     var read = new FileReader();
-    read.readAsBinaryString(uploadFileApp.implementFile[0]);
+    read.readAsBinaryString(uploadFileApp.headerFile[0]);
     read.onloadend = function(){
       uploadFileApp.headerFile1String = read.result;
     }
@@ -152,7 +152,7 @@ function getHeaderFile2Content() {
   if (uploadFileApp.headerFile != null && uploadFileApp.headerFile[1] != undefined)
   {
     var read = new FileReader();
-    read.readAsBinaryString(uploadFileApp.implementFile[1]);
+    read.readAsBinaryString(uploadFileApp.headerFile[1]);
     read.onloadend = function(){
       uploadFileApp,headerFile2String = read.result;
     }

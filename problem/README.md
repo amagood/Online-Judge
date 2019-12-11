@@ -24,6 +24,8 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/12/12 fix bug: upload header file
+	js fix bug : read implementFile when upload headerFile
 ### 2019/12/09 fileAmount
 	js submitObj.fileAmount, submitObj.headerFileAmount
 ### 2019/12/08 Submit Uploaded File
