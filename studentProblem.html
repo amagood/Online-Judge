@@ -55,7 +55,7 @@
       </nav>
       <!--navbar end-->
 
-      <div id="app-1" class="mainBlockStudentProblem">
+      <div id="probapp" class="mainBlockStudentProblem">
         <!--block 1 sortMenu-->
         <div>
           <b-row>
@@ -92,8 +92,8 @@
 
         <!--block 2 Problem-->
         <div style="margin-top: 20px; min-height: 480px;">
-          <b-table sticky hover :items="items" :fields="fields" id="problemTable" :per-page="perPage"
-            :current-page="currentPage" :filter="filter">
+          <b-table sticky hover id="problemTable" :items="items" :fields="fields" :per-page="perPage"
+            :current-page="currentPage" :filter="filter" @filtered="onFiltered">
             <!--problemLink-->
             <template v-slot:cell(title)="titleData">
               <a :href="`#${titleData.value.replace(/[^0-9][^a-z]+/i,'-')}`">${ titleData.value }</a>
@@ -104,7 +104,7 @@
 
         <!--block 3 Page-->
         <div style="margin-block-end:10px;">
-          <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="problemTable"
+          <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" aria-controls="problemTable"
             align="center">
           </b-pagination>
         </div>
