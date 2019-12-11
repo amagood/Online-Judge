@@ -61,13 +61,13 @@
         <div>
           <b-row>
             <b-col>
-              <b-dropdown dropup v-bind:text="Target" variant="secondary">
-                <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTarget('Loop')">Loop</b-dropdown-item>
-                <b-dropdown-item @click="filter = 'array'" v-on:click="clickTarget('Array')">Array</b-dropdown-item>
-                <b-dropdown-item @click="filter = 'string'" v-on:click="clickTarget('String')">String</b-dropdown-item>
-                <b-dropdown-item @click="filter = 'function'" v-on:click="clickTarget('Function')">Function
+              <b-dropdown dropup v-bind:text="Tag" variant="secondary">
+                <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTag('Loop')">Loop</b-dropdown-item>
+                <b-dropdown-item @click="filter = 'array'" v-on:click="clickTag('Array')">Array</b-dropdown-item>
+                <b-dropdown-item @click="filter = 'string'" v-on:click="clickTag('String')">String</b-dropdown-item>
+                <b-dropdown-item @click="filter = 'function'" v-on:click="clickTag('Function')">Function
                 </b-dropdown-item>
-                <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTarget('Pointer')">Pointer
+                <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTag('Pointer')">Pointer
                 </b-dropdown-item>
               </b-dropdown>
               <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
@@ -78,7 +78,7 @@
             </b-col>
             <!--search/filter bar-->
             <b-col sm="5">
-              <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput" class="mb-0">
+              <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput">
                 <b-input-group size="">
                   <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
                   </b-form-input>
