@@ -39,8 +39,8 @@ var navapp = new Vue({
 
 var questionLibObj = {
   "action": "questionLib",
-  "questionNum": "20",//there are twenty question in one page. 
-  "questionPage": "1",//1 means select the top 20 question
+  "questionNum": "2",//there are twenty question in one page. 一頁幾行
+  "questionPage": "1",//1 means select the top 20 question.當前頁數
   "sequence": "id",
   "tag": "loop",
   "degree": "easy",
@@ -56,7 +56,7 @@ window.onload = () => {
     el: "#probapp",
     data() {
       return {
-        perPage: 2,//一頁幾行
+        //perPage: 2,//一頁幾行
         currentPage: 1,//當前頁數
         totalRows:1,//總行數
         filter: null,//Search
@@ -113,9 +113,17 @@ window.onload = () => {
           })
       }
     },//computed end
-    created: function () {
+    created(){
       this.getQuestionData()
     },//created end
+    updated(){
+      //console.log(questionLibObj.questionPage)
+      if(this.currentPage!=questionLibObj.questionPage){
+        questionLibObj.questionPage=this.currentPage.toString()//轉字串
+        console.log(questionLibObj)
+      }
+      //console.log(questionLibObj.questionPage)
+    },
     methods: {
       //mainblock2
       getQuestionData() {

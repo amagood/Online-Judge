@@ -92,7 +92,7 @@
 
         <!--block 2 Problem-->
         <div style="margin-top: 20px; min-height: 480px;">
-          <b-table sticky hover id="problemTable" :items="items" :fields="fields" :per-page="perPage"
+          <b-table sticky hover id="problemTable" :items="items" :fields="fields" :per-page="questionLibObj.questionNum"
             :current-page="currentPage" :filter="filter" @filtered="onFiltered">
             <!--problemLink-->
             <template v-slot:cell(title)="titleData">
@@ -104,8 +104,8 @@
 
         <!--block 3 Page-->
         <div style="margin-block-end:10px;">
-          <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" aria-controls="problemTable"
-            align="center">
+          <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="questionLibObj.questionNum" aria-controls="problemTable"
+            align="center" >
           </b-pagination>
         </div>
       </div>
