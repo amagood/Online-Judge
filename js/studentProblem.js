@@ -41,7 +41,7 @@ var questionLibObj = {
   "action": "questionLib",
   "questionNum": "2",//there are twenty question in one page. 一頁幾行
   "questionPage": "1",//1 means select the top 20 question.當前頁數
-  "sequence": "id",
+  "sequence": "id",//排序方式,API少升降序
   "tag": "loop",
   "degree": "easy",
   "userName": "amagood",
@@ -56,12 +56,14 @@ window.onload = () => {
     el: "#probapp",
     data() {
       return {
+        Target: "Target",//for dropdown buttom
+        Degree: "Degree",//for dropdown buttom
+        sortBy: "id",//排序方式
+        sortDesc: false,//false:升序
         //perPage: 2,//一頁幾行
         currentPage: 1,//當前頁數
         totalRows:1,//總行數
         filter: null,//Search
-        Target: "Target",
-        Degree: "Degree",
         fields: [
           {
             key: "id",
@@ -118,11 +120,13 @@ window.onload = () => {
     },//created end
     updated(){
       //console.log(questionLibObj.questionPage)
-      if(this.currentPage!=questionLibObj.questionPage){
+      if(this.currentPage!=questionLibObj.questionPage||this.sortBy!=questionLibObj.sequence){
         questionLibObj.questionPage=this.currentPage.toString()//轉字串
+        questionLibObj.sequence=this.sortBy
         console.log(questionLibObj)
       }
       //console.log(questionLibObj.questionPage)
+      //console.log(this.sortBy,this.sortDesc)
     },
     methods: {
       //mainblock2
