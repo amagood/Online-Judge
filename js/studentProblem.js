@@ -58,12 +58,12 @@ window.onload = () => {
       return {
         Tag: "Tag",//for dropdown buttom
         Degree: "Degree",//for dropdown buttom
+        filter: null,//text in filter
         sortBy: "id",//排序方式
         sortDesc: false,//false:升序
         //perPage: 2,//一頁幾行
         currentPage: 1,//當前頁數
         totalRows:1,//總行數
-        filter: null,//text in filter
         fields: [
           {
             key: "id",
@@ -138,7 +138,7 @@ window.onload = () => {
         questionLibObj.degree=this.Degree
         console.log(questionLibObj)
       }
-    },
+    },//updated end
     methods: {
       //mainblock2
       getQuestionData() {
@@ -165,14 +165,15 @@ window.onload = () => {
       //mainblock1
       clickTag(Tag) {
         this.Tag = Tag
-        this.Degree = "Degree"
         questionLibObj.tag=this.Tag
-        console.log(questionLibObj)
+        this.Degree = "Degree"
+        questionLibObj.degree="Degree"
       },
       clickDegree(Degree) {
         this.Degree = Degree
-        this.Tag = "Tag"
         questionLibObj.degree=this.Degree
+        this.Tag = "Tag"
+        questionLibObj.tag="Tag"
       },
       //mainblock3
       onFiltered(filteredItems) {

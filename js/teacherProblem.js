@@ -38,11 +38,11 @@ var navapp = new Vue({
 })
 var questionLibObj = {
   "action": "questionLib",
-  "questionNum": "20",//there are twenty question in one page. 
+  "questionNum": "2",//there are twenty question in one page. 
   "questionPage": "1",//1 means select the top 20 question
   "sequence": "id",
-  "tag": "loop",
-  "degree": "easy",
+  "tag": "Tag",
+  "degree": "Degree",
   "userName": "amagood",
   "Class": "CSIE110",
   "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
@@ -52,13 +52,18 @@ var tmpobj = {}
 window.onload = () => {
   new Vue({
     delimiters: ['${', '}'],
-    el: "#app-1",
+    el: "#probapp",
       data() {
         return {
-          perPage: 20,//一頁幾行
-          currentPage: 1,//當前頁數
-          //pageOptions: [5,10, 15],//使用者選擇當前頁數
+          Tag: "Tag",//for dropdown buttom
+          Degree: "Degree",//for dropdown buttom
           filter: null,//Search
+          sortBy: "id",//排序方式
+          sortDesc: false,//false:升序
+          //perPage: 20,//一頁幾行
+          currentPage: 1,//當前頁數
+          totalRows:1,//總行數
+          //pageOptions: [5,10, 15],//使用者選擇當前頁數
           clickAddClass:false,//連結 Class button
           showDismissibleAlert: false,//add class bar 
           modes: ['multi', 'single', 'range'],//選擇模式多選、一次一行、shirt/ctrl選範圍
@@ -109,9 +114,6 @@ window.onload = () => {
         }
     },//data end
     computed: {
-      rows() {
-        return this.items.length
-      },
       sortOptions() {
         // Create an options list from our fields
         return this.fields
@@ -121,18 +123,36 @@ window.onload = () => {
           })
       }
     },//computed end
-    created: function () {
+    created(){
       this.getQuestionData()
+    },
+    updated(){
+      //---updata questionLibObj---
+      if(this.currentPage!=questionLibObj.questionPage||this.sortBy!=questionLibObj.sequence){
+        questionLibObj.questionPage=this.currentPage.toString()//轉字串
+        questionLibObj.sequence=this.sortBy
+        console.log(questionLibObj)
+      }
+
+      //---clear filter---
+      if(!this.filter){
+        this.Degree = "Degree"
+        this.Tag = "Tag"
+        questionLibObj.tag=this.Tag
+        questionLibObj.degree=this.Degree
+        console.log(questionLibObj)
+      }
     },
     methods: {
       getQuestionData() {
         axios
-          .post("https://httpbin.org/response-headers?freeform=%7B%20%20%20%20%20%22questionLib%22%3A%5B%20%20%20%20%20%20%20%7B%22id%22%3A%22a001%22%2C%22title%22%3A%22title01%22%2C%22tag%22%3A%22loop%22%2C%22degree%22%3A%22easy%22%2C%22percentagePassing%22%3A%2250%22%2C%22respondent%22%3A%22100%22%2C%22inputTime%22%3A%2220190101%22%7D%2C%20%20%20%20%20%20%20%7B%22id%22%3A%22a002%22%2C%22title%22%3A%22title01%22%2C%22tag%22%3A%22loop%22%2C%22degree%22%3A%22easy%22%2C%22percentagePassing%22%3A%2250%22%2C%22respondent%22%3A%22100%22%2C%22inputTime%22%3A%2220190101%22%7D%2C%7B%22id%22%3A%22a020%22%2C%22title%22%3A%22title01%22%2C%22tag%22%3A%22loop%22%2C%22degree%22%3A%22easy%22%2C%22percentagePassing%22%3A%2250%22%2C%22respondent%22%3A%22100%22%2C%22inputTime%22%3A%2220190101%22%7D%20%20%20%20%20%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D", questionLibObj)
+          .post("https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D%20",questionLibObj)
           .then(response => {
             tmpobj = JSON.parse(response.data.freeform);
-            //console.log(tmpobj.questionLib)
-            //console.log(this.items)
             this.items = tmpobj.questionLib
+
+            // Set the initial number of items、totalRows
+            this.totalRows = this.items.length
           })
           .catch(function (error) {
             console.log(error);
@@ -161,6 +181,27 @@ window.onload = () => {
         else{
           this.fields.splice()
         }*/
+      },
+      //mainblock1
+      clickTag(Tag) {
+        this.Tag = Tag
+        questionLibObj.tag=this.Tag
+        this.Degree = "Degree"
+        questionLibObj.degree="Degree"
+        //console.log(questionLibObj)
+      },
+      clickDegree(Degree) {
+        this.Degree = Degree
+        questionLibObj.degree=this.Degree
+        this.Tag = "Tag"
+        questionLibObj.tag="Tag"
+        //console.log(questionLibObj)
+      },
+      //mainblock3
+      onFiltered(filteredItems) {
+        // Trigger pagination to update the number of buttons/pages due to filtering
+        this.totalRows = filteredItems.length
+        this.currentPage = 1
       }
     },//method end
 

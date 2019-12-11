@@ -66,21 +66,23 @@
     </nav>
     <!--navbar end-->
 
-    <div id="app-1" class="mainBlockStudentProblem">
+    <div id="probapp" class="mainBlockStudentProblem">
       <!--block 1 sortMenu-->
       <b-row>
         <b-col>
-          <b-dropdown dropup text="Target" variant="secondary">
-            <b-dropdown-item @click="filter = 'loop'">Loop</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'array'">Array</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'string'">String</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'function'">Function</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'pointer'">Pointer</b-dropdown-item>
+          <b-dropdown dropup v-bind:text="Tag" variant="secondary">
+            <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTag('Loop')">Loop</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'array'" v-on:click="clickTag('Array')">Array</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'string'" v-on:click="clickTag('String')">String</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'function'" v-on:click="clickTag('Function')">Function
+            </b-dropdown-item>
+            <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTag('Pointer')">Pointer
+            </b-dropdown-item>
           </b-dropdown>
-          <b-dropdown dropup text="Degree" variant="secondary" style="margin-left: 10px">
-            <b-dropdown-item @click="filter = 'easy'">easy</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'medium'">medium</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'hard'">hard</b-dropdown-item>
+          <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
+            <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
           </b-dropdown>
           <b-dropdown dropup text="Class" variant="outline-secondary" style="margin-left: 10px">
             <!--turn right-->
@@ -120,7 +122,9 @@
       <!--block 2 Problem-->
       <div style="margin-top: 20px; min-height: 480px;">
         <b-table selectable :select-mode="selectMode" sticky hover :items="items" :fields="fields" id="problemTable"
-          :per-page="perPage" :current-page="currentPage" :filter="filter">
+          :per-page="questionLibObj.questionNum" :current-page="currentPage" 
+          :filter="filter" @filtered="onFiltered" 
+          :sort-by.sync="sortBy" :sort-desc.sync="sortDesc">
           <!--problemLink-->
           <template v-slot:cell(title)="titleData">
             <a :href="`#${titleData.value.replace(/[^0-9][^a-z]+/i,'-')}`">${ titleData.value }</a>
@@ -151,7 +155,7 @@
             label-for="perPageSelect" class="mb-0">
             <b-form-select v-model="perPage" id="perPageSelect" :options="pageOptions"></b-form-select>
           </b-form-group>-->
-        <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="problemTable"
+        <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="questionLibObj.questionNum" aria-controls="problemTable"
           align="center">
         </b-pagination>
       </div>
