@@ -12,33 +12,38 @@
   <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.css">
   <!--teacherProblem.css-->
-  {% load static %}
-  <link rel="stylesheet" href={% static "css/teacherProblem.css" %}>
+  <link rel="stylesheet" type="text/css" href="css/teacherProblem.css">
   <title>teacherProblem</title>
 </head>
 
 <body>
   <body>
     <!--navbar-->
-    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href=  {% static "index.html" %}>GreenTeam</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset"
+      style="border-bottom: 4px solid MediumSeaGreen">
+      <a class="navbar-brand" href="index.html">GreenTeam</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href= {% static "index.html" %}><img class="navbarimage" src= {% static "image/home.svg" %} /> Home</a>
+            <a class="nav-link" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href= {% static "teacherProblem.html" %}><img class="navbarimage" src= {% static "image/file.svg" %} /> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href= {% static "studentProblem.html" %}><img class="navbarimage" src= {% static "image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img class="navbarimage"
+                src="image/file.svg" /> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img class="navbarimage"
+                src="image/file.svg" /> Problems</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href= {% static "ranking.html" %}><img class="navbarimage" src= {% static "image/list-ordered.svg" %} /> Ranking<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="ranking.html"><img class="navbarimage" src="image/list-ordered.svg" />
+              Ranking<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href= {% static "comments.html" %}><img class="navbarimage" src= {% static "image/comments-regular.svg" %} /> Comments</a>
+            <a class="nav-link" href="comments.html"><img class="navbarimage" src="image/comments-regular.svg" />
+              Comments</a>
           </li>
         </ul>
         <ul class="navbar-nav">
@@ -46,13 +51,16 @@
             <span id="username">${ name } &nbsp</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href= {% static "register.html" %}><img class="navbarimage" src= {% static "image/address-book-regular.svg" %} /> Register</a>
+            <a class="nav-link" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" />
+              Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href= {% static "login.html" %}><img class="navbarimage" src= {% static "image/sign-in-alt-solid.svg %}" /> Login</a>
+            <a class="nav-link" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" />
+              Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-on:click="clearStorage()" href= {% static "index.html" %}><img class="navbarimage" src= {% static "image/sign-out-alt-solid.svg" %}/> Logout</a>
+            <a class="nav-link" v-on:click="clearStorage()" href="index.html"><img class="navbarimage"
+                src="image/sign-out-alt-solid.svg" /> Logout</a>
           </li>
         </ul>
       </div>
@@ -120,7 +128,7 @@
           :sort-by.sync="sortBy" :sort-desc.sync="sortDesc">
           <!--problemLink-->
           <template v-slot:cell(title)="data">
-            <a :href= {% static "`problem/${data.item.id.replace(/[^a-z][^0-9]+/i,'')}.html`" %}>${ data.value }</a>
+            <a :href="`problem/${data.item.id.replace(/[^a-z][^0-9]+/i,'')}.html`">${ data.value }</a>
           </template>
           <!--select problem-->
           <template v-slot:cell(selected)="{ rowSelected }">
@@ -171,7 +179,7 @@
   <script src='http://unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.js'></script>
   <!--axios-->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src={% static "js/teacherProblem.js" %}></script>
+  <script src="js/teacherProblem.js"></script>
 </body>
 
 </html>
