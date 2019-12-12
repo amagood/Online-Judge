@@ -1,0 +1,112 @@
+<!--version1.1-->
+<!--
+  這裡是留言區
+  圖片都放在image資料夾中
+-->
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
+    />
+    <!--連接CSS-->
+    <link rel="stylesheet" type="text/css" href="css/comments.css">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!--axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--vue.js-->
+    <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
+    <!--polyfill-->
+    <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
+    <title>GreenTeam Online-Judge</title>
+  </head>
+  <body>
+    <!--navbar, 格式設定在ranking.css檔中-->
+    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+      <a class="navbar-brand" href="index.html">GreenTeam</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ranking.html"><img class="navbarimage" src="image/list-ordered.svg" /> Ranking</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="comments.html"><img class="navbarimage" src="image/comments-regular.svg" /> Comments<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <span id="username">${ name } &nbsp</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-on:click="clearStorage()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!--留言板區域-->
+    <div id="app1">
+			<div class="message">
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Class</label>
+          <select v-on:change="showMessages()" class="form-control">
+            <option :selectedClass="classSet.Class" v-for="classSet in classSet">${ classSet.Class }</option>
+          </select>
+        </div>
+				<v-textarea :who="who" v-model="message"></v-textarea>
+				<button @click="createMessage" type="button" class="btn btn-success">Next</button>
+			</div>
+			<div class="list">
+				<v-list :clock="clock" :list="list" :authority="authority" @reply="handleReply" @delete="handleDelete"></v-list>
+			</div>
+		</div>
+
+    <!--comments template-->   
+		<script type="text/template" id="v-textarea">
+			<div>
+        <span>${ username }:<br>(${ who })</span>
+				<textarea :value="value" placeholder="send a comment" @input="$emit('input', $event.target.value)"></textarea>
+			</div>
+		</script>
+		
+		<script type="text/template" id="v-list">
+			<div>
+				<div class="list-item" v-for="(item, index) in itemlist">
+          <span>${ item.name }:<br>(${ item.who })</span>
+					<div class="list-msg">
+            <p id="show-message">${ item.message }</p>
+            <span>${ clock }</span>
+            <button v-show="authority" type="button" @click="handleDelete(index)" class="list-reply btn btn-outline-success">Delete</button>
+            <button type="button" @click="handleReply(index)" class="list-reply btn btn-outline-success">Reply</button>
+					</div>
+				</div>
+			</div>
+		</script>
+
+    <!--js-->
+    <script src="js/comments.js"></script>
+  </body>
+</html>
