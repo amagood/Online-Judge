@@ -70,8 +70,8 @@
     <!--留言板區域-->
     <div id="app1">
 			<div class="message">
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Class</label>
+        <div v-show="nowFalse" class="form-group">
+          <label for="exampleFormControlSelect1">class</label>
           <select v-on:change="showMessages()" class="form-control">
             <option :selectedClass="classSet.Class" v-for="classSet in classSet">${ classSet.Class }</option>
           </select>

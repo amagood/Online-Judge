@@ -4,8 +4,9 @@ var attendRank = {
   attendStatus : "attend",
   hash : localStorage.getItem("hash"),
   questionNum : "",
+  userName : localStorage.getItem("userName"),
 
-  status : "success",
+  //status : "success",
 }
 //選擇不參加後送出
 var notAttendRank = {
@@ -13,8 +14,9 @@ var notAttendRank = {
   attendStatus : "notAttend",
   hash : localStorage.getItem("hash"),
   questionNum : "",
+  userName : localStorage.getItem("userName"),
 
-  status : "fail",
+  //status : "fail",
 }
 //填寫題號enter後送出
 var rankAction = {
@@ -24,7 +26,7 @@ var rankAction = {
   Class : "", //該學生所選擇班級
   hash : localStorage.getItem("hash"),
 
-  userData : [
+  /*userData : [
     {
       name : "abb",
       ACTimes : 100,
@@ -49,7 +51,7 @@ var rankAction = {
       AttendStatus : true,
       passTime : "0.00000001",
     },
-  ]
+  ]*/
 }
 
 //----navbar的設定----

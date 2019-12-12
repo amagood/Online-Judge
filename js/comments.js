@@ -128,7 +128,8 @@ var app1 = new Vue({
 		who : localStorage.getItem("who"),
 		authority : false,
 		classSet : [],
-		selectedClass :"",
+		selectedClass : "",
+		nowFalse : false,
 	},
 	created(){
 		this.checkID()
