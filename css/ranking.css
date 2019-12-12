@@ -8,11 +8,11 @@
 
 .attendButton{
 	margin: 10px 0px 5px 8px;
-	float:left;
+	float:right;
 }
 
 #search-btn{
-	width:350px;
+	width:300px;
 	margin: 10px 8px 5px 5px;
 	float:right;
 }
