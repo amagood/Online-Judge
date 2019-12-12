@@ -1,4 +1,4 @@
-/* 20191208 */
+/* 20191212 */
 /*
   mainColor: MediumSeaGreen / #01f97d
   backgroundColor: lightgray
@@ -296,8 +296,9 @@ body.fullScreen {
   padding: 1rem;
   top: 2.5rem;
   left: 0;
+  right: 0;
   z-index: 1000;
-  width: 500px;
+  max-width: 500px;
   background: rgba(0,0,0, 0.6);
   color: white;
 }
