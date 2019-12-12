@@ -1,3 +1,4 @@
+<!--version1.1-->
 <!--
   這裡是首頁
   圖片都放在image資料夾中
@@ -11,7 +12,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!--連接index.css-->
-    <link rel = "stylesheet" type="text/css"  href = "css/index.css">
+    {% load static %}
+    <link rel = "stylesheet" type="text/css"  href = {% static "css/index.css" %} >
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -30,24 +32,24 @@
     <div id="app1">
       <!--網頁上方的navbar, 格式設定在index.css檔中-->
       <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-        <a class="navbar-brand" href="index.html">GreenTeam</a>
+        <a class="navbar-brand" href= {% static "index.html" %} >GreenTeam</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home<span class="sr-only">(current)</span></a>
+              <a class="nav-link active" href={% static "index.html" %}><img class="navbarimage" src={% static "image/home.svg" %} /> Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
-              <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
+              <a class="nav-link" v-if="whichShow === 'teacher'" href={% static "teacherProblem.html" %} ><img class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
+              <a class="nav-link" v-else-if="whichShow === 'student'" href={% static "studentProblem.html" %} ><img class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" v-show="isShow" href="ranking.html"><img class="navbarimage" src="image/list-ordered.svg" /> Ranking</a>
+              <a class="nav-link" v-show="isShow" href={% static "ranking.html" %}><img class="navbarimage" src={% static "image/list-ordered.svg" %} /> Ranking</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" v-show="isShow" href="comments.html"><img class="navbarimage" src="image/comments-regular.svg" /> Comments</a>
+              <a class="nav-link" v-show="isShow" href={% static "comments.html" %}><img class="navbarimage" src={% static "image/comments-regular.svg" %} /> Comments</a>
             </li>
           </ul>
           <ul class="navbar-nav">
@@ -55,13 +57,13 @@
               <span id="username">${ name } &nbsp</span>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
+              <a class="nav-link" href={% static "register.html" %}><img class="navbarimage" src={% static "image/address-book-regular.svg" %} /> Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
+              <a class="nav-link" href={% static "login.html" %}><img class="navbarimage" src={% static "image/sign-in-alt-solid.svg" %} /> Login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" v-on:click="clearStorage()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
+                <a class="nav-link" v-on:click="clearStorage()" href={% static "index.html" %}><img class="navbarimage" src={% static "image/sign-out-alt-solid.svg" %}/> Logout</a>
             </li>
           </ul>
         </div>
@@ -80,6 +82,6 @@
     </div>
 
     <!--js-->
-    <script src="js/index.js"></script>
+    <script src={% static "js/index.js" %}></script>
   </body>
 </html>

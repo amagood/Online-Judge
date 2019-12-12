@@ -3,16 +3,18 @@ var attendRank = {
   action : "attend_rank",
   attendStatus : "attend",
   hash : localStorage.getItem("hash"),
+  questionNum : "",
 
-  //status : "success",
+  status : "success",
 }
 //選擇不參加後送出
 var notAttendRank = {
   action : "attend_rank",
   attendStatus : "notAttend",
   hash : localStorage.getItem("hash"),
+  questionNum : "",
 
-  //status : "fail",
+  status : "fail",
 }
 //填寫題號enter後送出
 var rankAction = {
@@ -22,7 +24,7 @@ var rankAction = {
   Class : "", //該學生所選擇班級
   hash : localStorage.getItem("hash"),
 
-  /*userData : [
+  userData : [
     {
       name : "abb",
       ACTimes : 100,
@@ -47,7 +49,7 @@ var rankAction = {
       AttendStatus : true,
       passTime : "0.00000001",
     },
-  ]*/
+  ]
 }
 
 //----navbar的設定----
@@ -86,7 +88,7 @@ var app1 = new Vue({
   el : "#app1",
   data : {
     userdata : [],
-    isShow : true,
+    isShow : false,
     qsNumber :"",
     clock : "",
   },
@@ -94,13 +96,13 @@ var app1 = new Vue({
     this.setTime()
   },
   mounted(){
-    this.idCheck()
+    
   },
   methods:{
-    idCheck(){
+    attendButtonShow(){
       let self = this
-      if(localStorage.getItem("who") == "admin" ||localStorage.getItem("who") == "teacher"){
-        self.isShow = false
+      if(localStorage.getItem("who") == "student"){
+        self.isShow = true
       }
     },
     setTime(){
@@ -132,6 +134,8 @@ var app1 = new Vue({
         let self = this;
         console.log(this.qsNumber)
         rankAction.questionNum = this.qsNumber
+        notAttendRank.questionNum = this.qsNumber
+        attendRank.questionNum = this.qsNumber
         axios.post("https://httpbin.org/post",rankAction)
           .then(function(response){
             console.log(response.data)
@@ -152,6 +156,7 @@ var app1 = new Vue({
             console.log(error)
           })
       }
+      this.attendButtonShow();
     },
     sendAttendMSG(){
       axios.post("https://httpbin.org/post",attendRank)
