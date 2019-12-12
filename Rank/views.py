@@ -5,7 +5,7 @@ from DataBase.models import Summary
 import hashlib
 import json
 
-
+''' for rank list '''
 
 def Single_Rank(Current_Rank):
     Current_User = Current_Rank.Rank_User.User_Name
@@ -21,8 +21,6 @@ def Single_Rank(Current_Rank):
             "rank" : Current_Rank_No
         }
     return Rank_Single_Json
-
-
 
 def Rank_json(Request_Question, UserName, UserHash):
     search_Question = Question.objects.get(Question_ID = Request_Question)
@@ -40,17 +38,25 @@ def Rank_json(Request_Question, UserName, UserHash):
     #data = json.dumps(Return_data)
     return Return_Data
 
+''' for rank attent '''
 
+def Rank_Attend_json(Request_Question, UserName, UserHash):
+    //
 
 def RankRequest(request):
     if request.method == "POST":
         req = json.loads(request.body.decode('utf-8'))
-        data = Rank_json(req['questionNum'], req['userName'], req['hash'])
+        print(req)
+        if req['action'] == 'rank':
+            data = Rank_json(req['questionNum'], req['userName'], req['hash'])
+        '''elif req['action'] == 'attend_rank':
+            data ='''
         print(data)
         
         data = json.dumps(data)
+    #return render(data,'ranking.html',{})
         return HttpResponse(data)
-    #return render(request,'Rank.html',{})
+    return render(request,'ranking.html',{})
 # return HttpResponse()
 
 

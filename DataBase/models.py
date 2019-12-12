@@ -4,7 +4,7 @@ from django.db import models
     Before using new version of models.py is better to flush the original database data (if you have any) to decrease the problem you might meet
     
     Version Note:
-    Current Version: V2.1
+    Current Version: V2.2
     
     Version 1
         V1.0 inital release for V.1 judge demo with no group functionality
@@ -19,6 +19,8 @@ from django.db import models
         V2.1 delete Question Html and Js FileName
              Change Question ID from int to char
              adding class Category and manytomany relation to Question with relation name Category
+        V2.2 Change Summary_Count default to 1
+             adding Rank_Attend for Attend function
     
     If you encounter any problem you can't solve or want to change anything please contact me
     
@@ -90,7 +92,7 @@ class Summary(models.Model):
     Summary_User = models.ForeignKey(User, related_name='Summary', blank=True, null=True, on_delete=models.CASCADE) # two way relation with User
     Summary_Question = models.ForeignKey(Question, related_name='+', blank=True, null=True, on_delete=models.CASCADE) # one way relation with Question
     # Summary_Question_ID = models.PositiveIntegerField(default = 0)
-    Summary_Count = models.PositiveIntegerField(default = 0)
+    Summary_Count = models.PositiveIntegerField(default = 1)
     Summary_AC_Count = models.PositiveIntegerField(default = 0) # Summary Count >= Summary AC Count
     def __str__(self):
         return self.Summary_Question.Question_Name # for debug ,can be change for your own purpose
@@ -101,6 +103,7 @@ class Rank(models.Model):
     Rank_Question = models.ForeignKey(Question, related_name='Rank', blank=True, null=True, on_delete=models.CASCADE)
     Rank_User = models.ForeignKey(User, related_name='Rank', blank=True, null=True, on_delete=models.CASCADE)
     Rank_Order = models.PositiveIntegerField(default = 0) # should be in range 1~100
+    Rank_Attend = models.BooleanField(default = False)
     # Rank_Summary_Count it should be able to access User relation 'Summary' to  get the data
     # Rank_AC_count it should be able to access User relation 'Summary' to  get the data
     def __str__(self):
