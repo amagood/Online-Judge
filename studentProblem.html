@@ -98,8 +98,8 @@
             :filter="filter" @filtered="onFiltered" 
             :sort-by.sync="sortBy" :sort-desc.sync="sortDesc">
             <!--problemLink-->
-            <template v-slot:cell(title)="titleData">
-              <a :href="`#${titleData.value.replace(/[^0-9][^a-z]+/i,'-')}`">${ titleData.value }</a>
+            <template v-slot:cell(title)="data">
+              <a :href="`problem/${data.item.id.replace(/[^a-z][^0-9]+/i,'')}.html`">${ data.value }</a>
             </template>
           </b-table>
 
