@@ -4,14 +4,14 @@ var showMessageAction = {
 	"hash" : localStorage.getItem("hash"),
 	"Class" : "",
 	
-	"message" :[ 
-		{"userName" :　"Ian", "date" : "20191015", "time" : "1159", "content" : "aaa"},
-		{"userName" :　"charlie", "date" : "20191016", "time" : "1900", "content" : "aeaa"},
-		{"userName" :　"Iann", "date" : "20191126", "time" : "1915", "content" : "aaeqwa"}
-	],
+	/*"message" :[ 
+		{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
+		{"userName" :　"87man", "date" : "20191016", "time" : "1900", "content" : "oh,haha"},
+		{"userName" :　"charlieyang", "date" : "20191126", "time" : "1915", "content" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
+	],*/
 }
 //按下next後送出
-var handleSend = {
+var sendMsg = {
 	"action" : "send_message",
 	"userName" : "",
 	"date" : "",
@@ -92,12 +92,8 @@ Vue.component("v-list", {
 			type : Array,
 			default : []
 		},
-		authority: {
+		candelete: {
 			type : Boolean
-		},
-		clock : {
-			type : String,
-			default : ""
 		},
 	},
 	data : function(){
@@ -106,10 +102,10 @@ Vue.component("v-list", {
 		}
 	},
 	methods : {
-		handleReply : function(index){
+		handleReply(index){
 			this.$emit("reply", index)
 		},
-		handleDelete : function(index){
+		handleDelete(index){
 			this.$emit("delete", index)
 		}
 	}
@@ -120,25 +116,31 @@ var app1 = new Vue({
 	delimiters : ['${', '}'],
 	el : "#app1",
 	data : {
-		message : "",
-		list : [],
-		msgList : [],
-		clock :"",
+		inputContent : "", //使用者輸入訊息
+		list : [],      //準備顯示的資訊列表
+		msgList : [],    //接收其他人的訊息列表
+		msgSend : "",    //接收使用者傳的訊息
+		dateSend : "",   //送出的日期
+		timeSend : "",   //送出的時間
 		username : localStorage.getItem("userName"),
 		who : localStorage.getItem("who"),
-		authority : false,
-		classSet : [],
-		selectedClass :"",
+		candelete : false,
+		classSet : [],   //使用者的班級列表(或全部?)
+		selectedClass : "", //選擇的班級
+		nowFalse : false,   //班級列表先藏起來
 	},
 	created(){
 		this.checkID()
 		this.setClass()
 	},
+	mounted(){
+		this.showMessages()
+	},
 	methods : {
 		checkID(){
 			let self = this
 			if(self.who === "admin"){
-				self.authority = true
+				self.candelete = true
 			}
 		},
 		setClass(){//取得使用者參加之班級
@@ -167,55 +169,98 @@ var app1 = new Vue({
 					console.log(response.config)
 					console.log(self.selectedClass)
 					self.msgList = response.data.json.message
-					/*for(let i=0; i<self.message.length; i++){
-						
-					}*/
+					for(let i=self.msgList.length-1; i>=0; i--){
+						let date = self.msgList[i].date
+						let time = self.msgList[i].time
+						self.msgList[i].showtime = date.substring(0,4) + "/" + date.substring(4,6) + "/" + date.substring(6,8) + " " + time.substring(0,2) + ":" + time.substring(2,4)
+						self.list.push({
+							name : self.msgList[i].userName,
+							message : self.msgList[i].content,
+							time : self.msgList[i].showtime,
+						})
+					}
 				})
 				.catch(function(error){
 					console.log(error)
 				})
 		},
-		createMessage(){//從這邊呼叫設定時間,送訊息
-			this.setTime()
-			this.handleSend()
-		},
 		setTime(){//設定觸發時的時間
-      this.clock = ""
+			let self = this
+			self.dateSend = ""
+			self.timeSend = ""
       var now = new Date()
-        var year = now.getFullYear()
-        var month = now.getMonth() + 1
-        var day = now.getDate()
-        var hh = now.getHours()
-        var mm = now.getMinutes()
-        this.clock = year + "/"
-        if(month < 10)
-          this.clock += "0"
-        this.clock += month + "/"
-        if(day < 10)
-          this.clock += "0"       
-        this.clock += day + " "       
-        if(hh < 10)
-          this.clock += "0"     
-        this.clock += hh + ":"
-        if (mm < 10) this.clock += '0' 
-				this.clock += mm
-				console.log(this.clock)
+			var year = now.getFullYear()
+			var month = now.getMonth() + 1
+			var day = now.getDate()
+			var hh = now.getHours()
+			var mm = now.getMinutes()
+			self.dateSend = String(year)
+			if(month < 10){
+				self.dateSend += "0"
+			}
+			self.dateSend += String(month)
+			if(day < 10){
+				self.dateSend += "0"
+			}      
+			self.dateSend += String(day)   
+					
+			if(hh < 10){
+				self.timeSend += "0"
+			}
+			self.timeSend += String(hh)
+			if (mm < 10){
+				self.timeSend += '0'
+			}
+			self.timeSend += String(mm)
+			console.log(self.dateSend)
+			console.log(self.timeSend)
     },
 		handleSend(){
-			if(this.message === ""){
+			let self = this
+			self.msgSend = ""
+			self.setTime()
+			sendMsg.userName = localStorage.getItem("userName")
+			sendMsg.date = this.dateSend
+			sendMsg.time = this.timeSend
+			sendMsg.content = this.inputContent
+			axios.post("https://httpbin.org/post",sendMsg)
+				.then(function(response){
+					console.log(response.data)
+					console.log(response.status)
+					console.log(response.statusText)
+					console.log(response.headers)
+					console.log(response.config)
+					console.log(self.selectedClass)
+					self.msgSend = response.data.json
+					let date = self.msgSend.date
+					let time = self.msgSend.time
+					self.msgSend.showtime = date.substring(0,4) + "/" + date.substring(4,6) + "/" + date.substring(6,8) + " " + time.substring(0,2) + ":" + time.substring(2,4)
+					self.msgList.push({
+						userName : self.msgSend.userName,
+						content : self.msgSend.content,
+						showtime : self.msgSend.showtime,
+					})
+					self.list.splice(0,self.list.length)
+					for(let i=self.msgList.length-1; i>=0; i--){
+						self.list.push({
+							name : self.msgList[i].userName,
+							message : self.msgList[i].content,
+							time : self.msgList[i].showtime,
+						})
+					}
+				})
+				.catch(function(error){
+					console.log(error)
+				})
+			if(this.inputContent === ""){
 				alert("Please enter comments")
 				return
 			}
-			this.list.push({
-				who : this.who,
-				name : this.username,
-				message : this.message
-			})
-			this.message = ""
+			this.inputContent = ""
 		},
 		handleReply : function(index){
 			var name = this.list[index].name;
-			this.message = "reply@" + name + ": ";
+			this.inputContent = "reply@" + name + ": ";
 		},
 		handleDelete : function(index){
 			this.list.splice(index, 1)
