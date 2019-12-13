@@ -4,11 +4,11 @@ var showMessageAction = {
 	"hash" : localStorage.getItem("hash"),
 	"Class" : "",
 	
-	"message" :[ 
+	/*"message" :[ 
 		{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
 		{"userName" :　"87man", "date" : "20191016", "time" : "1900", "content" : "oh,haha"},
 		{"userName" :　"charlieyang", "date" : "20191126", "time" : "1915", "content" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
-	],
+	],*/
 }
 //按下next後送出
 var sendMsg = {
@@ -20,7 +20,7 @@ var sendMsg = {
 	"hash" : localStorage.getItem("hash"),
 }
 //一開始送出
-var collectClass = {
+/*var collectClass = {
 	"action" : "selectClass",
 	"userName" : localStorage.getItem("userName"),
 	"hash" : localStorage.getItem("hash"),
@@ -31,7 +31,7 @@ var collectClass = {
 		{"Class" : "CSIE111"},
 		{"Class" : "LOL201"},
 	]
-}
+}*/
 
 //----navbar設定----
 var navapp = new Vue({
@@ -94,10 +94,6 @@ Vue.component("v-list", {
 		},
 		candelete: {
 			type : Boolean
-		},
-		clock : {
-			type : String,
-			default : ""
 		},
 	},
 	data : function(){
@@ -173,7 +169,7 @@ var app1 = new Vue({
 					console.log(response.config)
 					console.log(self.selectedClass)
 					self.msgList = response.data.json.message
-					for(let i=0; i<self.msgList.length; i++){
+					for(let i=self.msgList.length-1; i>=0; i--){
 						let date = self.msgList[i].date
 						let time = self.msgList[i].time
 						self.msgList[i].showtime = date.substring(0,4) + "/" + date.substring(4,6) + "/" + date.substring(6,8) + " " + time.substring(0,2) + ":" + time.substring(2,4)
@@ -239,11 +235,19 @@ var app1 = new Vue({
 					let date = self.msgSend.date
 					let time = self.msgSend.time
 					self.msgSend.showtime = date.substring(0,4) + "/" + date.substring(4,6) + "/" + date.substring(6,8) + " " + time.substring(0,2) + ":" + time.substring(2,4)
-					self.list.push({
-						name : self.msgSend.userName,
-						message : self.msgSend.content,
-						time : self.msgSend.showtime,
+					self.msgList.push({
+						userName : self.msgSend.userName,
+						content : self.msgSend.content,
+						showtime : self.msgSend.showtime,
 					})
+					self.list.splice(0,self.list.length)
+					for(let i=self.msgList.length-1; i>=0; i--){
+						self.list.push({
+							name : self.msgList[i].userName,
+							message : self.msgList[i].content,
+							time : self.msgList[i].showtime,
+						})
+					}
 				})
 				.catch(function(error){
 					console.log(error)
