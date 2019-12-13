@@ -6,13 +6,19 @@
   smallTitleColor: DodgerBlue
   grayBorderColor: #e9eaec
 */
+.navbarset{
+    background-color: #56fd96;
+}
+
+.navbarimage{
+    width: 23px;
+}
 
 ::selection {
 	background: #01f9bb;
 }
 
 body {
-  padding: 1rem;
   background-color: lightgray;
   word-wrap: break-word;
 }
@@ -38,6 +44,14 @@ input {
 ::-moz-placeholder{color:#2AE;}
 :-ms-input-placeholder{color:#2AE;}
 
+form.btn{
+  background-color: #237ACC; 
+  font-size: 20px; 
+  padding: 10px 58px; 
+  color: #fff; 
+  margin-right: 20px;
+}
+
 
 .bigTitle {
   border-left: 8px solid MediumSeaGreen;
@@ -55,6 +69,8 @@ input {
   border-radius: 10px;
   font-size: 20px;
 }
+
+
 /*.col-sm-2{
     float: left;
 }*/

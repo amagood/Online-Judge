@@ -4,10 +4,10 @@ while True:
 	try:
 		pass_data_a = {
 			'action':'register',
-			'account':'TestCase01',
-			'password':'TestPassword01',
-			'who':'teacher',
-			'email':'Test01@mail.com'
+			'account':input('account...>'),
+			'password':input('password...>'),
+			'who':input('who...>'),
+			'email':input('email...>')
 		}
 		r = requests.post('http://127.0.0.1:8000/register-test/',json = pass_data_a)
 
