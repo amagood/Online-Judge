@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+	'DataBase',
 	'register.apps.RegisterConfig',
     'django.contrib.admin',
     'django.contrib.auth',
