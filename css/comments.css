@@ -90,15 +90,17 @@
 
 .list-item span{
 	display: block;
-	width: 60px;
+	width: 110px;
 	float: left;
 	color:rgb(51, 177, 51);
 	text-align:right;
+	word-wrap: break-word; 
+	overflow:hidden;
 }
 
 .list-msg{
 	display: block;
-	margin-left: 60px;
+	margin-left: 115px;
 	text-align: justify;
 }
 
@@ -109,6 +111,7 @@
 }
 
 .list-msg span{
+	width: 80px;
 	float: right;
 	font-size: 14px;
 	text-align: justify;

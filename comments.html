@@ -85,20 +85,22 @@
 		</div>
 
     <!--comments template-->   
+    <!--輸入區域-->
 		<script type="text/template" id="v-textarea">
 			<div>
         <span>${ username }:<br>(${ who })</span>
 				<textarea :value="value" placeholder="send a comment" @input="$emit('input', $event.target.value)"></textarea>
 			</div>
 		</script>
-		
+    
+    <!--顯示區域-->
 		<script type="text/template" id="v-list">
 			<div>
 				<div class="list-item" v-for="(item, index) in itemlist">
-          <span>${ item.name }:<br>(${ item.who })</span>
-					<div class="list-msg">
+          <span>${ item.name }:</span>     <!--沒開取身份的api:<span>${ item.name }:<br>(${ item.who })</span>-->
+          <div class="list-msg">
             <p id="show-message">${ item.message }</p>
-            <span>${ clock }</span>
+            <span>${ item.time }</span>
             <button v-show="authority" type="button" @click="handleDelete(index)" class="list-reply btn btn-outline-success">Delete</button>
             <button type="button" @click="handleReply(index)" class="list-reply btn btn-outline-success">Reply</button>
 					</div>

@@ -8,7 +8,7 @@ var app1 = new Vue({
 		whichShow: "",
 	},
 	created() {
-		//this.test()
+		this.test()
 		this.chooseProblems()
 	},
 	methods: {

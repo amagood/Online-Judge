@@ -5,9 +5,9 @@ var showMessageAction = {
 	"Class" : "",
 	
 	"message" :[ 
-		{"userName" :　"Ian", "date" : "20191015", "time" : "1159", "content" : "aaa"},
-		{"userName" :　"charlie", "date" : "20191016", "time" : "1900", "content" : "aeaa"},
-		{"userName" :　"Iann", "date" : "20191126", "time" : "1915", "content" : "aaeqwa"}
+		{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
+		{"userName" :　"87man", "date" : "20191016", "time" : "1900", "content" : "oh,haha"},
+		{"userName" :　"charlieyang", "date" : "20191126", "time" : "1915", "content" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
 	],
 }
 //按下next後送出
@@ -106,10 +106,10 @@ Vue.component("v-list", {
 		}
 	},
 	methods : {
-		handleReply : function(index){
+		handleReply(index){
 			this.$emit("reply", index)
 		},
-		handleDelete : function(index){
+		handleDelete(index){
 			this.$emit("delete", index)
 		}
 	}
@@ -134,6 +134,9 @@ var app1 = new Vue({
 	created(){
 		this.checkID()
 		this.setClass()
+	},
+	mounted(){
+		this.showMessages()
 	},
 	methods : {
 		checkID(){
@@ -168,9 +171,16 @@ var app1 = new Vue({
 					console.log(response.config)
 					console.log(self.selectedClass)
 					self.msgList = response.data.json.message
-					/*for(let i=0; i<self.message.length; i++){
-						
-					}*/
+					for(let i=0; i<self.msgList.length; i++){
+						let date = self.msgList[i].date
+						let time = self.msgList[i].time
+						self.msgList[i].showtime = date.substring(0,4) + "/" + date.substring(4,6) + "/" + date.substring(6,8) + " " + time.substring(0,2) + ":" + time.substring(2,4)
+						self.list.push({
+							name : self.msgList[i].userName,
+							message : self.msgList[i].content,
+							time : self.msgList[i].showtime,
+						})
+					}
 				})
 				.catch(function(error){
 					console.log(error)
@@ -178,7 +188,7 @@ var app1 = new Vue({
 		},
 		createMessage(){//從這邊呼叫設定時間,送訊息
 			this.setTime()
-			this.handleSend()
+			//this.handleSend()
 		},
 		setTime(){//設定觸發時的時間
       this.clock = ""
@@ -202,7 +212,7 @@ var app1 = new Vue({
 				this.clock += mm
 				console.log(this.clock)
     },
-		handleSend(){
+		/*handleSend(){
 			if(this.message === ""){
 				alert("Please enter comments")
 				return
@@ -213,7 +223,7 @@ var app1 = new Vue({
 				message : this.message
 			})
 			this.message = ""
-		},
+		},*/
 		handleReply : function(index){
 			var name = this.list[index].name;
 			this.message = "reply@" + name + ": ";
