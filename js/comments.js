@@ -11,7 +11,7 @@ var showMessageAction = {
 	],
 }
 //按下next後送出
-var handleSend = {
+var sendMsg = {
 	"action" : "send_message",
 	"userName" : "",
 	"date" : "",
@@ -92,7 +92,7 @@ Vue.component("v-list", {
 			type : Array,
 			default : []
 		},
-		authority: {
+		candelete: {
 			type : Boolean
 		},
 		clock : {
@@ -120,16 +120,18 @@ var app1 = new Vue({
 	delimiters : ['${', '}'],
 	el : "#app1",
 	data : {
-		message : "",
-		list : [],
-		msgList : [],
-		clock :"",
+		inputContent : "", //使用者輸入訊息
+		list : [],      //準備顯示的資訊列表
+		msgList : [],    //接收其他人的訊息列表
+		msgSend : "",    //接收使用者傳的訊息
+		dateSend : "",   //送出的日期
+		timeSend : "",   //送出的時間
 		username : localStorage.getItem("userName"),
 		who : localStorage.getItem("who"),
-		authority : false,
-		classSet : [],
-		selectedClass : "",
-		nowFalse : false,
+		candelete : false,
+		classSet : [],   //使用者的班級列表(或全部?)
+		selectedClass : "", //選擇的班級
+		nowFalse : false,   //班級列表先藏起來
 	},
 	created(){
 		this.checkID()
@@ -142,7 +144,7 @@ var app1 = new Vue({
 		checkID(){
 			let self = this
 			if(self.who === "admin"){
-				self.authority = true
+				self.candelete = true
 			}
 		},
 		setClass(){//取得使用者參加之班級
@@ -186,47 +188,75 @@ var app1 = new Vue({
 					console.log(error)
 				})
 		},
-		createMessage(){//從這邊呼叫設定時間,送訊息
-			this.setTime()
-			//this.handleSend()
-		},
 		setTime(){//設定觸發時的時間
-      this.clock = ""
+			let self = this
+			self.dateSend = ""
+			self.timeSend = ""
       var now = new Date()
-        var year = now.getFullYear()
-        var month = now.getMonth() + 1
-        var day = now.getDate()
-        var hh = now.getHours()
-        var mm = now.getMinutes()
-        this.clock = year + "/"
-        if(month < 10)
-          this.clock += "0"
-        this.clock += month + "/"
-        if(day < 10)
-          this.clock += "0"       
-        this.clock += day + " "       
-        if(hh < 10)
-          this.clock += "0"     
-        this.clock += hh + ":"
-        if (mm < 10) this.clock += '0' 
-				this.clock += mm
-				console.log(this.clock)
+			var year = now.getFullYear()
+			var month = now.getMonth() + 1
+			var day = now.getDate()
+			var hh = now.getHours()
+			var mm = now.getMinutes()
+			self.dateSend = String(year)
+			if(month < 10){
+				self.dateSend += "0"
+			}
+			self.dateSend += String(month)
+			if(day < 10){
+				self.dateSend += "0"
+			}      
+			self.dateSend += String(day)   
+					
+			if(hh < 10){
+				self.timeSend += "0"
+			}
+			self.timeSend += String(hh)
+			if (mm < 10){
+				self.timeSend += '0'
+			}
+			self.timeSend += String(mm)
+			console.log(self.dateSend)
+			console.log(self.timeSend)
     },
-		/*handleSend(){
-			if(this.message === ""){
+		handleSend(){
+			let self = this
+			self.msgSend = ""
+			self.setTime()
+			sendMsg.userName = localStorage.getItem("userName")
+			sendMsg.date = this.dateSend
+			sendMsg.time = this.timeSend
+			sendMsg.content = this.inputContent
+			axios.post("https://httpbin.org/post",sendMsg)
+				.then(function(response){
+					console.log(response.data)
+					console.log(response.status)
+					console.log(response.statusText)
+					console.log(response.headers)
+					console.log(response.config)
+					console.log(self.selectedClass)
+					self.msgSend = response.data.json
+					let date = self.msgSend.date
+					let time = self.msgSend.time
+					self.msgSend.showtime = date.substring(0,4) + "/" + date.substring(4,6) + "/" + date.substring(6,8) + " " + time.substring(0,2) + ":" + time.substring(2,4)
+					self.list.push({
+						name : self.msgSend.userName,
+						message : self.msgSend.content,
+						time : self.msgSend.showtime,
+					})
+				})
+				.catch(function(error){
+					console.log(error)
+				})
+			if(this.inputContent === ""){
 				alert("Please enter comments")
 				return
 			}
-			this.list.push({
-				who : this.who,
-				name : this.username,
-				message : this.message
-			})
-			this.message = ""
-		},*/
+			this.inputContent = ""
+		},
 		handleReply : function(index){
 			var name = this.list[index].name;
-			this.message = "reply@" + name + ": ";
+			this.inputContent = "reply@" + name + ": ";
 		},
 		handleDelete : function(index){
 			this.list.splice(index, 1)

@@ -14,7 +14,7 @@ var app1 = new Vue({
 	methods: {
 		test(){//測試
 			localStorage.setItem("who","student")
-			localStorage.setItem("userName","iannn")
+			localStorage.setItem("userName","imtestman")
 			let who = localStorage.getItem("who")
 			console.log(who)
 		},

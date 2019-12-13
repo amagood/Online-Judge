@@ -110,23 +110,23 @@ var app1 = new Vue({
     setTime(){
       this.clock = ""
       var now = new Date()
-        var year = now.getFullYear()
-        var month = now.getMonth() + 1
-        var day = now.getDate()
-        var hh = now.getHours()
-        var mm = now.getMinutes()
-        this.clock = year + "-"
-        if(month < 10)
-          this.clock += "0"
-        this.clock += month + "-"
-        if(day < 10)
-          this.clock += "0"       
-        this.clock += day + " "       
-        if(hh < 10)
-          this.clock += "0"     
-        this.clock += hh + ":"
-        if (mm < 10) this.clock += '0' 
-        this.clock += mm
+      var year = now.getFullYear()
+      var month = now.getMonth() + 1
+      var day = now.getDate()
+      var hh = now.getHours()
+      var mm = now.getMinutes()
+      this.clock = year + "-"
+      if(month < 10)
+        this.clock += "0"
+      this.clock += month + "-"
+      if(day < 10)
+        this.clock += "0"       
+      this.clock += day + " "       
+      if(hh < 10)
+        this.clock += "0"     
+      this.clock += hh + ":"
+      if (mm < 10) this.clock += '0' 
+      this.clock += mm
     },
     createRankList(){
       if(this.qsNumber == ""){
