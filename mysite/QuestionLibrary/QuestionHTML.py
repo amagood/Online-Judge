@@ -1,11 +1,11 @@
-# Question_Lirbrary
+# Question Library
 # +field: type
 # ----------
 # +addQuestion()
 # +deleteQuestion()
 
 import os
-class Question_Lirbrary():
+class Question_Library():
     path='../../../QuestionData'
     def __init__(self,QuestionID):
         self.QuestionID = QuestionID

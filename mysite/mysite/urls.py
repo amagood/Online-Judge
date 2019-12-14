@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 from QuestionLibrary.views import responseGetQuestion
+from QuestionLibrary.views import responseCreateQuestion
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^problem/$', responseGetQuestion),
+    url(r'^createproblem/$', responseCreateQuestion),
 ]

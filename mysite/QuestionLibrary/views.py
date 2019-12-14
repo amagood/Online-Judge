@@ -16,6 +16,7 @@ def problem(request):
 from django.http import HttpResponse
 from DataBase.models import Question
 import QuestionLibrary.GetQuestion
+import QuestionLibrary.CreateQuestion
 import hashlib
 import time
 import json
@@ -32,3 +33,16 @@ def responseGetQuestion(request):
         }
         return HttpResponse(json.dumps(data))
     return render(request,'problem.html',{})
+
+def responseCreateQuestion(request):
+    if request.method == "POST":
+        req=json.loads(request.body.decode('utf-8'))
+        submitStats=QuestionLibrary.CreateQuestion.responseCreateQuestion(req['questionName'],req['PDF'],req['questionContent'],req['language'],req['sampleProgram'],req['exampleInput'],req['exampleOutput'],req['input'],req['output'])
+        data={
+            "submitStats" : submitStats,
+            "userName" : req['userName'],
+            "Class" : req['Class'],
+            "hash" : req['hash'],
+        }
+        return HttpResponse(json.dumps(data))
+    return render(request,'createproblem.html',{})
