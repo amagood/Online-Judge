@@ -3,15 +3,30 @@ import hashlib
 import time
 import json
 
-
 def responseGetQuestion(questionNum,questionPage,questionSequence,questionTarget,questionDegree,selectClass):
     questionList=Question.objects.all()
+    #if questionTarget!='tag':
+    #    questionList=questionList.filter(Question_Category__contains=questionTarget)
+    if questionDegree!='degree':
+        questionList=questionList.filter(Question_difficulty__exact=questionDegree)
+    if questionSequence=='id':
+        questionList=questionList.order_by('id')
+    elif questionSequence=='tag':
+        questionList=questionList.order_by('tag')
+    elif questionSequence=='degree':
+        questionList=questionList.order_by('degree')
+    elif questionSequence=='percentagePassing':
+        questionList=questionList.order_by('percentagePassing')
+    elif questionSequence=='respondent':
+        questionList=questionList.order_by('respondent')
+    elif questionSequence=='inputTime':
+        questionList=questionList.order_by('inputTime')
     retQuesData=[]
     for eachQues in questionList:
         Qdata = {
             "id":eachQues.Question_ID,
             "tltle":eachQues.Question_Name,  
-            "target":"loop",
+            "target":eachQues.Question_Category.all(),
             "degree":eachQues.Question_difficulty,
             "percentagePassing":'{:.2%}'.format(eachQues.Question_AC_Count/eachQues.Question_Summit_Time),
             "respondent":"100",

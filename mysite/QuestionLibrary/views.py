@@ -27,7 +27,8 @@ def responseGetQuestion(request):
         data={
             "questionLib" : qLib,
             "userName" : req['userName'],
-            "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9",
+            "Class" : req['selectClass'],
+            "hash" : req['hash'],
         }
         return HttpResponse(json.dumps(data))
     return render(request,'problem.html',{})
