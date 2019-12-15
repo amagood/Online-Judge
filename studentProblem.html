@@ -20,47 +20,57 @@
 <body>
 
   <body>
-      <!--navbar-->
-      <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-        <a class="navbar-brand" href=  {% static "index.html" %}>GreenTeam</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href= {% static "index.html" %}><img class="navbarimage" src= {% static "image/home.svg" %} /> Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" v-if="whichShow === 'teacher'" href= {% static "teacherProblem.html" %}><img class="navbarimage" src= {% static "image/file.svg" %} /> Problems</a>
-              <a class="nav-link" v-else-if="whichShow === 'student'" href= {% static "studentProblem.html" %}><img class="navbarimage" src= {% static "image/file.svg" %} /> Problems</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href= {% static "ranking.html" %}><img class="navbarimage" src= {% static "image/list-ordered.svg" %} /> Ranking<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href= {% static "comments.html" %}><img class="navbarimage" src= {% static "image/comments-regular.svg" %} /> Comments</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <span id="username">${ name } &nbsp</span>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href= {% static "register.html" %}><img class="navbarimage" src= {% static "image/address-book-regular.svg" %} /> Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href= {% static "login.html" %}><img class="navbarimage" src= {% static "image/sign-in-alt-solid.svg %}" /> Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" v-on:click="clearStorage()" href= {% static "index.html" %}><img class="navbarimage" src= {% static "image/sign-out-alt-solid.svg" %}/> Logout</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <!--navbar end-->
+    <!--navbar-->
+    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset"
+      style="border-bottom: 4px solid MediumSeaGreen">
+      <a class="navbar-brand" href={% static "index.html" %}>GreenTeam</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href={% static "index.html" %}><img class="navbarimage"
+                src={% static "image/home.svg" %} /> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-if="whichShow === 'teacher'" href={% static "teacherProblem.html" %}><img
+                class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href={% static "studentProblem.html" %}><img
+                class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href={% static "ranking.html" %}><img class="navbarimage"
+                src={% static "image/list-ordered.svg" %} /> Ranking<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href={% static "comments.html" %}><img class="navbarimage"
+                src={% static "image/comments-regular.svg" %} /> Comments</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <span id="username">${ name } &nbsp</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href={% static "register.html" %}><img class="navbarimage"
+                src={% static "image/address-book-regular.svg" %} /> Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href={% static "login.html" %}><img class="navbarimage"
+                src={% static "image/sign-in-alt-solid.svg %}" /> Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-on:click="clearStorage()" href={% static "index.html" %}><img class="navbarimage"
+                src={% static "image/sign-out-alt-solid.svg" %} /> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--navbar end-->
 
-      <div  id="mainBlockStudentProblem" class="mainBlockStudentProblem">
+    <div id="mainBlockStudentProblem" class="mainBlockStudentProblem">
       <div id="probapp">
         <!--block 1 sortMenu-->
         <div>
@@ -98,13 +108,12 @@
 
         <!--block 2 Problem-->
         <div style="margin-top: 20px; min-height: 480px;">
-          <b-table sticky hover id="problemTable" :items="items" :fields="fields" 
-            :per-page="questionLibObj.questionNum" :current-page="currentPage" 
-            :filter="filter" @filtered="onFiltered" 
-            :sort-by.sync="sortBy" :sort-desc.sync="sortDesc">
+          <b-table sticky hover id="problemTable" :items="items" :fields="fields" :per-page="questionLibObj.questionNum"
+            :current-page="currentPage" :filter="filter" @filtered="onFiltered" :sort-by.sync="sortBy"
+            :sort-desc.sync="sortDesc">
             <!--problemLink-->
             <template v-slot:cell(title)="data">
-              <a :href= {% static "`problem/${data.item.id.replace(/[^a-z][^0-9]+/i,'')}.html`" %}>${ data.value }</a>
+              <a :href={% static "`problem/${data.item.id.replace(/[^a-z][^0-9]+/i,'')}.html`" %}>${ data.value }</a>
             </template>
           </b-table>
 
@@ -112,12 +121,12 @@
 
         <!--block 3 Page-->
         <div style="margin-block-end:10px;">
-          <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="questionLibObj.questionNum" aria-controls="problemTable"
-            align="center" >
+          <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="questionLibObj.questionNum"
+            aria-controls="problemTable" align="center">
           </b-pagination>
         </div>
       </div>
-      </div>
+    </div>
   </body>
 
   <!-- Optional JavaScript -->

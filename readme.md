@@ -1,5 +1,45 @@
+### 2019 12/15 Commit:Format document. Updata commit.
+
+### 2019 12/15 Commit:add w3-animate to solve onload problem
+
+### 2019 12/12 Commit:add getQuestionData to filter tag,degree
+
+### 2019 12/12 Commit:change file name. add local file.
+
+### 2019 12/12 Commit:little change
+
+### 2019 12/12 Commit:change problem link to problem/id.html
+    studentProblem
+      更改點擊題目link時，link的命名方式
+
+### 2019 12/12 Commit:update teacherProblem.small change filter.
+    teacherProblem
+       更新teacherProblem
+    small change filter.
+
+### 2019 12/11 Commit:stuPro Update filter.Set up questionLibObj
+    studentProblem
+      1.更新使用filter時，tag/gegree buttom 顯示的內容
+      2.Set up questionLibObj
+
+### 2019 12/11 Commit:stuPro add sortby,sortDesc data for get table data
+
+### 2019 12/11 Commit:stuPro add bootstrap-vue link due to sort table
+    studentProblem
+      修bug(排序按鈕消失)
+
+### 2019 12/11 Commit:stuPro update data name for link html buttom
+
+### 2019 12/11 Commit:stuPro update number of button/page due to fitler
+    studentProblem 
+      修正使用過濾功能時，Pagination 總頁數(題目行數)需一起更新
+
+### 2019 12/11 Commit:Updata navbar,Arrange composition
+    更新navbar
+    修正成統一codestyle
+
 ### 2019 12/05 Commit:delete problom buttom change click title to link problem
-     studentProblem.html 
+    studentProblem.html 
        delete problem buttom
     studentProblem.html 
     teacherProblem.html
