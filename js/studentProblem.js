@@ -39,7 +39,7 @@ var navapp = new Vue({
 
 var questionLibObj = {
   "action": "questionLib",
-  "questionNum": "2",//there are twenty question in one page. 一頁幾行
+  "questionNum": "20",//there are twenty question in one page. 一頁幾行
   "questionPage": "1",//1 means select the top 20 question.當前頁數
   "sequence": "id",//排序方式,API少升降序
   "tag": "Tag",//filter
@@ -60,7 +60,7 @@ window.onload = () => {
     el: "#probapp",
     data() {
       return {
-        getData:false,
+        noGetData:true,//loading
         Tag: "Tag",//for dropdown buttom
         Degree: "Degree",//for dropdown buttom
         filter: null,//text in filter
@@ -93,7 +93,7 @@ window.onload = () => {
           },
           {
             key: "percentagePassing",
-            label: "Percentage Passing",
+            label: "Pass Ratio",
             sortable: true
           },
           {
@@ -164,8 +164,8 @@ window.onload = () => {
             this.totalRows = this.items.length
             //console.log(this.items.length)
             console.log("get new data from postURL")
-            this.getData=true
-            console.log(this.getData)
+            this.noGetData=false
+            console.log(this.noGetData)
           })
           .catch(function (error) {
             console.log(error)

@@ -38,7 +38,7 @@ var navapp = new Vue({
 })
 var questionLibObj = {
   "action": "questionLib",
-  "questionNum": "2",//there are twenty question in one page. 
+  "questionNum": "20",//there are twenty question in one page. 
   "questionPage": "1",//1 means select the top 20 question
   "sequence": "id",
   "tag": "Tag",
@@ -59,7 +59,7 @@ window.onload = () => {
     el: "#probapp",
     data() {
       return {
-        getData:false,
+        noGetData:true,
         Tag: "Tag",//for dropdown buttom
         Degree: "Degree",//for dropdown buttom
         filter: null,//Search
@@ -96,7 +96,7 @@ window.onload = () => {
           },
           {
             key: "percentagePassing",
-            label: "Percentage Passing",
+            label: "Pass Ratio",
             sortable: true
           },
           {
@@ -164,8 +164,8 @@ window.onload = () => {
             this.totalRows = this.items.length
 
             console.log("get new data from postURL")
-            this.getData=true
-            console.log(this.getData)
+            this.noGetData=false
+            console.log(this.noGetData)
           })
           .catch(function (error) {
             console.log(error);

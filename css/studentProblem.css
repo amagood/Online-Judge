@@ -34,11 +34,33 @@ p{
 }
 
 
-/* Table設定 
+/*Table設定 */
 .problemTable{
   width:100% ;
   border-collapse:collapse ;
 }
+.problemTable td:nth-child(1){
+  width:6% ;
+}
+.problemTable td:nth-child(2){
+  width:60% ;
+}
+.problemTable td:nth-child(3){
+  width:8% ;
+}
+.problemTable td:nth-child(4){
+  width:8% ;
+}
+.problemTable td:nth-child(5){
+  width:5% ;
+}
+.problemTable td:nth-child(6){
+  width:5% ;
+}
+.problemTable td:nth-child(7){
+  width:8% ;
+}
+/* 
 .problemTable td{
   padding: 8px;
   border-bottom: 0.5px solid lightgray;
@@ -48,20 +70,5 @@ p{
   border-bottom: 3px solid #3cb371;
   border-top: 3px solid  #3cb371;
   font-weight: bold;
-}
-.problemTable td:nth-child(1){
-  width:60% ;
-}
-.problemTable td:nth-child(2){
-  width:8% ;
-}
-.problemTable td:nth-child(3){
-  width:8% ;
-}
-.problemTable td:nth-child(4){
-  width:8% ;
-}
-.problemTable td:nth-child(5){
-  width:8% ;
 }
 /* Table設定 end */

@@ -110,13 +110,22 @@
         <div style="margin-top: 20px; min-height: 480px;">
           <b-table sticky hover id="problemTable" :items="items" :fields="fields" :per-page="questionLibObj.questionNum"
             :current-page="currentPage" :filter="filter" @filtered="onFiltered" :sort-by.sync="sortBy"
-            :sort-desc.sync="sortDesc">
+            :sort-desc.sync="sortDesc" :busy="noGetData">
+            <!--loading-->
+            <template v-slot:table-busy>
+              <div class="text-center text-success " style="margin-top:30px">
+                <b-spinner class="align-middle" style="width: 3rem; height: 3rem; "></b-spinner>
+                <strong> Loading... </strong>
+              </div>
+            </template>
             <!--problemLink-->
             <template v-slot:cell(title)="data">
               <a :href={% static "`problem/${data.item.id.replace(/[^a-z][^0-9]+/i,'')}.html`" %}>${ data.value }</a>
             </template>
+            <template v-slot:cell(percentagePassing)="data">
+              ${ data.item.percentagePassing } %
+            </template>
           </b-table>
-
         </div>
 
         <!--block 3 Page-->
