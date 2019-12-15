@@ -27,6 +27,7 @@
 #define MLE 125
 #define CE 126
 #define RE 127
+#define UNKNOWN 255
 
 int status = FINE;
 
@@ -182,14 +183,20 @@ int main(int argc, char *argv[]) {
 					printf("usec: %ld\n", resourceUsage.ru_utime.tv_usec + resourceUsage.ru_stime.tv_usec);
 					printf("memory: %d\n", usedMemory);*/
 					
-					// when the program is NOT terminated normally, return RE
+					// when the program is NOT terminated normally
 					if(!WIFEXITED(wstatus)) {
-						printf("RE\n");
-						if(WTERMSIG(wstatus) == SIGFPE)
-							printf("Floating point exception\n");
-						else if(WTERMSIG(wstatus) == SIGSEGV)
-							printf("Segmentation fault\n");
-						return RE;
+						if(WIFSIGNALED(wstatus)) {
+							printf("RE\n");
+							if(WTERMSIG(wstatus) == SIGFPE)
+								printf("Floating point exception\n");
+							else if(WTERMSIG(wstatus) == SIGSEGV)
+								printf("Segmentation fault\n");
+							return RE;
+						}
+						else {
+							printf("UNKNOWN\n");
+							return UNKNOWN;
+						}
 					}
 					
 					// CE for python
