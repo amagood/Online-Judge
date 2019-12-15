@@ -27,6 +27,7 @@
 #define MLE 125
 #define CE 126
 #define RE 127
+#define RF 128
 #define UNKNOWN 255
 
 int status = FINE;
@@ -185,14 +186,24 @@ int main(int argc, char *argv[]) {
 					
 					// when the program is NOT terminated normally
 					if(!WIFEXITED(wstatus)) {
+						// when the program is terminated by a signal
 						if(WIFSIGNALED(wstatus)) {
-							printf("RE\n");
-							if(WTERMSIG(wstatus) == SIGFPE)
-								printf("Floating point exception\n");
-							else if(WTERMSIG(wstatus) == SIGSEGV)
-								printf("Segmentation fault\n");
-							return RE;
+							if(WTERMSIG(wstatus) == SIGSYS) {
+								printf("RF\n");
+								printf("It's forbidden to use some functions.\n");
+								return RF;
+							}
+							else {
+								printf("RE\n");
+								if(WTERMSIG(wstatus) == SIGFPE)
+									printf("Floating point exception\n");
+								else if(WTERMSIG(wstatus) == SIGSEGV)
+									printf("Segmentation fault\n");
+								return RE;
+							}
 						}
+						// When the program is NOT terminated normally and not terminated 
+						// by signal, whcih this kind of situation shouldn't happen.
 						else {
 							printf("UNKNOWN\n");
 							return UNKNOWN;
