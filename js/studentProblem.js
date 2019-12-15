@@ -202,6 +202,8 @@ window.onload = () => {
       }
     },//methods end
   })
+  document.getElementById("mainBlockStudentProblem").className = "mainBlockStudentProblem w3-animate-opacity";
+  document.getElementsByTagName("html")[0].style.visibility = "visible";
 }
 /*response example
 {

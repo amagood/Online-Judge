@@ -1,9 +1,12 @@
-<!--20191212-->
+<!--20191215-->
 <!doctype html>
 <html lang="zh-Hant-TW">
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <!--W3.CSS-->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <!-- Bootstrap css-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -12,7 +15,6 @@
   <!--studentProblem.css-->
   {% load static %}
   <link rel="stylesheet" href={% static "css/studentProblem.css" %}>
-  <meta name="viewport" content="width=device-width">
 </head>
 
 <body>
@@ -58,7 +60,8 @@
       </nav>
       <!--navbar end-->
 
-      <div id="probapp" class="mainBlockStudentProblem">
+      <div  id="mainBlockStudentProblem" class="mainBlockStudentProblem">
+      <div id="probapp">
         <!--block 1 sortMenu-->
         <div>
           <b-row>
@@ -113,6 +116,7 @@
             align="center" >
           </b-pagination>
         </div>
+      </div>
       </div>
   </body>
 

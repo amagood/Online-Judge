@@ -1,11 +1,13 @@
-<!--20191212-->
+<!--20191215-->
 <!doctype html>
 <html lang="zh-Hant-TW">
 
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
+  <!--W3.CSS-->
   <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <!-- Bootstrap、Bootstrap-Vue -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -18,27 +20,35 @@
 </head>
 
 <body>
+
   <body>
     <!--navbar-->
-    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href=  {% static "index.html" %}>GreenTeam</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset"
+      style="border-bottom: 4px solid MediumSeaGreen">
+      <a class="navbar-brand" href={% static "index.html" %}>GreenTeam</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href= {% static "index.html" %}><img class="navbarimage" src= {% static "image/home.svg" %} /> Home</a>
+            <a class="nav-link" href={% static "index.html" %}><img class="navbarimage"
+                src={% static "image/home.svg" %} /> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href= {% static "teacherProblem.html" %}><img class="navbarimage" src= {% static "image/file.svg" %} /> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href= {% static "studentProblem.html" %}><img class="navbarimage" src= {% static "image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href={% static "teacherProblem.html" %}><img
+                class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href={% static "studentProblem.html" %}><img
+                class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href= {% static "ranking.html" %}><img class="navbarimage" src= {% static "image/list-ordered.svg" %} /> Ranking<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href={% static "ranking.html" %}><img class="navbarimage"
+                src={% static "image/list-ordered.svg" %} /> Ranking<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href= {% static "comments.html" %}><img class="navbarimage" src= {% static "image/comments-regular.svg" %} /> Comments</a>
+            <a class="nav-link" href={% static "comments.html" %}><img class="navbarimage"
+                src={% static "image/comments-regular.svg" %} /> Comments</a>
           </li>
         </ul>
         <ul class="navbar-nav">
@@ -46,64 +56,68 @@
             <span id="username">${ name } &nbsp</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href= {% static "register.html" %}><img class="navbarimage" src= {% static "image/address-book-regular.svg" %} /> Register</a>
+            <a class="nav-link" href={% static "register.html" %}><img class="navbarimage"
+                src={% static "image/address-book-regular.svg" %} /> Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href= {% static "login.html" %}><img class="navbarimage" src= {% static "image/sign-in-alt-solid.svg %}" /> Login</a>
+            <a class="nav-link" href={% static "login.html" %}><img class="navbarimage"
+                src={% static "image/sign-in-alt-solid.svg %}" /> Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-on:click="clearStorage()" href= {% static "index.html" %}><img class="navbarimage" src= {% static "image/sign-out-alt-solid.svg" %}/> Logout</a>
+            <a class="nav-link" v-on:click="clearStorage()" href={% static "index.html" %}><img class="navbarimage"
+                src={% static "image/sign-out-alt-solid.svg" %} /> Logout</a>
           </li>
         </ul>
       </div>
     </nav>
     <!--navbar end-->
 
-    <div id="probapp" class="mainBlockStudentProblem">
-      <!--block 1 sortMenu-->
-      <b-row>
-        <b-col>
-          <b-dropdown dropup v-bind:text="Tag" variant="secondary">
-            <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTag('Loop')">Loop</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'array'" v-on:click="clickTag('Array')">Array</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'string'" v-on:click="clickTag('String')">String</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'function'" v-on:click="clickTag('Function')">Function
-            </b-dropdown-item>
-            <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTag('Pointer')">Pointer
-            </b-dropdown-item>
-          </b-dropdown>
-          <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
-            <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
-            <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
-          </b-dropdown>
-          <b-dropdown dropup text="Class" variant="outline-secondary" style="margin-left: 10px">
-            <!--turn right-->
-            <b-dropdown-item>Class A</b-dropdown-item>
-            <b-dropdown-item>Class B</b-dropdown-item>
-            <b-dropdown-item>Class C</b-dropdown-item>
-          </b-dropdown>
-          <b-dropdown dropup text="Add" variant="outline-secondary" style="margin-left: 10px">
-            <!--turn right-->
-            <b-dropdown-item @click="addClass">Class</b-dropdown-item>
-            <b-dropdown-item>Problem</b-dropdown-item>
-          </b-dropdown>
-        </b-col>
-        <!--search/filter bar-->
-        <b-col sm="5">
-          <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput" class="mb-0">
-            <b-input-group size="">
-              <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
-              </b-form-input>
-              <b-input-group-append>
-                <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
-              </b-input-group-append>
-            </b-input-group>
-          </b-form-group>
-        </b-col>
-      </b-row>
+    <div id="mainBlockStudentProblem" class="mainBlockStudentProblem">
+      <div id="probapp">
+        <!--block 1 sortMenu-->
+        <b-row>
+          <b-col>
+            <b-dropdown dropup v-bind:text="Tag" variant="secondary">
+              <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTag('Loop')">Loop</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'array'" v-on:click="clickTag('Array')">Array</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'string'" v-on:click="clickTag('String')">String</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'function'" v-on:click="clickTag('Function')">Function
+              </b-dropdown-item>
+              <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTag('Pointer')">Pointer
+              </b-dropdown-item>
+            </b-dropdown>
+            <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
+              <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
+            </b-dropdown>
+            <b-dropdown dropup text="Class" variant="outline-secondary" style="margin-left: 10px">
+              <!--turn right-->
+              <b-dropdown-item>Class A</b-dropdown-item>
+              <b-dropdown-item>Class B</b-dropdown-item>
+              <b-dropdown-item>Class C</b-dropdown-item>
+            </b-dropdown>
+            <b-dropdown dropup text="Add" variant="outline-secondary" style="margin-left: 10px">
+              <!--turn right-->
+              <b-dropdown-item @click="addClass">Class</b-dropdown-item>
+              <b-dropdown-item>Problem</b-dropdown-item>
+            </b-dropdown>
+          </b-col>
+          <!--search/filter bar-->
+          <b-col sm="5">
+            <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput" class="mb-0">
+              <b-input-group size="">
+                <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
+                </b-form-input>
+                <b-input-group-append>
+                  <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                </b-input-group-append>
+              </b-input-group>
+            </b-form-group>
+          </b-col>
+        </b-row>
 
-      <!--block 2.5 add class bar
+        <!--block 2.5 add class bar
         <div style="margin-top: 15px;" id="addClassBar" >
           <b-alert show variant="secondary" dismissible :show="showDismissibleAlert">
             <span style="margin-right: 5px;">add ? problem </span>
@@ -112,47 +126,48 @@
         </div>-->
 
 
-      <!--block 2 Problem-->
-      <div style="margin-top: 20px; min-height: 480px;">
-        <b-table selectable :select-mode="selectMode" sticky hover :items="items" :fields="fields" id="problemTable"
-          :per-page="questionLibObj.questionNum" :current-page="currentPage" 
-          :filter="filter" @filtered="onFiltered" 
-          :sort-by.sync="sortBy" :sort-desc.sync="sortDesc">
-          <!--problemLink-->
-          <template v-slot:cell(title)="data">
-            <a :href= {% static "`problem/${data.item.id.replace(/[^a-z][^0-9]+/i,'')}.html`" %}>${ data.value }</a>
-          </template>
-          <!--select problem-->
-          <template v-slot:cell(selected)="{ rowSelected }">
-            <template v-if="rowSelected">
-              <span aria-hidden="true">&check;</span>
-              <span class="sr-only">Selected</span>
+        <!--block 2 Problem-->
+        <div style="margin-top: 20px; min-height: 480px;">
+          <b-table selectable :select-mode="selectMode" sticky hover :items="items" :fields="fields" id="problemTable"
+            :per-page="questionLibObj.questionNum" :current-page="currentPage" :filter="filter" @filtered="onFiltered"
+            :sort-by.sync="sortBy" :sort-desc.sync="sortDesc">
+            <!--problemLink-->
+            <template v-slot:cell(title)="data">
+              <a :href={% static "`problem/${data.item.id.replace(/[^a-z][^0-9]+/i,'')}.html`" %}>${ data.value }</a>
             </template>
-            <template v-else>
-              <span aria-hidden="true">&nbsp;</span>
-              <span class="sr-only">Not selected</span>
+            <!--select problem-->
+            <template v-slot:cell(selected)="{ rowSelected }">
+              <template v-if="rowSelected">
+                <span aria-hidden="true">&check;</span>
+                <span class="sr-only">Selected</span>
+              </template>
+              <template v-else>
+                <span aria-hidden="true">&nbsp;</span>
+                <span class="sr-only">Not selected</span>
+              </template>
             </template>
-          </template>
-        </b-table>
-        <!--<div v-else>
+          </b-table>
+          <!--<div v-else>
             <b-table sticky hover :items="items" :fields="fields" id="problemTable" :per-page="perPage"
               :current-page="currentPage" :filter="filter">
             </b-table>
           </div>-->
-      </div>
+        </div>
 
-      <!--block 3 Page-->
-      <div>
-        <!--使用者選擇per page
+        <!--block 3 Page-->
+        <div>
+          <!--使用者選擇per page
           <b-form-group label="Per page" label-cols-sm="6" label-cols-md="4" label-cols-lg="3" label-align-sm="right"
             label-for="perPageSelect" class="mb-0">
             <b-form-select v-model="perPage" id="perPageSelect" :options="pageOptions"></b-form-select>
           </b-form-group>-->
-        <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="questionLibObj.questionNum" aria-controls="problemTable"
-          align="center">
-        </b-pagination>
+          <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="questionLibObj.questionNum"
+            aria-controls="problemTable" align="center">
+          </b-pagination>
+        </div>
       </div>
     </div>
+
   </body>
 
   <!-- Optional JavaScript -->

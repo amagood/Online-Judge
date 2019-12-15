@@ -1,3 +1,5 @@
+html { visibility: hidden; }
+
 body{
   background-color: lightgray;/*#d3d3d3*/
   font-family: "微軟正黑體";
