@@ -76,6 +76,7 @@
         <b-row>
           <b-col>
             <b-dropdown dropup v-bind:text="Tag" variant="secondary">
+              <b-dropdown-item @click="filter = ''" v-on:click="clickTag('Tag')">all</b-dropdown-item>
               <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTag('Loop')">Loop</b-dropdown-item>
               <b-dropdown-item @click="filter = 'array'" v-on:click="clickTag('Array')">Array</b-dropdown-item>
               <b-dropdown-item @click="filter = 'string'" v-on:click="clickTag('String')">String</b-dropdown-item>
@@ -85,6 +86,7 @@
               </b-dropdown-item>
             </b-dropdown>
             <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
+              <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('Degree')">all</b-dropdown-item>
               <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
               <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
               <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
