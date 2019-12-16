@@ -2,17 +2,23 @@
 var attendRank = {
   action : "attend_rank",
   attendStatus : "attend",
-  hash : localStorage.getItem("hash"),
+  userName : "amagood", // temp debug purpose
+  //hash : localStorage.getItem("hash"),
+  hash : "1234567890987654321234567", // temp debug purpose
+  questionNum : "",
 
-  //status : "success",
+  status : "success",
 }
 //選擇不參加後送出
 var notAttendRank = {
   action : "attend_rank",
   attendStatus : "notAttend",
-  hash : localStorage.getItem("hash"),
+  userName : "amagood", // temp debug purpose
+  //hash : localStorage.getItem("hash"),
+  hash : "1234567890987654321234567", // temp debug purpose
+  questionNum : "",
 
-  //status : "fail",
+  status : "fail",
 }
 //填寫題號enter後送出
 var rankAction = {
@@ -134,6 +140,8 @@ var app1 = new Vue({
         let self = this;
         console.log(this.qsNumber)
         rankAction.questionNum = this.qsNumber
+        notAttendRank.questionNum = this.qsNumber
+        attendRank.questionNum = this.qsNumber
         axios.post("http://127.0.0.1:8000/Rank/",rankAction) // rank list
           .then(function(response){
             console.log(response.data)
@@ -164,7 +172,7 @@ var app1 = new Vue({
         console.log(response.statusText)
         console.log(response.headers)
         console.log(response.config)
-        if(response.data.json.status == "success"){
+        if(response.data.status == "success"){
           alert("Congratulations! You successful attend!")
         }
         else{
@@ -174,7 +182,7 @@ var app1 = new Vue({
       .catch(function(error){
         console.log(error)
       })
-      this.isShow = false
+      //this.isShow = false
       this.setTime()
     },
     sendNotAttendMSG(){
@@ -185,7 +193,7 @@ var app1 = new Vue({
         console.log(response.statusText)
         console.log(response.headers)
         console.log(response.config)
-        if(response.data.json.status == "fail"){
+        if(response.data.status == "success"){
           alert("OK! Maybe next time!")
         }
         else{
@@ -195,7 +203,7 @@ var app1 = new Vue({
       .catch(function(error){
         console.log(error)
       })
-      this.isShow = false
+      //this.isShow = false
       this.setTime()
     }
   }

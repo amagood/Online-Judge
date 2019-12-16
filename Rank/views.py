@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from DataBase.models import Question
-from DataBase.models import Summary
+from DataBase.models import Question, User
+from DataBase.models import Summary, Rank
 import hashlib
 import json
 
@@ -40,8 +40,25 @@ def Rank_json(Request_Question, UserName, UserHash):
 
 ''' for rank attent '''
 
-def Rank_Attend_json(Request_Question, UserName, UserHash):
-    //
+def Rank_Attend_json(Request_Question, if_attend, UserName, UserHash):
+    User_Summary = Summary.objects.filter(Summary_Question__Question_ID = Request_Question, Summary_User__User_Name = UserName)
+    Return_Data = {}
+    Return_Data['userName'] = UserName
+    Return_Data['hash'] = UserHash
+    if len(User_Summary) != 0:
+        if if_attend == 'attend':
+            User_Summary.update(Summary_Attend = True)
+        else:
+            User_Summary.update(Summary_Attend = False)
+        Rank.objects.filter(Rank_Question__Question_ID = Request_Question).delete()
+        New_Rank = Summary.objects.filter(Summary_Question__Question_ID = Request_Question, Summary_Attend = True).order_by('Summary_AC_Count').reverse()[:100:]
+        print(New_Rank)
+        for i in range(len(New_Rank)):
+            Rank(Rank_Question = New_Rank[i].Summary_Question, Rank_User = New_Rank[i].Summary_User, Rank_Order = i).save()
+        Return_Data['status'] = 'success'
+        return Return_Data
+    Return_Data['status'] = 'fail'
+    return Return_Data
 
 def RankRequest(request):
     if request.method == "POST":
@@ -49,8 +66,8 @@ def RankRequest(request):
         print(req)
         if req['action'] == 'rank':
             data = Rank_json(req['questionNum'], req['userName'], req['hash'])
-        '''elif req['action'] == 'attend_rank':
-            data ='''
+        elif req['action'] == 'attend_rank':
+            data = Rank_Attend_json(req['questionNum'], req['attendStatus'], req['userName'], req['hash'])
         print(data)
         
         data = json.dumps(data)

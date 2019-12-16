@@ -20,7 +20,7 @@ from django.db import models
              Change Question ID from int to char
              adding class Category and manytomany relation to Question with relation name Category
         V2.2 Change Summary_Count default to 1
-             adding Rank_Attend for Attend function
+             adding Summary_Attend for Attend function default to False -> no auto attend
     
     If you encounter any problem you can't solve or want to change anything please contact me
     
@@ -35,7 +35,7 @@ class Group(models.Model):
     # Group_Chat_History with relation of 'Chat'
     Group_Chat_Maximum = models.PositiveIntegerField(default = 100)
     def __str__(self):
-        return self.Group_Name
+        return self.Group_Name # for debug, can be change for your own purpose
 
 class User(models.Model):
     # User_Group with relation of 'Group'
@@ -49,7 +49,7 @@ class User(models.Model):
     # User_Summit_History with a relation of 'Summit'
     # User_Summary_History with a relation of 'Summary'
     def __str__(self):
-        return self.User_Name
+        return self.User_Name # for debug, can be change for your own purpose
 
 class Question(models.Model):
     # Question_Group with relation of 'Group'
@@ -65,7 +65,7 @@ class Question(models.Model):
     Question_Create_Time = models.DateTimeField(auto_now_add=True)
     # Question_Ranking_List with relation of 'Rank'
     def __str__(self):
-        return self.Question_Name
+        return self.Question_Name # for debug, can be change for your own purpose
 
 # subclass for Group
 
@@ -75,7 +75,7 @@ class Chat(models.Model):
     Chat_User = models.ForeignKey(User, related_name='+', blank=True, null=True, on_delete=models.CASCADE) # one way relation with User
     Chat_Time = models.DateTimeField(auto_now_add=True) # time on create
     def __str__(self):
-        return self.Chat_Message # for debug ,can be change for your own purpose
+        return self.Chat_Message # for debug, can be change for your own purpose
 
 # subclass for User
 
@@ -86,7 +86,7 @@ class Summit(models.Model):
     Summit_Time = models.DateTimeField(auto_now_add=True) # will be it's creation time
     Summit_Output = models.CharField(default = 'WA',max_length = 10) # no output longer than 10
     def __str__(self):
-        return self.Summit_Question.Question_Name # for debug ,can be change for your own purpose
+        return self.Summit_Question.Question_Name # for debug, can be change for your own purpose
 
 class Summary(models.Model):
     Summary_User = models.ForeignKey(User, related_name='Summary', blank=True, null=True, on_delete=models.CASCADE) # two way relation with User
@@ -94,6 +94,7 @@ class Summary(models.Model):
     # Summary_Question_ID = models.PositiveIntegerField(default = 0)
     Summary_Count = models.PositiveIntegerField(default = 1)
     Summary_AC_Count = models.PositiveIntegerField(default = 0) # Summary Count >= Summary AC Count
+    Summary_Attend = models.BooleanField(default = False)
     def __str__(self):
         return self.Summary_Question.Question_Name # for debug ,can be change for your own purpose
 
@@ -103,15 +104,14 @@ class Rank(models.Model):
     Rank_Question = models.ForeignKey(Question, related_name='Rank', blank=True, null=True, on_delete=models.CASCADE)
     Rank_User = models.ForeignKey(User, related_name='Rank', blank=True, null=True, on_delete=models.CASCADE)
     Rank_Order = models.PositiveIntegerField(default = 0) # should be in range 1~100
-    Rank_Attend = models.BooleanField(default = False)
     # Rank_Summary_Count it should be able to access User relation 'Summary' to  get the data
     # Rank_AC_count it should be able to access User relation 'Summary' to  get the data
     def __str__(self):
-        return self.Rank_User.User_Name # for debug ,can be change for your own purpose
+        return self.Rank_User.User_Name # for debug, can be change for your own purpose
 
 class Category(models.Model):
     # Category_Question with relation 'Category'
     Category_Name = models.CharField(max_length = 40) # no name longer than 40
     Category_Description = models.CharField(blank=True, max_length = 255) # might be changing
     def __str__(self):
-        return self.Category_Name # for debug ,can be change for your own purpose
+        return self.Category_Name # for debug, can be change for your own purpose
