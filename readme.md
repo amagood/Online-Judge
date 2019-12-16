@@ -1,8 +1,20 @@
+### 2019 12/16 Commit:getQuestionObj when sort.TPro link createQuestion
+    studentProblem.html 
+    teacherProblem.html
+      變換排序時，從getQuestionObj()要資料 
+
 ### 2019 12/15 Commit:Format document. Updata commit.
 
 ### 2019 12/15 Commit:add w3-animate to solve onload problem
+    studentProblem.html 
+    teacherProblem.html
+      add loading before get data
+      solve onload problem
 
 ### 2019 12/12 Commit:add getQuestionData to filter tag,degree
+    studentProblem.html 
+    teacherProblem.html
+      過濾時從getQuestionObj()要資料
 
 ### 2019 12/12 Commit:change file name. add local file.
 
@@ -23,6 +35,8 @@
       2.Set up questionLibObj
 
 ### 2019 12/11 Commit:stuPro add sortby,sortDesc data for get table data
+    studentProblem
+      增加控制排序、排序方向的變數
 
 ### 2019 12/11 Commit:stuPro add bootstrap-vue link due to sort table
     studentProblem
