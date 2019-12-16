@@ -4,8 +4,12 @@ from django.shortcuts import render
 from django.http import JsonResponse,HttpResponse
 
 from . import Register
-# Create your views here.	
-def ResponseRegisterStatus(request):#request for register##not include return register page
+# Create your views here.
+
+#the html page file route; default route templates/register/register.html
+page_route = 'register/register.html'
+
+def ResponseRegisterStatus(request):#request for register#
 	if request.method == 'POST':
 		try:
 			jsonPost = json.loads(request.body)
@@ -16,5 +20,5 @@ def ResponseRegisterStatus(request):#request for register##not include return re
 		else:
 			retDict = {'stats':'error'}
 		return JsonResponse(retDict)
-'''	else:#for test
-		return render(request,'register/index.html',{})'''
+	else:
+		return render(request,page_route,{})
