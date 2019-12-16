@@ -72,7 +72,7 @@
     </nav>
     <!--navbar end-->
 
-    <div id="mainBlockStudentProblem" class="mainBlockStudentProblem">
+    <div id="problemLib" class="problemLib">
       <div id="probapp">
         <!--block 1 sortMenu-->
         <b-row>
@@ -101,8 +101,8 @@
             </b-dropdown>
             <b-dropdown dropup text="Add" variant="outline-secondary" style="margin-left: 10px">
               <!--turn right-->
-              <b-dropdown-item @click="addClass">Class</b-dropdown-item>
-              <b-dropdown-item>Problem</b-dropdown-item>
+              <b-dropdown-item >Class</b-dropdown-item>
+              <b-dropdown-item href={% static "createQuestion.html" %}>Problem</b-dropdown-item>
             </b-dropdown>
           </b-col>
           <!--search/filter bar-->
@@ -118,15 +118,6 @@
             </b-form-group>
           </b-col>
         </b-row>
-
-        <!--block 2.5 add class bar
-        <div style="margin-top: 15px;" id="addClassBar" >
-          <b-alert show variant="secondary" dismissible :show="showDismissibleAlert">
-            <span style="margin-right: 5px;">add ? problem </span>
-            <b-button variant="outline-secondary" size="sm">Add to</b-button>
-          </b-alert>
-        </div>-->
-
 
         <!--block 2 Problem-->
         <div style="margin-top: 20px; min-height: 480px;">
@@ -159,11 +150,6 @@
               </template>
             </template>
           </b-table>
-          <!--<div v-else>
-            <b-table sticky hover :items="items" :fields="fields" id="problemTable" :per-page="perPage"
-              :current-page="currentPage" :filter="filter">
-            </b-table>
-          </div>-->
         </div>
 
         <!--block 3 Page-->

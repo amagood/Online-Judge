@@ -50,6 +50,7 @@ var questionLibObj = {
 var tmpobj = {}
 var postURL = "https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D%20"
 
+var sortDescObj =false//改API 放到questionLibObj裡
 //判斷filter
 var noFilterData=0
 
@@ -59,19 +60,19 @@ window.onload = () => {
     el: "#probapp",
     data() {
       return {
-        noGetData:true,
+        noGetData:true,//loading
         Tag: "Tag",//for dropdown buttom
         Degree: "Degree",//for dropdown buttom
-        filter: null,//Search
+        filter: null,//text in filter
         sortBy: "id",//排序方式
         sortDesc: false,//false:升序
         //perPage: 20,//一頁幾行
         currentPage: 1,//當前頁數
         totalRows: 1,//總行數
+        selectMode: 'range',//選擇模式
+        //showDismissibleAlert: false,//add class bar 
+        //modes: ['multi', 'single', 'range'],選擇模式多選、一次一行、shirt/ctrl選範圍
         //pageOptions: [5,10, 15],//使用者選擇當前頁數
-        clickAddClass: false,//連結 Class button
-        showDismissibleAlert: false,//add class bar 
-        modes: ['multi', 'single', 'range'],//選擇模式多選、一次一行、shirt/ctrl選範圍
         fields: [//table 每列項目,用來取整列值
           {
             key: "id",
@@ -115,7 +116,6 @@ window.onload = () => {
           }
         ],
         items: [],//每行內容
-        selectMode: 'range',//選擇模式，<b-table :select-mode="selectMode">
       }
     },//data end
     computed: {
@@ -132,40 +132,53 @@ window.onload = () => {
       this.getQuestionData()
     },
     updated() {
-      //---updata questionLibObj---
-      if (this.currentPage != questionLibObj.questionPage || this.sortBy != questionLibObj.sequence) {
+      //---updata questionLibObj for changePage---
+      if (this.currentPage != questionLibObj.questionPage) {
         questionLibObj.questionPage = this.currentPage.toString()//轉字串
+        //console.log(questionLibObj)
+        console.log("update data for changePage ")
+      }
+
+      //---update data for sort---
+      if (this.sortBy != questionLibObj.sequence||this.sortDesc!=sortDescObj) {
+        this.noGetData=true
         questionLibObj.sequence = this.sortBy
-        console.log(questionLibObj)
+        sortDescObj=this.sortDesc
+        this.getQuestionData()
+        //console.log(questionLibObj)
+        //console.log(sortDescObj)
+        console.log("update data for sort")
       }
 
       //---clear filter---
       if (!this.filter&&noFilterData) {
+        this.noGetData=true
         this.Degree = "Degree"
         this.Tag = "Tag"
         questionLibObj.tag = this.Tag
         questionLibObj.degree = this.Degree
-        console.log(questionLibObj)
+        //console.log(questionLibObj)
         //postURL = "https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22p000%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
         this.getQuestionData()
         console.log("clear,get all data")
         noFilterData=0
       }
-    },
+    },//updated end
     methods: {
+      //html b-table(block 2)
       getQuestionData() {
         axios
           .post(postURL, questionLibObj)
           .then(response => {
             tmpobj = JSON.parse(response.data.freeform);
             this.items = tmpobj.questionLib
-
             // Set the initial number of items、totalRows
             this.totalRows = this.items.length
-
+            //console.log(questionLibObj)
             console.log("get new data from postURL")
+
+            //determine get data due to loading
             this.noGetData=false
-            console.log(this.noGetData)
           })
           .catch(function (error) {
             console.log(error);
@@ -174,29 +187,9 @@ window.onload = () => {
       problemLink(value) {
         return `${value}`
       },
-      addClass(fields) {
-        this.clickAddClass = !this.clickAddClass;
-        //showDismissibleAlert=!showDismissibleAlert;
-
-        /*if(this.clickAddClass){
-          document.getElementById("addClassBar").style.display="block";
-        }
-        else{
-          document.getElementById("addClassBar").style.display="none";
-        }
-        if(this.clickAddClass){
-          this.fields.push({
-            key:"add",
-            label: "Add",
-            sortable:false
-          })
-        }
-        else{
-          this.fields.splice()
-        }*/
-      },
-      //mainblock1
+      //html dropdown buttom(block 1)
       clickTag(Tag) {
+        this.noGetData=true
         this.Tag = Tag
         questionLibObj.tag = this.Tag
         this.Degree = "Degree"
@@ -208,6 +201,7 @@ window.onload = () => {
         console.log("tag sort get data")
       },
       clickDegree(Degree) {
+        this.noGetData=true
         this.Degree = Degree
         questionLibObj.degree = this.Degree
         this.Tag = "Tag"
@@ -217,7 +211,7 @@ window.onload = () => {
         this.getQuestionData()
         console.log("degree sort get data")
       },
-      //mainblock3
+      //html pagination(block3)
       onFiltered(filteredItems) {
         // Trigger pagination to update the number of buttons/pages due to filtering
         this.totalRows = filteredItems.length
@@ -226,7 +220,7 @@ window.onload = () => {
     },//method end
 
   })
-  document.getElementById("mainBlockStudentProblem").className = "mainBlockStudentProblem w3-animate-opacity";
+  document.getElementById("problemLib").className = "problemLib w3-animate-opacity";
   document.getElementsByTagName("html")[0].style.visibility = "visible";
 }
 
