@@ -1,9 +1,12 @@
+### 2019 12/16 Commit:add responsive in b-table for small table
+    studentProblem.html 
+    teacherProblem.html
+      當畫面縮小，table可水平滾動
+
 ### 2019 12/16 Commit:getQuestionObj when sort.TPro link createQuestion
     studentProblem.html 
     teacherProblem.html
       變換排序時，從getQuestionObj()要資料 
-
-### 2019 12/15 Commit:Format document. Updata commit.
 
 ### 2019 12/15 Commit:add w3-animate to solve onload problem
     studentProblem.html 
@@ -18,7 +21,6 @@
 
 ### 2019 12/12 Commit:change file name. add local file.
 
-### 2019 12/12 Commit:little change
 
 ### 2019 12/12 Commit:change problem link to problem/id.html
     studentProblem
