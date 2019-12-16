@@ -12,7 +12,6 @@ new Vue({
   el: '#app1',
   data() {
     return {
-      msg: ""
     }
   },
   methods: {
@@ -20,7 +19,7 @@ new Vue({
       if(document.getElementById("id_account").validity.valid
       	&&document.getElementById("id_password").validity.valid
       	&&document.getElementById("id_confirm_password").validity.valid
-      	&&document.getElementById("id_email").validity
+      	&&document.getElementById("id_email").validity.valid
       	)
       {
       registerObj.account = document.getElementById("id_account").value;
@@ -40,7 +39,7 @@ new Vue({
 
       if(registerObj.password.length<8 || registerObj.password.length>20)
       {
-      	this.msg='密碼長度錯誤!';
+      	alert('密碼長度錯誤!');
       }
       else
       {
@@ -50,23 +49,23 @@ new Vue({
           	.then(function (response) {
             	console.log(response);
             	tmpObj = response.data;
-            	this.msg=tmpObj.status;
+            	alert(tmpObj.status);
           	})
           	.catch(function (error) {
-            	this.msg = "連線錯誤! 請再試一次~"
+            	alert("連線錯誤! 請再試一次~");
             	console.log(error);
           	})
 	  	}
      	else
       	{
-        	this.msg='密碼確認錯誤!';
+        	alert('密碼確認錯誤!');
       	}
       }
       
     }
     else
     {
-    	this.msg='表格沒填完!!';
+    	alert('表格沒填完!!');
     }
 }
   }

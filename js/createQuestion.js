@@ -9,6 +9,8 @@ var questionObj = {
   "exampleOutput" : "",
   "input" : "",
   "output" : "",
+  "tag" : "",
+  "difficulty" : "",
   "userName" : "",
   "Class" : "",
   "hash" : ""
@@ -122,6 +124,29 @@ new Vue({
         {
           questionObj.language = "python";
         }
+
+        for (i=0; i<document.getElementsByTagName('input').length; i+=1) 
+        {
+          if(document.getElementsByTagName('input')[i].type=='radio')
+          {
+            if(document.getElementsByTagName('input')[i].checked)
+            {
+              questionObj.difficulty = document.getElementsByTagName('input')[i].value;
+            } 
+          }
+        }
+        for (i=0; i<document.getElementsByTagName('input').length; i+=1) 
+        {
+          if(document.getElementsByTagName('input')[i].type=='checkbox')
+          {
+            if(document.getElementsByTagName('input')[i].checked)
+            {
+              questionObj.tag=questionObj.tag.concat(document.getElementsByTagName('input')[i].value);
+              questionObj.tag=questionObj.tag.concat(" ");
+            } 
+          }
+        }
+        alert(questionObj.tag);
       
         axios.post(postURL,questionObj)
           .then(function (response) {
@@ -130,6 +155,10 @@ new Vue({
             if(tmpObj2.stats=="success")
             {
               alert("Question Submit Success!");
+            }
+            else
+            {
+              alert("ERROR!");
             }
 
           })
@@ -169,11 +198,11 @@ new Vue({
           .then(function (response) {
             console.log(response);
             tmpObj = response.data;
-            testMode = false;//等有Response要刪掉~~
+            //testMode = false;//等有Response要刪掉~~
             if(tmpObj.stats=="verified")
             {
               alert('題目建立成功');
-              //testMode = false;
+              testMode = false; //測試時註解
             }
             else
             {

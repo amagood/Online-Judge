@@ -5,13 +5,13 @@
   	<meta charset="UTF-8">
     <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
     <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
-    {% load static %}
+    {%load static %}
     <link rel="stylesheet" href={% static "css/createQuestion.css" %} >
   </head>
 
   <body>
     <!-- navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+    <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
     <a class="navbar-brand" href="index.html">GreenTeam</a>
     <button class="navbar-toggler" type="button">
       <span class="navbar-toggler-icon"></span>
@@ -143,6 +143,44 @@
                   style="background-color: #237ACC; font-size: 20px; padding: 10px 58px; color: #fff; margin-right: 20px;" v-on:click="testQ()">
             </div>
           </div>
+
+          <br>
+
+          <div class="form-group">
+            <div class="col-sm-10">
+              <label for="difficulty">題目類別(複選) :</label>
+              <br>
+              <input type="checkbox" name="tag" id="id_tag_loop" value="loop">迴圈<br>
+              <input type="checkbox" name="tag" id="id_tag_if" value="if">條件式<br>
+              <input type="checkbox" name="tag" id="id_tag_array" value="array">陣列<br>
+              <input type="checkbox" name="tag" id="id_tag_pointer" value="pointer">指標<br>
+              <input type="checkbox" name="tag" id="id_tag_string" value="string">字串<br>
+              <input type="checkbox" name="tag" id="id_tag_binaryTree" value="binaryTree">二元樹<br>
+              <input type="checkbox" name="tag" id="id_tag_sort" value="sort">排序<br>
+              <input type="checkbox" name="tag" id="id_tag_dp" value="dp">動態規劃<br>
+            </div>
+          </div>
+
+          <br>
+
+          <div class="form-group">
+            <div class="col-sm-10">
+              <label for="difficulty">題目難度(1~10) :</label>
+              <br>
+              1 &ensp;&ensp;2 &ensp;&ensp;3 &ensp;&ensp;4 &ensp;&ensp;5 &ensp;&ensp;6 &ensp;&ensp;7 &ensp;&ensp;8 &ensp;&ensp;9 &ensp;&nbsp;10
+              <br>
+              <input name="difficulty" type="radio" id="id_difficulty_1" value="1" checked="true" required>
+              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_2" value="2" required>
+              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_3" value="3" required>
+              &nbsp;&nbsp; &nbsp;<input name="difficulty" type="radio" id="id_difficulty_4" value="4" required>
+              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_5" value="5" required>
+              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_6" value="6" required>
+              &nbsp;&nbsp; &nbsp;<input name="difficulty" type="radio" id="id_difficulty_7" value="7" required>
+              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_8" value="8" required>
+              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_9" value="9" required>
+              &nbsp;&nbsp; &nbsp;<input name="difficulty" type="radio" id="id_difficulty_10" value="10" required>
+            </div>
+          </div>
             
           <br>
           <hr style="border: 1px solid #999;">
@@ -163,7 +201,7 @@
     <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
     <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src={% static "js/createQuestion.js" %}></script>
+    <script src={% static "js/createQuestion.js" %} ></script>
 
 </html>
 <!-- <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script> -->

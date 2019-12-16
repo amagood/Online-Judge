@@ -5,6 +5,7 @@
     <title>Register</title>
     <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
     <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
+    {%load static %}
     <link rel="stylesheet" href={% static "css/register.css" %}>
   </head>
 
@@ -90,9 +91,9 @@
             <div class="form-group">
               <label for="id_identify" class="col-sm-10 control-label">身份 :</label>
                 <div class="col-sm-10">
-                  &nbsp;&nbsp;<input size="40" name="identify" type="radio" id="id_identify_student" value="student" checked="true" required> 學生
+                  &nbsp;&nbsp;<input name="identify" type="radio" id="id_identify_student" value="student" checked="true" required> 學生
                   <br>
-                  &nbsp;&nbsp;<input size="40" name="identify" type="radio" id="id_identify_teacher" value="teacher" required> 教師
+                  &nbsp;&nbsp;<input name="identify" type="radio" id="id_identify_teacher" value="teacher" required> 教師
                 </div>
             </div>
 
@@ -105,8 +106,6 @@
                 <a class="btn btn-default" id="id_cancel" style="font-size: 20px; padding: 10px 58px;" role="button">取消</a>
               </div>
             </div>
-
-            <div v-if="msg" class="mt-3">{{ msg }}</div>
 
           </form>
         </div>
