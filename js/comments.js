@@ -20,7 +20,7 @@ var sendMsg = {
 	"hash" : localStorage.getItem("hash"),
 }
 //一開始送出
-/*var collectClass = {
+var collectClass = {
 	"action" : "selectClass",
 	"userName" : localStorage.getItem("userName"),
 	"hash" : localStorage.getItem("hash"),
@@ -31,7 +31,7 @@ var sendMsg = {
 		{"Class" : "CSIE111"},
 		{"Class" : "LOL201"},
 	]
-}*/
+}
 
 //----navbar設定----
 var navapp = new Vue({

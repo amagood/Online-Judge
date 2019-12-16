@@ -5,7 +5,9 @@
       class="navbar-toggler"旁邊增加以下標籤 data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
       class="collapse navbar-collapse"旁邊增加 id="navbarSupportedContent"
       用${ name }標記使用者名稱在register按鈕左邊 (理論上使用者在除了首頁、註冊和登入畫面都應該是登入的狀態)
-  -->
+    12/16修正:
+      register的按鈕新增v-show="regIsShow"屬性,只有身份為admin才能顯示註冊
+    -->
 <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
   <a class="navbar-brand" href="index.html">GreenTeam</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,7 +34,7 @@
         <span id="username">${ name } &nbsp</span>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
+        <a class="nav-link" v-show="regIsShow" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
@@ -45,14 +47,16 @@
 </nav>
 <script>
   var navapp = new Vue({
-    el: "#navapp",
-    data:{
-      whichShow:"",
-      userid: "",
-      name: localStorage.getItem("userName"),
+    el : "#navapp",
+    data :{
+      whichShow : "",//顯示哪個題目庫
+      regIsShow : "",//顯示註冊鈕
+      userid : "",
+      name : localStorage.getItem("userName"),
     },
     created() {
       this.chooseProblems()
+      this.canRegister()
     },
     methods: {
       chooseProblems(){
@@ -63,6 +67,13 @@
         }
         else if(self.userid === "student"){
           self.whichShow = "student"
+        }
+      },
+      canRegister(){
+        let self = this
+        self.userid = localStorage.getItem("who")
+        if(self.userid === "admin"){
+          self.regIsShow = true
         }
       },
       clearStorage(){
