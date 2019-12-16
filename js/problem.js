@@ -1,4 +1,4 @@
-﻿// 20191212
+﻿// 20191216
 // navbar
 
 
@@ -154,11 +154,11 @@ function getHeaderFile2Content() {
     var read = new FileReader();
     read.readAsBinaryString(uploadFileApp.headerFile[1]);
     read.onloadend = function(){
-      uploadFileApp,headerFile2String = read.result;
+      uploadFileApp.headerFile2String = read.result;
     }
   }
   else
-    uploadFileApp,headerFile2String = "";
+    uploadFileApp.headerFile2String = "";
 }
 
 

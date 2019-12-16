@@ -24,6 +24,8 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/12/16 Fix typo error
+	js uploadFileApp,headerFile2String
 ### 2019/12/12 Improve styling on upload file block
 	css right: 0; max-width: 500px;
 ### 2019/12/12 fix bug: upload header file
