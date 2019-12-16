@@ -110,7 +110,7 @@
 
         <!--block 2 Problem-->
         <div style="margin-top: 20px; min-height: 480px;">
-          <b-table sticky hover id="problemTable" :items="items" :fields="fields" :per-page="questionLibObj.questionNum"
+          <b-table sticky hover responsive id="problemTable" :items="items" :fields="fields" :per-page="questionLibObj.questionNum"
             :current-page="currentPage" :filter="filter" @filtered="onFiltered" :sort-by.sync="sortBy"
             :sort-desc.sync="sortDesc" :busy="noGetData">
             <!--loading-->

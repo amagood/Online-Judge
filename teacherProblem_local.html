@@ -119,9 +119,9 @@
 
         <!--block 2 Problem-->
         <div style="margin-top: 20px; min-height: 480px;">
-          <b-table selectable :select-mode="selectMode" sticky hover :items="items" :fields="fields" id="problemTable"
+          <b-table selectable sticky hover responsive id="problemTable" :items="items" :fields="fields"
             :per-page="questionLibObj.questionNum" :current-page="currentPage" :filter="filter" @filtered="onFiltered"
-            :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :busy="noGetData">
+            :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :busy="noGetData" :select-mode="selectMode">
             <!--loading-->
             <template v-slot:table-busy>
               <div class="text-center text-success " style="margin-top:30px">
