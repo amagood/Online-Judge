@@ -1,5 +1,9 @@
 README
 
+How to use
+1. place Register.py and Register_View.py in same folder
+2. add path in url.py and link with ResponseRegisterStatus
+
 Function Description
 
 Register.py:
