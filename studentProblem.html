@@ -73,46 +73,44 @@
     <div id="problemLib" class="problemLib">
       <div id="probapp">
         <!--block 1 sortMenu-->
-        <div>
-          <b-row>
-            <b-col>
-              <b-dropdown dropup v-bind:text="Tag" variant="secondary">
-                <b-dropdown-item @click="filter = ''" v-on:click="clickTag('Tag')">all</b-dropdown-item>
-                <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTag('Loop')">Loop</b-dropdown-item>
-                <b-dropdown-item @click="filter = 'array'" v-on:click="clickTag('Array')">Array</b-dropdown-item>
-                <b-dropdown-item @click="filter = 'string'" v-on:click="clickTag('String')">String</b-dropdown-item>
-                <b-dropdown-item @click="filter = 'function'" v-on:click="clickTag('Function')">Function
-                </b-dropdown-item>
-                <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTag('Pointer')">Pointer
-                </b-dropdown-item>
-              </b-dropdown>
-              <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
-                <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('Degree')">all</b-dropdown-item>
-                <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
-                <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
-                <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
-              </b-dropdown>
-            </b-col>
-            <!--search/filter bar-->
-            <b-col sm="5">
-              <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput">
-                <b-input-group size="">
-                  <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
-                  </b-form-input>
-                  <b-input-group-append>
-                    <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
-                  </b-input-group-append>
-                </b-input-group>
-              </b-form-group>
-            </b-col>
-          </b-row>
-        </div>
+        <b-row>
+          <b-col>
+            <b-dropdown dropup v-bind:text="Tag" variant="secondary">
+              <b-dropdown-item @click="filter = ''" v-on:click="clickTag('tag')">all</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTag('loop')">loop</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'array'" v-on:click="clickTag('array')">array</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'string'" v-on:click="clickTag('string')">string</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'function'" v-on:click="clickTag('function')">function
+              </b-dropdown-item>
+              <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTag('pointer')">pointer
+              </b-dropdown-item>
+            </b-dropdown>
+            <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
+              <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('degree')">all</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
+            </b-dropdown>
+          </b-col>
+          <!--search/filter bar-->
+          <b-col sm="5">
+            <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput">
+              <b-input-group size="">
+                <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
+                </b-form-input>
+                <b-input-group-append>
+                  <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                </b-input-group-append>
+              </b-input-group>
+            </b-form-group>
+          </b-col>
+        </b-row>
 
         <!--block 2 Problem-->
         <div style="margin-top: 20px; min-height: 480px;">
-          <b-table sticky hover responsive id="problemTable" :items="items" :fields="fields" :per-page="questionLibObj.questionNum"
-            :current-page="currentPage" :filter="filter" @filtered="onFiltered" :sort-by.sync="sortBy"
-            :sort-desc.sync="sortDesc" :busy="noGetData">
+          <b-table sticky hover responsive id="problemTable" :items="items" :fields="fields"
+            :per-page="questionLibObj.questionNum" :current-page="currentPage" :filter="filter" @filtered="onFiltered"
+            :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :busy="noGetData">
             <!--loading-->
             <template v-slot:table-busy>
               <div class="text-center text-success " style="margin-top:30px">

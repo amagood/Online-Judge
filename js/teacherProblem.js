@@ -40,9 +40,10 @@ var questionLibObj = {
   "action": "questionLib",
   "questionNum": "20",//there are twenty question in one page. 
   "questionPage": "1",//1 means select the top 20 question
-  "sequence": "id",
-  "tag": "Tag",
-  "degree": "Degree",
+  "sortDesc": "false",//false:升序
+  "sequence": "id",//排序方式
+  "tag": "tag",//filter
+  "degree": "degree",//filter
   "userName": "amagood",
   "Class": "CSIE110",
   "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
@@ -50,19 +51,16 @@ var questionLibObj = {
 var tmpobj = {}
 var postURL = "https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D%20"
 
-var sortDescObj =false//改API 放到questionLibObj裡
-//判斷filter
-var noFilterData=0
-
 window.onload = () => {
   new Vue({
     delimiters: ['${', '}'],
     el: "#probapp",
     data() {
       return {
-        noGetData:true,//loading
-        Tag: "Tag",//for dropdown buttom
-        Degree: "Degree",//for dropdown buttom
+        noGetData: true,//loading
+        noFilterData: false,//判斷filter
+        Tag: "tag",//for dropdown buttom
+        Degree: "degree",//for dropdown buttom
         filter: null,//text in filter
         sortBy: "id",//排序方式
         sortDesc: false,//false:升序
@@ -133,35 +131,34 @@ window.onload = () => {
     },
     updated() {
       //---updata questionLibObj for changePage---
-      if (this.currentPage != questionLibObj.questionPage) {
+      if (this.currentPage != parseInt(questionLibObj.questionPage)) {//轉數字
         questionLibObj.questionPage = this.currentPage.toString()//轉字串
         //console.log(questionLibObj)
         console.log("update data for changePage ")
       }
 
       //---update data for sort---
-      if (this.sortBy != questionLibObj.sequence||this.sortDesc!=sortDescObj) {
-        this.noGetData=true
+      if (this.sortBy != questionLibObj.sequence || this.sortDesc.toString() != questionLibObj.sortDesc) {
+        this.noGetData = true
         questionLibObj.sequence = this.sortBy
-        sortDescObj=this.sortDesc
-        this.getQuestionData()
+        questionLibObj.sortDesc = this.sortDesc.toString()//轉字串
         //console.log(questionLibObj)
-        //console.log(sortDescObj)
+        this.getQuestionData()
         console.log("update data for sort")
       }
 
       //---clear filter---
-      if (!this.filter&&noFilterData) {
-        this.noGetData=true
-        this.Degree = "Degree"
-        this.Tag = "Tag"
+      if (!this.filter && this.noFilterData) {
+        this.noGetData = true
+        this.Degree = "degree"
+        this.Tag = "tag"
         questionLibObj.tag = this.Tag
         questionLibObj.degree = this.Degree
         //console.log(questionLibObj)
         //postURL = "https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22p000%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
         this.getQuestionData()
         console.log("clear,get all data")
-        noFilterData=0
+        this.noFilterData = false
       }
     },//updated end
     methods: {
@@ -174,11 +171,11 @@ window.onload = () => {
             this.items = tmpobj.questionLib
             // Set the initial number of items、totalRows
             this.totalRows = this.items.length
-            //console.log(questionLibObj)
+            console.log(questionLibObj)
             console.log("get new data from postURL")
 
             //determine get data due to loading
-            this.noGetData=false
+            this.noGetData = false
           })
           .catch(function (error) {
             console.log(error);
@@ -189,27 +186,29 @@ window.onload = () => {
       },
       //html dropdown buttom(block 1)
       clickTag(Tag) {
-        this.noGetData=true
         this.Tag = Tag
         questionLibObj.tag = this.Tag
-        this.Degree = "Degree"
-        questionLibObj.degree = "Degree"
-        //console.log(questionLibObj)
-        noFilterData=1
-        //postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22p000%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
-        this.getQuestionData()
-        console.log("tag sort get data")
+        this.Degree = "degree"
+        questionLibObj.degree = "degree"
+        if (Tag != "tag") {
+          this.noGetData = true
+          this.noFilterData = true
+          //postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22p000%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
+          this.getQuestionData()
+          console.log("tag sort get data")
+        }
       },
       clickDegree(Degree) {
-        this.noGetData=true
         this.Degree = Degree
         questionLibObj.degree = this.Degree
-        this.Tag = "Tag"
-        questionLibObj.tag = "Tag"
-        //console.log(questionLibObj)
-        noFilterData=1
-        this.getQuestionData()
-        console.log("degree sort get data")
+        this.Tag = "tag"
+        questionLibObj.tag = "tag"
+        if (Degree != "degree") {
+          this.noGetData = true
+          this.noFilterData = true
+          this.getQuestionData()
+          console.log("degree sort get data")
+        }
       },
       //html pagination(block3)
       onFiltered(filteredItems) {
