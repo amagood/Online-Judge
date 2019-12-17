@@ -4,11 +4,11 @@ var showMessageAction = {
 	"hash" : localStorage.getItem("hash"),
 	"Class" : "",
 	
-	/*"message" :[ 
+	"message" :[ 
 		{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
 		{"userName" :　"87man", "date" : "20191016", "time" : "1900", "content" : "oh,haha"},
 		{"userName" :　"charlieyang", "date" : "20191126", "time" : "1915", "content" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
-	],*/
+	],
 }
 //按下next後送出
 var sendMsg = {
@@ -39,11 +39,13 @@ var navapp = new Vue({
 	el : "#navapp",
 	data:{
 		whichShow : "",
+		regIsShow : false,
 		userid : "",
 		name : "",
 	},
 	created(){
 		this.chooseProblems()
+		this.canRegister()
 	},
 	methods:{
 		chooseProblems(){
@@ -55,6 +57,13 @@ var navapp = new Vue({
 			}
 			else if(self.userid === "student"){
 				self.whichShow = "student"
+			}
+		},
+		canRegister(){
+			let self = this
+			self.userid = localStorage.getItem("who")
+			if(self.userid === "admin"){
+				self.regIsShow = true
 			}
 		},
 		clearStorage(){
@@ -235,6 +244,9 @@ var app1 = new Vue({
 					let date = self.msgSend.date
 					let time = self.msgSend.time
 					self.msgSend.showtime = date.substring(0,4) + "/" + date.substring(4,6) + "/" + date.substring(6,8) + " " + time.substring(0,2) + ":" + time.substring(2,4)
+					if(typeof(self.msgList) === "undefined"){
+						self.msgList = []
+					}
 					self.msgList.push({
 						userName : self.msgSend.userName,
 						content : self.msgSend.content,

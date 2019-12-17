@@ -60,11 +60,13 @@ var navapp = new Vue({
   el : "#navapp",
   data : {
     whichShow : "",
+    regIsShow : false,
     userid : "",
     name : "",
   },
   created(){
     this.chooseProblems()
+    this.canRegister()
   },
   methods:{
     chooseProblems(){
@@ -78,6 +80,13 @@ var navapp = new Vue({
         self.whichShow = "student"
       }
     },
+    canRegister(){
+			let self = this
+			self.userid = localStorage.getItem("who")
+			if(self.userid === "admin"){
+				self.regIsShow = true
+			}
+		},
     clearStorage(){
       localStorage.clear()
     },
