@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from DataBase.models import Question, User
 from DataBase.models import Summary, Rank
+# from Rank.Summit_database_operation import DataBase_Operation
 import hashlib
 import json
 
@@ -69,6 +70,8 @@ def RankRequest(request):
         elif req['action'] == 'attend_rank':
             data = Rank_Attend_json(req['questionNum'], req['attendStatus'], req['userName'], req['hash'])
         print(data)
+        
+        #DataBase_Operation('a002','amamamagood','AC',10)
         
         data = json.dumps(data)
     #return render(data,'ranking.html',{})
