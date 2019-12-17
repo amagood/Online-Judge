@@ -16,8 +16,16 @@ public class MainActivity extends AppCompatActivity {
         WebView webview = (WebView) findViewById(R.id.webview);
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+        webSettings.setSupportZoom(true);
+        webSettings.setDefaultTextEncodingName("utf-8");
+        
         setContentView(webview);
         webview.setWebViewClient(new WebViewClient());
-        webview.loadUrl("https://www.google.com/");
+        webview.loadUrl("http://ntnugreenoj.duckdns.org/login/");
     }
 }
