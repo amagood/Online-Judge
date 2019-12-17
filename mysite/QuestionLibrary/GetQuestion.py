@@ -4,58 +4,57 @@ import time
 import json
 import datetime
 
-def responseGetQuestion(questionNum,questionPage,questionSequence,questionTarget,questionDegree,selectClass):
+def responseGetQuestion(questionNum,questionPage,questionSequence,questionTarget,questionDegree,selectClass,sortDesc):
     questionList=Question.objects.all()
     if questionTarget!='tag':
         questionList=questionList.filter(Question_Category__Category_Name=questionTarget)
     if questionDegree!='degree':
         questionList=questionList.filter(Question_difficulty__exact=questionDegree)
     if questionSequence=='id':
-        questionList=questionList.order_by('id')
+        if sortDesc=='true':
+            questionList=questionList.order_by('-id')
+        else:
+            questionList=questionList.order_by('id')
     elif questionSequence=='tag':
-        questionList=questionList.order_by('tag')
+        if sortDesc=='true':
+            questionList=questionList.order_by('-tag')
+        else:
+            questionList=questionList.order_by('tag')
     elif questionSequence=='degree':
-        questionList=questionList.order_by('degree')
+        if sortDesc=='true':
+            questionList=questionList.order_by('-degree')
+        else:
+            questionList=questionList.order_by('degree')
     elif questionSequence=='percentagePassing':
-        questionList=questionList.order_by('percentagePassing')
+        if sortDesc=='true':
+            questionList=questionList.order_by('-percentagePassing')
+        else:
+            questionList=questionList.order_by('percentagePassing')
     elif questionSequence=='respondent':
-        questionList=questionList.order_by('respondent')
+        if sortDesc=='true':
+            questionList=questionList.order_by('-respondent')
+        else:
+            questionList=questionList.order_by('respondent')
     elif questionSequence=='inputTime':
-        questionList=questionList.order_by('inputTime')
+        if sortDesc=='true':
+            questionList=questionList.order_by('-inputTime')
+        else:
+            questionList=questionList.order_by('inputTime')
     retQuesData=[]
     for eachQues in questionList:
         passrate='0.00%'
         if eachQues.Question_Summit_Time!=0:
             passrate='{:.2%}'.format(eachQues.Question_AC_Count/eachQues.Question_Summit_Time)
+        targetlist=[str(e) for e in eachQues.Question_Category.all()]
+        targets=' '.join(targetlist)
         Qdata = {
             "id":eachQues.Question_ID,
             "tltle":eachQues.Question_Name,
-            "target":eachQues.Question_Category,#?
+            "target":targets,
             "degree":eachQues.Question_difficulty,
             "percentagePassing":passrate,
             "respondent":"100",
-            "inputTime":eachQues.Question_Create_Time,
+            "inputTime":eachQues.Question_Create_Time.strftime("%Y%m%d"),
         }
-        retQuesData.append(json.dumps(Qdata, default = myconverter))
-        #retQuesData.append(Qdata)
+        retQuesData.append(Qdata)
     return retQuesData
-
-def myconverter(o):#solve 'datetime.datetime is not JSON serializable'
-    if isinstance(o, datetime.datetime):
-        return o.__str__()
-#myDict={}
-#print(json.dumps(myDict, default = myconverter))
-
-'''
-class Question(models.Model):
-    Question_Name = models.CharField(max_length = 40) # no name longer than 40
-    Question_ID = models.CharField(max_length = 40) # no name longer than 40
-    Question_Current_Count = models.PositiveIntegerField(default = 1)
-    Question_difficulty = models.CharField(max_length = 10 ,default = 'normal') # no name longer than 10
-    Question_Category = models.ManyToManyField('Category', blank=True, related_name='Category')
-    Question_AC_Count = models.PositiveIntegerField(default = 0)
-    Question_Summit_Time = models.PositiveIntegerField(default = 0)
-    Question_Create_Time = models.DateTimeField(auto_now_add=True)
-    def __str__(self):
-        return self.Question_Name
-'''
