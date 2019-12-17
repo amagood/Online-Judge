@@ -5,7 +5,7 @@ var registerObj = {
   "password" : "",
   "email" : ""
 }
-var postURL = "https://httpbin.org/post";
+var postURL = ""; //<--URL
 var tmpObj = {};
 
 new Vue({
@@ -49,7 +49,7 @@ new Vue({
           	.then(function (response) {
             	console.log(response);
             	tmpObj = response.data;
-            	alert(tmpObj.status);
+            	alert(tmpObj.stats);
           	})
           	.catch(function (error) {
             	alert("連線錯誤! 請再試一次~");

@@ -26,7 +26,7 @@ var testObj = {
   "hash" : ""
 
 }
-var postURL = "https://httpbin.org/post";
+var postURL = ""; //<--URL
 var tmpObj = {};
 var tmpObj2 = {};
 
@@ -152,7 +152,7 @@ new Vue({
           .then(function (response) {
             console.log(response);
             tmpObj2 = response.data;
-            if(tmpObj2.stats=="success")
+            if(tmpObj2.submitStats=="success")
             {
               alert("Question Submit Success!");
             }
