@@ -75,3 +75,7 @@ v1.3 2019/12/15
 new: create question
 
 v1.4 2019/12/16
+
+newAPI getQ:sortDesc ceaQ:tag&difficulty fix:json-decodeBUG
+
+v1.5 2019/12/17
