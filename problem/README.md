@@ -24,6 +24,8 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/12/21 Hide upload header files in py mode
+	html js hide and clear upload header files when change to py mode
 ### 2019/12/21 InitCode
 	html js set initial code on editor
 	solve the problem about header file like <stdio.h> would become a html tag

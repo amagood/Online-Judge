@@ -1,4 +1,4 @@
-﻿// 20191216
+﻿// 20191221
 // navbar
 
 
@@ -95,10 +95,15 @@ var app2 = new Vue({
     clickLang(langDisplay, selectedLang) {
       this.langDisplay = langDisplay;
       submitObj.language = selectedLang;
-      if (selectedLang == "python")
+      if (selectedLang == "python") {
         editor.session.setMode("ace/mode/python");
-      else
+        uploadFileApp.showHeaderFile = false;
+        uploadFileApp.headerFile = null;
+      }
+      else {
         editor.session.setMode("ace/mode/c_cpp");
+        uploadFileApp.showHeaderFile = true;
+      }
     },
     clickTheme() {
       var acePath = 'ace/theme/' + this.themeSelected;
@@ -181,12 +186,13 @@ var uploadFileApp = new Vue({
   el: "#uploadFileApp",
   data: {
     showUploadFileBlock: false,
+    showHeaderFile: true,
+    showImplementFilesInvalidMsg: false,
+    showHeaderFilesInvalidMsg: false,
     mainFile: null,
     implementFile: null,
     headerFile: null,
-    showImplementFilesInvalidMsg: false,
     implementFilesInvalidMsg: "",
-    showHeaderFilesInvalidMsg: false,
     headerFilesInvalidMsg: "",
     mainFileString: "",
     implementFile1String: "",

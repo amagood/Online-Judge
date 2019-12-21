@@ -115,8 +115,10 @@
           <b-form-file id="file-default" v-model="mainFile" v-on:input="checkMainFile" accept=".c, .cpp, .py"></b-form-file>
           <span>files</span>
           <b-form-file id="file-default" v-model="implementFile" v-on:input="checkImplementFiles" accept=".c, .cpp, .py" multiple></b-form-file>
-          <span>header files</span>
-          <b-form-file id="file-default" v-model="headerFile" v-on:input="checkHeaderFiles" accept=".h" multiple></b-form-file>
+          <div v-show="showHeaderFile">
+            <span>header files</span>
+            <b-form-file id="file-default" v-model="headerFile" v-on:input="checkHeaderFiles" accept=".h" multiple></b-form-file>
+          </div>
           <span v-show="showImplementFilesInvalidMsg" style="color: red;">${ implementFilesInvalidMsg }</span>
           <span v-show="showHeaderFilesInvalidMsg" style="color: red;">${ headerFilesInvalidMsg }</span>
         </div>
