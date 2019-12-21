@@ -2,20 +2,21 @@
 // navbar
 
 
-clearStorage = function(){
-  localStorage.clear();
-}
 var navapp = new Vue({
-  el: "#navapp",
-  data:{
-    whichShow:"",
-    userid: "",
+  delimiters: ['${', '}'],
+  el : "#navapp",
+  data :{
+    whichShow : "",//顯示哪個題目庫
+    regIsShow : "",//顯示註冊鈕
+    userid : "",
+    name : localStorage.getItem("userName"),
   },
   created() {
-    this.checkId()
+    this.chooseProblems()
+    this.canRegister()
   },
   methods: {
-    checkId(){
+    chooseProblems(){
       let self = this
       self.userid = localStorage.getItem("who")
       if(self.userid === "admin"||self.userid === "teacher"){
@@ -24,7 +25,17 @@ var navapp = new Vue({
       else if(self.userid === "student"){
         self.whichShow = "student"
       }
-    }
+    },
+    canRegister(){
+      let self = this
+      self.userid = localStorage.getItem("who")
+      if(self.userid === "admin"){
+        self.regIsShow = true
+      }
+    },
+    clearStorage(){
+      localStorage.clear();
+    },
   },
 })
 
@@ -237,7 +248,9 @@ var submitObj = {
     "file1": "",
     "file2": ""
   },
-  "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
+  "userName" : "",
+  "Class" : "",
+  "hash": ""
 }
 var postURL = "submit/"
 var testMode = false
@@ -362,6 +375,8 @@ window.onload = function() {
   userInfo.userName = localStorage.getItem("userName");
   userInfo.hash = localStorage.getItem("hash");
   this.console.log(userInfo);
+  submitObj.userName = userInfo.userName;
+  submitObj.hash = userInfo.hash;
 }
 
 

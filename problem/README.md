@@ -24,6 +24,9 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/12/21 Update navbar
+	html js update navbar: index v1.2, OnlyNavbar modeify
+	get userName and hash when onload
 ### 2019/12/16 Fix typo error
 	js uploadFileApp,headerFile2String
 ### 2019/12/12 Improve styling on upload file block
