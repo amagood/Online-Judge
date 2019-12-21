@@ -24,6 +24,9 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/12/21 New implement on upload file
+	js
+	max file amount of implementFile/headerFile set by the global variable named "maxFileAmount" (value is 10)
 ### 2019/12/21 Hide upload header files in py mode
 	html js hide and clear upload header files when change to py mode
 ### 2019/12/21 InitCode

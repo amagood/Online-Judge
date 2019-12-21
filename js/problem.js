@@ -99,8 +99,7 @@ var app2 = new Vue({
         editor.session.setMode("ace/mode/python");
         uploadFileApp.showHeaderFile = false;
         uploadFileApp.headerFile = null;
-      }
-      else {
+      } else {
         editor.session.setMode("ace/mode/c_cpp");
         uploadFileApp.showHeaderFile = true;
       }
@@ -113,68 +112,35 @@ var app2 = new Vue({
 })
 
 
-// get content from file object
+// FileReader
 
 
-function getMainFileContent() {
+var maxFileAmount = 10;
+var mainFileReader = new FileReader();
+var implementFileReaders = [];
+var headerFileReaders = [];
+function creatFileReaders() {
+  var i = 0;
+  for (i=0; i<maxFileAmount; i++) {
+    implementFileReaders[i] = new FileReader();
+    headerFileReaders[i] = new FileReader();
+  }
+}
+function readMainFileContent() {
   if (uploadFileApp.mainFile != null)
-  {
-    var read = new FileReader();
-    read.readAsBinaryString(uploadFileApp.mainFile);
-    read.onloadend = function(){
-      uploadFileApp.mainFileString = read.result;
-    }
-  }
-  else
-    uploadFileApp.mainFileString = "";
+    mainFileReader.readAsText(uploadFileApp.mainFile);
 }
-function getImplementFile1Content() {
-  if (uploadFileApp.implementFile != null)
-  {
-    var read = new FileReader();
-    read.readAsBinaryString(uploadFileApp.implementFile[0]);
-    read.onloadend = function(){
-      uploadFileApp.implementFile1String = read.result;
-    }
-  }
-  else
-    uploadFileApp.implementFile1String = "";
+function readImplementFileContent() {
+  var i = 0;
+  for (i=0; i<maxFileAmount; i++)
+    if (uploadFileApp.implementFile != null && uploadFileApp.implementFile[i] != undefined)
+      implementFileReaders[i].readAsText(uploadFileApp.implementFile[i]);
 }
-function getImplementFile2Content() {
-  if (uploadFileApp.implementFile != null && uploadFileApp.implementFile[1] != undefined)
-  {
-    var read = new FileReader();
-    read.readAsBinaryString(uploadFileApp.implementFile[1]);
-    read.onloadend = function(){
-      uploadFileApp.implementFile2String = read.result;
-    }
-  }
-  else
-    uploadFileApp.implementFile2String = "";
-}
-function getHeaderFile1Content() {
-  if (uploadFileApp.headerFile != null)
-  {
-    var read = new FileReader();
-    read.readAsBinaryString(uploadFileApp.headerFile[0]);
-    read.onloadend = function(){
-      uploadFileApp.headerFile1String = read.result;
-    }
-  }
-  else
-    uploadFileApp.headerFile1String = "";
-}
-function getHeaderFile2Content() {
-  if (uploadFileApp.headerFile != null && uploadFileApp.headerFile[1] != undefined)
-  {
-    var read = new FileReader();
-    read.readAsBinaryString(uploadFileApp.headerFile[1]);
-    read.onloadend = function(){
-      uploadFileApp.headerFile2String = read.result;
-    }
-  }
-  else
-    uploadFileApp.headerFile2String = "";
+function readHeaderFileContent() {
+  var i = 0;
+  for (i=0; i<maxFileAmount; i++)
+    if (uploadFileApp.headerFile != null && uploadFileApp.headerFile[i] != undefined)
+      headerFileReaders[i].readAsText(uploadFileApp.headerFile[i]);
 }
 
 
@@ -193,41 +159,28 @@ var uploadFileApp = new Vue({
     implementFile: null,
     headerFile: null,
     implementFilesInvalidMsg: "",
-    headerFilesInvalidMsg: "",
-    mainFileString: "",
-    implementFile1String: "",
-    implementFile2String: "",
-    headerFile1String: "",
-    headerFile2String: ""
+    headerFilesInvalidMsg: ""
   },
   methods: {
     checkMainFile() {
-      getMainFileContent();
+      readMainFileContent();
     },
     checkImplementFiles() {
-      if (this.implementFile != null && this.implementFile.length > 2)
-      {
+      if (this.implementFile != null && this.implementFile.length > maxFileAmount) {
         this.showImplementFilesInvalidMsg = true;
-        this.implementFilesInvalidMsg = "files: exceed 2 files!";
-      }
-      else
-      {
+        this.implementFilesInvalidMsg = "files: exceed " + maxFileAmount.toString() + " files!";
+      } else {
         this.showImplementFilesInvalidMsg = false;
-        getImplementFile1Content();
-        getImplementFile2Content();
+        readImplementFileContent();
       }
     },
     checkHeaderFiles() {
-      if (this.headerFile != null && this.headerFile.length > 2)
-      {
+      if (this.headerFile != null && this.headerFile.length > maxFileAmount) {
         this.showHeaderFilesInvalidMsg = true;
-        this.headerFilesInvalidMsg = "header files: exceed 2 files!";
-      }
-      else
-      {
+        this.headerFilesInvalidMsg = "header files: exceed " + maxFileAmount.toString() + " files!";
+      } else {
         this.showHeaderFilesInvalidMsg = false;
-        getHeaderFile1Content();
-        getHeaderFile2Content();
+        readHeaderFileContent();
       }
     }   
   }
@@ -244,15 +197,12 @@ var submitObj = {
   "fileAmount": 0,
   "file":
   {
-    "file1": "",
-    "file2": "",
-    "file3": ""
+    "file1": ""
   },
   "headerFileAmount": 0,
   "headerFile":
   {
-    "file1": "",
-    "file2": ""
+    "file1": ""
   },
   "userName" : "",
   "Class" : "",
@@ -261,6 +211,30 @@ var submitObj = {
 var postURL = "submit/"
 var testMode = false
 var tmpObj = {}
+function copyFileStringsToSubmitObj() {
+  submitObj.file["file1"] = mainFileReader.result;
+  if (uploadFileApp.mainFile == null)
+    submitObj.file["file1"] = "";
+  var i = 0;
+  for (i=0; i<maxFileAmount; i++) {
+    if (uploadFileApp.implementFile != null && uploadFileApp.implementFile.length > 0) {
+      if (implementFileReaders[i].result != null && i < uploadFileApp.implementFile.length)
+        submitObj.file["file"+(i+2)] = implementFileReaders[i].result;
+      else
+        delete submitObj.file["file"+(i+2)];
+    } else {
+      delete submitObj.file["file"+(i+2)];
+    }
+    if (uploadFileApp.headerFile != null && uploadFileApp.headerFile.length > 0) {
+      if (headerFileReaders[i].result != null && i < uploadFileApp.headerFile.length)
+        submitObj.headerFile["file"+(i+1)] = headerFileReaders[i].result;
+      else
+        delete submitObj.headerFile["file"+(i+1)];
+    } else {
+      delete submitObj.headerFile["file"+(i+1)];
+    }
+  }
+}
 
 
 // app3 for submit
@@ -291,39 +265,20 @@ var app3 = new Vue({
     submitCode() {
       document.getElementById("submitBtn").setAttribute("disabled", "disabled");
       this.showSpinner = true;
-      if (uploadFileApp.showUploadFileBlock)
-      {
-        submitObj.fileAmount = 1;
+      if (uploadFileApp.showUploadFileBlock) {
+        copyFileStringsToSubmitObj();
         if (uploadFileApp.implementFile != null)
-        {
-          if (uploadFileApp.implementFile.length > 2)
-            submitObj.fileAmount = 3;
-          else
-            submitObj.fileAmount = uploadFileApp.implementFile.length + 1;
-        }
-        submitObj.file.file1 = uploadFileApp.mainFileString;
-        submitObj.file.file2 = uploadFileApp.implementFile1String;
-        submitObj.file.file3 = uploadFileApp.implementFile2String;
-        submitObj.headerFileAmount = 0;
+          submitObj.fileAmount = 1 + uploadFileApp.implementFile.length;
+        else
+          submitObj.fileAmount = 1;
         if (uploadFileApp.headerFile != null)
-        {
-          if (uploadFileApp.headerFile.length > 2)
-            submitObj.headerFileAmount = 2;
-          else
-            submitObj.headerFileAmount = uploadFileApp.headerFile.length;
-        }
-        submitObj.headerFile.file1 = uploadFileApp.headerFile1String;
-        submitObj.headerFile.file2 = uploadFileApp.headerFile2String;
-      }
-      else
-      {
+          submitObj.headerFileAmount = uploadFileApp.headerFile.length;
+        else
+          submitObj.headerFileAmount = 0;
+      } else {
         submitObj.fileAmount = 1;
         submitObj.file.file1 = editor.getValue();
-        submitObj.file.file2 = "";
-        submitObj.file.file3 = "";
         submitObj.headerFileAmount = 0;
-        submitObj.headerFile.file1 = "";
-        submitObj.headerFile.file2 = "";
       }
       this.showAC = false;
       this.showCE = false;
@@ -371,7 +326,6 @@ var userInfo = {
 }
 
 window.onload = function() {
-  // Login System
   userInfo.who = localStorage.getItem("who");
   userInfo.userName = localStorage.getItem("userName");
   userInfo.hash = localStorage.getItem("hash");
@@ -384,6 +338,7 @@ window.onload = function() {
   document.getElementById("mainBlock1").className = "mainBlock1 w3-animate-zoom";
   document.getElementById("mainBlock2").className = "mainBlock2 w3-animate-bottom";
   document.getElementsByTagName("html")[0].style.visibility = "visible";
+  creatFileReaders();
 }
 
 
