@@ -365,11 +365,6 @@ var userInfo = {
 }
 
 window.onload = function() {
-  document.getElementsByTagName("body")[0].className = "w3-animate-opacity";
-  document.getElementById("navapp").className = "navbar navbar-expand-lg navbar-light navbarset w3-animate-top";
-  document.getElementById("mainBlock1").className = "mainBlock1 w3-animate-zoom";
-  document.getElementById("mainBlock2").className = "mainBlock2 w3-animate-bottom";
-  document.getElementsByTagName("html")[0].style.visibility = "visible";
   // Login System
   userInfo.who = localStorage.getItem("who");
   userInfo.userName = localStorage.getItem("userName");
@@ -377,6 +372,12 @@ window.onload = function() {
   this.console.log(userInfo);
   submitObj.userName = userInfo.userName;
   submitObj.hash = userInfo.hash;
+  editor.setValue(initCode);
+  document.getElementsByTagName("body")[0].className = "w3-animate-opacity";
+  document.getElementById("navapp").className = "navbar navbar-expand-lg navbar-light navbarset w3-animate-top";
+  document.getElementById("mainBlock1").className = "mainBlock1 w3-animate-zoom";
+  document.getElementById("mainBlock2").className = "mainBlock2 w3-animate-bottom";
+  document.getElementsByTagName("html")[0].style.visibility = "visible";
 }
 
 
