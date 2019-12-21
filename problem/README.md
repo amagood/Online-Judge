@@ -24,6 +24,8 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/12/21 Update server-specific file
+	update p000.html
 ### 2019/12/21 New implement on upload file
 	js
 	max file amount of implementFile/headerFile set by the global variable named "maxFileAmount" (value is 10)
