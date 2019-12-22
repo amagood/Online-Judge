@@ -24,18 +24,20 @@ def Single_Rank(Current_Rank):
     return Rank_Single_Json
 
 def Rank_json(Request_Question, UserName, UserHash):
-    search_Question = Question.objects.get(Question_ID = Request_Question)
-    Question_Rank = search_Question.Rank.order_by('Rank_Order').all()
     Return_Data = {}
-    tmp = []
+    search_Question = Question.objects.filter(Question_ID = Request_Question)
+    if len(search_Question) != 0:
     
-    for i in range(100 if len(Question_Rank) > 100 else len(Question_Rank)):
-        tmp.append(Single_Rank(Question_Rank[i]))
-    '''for i in range(100 if len()):
-        tmp.append(Single_Rank(i))'''
-    Return_Data['userData'] = tmp
-    Return_Data['userName'] = UserName
-    Return_Data['hash'] = UserHash
+        Question_Rank = search_Question[0].Rank.order_by('Rank_Order').all()
+        tmp = []
+    
+        for i in range(100 if len(Question_Rank) > 100 else len(Question_Rank)):
+            tmp.append(Single_Rank(Question_Rank[i]))
+        '''for i in range(100 if len()):
+            tmp.append(Single_Rank(i))'''
+        Return_Data['userData'] = tmp
+        Return_Data['userName'] = UserName
+        Return_Data['hash'] = UserHash
     #data = json.dumps(Return_data)
     return Return_Data
 
