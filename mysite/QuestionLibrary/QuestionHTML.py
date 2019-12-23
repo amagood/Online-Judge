@@ -6,7 +6,7 @@
 
 import os
 class Question_Library():
-    path='../../../QuestionData'
+    path='./templates/QuestionData'
     def __init__(self,QuestionID):
         self.QuestionID = QuestionID
         if not os.path.isdir(self.path):
@@ -18,7 +18,8 @@ class Question_Library():
         h_path=p_path+'/{}.html'.format(self.QuestionID)
         f=open(h_path,"w")
         html_str=''
-        html_str+='''<!DOCTYPE html>
+        html_str+='''﻿<!-- 20191223 -->
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,6 +28,7 @@ class Question_Library():
         html_str+=Title
         html_str+='''</title>
   <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
   <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
   <link rel="stylesheet" href="../css/problem.css">
@@ -34,31 +36,48 @@ class Question_Library():
 
 <body>
   <!-- partial:index.partial.html -->
-
-  <body>
-    <!-- navbar -->
-    <div id="app1" style="border-bottom: 4px solid MediumSeaGreen">
-      <b-navbar toggleable="lg" type="light" variant="light">
-        <b-navbar-brand href="#">GreenTeam</b-navbar-brand>
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-        <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav>
-            <b-nav-item href="#">Problems</b-nav-item>
-            <b-nav-item href="#">Ranking</b-nav-item>
-          </b-navbar-nav>
-          <!-- Right aligned nav items -->
-          <b-navbar-nav class="ml-auto">
-            <b-nav-item href="#">Login</b-nav-item>
-            <b-nav-item href="#">Register</b-nav-item>
-          </b-navbar-nav>
-
-        </b-collapse>
-      </b-navbar>
+  <!-- navbar -->
+  <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+    <a class="navbar-brand" href="../index.html">GreenTeam</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html"><img class="navbarimage" src="../image/home.svg" /> Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" v-if="whichShow === 'teacher'" href="../teacherProblem.html"><img class="navbarimage" src="../image/file.svg" /> Problems</a>
+          <a class="nav-link" v-else-if="whichShow === 'student'" href="../studentProblem.html"><img class="navbarimage" src="../image/file.svg" /> Problems</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="../ranking.html"><img class="navbarimage" src="../image/list-ordered.svg" /> Ranking<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../comments.html"><img class="navbarimage" src="../image/comments-regular.svg" /> Comments</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <span id="username">${ name } &nbsp</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" v-show="regIsShow" href="../register.html"><img class="navbarimage" src="../image/address-book-regular.svg" /> Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../login.html"><img class="navbarimage" src="../image/sign-in-alt-solid.svg" /> Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" v-on:click="clearStorage()" href="../index.html"><img class="navbarimage" src="../image/sign-out-alt-solid.svg"/> Logout</a>
+        </li>
+      </ul>
     </div>
-    <!-- navbar end -->
-    <!-- mainBlock1 -->
-    <div class="mainBlock1">
-      <h1 class="bigTitle">'''
+  </nav>
+  <!-- navbar end -->
+  <!-- mainBlock1 -->
+  <div id="mainBlock1" class="mainBlock1">
+    <h1 class="bigTitle">'''
         html_str+=Title
         html_str+='''</h1>
       <p>'''
@@ -69,88 +88,165 @@ class Question_Library():
       <p class="content">'''
         html_str+=Description
         html_str+='''</p>
-      <div class="sampleInOutContainer">
-        <div class="sampleInOut">
-          <span class="smallTitle">Sample Input</span>
-          <img id="imgCopyIn" src="../image/copy.svg" alt="" onclick="copyFn('sampleIn')">
-          <pre id="sampleIn" class="samplePre">'''
+    <div class="sampleInOutContainer">
+      <div class="sampleInOut">
+        <span class="smallTitle">Sample Input</span>
+        <img id="imgCopyIn" src="../image/copy.svg" alt="" onclick="copyFn('sampleIn')" style="cursor: pointer;">
+        <pre id="sampleIn" class="samplePre">'''
         html_str+=SampleInput
         html_str+='''</pre>
-        </div>
-        <div class="sampleInOut">
-          <span class="smallTitle">Sample Out</span>
-          <img id="imgCopyOut" src="../image/copy.svg" alt="" onclick="copyFn('sampleOut')">
-          <pre id="sampleOut" class="samplePre">'''
+      </div>
+      <div class="sampleInOut">
+        <span class="smallTitle">Sample Out</span>
+        <img id="imgCopyOut" src="../image/copy.svg" alt="" onclick="copyFn('sampleOut')" style="cursor: pointer;">
+        <pre id="sampleOut" class="samplePre">'''
         html_str+=SampleOut
         html_str+='''</pre>
-        </div>
       </div>
-
     </div>
-    <!-- mainBlock1 end -->
-    <!-- mainBlock2 -->
-    <div class="mainBlock2">
-      <div id="app2" style="position: relative;">
-        <!-- tooltip for copy SampleInOut -->
-        <b-tooltip target="imgCopyIn" title="Copy the sample input"></b-tooltip>
-        <b-tooltip target="imgCopyOut" title="Copy the sample output"></b-tooltip>
-        <transition name="slide-fade">
-          <div v-bind:class="copyPopupClass" v-show="showCopyPopup">
-            <p v-html="rawHtml"></p>
+  </div>
+  <!-- mainBlock1 end -->
+  <!-- mainBlock2 -->
+  <div id="mainBlock2" class="mainBlock2">
+    <div id="app2" style="position: relative;">
+      <!-- tooltip for copy SampleInOut -->
+      <b-tooltip target="imgCopyIn" title="Copy the sample input"></b-tooltip>
+      <b-tooltip target="imgCopyOut" title="Copy the sample output"></b-tooltip>
+      <transition name="slide-fade-popup">
+        <div class="copyPopup" v-show="showCopyPopup">
+          <p>Copied!</p>
+        </div>
+      </transition>
+      <!-- tooltip for copy SampleInOut end -->
+      <div class="d-flex langThemeFlexBox">
+        <!-- Lang dropdown -->
+        <div class="flex-fill">
+          <span class="langLbl">Language:</span>
+          <b-dropdown variant="light" v-bind:text="langDisplay">
+            <b-dropdown-item v-on:click="clickLang('C++', 'cpp')">C++</b-dropdown-item>
+            <b-dropdown-item v-on:click="clickLang('C','c')">C</b-dropdown-item>
+            <b-dropdown-item v-on:click="clickLang('Python', 'python')">Python</b-dropdown-item>
+          </b-dropdown>
+        </div>
+        <!-- Lang dropdown end -->
+        <!-- select form -->
+        <div class="themeFlexBox">
+          <span class="themeLbl">Theme:</span>
+          <b-form-select class="themeSelect" v-model="themeSelected" v-on:change="clickTheme()" :options="themeOptions">
+          </b-form-select>
+        </div>
+        <!-- select form end -->
+        </div>
+    </div>
+    <div id="uploadFileApp">
+      <b-button id="uploadFileBtn" v-on:click="showUploadFileBlock = !showUploadFileBlock" :pressed="showUploadFileBlock" size="sm" variant="outline-secondary" title="submit uploaded files when this button is toggled">Upload files</b-button>
+      <transition name="fade">
+        <div class="uploadFileBlock" v-show="showUploadFileBlock">
+          <span>main</span>
+          <b-form-file id="file-default" v-model="mainFile" v-on:input="checkMainFile" accept=".c, .cpp, .py"></b-form-file>
+          <span>files</span>
+          <b-form-file id="file-default" v-model="implementFile" v-on:input="checkImplementFiles" accept=".c, .cpp, .py" multiple></b-form-file>
+          <div v-show="showHeaderFile">
+            <span>header files</span>
+            <b-form-file id="file-default" v-model="headerFile" v-on:input="checkHeaderFiles" accept=".h" multiple></b-form-file>
           </div>
+          <span v-show="showImplementFilesInvalidMsg" style="color: red;">${ implementFilesInvalidMsg }</span>
+          <span v-show="showHeaderFilesInvalidMsg" style="color: red;">${ headerFilesInvalidMsg }</span>
+        </div>
+      </transition>
+    </div>
+    <div id="aceEditorContainer" class=" aceEditorContainer">
+      <pre id="aceEditor"></pre>
+    </div>
+    <!-- dragbar -->
+    <div class="dragbar" id="dragbar"></div>
+    <!-- dragbar end -->
+    <div id="app3">
+      <div class="d-flex justify-content-end mb-3">
+        <transition name="fade">
+          <b-spinner v-if="showSpinner" variant="secondary" label="Spinning"></b-spinner>
         </transition>
-        <!-- tooltip for copy SampleInOut end -->
-        <div class="d-flex langThemeFlexBox">
-          <!-- Lang dropdown -->
+        <!-- <b-button class="mr-1 ml-3" disabled pill variant="outline-secondary">Test</b-button> -->
+        <b-button id="submitBtn" class="mx-1" v-on:click="submitCode()" pill variant="outline-secondary">Submit</b-button>
+      </div>
+      <!-- resultBlcok -->
+      <transition name="slide-fade">
+        <div class="resultGreen d-flex" v-if="showAC">
           <div class="flex-fill">
-            <span class="langLbl">Language:</span>
-            <b-dropdown variant="light" v-bind:text="langDisplay">
-              <b-dropdown-item v-on:click="clickLang('C++', 'cpp')">C++</b-dropdown-item>
-              <b-dropdown-item v-on:click="clickLang('C','c')">C</b-dropdown-item>
-              <b-dropdown-item v-on:click="clickLang('Python', 'python')">Python</b-dropdown-item>
-            </b-dropdown>
+            <span class="codeState">${ codeState }</span>
+            <span>(${ exeTime }, ${ memoryUsage })</span>
           </div>
-          <!-- Lang dropdown end -->
-          <!-- select form -->
-          <div class="themeFlexBox">
-            <span class="themeLbl">Theme:</span>
-            <b-form-select class="themeSelect" v-model="themeSelected" v-on:change="clickTheme()" :options="themeOptions">
-            </b-form-select>
+          <div>
+            <span>${ verdictTime }</span>
           </div>
-          <!-- select form end -->
-          </div>
-      </div>
-      <div class=" aceEditorContainer">
-        <pre id="aceEditor">
-#include < iostream>
-using namespace std;
-
-int main()
-{
-    int a, b;
-    cin >> a >> b;
-    cout << a+b;
-    return 0;
-}</pre>
-      </div>
-      <div id="app3">
-        <div style="position: relative; height: 60px">
-          <b-button disabled class="btnTest" pill variant="outline-secondary">Test</b-button>
-          <b-button class="btnSubmit" v-on:click="testPost()" pill variant="outline-secondary">Submit</b-button>
         </div>
-        <!-- resultBlcok -->
-        <transition name="slide-fade">
-          <div v-bind:class="resultClass" v-if="showResult">
-            <!-- <p>{{ responseObj.codeStats }}</p>
-            <p>execution time: {{ responseObj.exeTime }}</p>
-            <p>error message: {{ responseObj.errorMessage }}</p> -->
-            <p>sent a request. Open DevTools and look for console.</p>
+      </transition>
+      <transition name="slide-fade">
+        <div class="resultRed d-flex" v-if="showCE">
+          <div class="flex-fill">
+            <span class="codeState">${ codeState }</span>
+            <p>${ errorMessage }</p>
           </div>
-        </transition>
-      </div>
+          <div>
+            <span>${ verdictTime }</span>
+          </div>
+        </div>
+      </transition>
+      <transition name="slide-fade">
+        <div class="resultRed d-flex" v-if="showTLE">
+          <div class="flex-fill">
+            <span class="codeState">${ codeState }</span>
+            <span>(${ exeTime })</span>
+          </div>
+          <div>
+            <span>${ verdictTime }</span>
+          </div>
+        </div>
+      </transition>
+      <transition name="slide-fade">
+        <div class="resultRed" v-if="showWA">
+          <div class="d-flex">
+            <div class="flex-fill">
+              <span class="codeState">${ codeState }</span>
+            </div>
+            <div>
+              <span>${ verdictTime }</span>
+            </div>
+          </div>
+          <div class="sampleInOutContainer">
+            <div class="sampleInOut">
+              <span class="smallTitle2">Wrong Output</span>
+              <img src="../image/copy.svg" alt="" onclick="copyFn('wrongOutput')" style="cursor: pointer;">
+              <div v-html="htmlWrongOutput"></div>
+            </div>
+            <div class="sampleInOut">
+              <span class="smallTitle2">Expected Output</span>
+              <img src="../image/copy.svg" alt="" onclick="copyFn('expectedOutput')" style="cursor: pointer;">
+              <div v-html="htmlExpectedOutput"></div>
+            </div>
+          </div>
+        </div>
+      </transition>
+      <transition name="slide-fade">
+        <div class="resultRed d-flex" v-if="showMLE">
+          <div class="flex-fill">
+            <span class="codeState">${ codeState }</span>
+            <span>(${ memoryUsage })</span>
+          </div>
+          <div>
+            <span>${ verdictTime }</span>
+          </div>
+        </div>
+      </transition>
+      <transition name="slide-fade">
+        <div v-if="showERR">
+          <p class="codeState">Network error! Please try again.</p>
+        </div>
+      </transition>
+      <!-- resultBlcok end -->
     </div>
-    <!-- mainBlock2 end -->
-  </body>
+  </div>
+  <!-- mainBlock2 end -->
   <!-- partial -->
   <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
   <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
@@ -160,6 +256,10 @@ int main()
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js" integrity="sha256-CVkji/u32aj2TeC+D13f7scFSIfphw2pmu4LaKWMSY8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ext-language_tools.js" integrity="sha256-5GsAp93HE/XYlhrUPMw4VBAoawG9n3c7+DbQE4tRwW0=" crossorigin="anonymous"></script>
   <script src="../js/problem.js"></script>
+  <script>
+    var qID = "p000";
+    var initCode = ``;
+  </script>
 </body>
 
 </html>'''

@@ -32,7 +32,7 @@ def responseGetQuestion(request):
             "hash" : req['hash'],
         }
         return HttpResponse(json.dumps(data))
-    return render(request,'problem.html',{})
+    return render(request,'QuestionData/problem.html',{})
 
 def responseCreateQuestion(request):
     if request.method == "POST":
@@ -45,4 +45,8 @@ def responseCreateQuestion(request):
             "hash" : req['hash'],
         }
         return HttpResponse(json.dumps(data))
-    return render(request,'createproblem.html',{})
+    return render(request,'QuestionData/createproblem.html',{})
+
+def problemDetail(request,num=1):
+    purl='QuestionData/p{:05d}/p{:05d}.html'.format(num,num)
+    return render(request,purl,{})

@@ -1,0 +1,207 @@
+﻿<!-- 20191213 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="UTF-8">
+    <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
+    {%load static %}
+    <link rel="stylesheet" href={% static "css/createQuestion.css" %} >
+  </head>
+
+  <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+    <a class="navbar-brand" href="index.html">GreenTeam</a>
+    <button class="navbar-toggler" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html"><img class="navbarimage" src={% static "image/home.svg" %} /> Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="teacherProblem.html"><img class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="ranking.html"><img class="navbarimage" src={% static "image/list-ordered.svg" %} /> Ranking<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="comments.html"><img class="navbarimage" src={% static "image/comments-regular.svg" %} /> Comments</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="register.html"><img class="navbarimage" src={% static "image/address-book-regular.svg" %} /> Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.html"><img class="navbarimage" src={% static "image/sign-in-alt-solid.svg" %} /> Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" onclick="clearStorage()" href="index.html"><img class="navbarimage" src={% static "image/sign-out-alt-solid.svg" %}/> Logout</a>
+        </li>
+      </ul>
+    </div>
+    <script>
+      clearStorage = function(){
+        localStorage.clear();
+      }
+    </script>
+  </nav>
+    <!-- navbar end -->
+    
+    <!-- mainBlock -->
+  <div id="app1" class="mainBlockContainer">
+    <div class="mainBlock">
+      <h1 class="bigTitle">建立題目</h1>
+      
+      <!-- change, tag href -->
+         
+      <div class="container">
+        <form class="form-horizontal" data-toggle="validator" role="form" method="post" novalidate="true" >
+          
+            <div class="form-group">
+               <div class="col-sm-10">
+                  <label for="id_name">題目名稱 :</label>
+                  <br>
+                  <input size="36" name="questionname" type="text" id="id_questionName" autocomplete="off" value="" required="required" maxlength="30">
+                  <input type="hidden" name="CSRF_KEY" value="2050849946">
+               </div>
+            </div>
+          
+          <div class="form-group">
+              <div class="col-sm-10">
+                 <label for="id_questionPDF">題目敘述PDF :</label>
+                 <br>
+                 <input name="pdf" type="file" id="id_pdf" autocomplete="off" value="" required="" accept = ".pdf" oninput="inputPDF()">
+              </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="col-sm-10">
+              <label for="id_Content">題目敘述 :</label>
+              <br>
+              <textarea id="id_questionContent" style="width:760px;height:310px;border:6px black double;" required></textarea>
+              <!--<textarea name="editor1" required="required"></textarea>
+                <script>
+                   CKEDITOR.replace( 'editor1' );
+                </script>-->
+            </div>
+          </div>
+
+         <div class="form-group">
+          	<div class="col-sm-10">
+              <label for="id_selectLanguage" >選擇語言 :</label>
+              <select name="language" id="selectLanguage">
+　         		<option value="0">C</option>
+　         		<option value="1">C++</option>
+　         		<option value="2">Python</option>
+          		</select>
+            </div>
+         </div>
+
+
+         <div class="form-group">
+           <div class="col-sm-10">
+               <label for="id_exampleCode" >範例程式檔 :</label>
+               <div id="id_selectFileType">
+                	<input size="40" name="exampleCode" type="file" id="id_exampleCode" autocomplete="off" value="" required="required" accept = ".c" oninput="inputExampleCode()">
+               </div>
+           </div>
+        </div>
+
+         <div class="form-group">
+           <div class="col-sm-10">
+            <label for="id_exampleTestdata" >範例測資 :</label>
+            <br>
+            <textarea id="id_exampleInput" style="width:385px;height:200px;border:4px black double;" placeholder="範例測資輸入" required></textarea>
+            <textarea id="id_exampleOutput" style="width:385px;height:200px;border:4px black double;" placeholder="範例測資輸出" required></textarea>
+          </div>
+         </div>
+
+
+          <div class="form-group">
+              <div class="col-sm-10">
+                <label for="id_testdataInput" >測試資料輸入 :</label>
+                <br>
+                <input name="Input" type="file" id="id_Input" autocomplete="off" value="" required="required" oninput="inputInput()" accept=".txt">
+              </div>
+          </div>
+
+          <div class="form-group">
+              <div class="col-sm-10">
+                <label for="id_testdataOutput">測試資料輸出 :</label>
+                <br>
+                <input name="Output" type="file" id="id_Output" autocomplete="off" value="" required="required" oninput="inputOutput()" accept=".txt">
+              </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10">
+              <input name="submit" class="btn btn-primary disabled" id="submitBtn" type="button" value="測試測資與範例程式" 
+                  style="background-color: #237ACC; font-size: 20px; padding: 10px 58px; color: #fff; margin-right: 20px;" v-on:click="testQ()">
+            </div>
+          </div>
+
+          <br>
+
+          <div class="form-group">
+            <div class="col-sm-10">
+              <label for="difficulty">題目類別(複選) :</label>
+              <br>
+              <input type="checkbox" name="tag" id="id_tag_loop" value="loop">迴圈<br>
+              <input type="checkbox" name="tag" id="id_tag_if" value="if">條件式<br>
+              <input type="checkbox" name="tag" id="id_tag_array" value="array">陣列<br>
+              <input type="checkbox" name="tag" id="id_tag_pointer" value="pointer">指標<br>
+              <input type="checkbox" name="tag" id="id_tag_string" value="string">字串<br>
+              <input type="checkbox" name="tag" id="id_tag_binaryTree" value="binaryTree">二元樹<br>
+              <input type="checkbox" name="tag" id="id_tag_sort" value="sort">排序<br>
+              <input type="checkbox" name="tag" id="id_tag_dp" value="dp">動態規劃<br>
+            </div>
+          </div>
+
+          <br>
+
+          <div class="form-group">
+            <div class="col-sm-10">
+              <label for="difficulty">題目難度(1~10) :</label>
+              <br>
+              1 &ensp;&ensp;2 &ensp;&ensp;3 &ensp;&ensp;4 &ensp;&ensp;5 &ensp;&ensp;6 &ensp;&ensp;7 &ensp;&ensp;8 &ensp;&ensp;9 &ensp;&nbsp;10
+              <br>
+              <input name="difficulty" type="radio" id="id_difficulty_1" value="1" checked="true" required>
+              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_2" value="2" required>
+              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_3" value="3" required>
+              &nbsp;&nbsp; &nbsp;<input name="difficulty" type="radio" id="id_difficulty_4" value="4" required>
+              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_5" value="5" required>
+              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_6" value="6" required>
+              &nbsp;&nbsp; &nbsp;<input name="difficulty" type="radio" id="id_difficulty_7" value="7" required>
+              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_8" value="8" required>
+              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_9" value="9" required>
+              &nbsp;&nbsp; &nbsp;<input name="difficulty" type="radio" id="id_difficulty_10" value="10" required>
+            </div>
+          </div>
+            
+          <br>
+          <hr style="border: 1px solid #999;">
+          <div class="form-group">
+             <div class="col-sm-10">
+                <input name="submit" class="btn btn-primary disabled" id="submitBtn" type="button" value="建立題目" 
+                  style="background-color: #237ACC; font-size: 20px; padding: 10px 58px; color: #fff; margin-right: 20px;" v-on:click="submitQ()">
+                <a class="btn btn-default" id="id_cancel" style="font-size: 20px; padding: 10px 58px;" href="https://i.ytimg.com/vi/HQEZGEn2Eh0/hqdefault.jpg" role="button">取消</a>
+             </div>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+    <!-- mainBlock end -->
+  </body>
+    <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
+    <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
+    <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src={% static "js/createQuestion.js" %} ></script>
+
+</html>
+<!-- <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script> -->

@@ -1,13 +1,14 @@
-# folder path
-
+# path
+url: QuestionData/p1
+(get 'QuestionData/p00001/p00001.html')
 ```
-./QuestionData/"QuestionID"/"QuestionID".html
-                            "QuestionID"exampleCode.c
-                            "QuestionID"exampleCode.cpp
-                            "QuestionID"exampleCode.py
-              /css
-              /js
-              /image
+./templates/QuestionData/"QuestionID"/"QuestionID".html
+                                      "QuestionID"exampleCode.c
+                                      "QuestionID"exampleCode.cpp
+                                      "QuestionID"exampleCode.py
+ /static/QuestionData/css
+       	             /js
+                     /image
 ```
 
 # API
@@ -95,3 +96,7 @@ response:
     * fix:json-decodeBUG
   * v1.6 2019/12/19
     * update readme.md
+  * v1.7 2019/12/24
+    * folder path change
+    * add html urls
+    * css&js link error

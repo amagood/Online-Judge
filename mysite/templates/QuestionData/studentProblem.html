@@ -1,0 +1,160 @@
+<!--20191216-->
+<!doctype html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <!--W3.CSS-->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <!-- Bootstrap css-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.css">
+  <!--studentProblem.css-->
+  {% load static %}
+  <link rel="stylesheet" href={% static "css/studentProblem.css" %}>
+</head>
+
+<body>
+
+  <body>
+    <!--navbar-->
+    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset"
+      style="border-bottom: 4px solid MediumSeaGreen">
+      <a class="navbar-brand" href={% static "index.html" %}>GreenTeam</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href={% static "index.html" %}><img class="navbarimage"
+                src={% static "image/home.svg" %} /> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-if="whichShow === 'teacher'" href={% static "teacherProblem.html" %}><img
+                class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href={% static "studentProblem.html" %}><img
+                class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href={% static "ranking.html" %}><img class="navbarimage"
+                src={% static "image/list-ordered.svg" %} /> Ranking<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href={% static "comments.html" %}><img class="navbarimage"
+                src={% static "image/comments-regular.svg" %} /> Comments</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <span id="username">${ name } &nbsp</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href={% static "register.html" %}><img class="navbarimage"
+                src={% static "image/address-book-regular.svg" %} /> Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href={% static "login.html" %}><img class="navbarimage"
+                src={% static "image/sign-in-alt-solid.svg %}" /> Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-on:click="clearStorage()" href={% static "index.html" %}><img class="navbarimage"
+                src={% static "image/sign-out-alt-solid.svg" %} /> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--navbar end-->
+
+    <div id="problemLib" class="problemLib">
+      <div id="probapp">
+        <!--block 1 sortMenu-->
+        <b-row>
+          <b-col>
+            <b-dropdown dropup v-bind:text="Tag" variant="secondary">
+              <b-dropdown-item @click="filter = ''" v-on:click="clickTag('tag')">all</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTag('loop')">loop</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'array'" v-on:click="clickTag('array')">array</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'string'" v-on:click="clickTag('string')">string</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'function'" v-on:click="clickTag('function')">function
+              </b-dropdown-item>
+              <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTag('pointer')">pointer
+              </b-dropdown-item>
+            </b-dropdown>
+            <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
+              <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('degree')">all</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
+            </b-dropdown>
+          </b-col>
+          <!--search/filter bar-->
+          <b-col sm="5">
+            <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput">
+              <b-input-group size="">
+                <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
+                </b-form-input>
+                <b-input-group-append>
+                  <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                </b-input-group-append>
+              </b-input-group>
+            </b-form-group>
+          </b-col>
+        </b-row>
+
+        <!--block 2 Problem-->
+        <div style="margin-top: 20px; min-height: 480px;">
+          <b-table sticky hover responsive id="problemTable" :items="items" :fields="fields"
+            :per-page="questionLibObj.questionNum" :current-page="currentPage" :filter="filter" @filtered="onFiltered"
+            :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :busy="noGetData">
+            <!--loading-->
+            <template v-slot:table-busy>
+              <div class="text-center text-success " style="margin-top:30px">
+                <b-spinner class="align-middle" style="width: 3rem; height: 3rem; "></b-spinner>
+                <strong> Loading... </strong>
+              </div>
+            </template>
+            <!--problemLink-->
+            <template v-slot:cell(title)="data">
+              <a :href={% static "`problem/${data.item.id.replace(/[^a-z][^0-9]+/i,'')}.html`" %}>${ data.value }</a>
+            </template>
+            <template v-slot:cell(percentagePassing)="data">
+              ${ data.item.percentagePassing } %
+            </template>
+          </b-table>
+        </div>
+
+        <!--block 3 Page-->
+        <div style="margin-block-end:10px;">
+          <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="questionLibObj.questionNum"
+            aria-controls="problemTable" align="center">
+          </b-pagination>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!-- Optional JavaScript -->
+  <!--jquery-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <!--polyfill-->
+  <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
+  <!--bootstrap-vue-->
+  <script src='http://unpkg.com/vue@2.6.10/dist/vue.min.js'></script>
+  <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
+  <script src='http://unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.js'></script>
+  <!--axios-->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src={% static "js/studentProblem.js" %}></script>
+</body>
+
+</html>
