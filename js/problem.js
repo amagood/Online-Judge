@@ -332,6 +332,10 @@ window.onload = function() {
   this.console.log(userInfo);
   submitObj.userName = userInfo.userName;
   submitObj.hash = userInfo.hash;
+  if (submitObj.userName == null || submitObj.hash == null) {
+    document.getElementById("submitBtn").setAttribute("disabled", "disabled");
+    document.getElementById("submitBtn").textContent = "Login before submit";
+  }
   submitObj.qID = qID;
   editor.setValue(initCode);
   document.getElementsByTagName("body")[0].className = "w3-animate-opacity";

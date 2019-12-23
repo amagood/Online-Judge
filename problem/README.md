@@ -24,6 +24,8 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/12/23 Login before submit
+	js disable submit button when user is not logged in
 ### 2019/12/23 qID
 	html js submit.qID = qID when onload
 ### 2019/12/21 Update server-specific file
