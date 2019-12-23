@@ -1,4 +1,4 @@
-﻿// 20191221
+﻿// 20191223
 // navbar
 
 
@@ -192,7 +192,7 @@ var uploadFileApp = new Vue({
 
 var submitObj = {
   "action": "submit_code",
-  "qID": "p000",
+  "qID": "",
   "language": "cpp",
   "fileAmount": 0,
   "file":
@@ -332,6 +332,7 @@ window.onload = function() {
   this.console.log(userInfo);
   submitObj.userName = userInfo.userName;
   submitObj.hash = userInfo.hash;
+  submitObj.qID = qID;
   editor.setValue(initCode);
   document.getElementsByTagName("body")[0].className = "w3-animate-opacity";
   document.getElementById("navapp").className = "navbar navbar-expand-lg navbar-light navbarset w3-animate-top";
