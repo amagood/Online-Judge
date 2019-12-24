@@ -37,7 +37,7 @@
                 src={% static "image/home.svg" %} /> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href={% static "teacherProblem.html" %}><img
+            <a class="nav-link" v-if="whichShow === 'teacher'" href={% QuestionLibrary "teacherProblem.html" %}><img
                 class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
             <a class="nav-link" v-else-if="whichShow === 'student'" href={% static "studentProblem.html" %}><img
                 class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
@@ -61,7 +61,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href={% static "login.html" %}><img class="navbarimage"
-                src={% static "image/sign-in-alt-solid.svg %}" /> Login</a>
+                src={% static "image/sign-in-alt-solid.svg" %} /> Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" v-on:click="clearStorage()" href={% static "index.html" %}><img class="navbarimage"
