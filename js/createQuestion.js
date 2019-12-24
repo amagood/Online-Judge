@@ -33,6 +33,46 @@ var tmpObj2 = {};
 var testMode = true;
 var PDFin = false;
 
+//NAV BAR
+var navapp = new Vue({
+  delimiters : ['${', '}'],
+  el : "#navapp",
+  data : {
+    whichShow : "",
+    regIsShow : false,
+    userid : "",
+    name : "",
+  },
+  created(){
+    this.chooseProblems()
+    this.canRegister()
+  },
+  methods:{
+    chooseProblems(){
+      let self = this
+      self.name = localStorage.getItem("userName")
+      self.userid = localStorage.getItem("who")
+      if(self.userid === "admin"||self.userid === "teacher"){
+        self.whichShow = "teacher"
+      }
+      else if(self.userid === "student"){
+        self.whichShow = "student"
+      }
+    },
+    canRegister(){
+      let self = this
+      self.userid = localStorage.getItem("who")
+      if(self.userid === "admin"){
+        self.regIsShow = true
+      }
+    },
+    clearStorage(){
+      localStorage.clear()
+    },
+  },
+})
+//NAV BAR END
+
 
 function inputPDF()
 {
@@ -213,6 +253,10 @@ new Vue({
             alert('Network error! Please try again.');
             console.log(error);
           })
+      }
+      else
+      {
+        alert('請上傳檔案後重試');
       }
     }
   }
