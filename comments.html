@@ -1,4 +1,4 @@
-<!--version2.4 選擇班級後才可留言->
+<!--version2.5 切換班級清空留言-->
 <!--
   這裡是留言區
   圖片都放在image資料夾中
@@ -14,7 +14,7 @@
     />
     {% load static %}
     <!--連接CSS-->
-    <link rel="stylesheet" type="text/css" href={% static "css/comments.css" %}>
+    <link rel="stylesheet" type="text/css" href= {% static "css/comments.css" %}>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -31,24 +31,24 @@
   <body>
     <!--navbar, 格式設定在ranking.css檔中-->
     <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href={% static "index.html" %}>GreenTeam</a>
+      <a class="navbar-brand" href= {% static "index.html" %}>GreenTeam</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href={% static "index.html" %}><img class="navbarimage" src={% static "image/home.svg" %}/> Home</a>
+            <a class="nav-link" href= {% static "index.html" %}><img class="navbarimage" src= {% static "image/home.svg" %}/> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href={% static "teacherProblem.html" %}><img class="navbarimage" src={% static "image/file.svg" %}/> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href={% static "studentProblem.html" %}><img class="navbarimage" src={% static "image/file.svg" %}/> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href= {% static "teacherProblem.html" %}><img class="navbarimage" src= {% static "image/file.svg" %}/> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href= {% static "studentProblem.html" %}><img class="navbarimage" src= {% static "image/file.svg" %}/> Problems</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href={% static "ranking.html" %}><img class="navbarimage" src={% static "image/list-ordered.svg" %}/> Ranking</a>
+            <a class="nav-link" href= {% static "ranking.html" %}><img class="navbarimage" src= {% static "image/list-ordered.svg" %}/> Ranking</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href={% static "comments.html" %}><img class="navbarimage" src={% static "image/comments-regular.svg" %}/> Comments<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href= {% static "comments.html" %}><img class="navbarimage" src= {% static "image/comments-regular.svg" %}/> Comments<span class="sr-only">(current)</span></a>
           </li>
         </ul>
         <ul class="navbar-nav">
@@ -56,13 +56,13 @@
             <span id="username">${ name } &nbsp</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-show="regIsShow" href={% static "register.html" %}><img class="navbarimage" src={% static "image/address-book-regular.svg" %}/> Register</a>
+            <a class="nav-link" v-show="regIsShow" href= {% static "register.html" %}><img class="navbarimage" src= {% static "image/address-book-regular.svg" %}/> Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href={% static "login.html" %}><img class="navbarimage" src={% static "image/sign-in-alt-solid.svg" %}/> Login</a>
+            <a class="nav-link" href= {% static "login.html" %}><img class="navbarimage" src= {% static "image/sign-in-alt-solid.svg" %}/> Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-on:click="clearStorage()" href={% static "index.html" %}><img class="navbarimage" src={% static "image/sign-out-alt-solid.svg" %}/> Logout</a>
+            <a class="nav-link" v-on:click="clearStorage()" href= {% static "index.html" %}><img class="navbarimage" src= {% static "image/sign-out-alt-solid.svg" %}/> Logout</a>
           </li>
         </ul>
       </div>
@@ -97,19 +97,19 @@
     <!--顯示區域-->
 		<script type="text/template" id="v-list">
 			<div>
-				<div class="list-item" v-for="(item, index) in itemlist">
+        <div class="list-item" v-for="(item, index) in itemlist">
           <span>${ item.name }:</span>     <!--沒開取身份的api:<span>${ item.name }:<br>(${ item.who })</span>-->
           <div class="list-msg">
             <p id="show-message">${ item.message }</p>
             <span>${ item.time }</span>
             <button v-show="candelete" type="button" @click="handleDelete(index)" class="list-reply btn btn-outline-success">Delete</button>
             <button type="button" @click="handleReply(index)" class="list-reply btn btn-outline-success">Reply</button>
-					</div>
-				</div>
-			</div>
+          </div>
+        </div>
+      </div>
 		</script>
 
     <!--js-->
-    <script src={% static "js/comments.js" %}></script>
+    <script src= {% static "js/comments.js" %}></script>
   </body>
 </html>

@@ -5,11 +5,11 @@ var showMessageAction = {
 	"hash" : localStorage.getItem("hash"),
 	"Class" : "", 
 	
-	/*"message" :[ 
+	"message" :[ 
 		{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
 		{"userName" :　"87man", "date" : "20191016", "time" : "1900", "content" : "oh,haha"},
 		{"userName" :　"charlieyang", "date" : "20191126", "time" : "1915", "content" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
-	],*/
+	],
 }
 //按下next後送出
 var sendMsg = {
@@ -27,12 +27,12 @@ var collectClass = {
 	"userName" : localStorage.getItem("userName"),
 	"hash" : localStorage.getItem("hash"),
 
-	/*"Classes":
+	"Classes":
 	[
 		{"Class" : "CSIE110"},
 		{"Class" : "CSIE111"},
 		{"Class" : "LOL201"},
-	]*/
+	]
 }
 
 //----navbar設定----
@@ -159,7 +159,7 @@ var app1 = new Vue({
 					console.log(response.statusText)
 					console.log(response.headers)
 					console.log(response.config)
-					self.classSet = response.data.json.Classes
+					self.classSet = response.data.Classes
 				})
 				.catch(function(error){
 					console.log(error)
@@ -167,6 +167,7 @@ var app1 = new Vue({
 		},
 		showMessages(){//點擊班級列表時秀出所點擊班級之留言
 			let self = this
+			self.list.length = 0
 			console.log(self.selectedClass)
 			showMessageAction.Class = self.selectedClass
 			axios.post("https://httpbin.org/post",showMessageAction)
@@ -176,7 +177,7 @@ var app1 = new Vue({
 					console.log(response.statusText)
 					console.log(response.headers)
 					console.log(response.config)
-					self.msgList = response.data.json.message
+					self.msgList = response.data.message
 					for(let i=self.msgList.length-1; i>=0; i--){
 						let date = self.msgList[i].date
 						let time = self.msgList[i].time
@@ -249,7 +250,7 @@ var app1 = new Vue({
 					console.log(response.statusText)
 					console.log(response.headers)
 					console.log(response.config)
-					self.msgSend = response.data.json
+					self.msgSend = response.data
 					let date = self.msgSend.date
 					let time = self.msgSend.time
 					self.msgSend.showtime = date.substring(0,4) + "/" + date.substring(4,6) + "/" + date.substring(6,8) + " " + time.substring(0,2) + ":" + time.substring(2,4)
