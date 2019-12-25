@@ -5,11 +5,11 @@ var showMessageAction = {
 	"hash" : localStorage.getItem("hash"),
 	"Class" : "", 
 	
-	"message" :[ 
+	/*"message" :[ 
 		{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
 		{"userName" :　"87man", "date" : "20191016", "time" : "1900", "content" : "oh,haha"},
 		{"userName" :　"charlieyang", "date" : "20191126", "time" : "1915", "content" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
-	],
+	],*/
 }
 //按下next後送出
 var sendMsg = {
@@ -27,12 +27,12 @@ var collectClass = {
 	"userName" : localStorage.getItem("userName"),
 	"hash" : localStorage.getItem("hash"),
 
-	"Classes":
+	/*"Classes":
 	[
 		{"Class" : "CSIE110"},
 		{"Class" : "CSIE111"},
 		{"Class" : "LOL201"},
-	]
+	]*/
 }
 
 //----navbar設定----
