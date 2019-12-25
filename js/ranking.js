@@ -61,12 +61,12 @@ var collectClass = {
 	"userName" : localStorage.getItem("userName"),
 	"hash" : localStorage.getItem("hash"),
 
-	/*"Classes":
+	"Classes":
 	[
 		{"Class" : "CSIE110"},
 		{"Class" : "CSIE111"},
 		{"Class" : "LOL201"},
-	]*/
+	]
 }
 
 //----navbar的設定----
