@@ -1,4 +1,4 @@
-<!--version1.1-->
+<!--version2.5 切換班級清空留言-->
 <!--
   這裡是留言區
   圖片都放在image資料夾中
@@ -12,8 +12,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
     />
-    <!--連接CSS-->
     {% load static %}
+    <!--連接CSS-->
     <link rel="stylesheet" type="text/css" href={% static "css/comments.css" %}>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -38,17 +38,17 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href={% static "index.html" %}><img class="navbarimage" src={% static "image/home.svg" %} /> Home</a>
+            <a class="nav-link" href={% static "index.html" %}><img class="navbarimage" src={% static "image/home.svg" %}/> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href={% static "teacherProblem.html" %}><img class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href={% static "studentProblem.html" %}><img class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href={% static "teacherProblem.html" %}><img class="navbarimage" src={% static "image/file.svg" %}/> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href={% static "studentProblem.html" %}><img class="navbarimage" src={% static "image/file.svg" %}/> Problems</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href={% static "ranking.html" %}><img class="navbarimage" src={% static "image/list-ordered.svg" %} /> Ranking</a>
+            <a class="nav-link" href={% static "ranking.html" %}><img class="navbarimage" src={% static "image/list-ordered.svg" %}/> Ranking</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href={% static "comments.html" %}><img class="navbarimage" src={% static "image/comments-regular.svg" %} /> Comments<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href={% static "comments.html" %}><img class="navbarimage" src={% static "image/comments-regular.svg" %}/> Comments<span class="sr-only">(current)</span></a>
           </li>
         </ul>
         <ul class="navbar-nav">
@@ -56,10 +56,10 @@
             <span id="username">${ name } &nbsp</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href={% static "register.html" %}><img class="navbarimage" src={% static "image/address-book-regular.svg" %} /> Register</a>
+            <a class="nav-link" v-show="regIsShow" href={% static "register.html" %}><img class="navbarimage" src={% static "image/address-book-regular.svg" %}/> Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href={% static "login.html" %}><img class="navbarimage" src={% static "image/sign-in-alt-solid.svg" %} /> Login</a>
+            <a class="nav-link" href={% static "login.html" %}><img class="navbarimage" src={% static "image/sign-in-alt-solid.svg" %}/> Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" v-on:click="clearStorage()" href={% static "index.html" %}><img class="navbarimage" src={% static "image/sign-out-alt-solid.svg" %}/> Logout</a>
@@ -71,14 +71,14 @@
     <!--留言板區域-->
     <div id="app1">
 			<div class="message">
-        <div v-show="nowFalse" class="form-group">
+        <div class="form-group">
           <label for="exampleFormControlSelect1">class</label>
-          <select v-on:change="showMessages()" class="form-control">
+          <select v-model="selectedClass" v-on:change="showMessages()" class="form-control">
             <option :selectedClass="classSet.Class" v-for="classSet in classSet">${ classSet.Class }</option>
           </select>
         </div>
-				<v-textarea :who="who" v-model="inputContent"></v-textarea>
-				<button @click="handleSend" type="button" class="btn btn-success">Next</button>
+        <v-textarea :who="who" v-model="inputContent"></v-textarea>
+        <button @click="handleSend" type="button" class="btn btn-success">Next</button>
 			</div>
 			<div class="list">
 				<v-list :list="list" :candelete="candelete" @reply="handleReply" @delete="handleDelete"></v-list>

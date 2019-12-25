@@ -1,15 +1,22 @@
 //選擇班級後送出
 var showMessageAction = {
 	"action" : "show_message",
+	"userName" : localStorage.getItem("userName"),
 	"hash" : localStorage.getItem("hash"),
-	"Class" : "",
+	"Class" : "", 
 	
+	/*"message" :[ 
+		{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
+		{"userName" :　"87man", "date" : "20191016", "time" : "1900", "content" : "oh,haha"},
+		{"userName" :　"charlieyang", "date" : "20191126", "time" : "1915", "content" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
+	],*/
 }
 //按下next後送出
 var sendMsg = {
 	"action" : "send_message",
 	"userName" : "",
 	"date" : "",
+	"Class" : "",
 	"time" : "",
 	"content" : "",
 	"hash" : localStorage.getItem("hash"),
@@ -20,12 +27,12 @@ var collectClass = {
 	"userName" : localStorage.getItem("userName"),
 	"hash" : localStorage.getItem("hash"),
 
-	"Classes":
+	/*"Classes":
 	[
 		{"Class" : "CSIE110"},
 		{"Class" : "CSIE111"},
 		{"Class" : "LOL201"},
-	]
+	]*/
 }
 
 //----navbar設定----
@@ -34,11 +41,13 @@ var navapp = new Vue({
 	el : "#navapp",
 	data:{
 		whichShow : "",
+		regIsShow : false,
 		userid : "",
 		name : "",
 	},
 	created(){
 		this.chooseProblems()
+		this.canRegister()
 	},
 	methods:{
 		chooseProblems(){
@@ -50,6 +59,13 @@ var navapp = new Vue({
 			}
 			else if(self.userid === "student"){
 				self.whichShow = "student"
+			}
+		},
+		canRegister(){
+			let self = this
+			self.userid = localStorage.getItem("who")
+			if(self.userid === "admin"){
+				self.regIsShow = true
 			}
 		},
 		clearStorage(){
@@ -122,14 +138,10 @@ var app1 = new Vue({
 		candelete : false,
 		classSet : [],   //使用者的班級列表(或全部?)
 		selectedClass : "", //選擇的班級
-		nowFalse : false,   //班級列表先藏起來
 	},
 	created(){
 		this.checkID()
 		this.setClass()
-	},
-	mounted(){
-		this.showMessages()
 	},
 	methods : {
 		checkID(){
@@ -155,6 +167,9 @@ var app1 = new Vue({
 		},
 		showMessages(){//點擊班級列表時秀出所點擊班級之留言
 			let self = this
+			self.list.length = 0
+			console.log(self.selectedClass)
+			showMessageAction.Class = self.selectedClass
 			axios.post("http://127.0.0.1:8000/message/",showMessageAction)
 				.then(function(response){
 					console.log(response.data)
@@ -162,7 +177,6 @@ var app1 = new Vue({
 					console.log(response.statusText)
 					console.log(response.headers)
 					console.log(response.config)
-					console.log(self.selectedClass)
 					self.msgList = response.data.message
 					for(let i=self.msgList.length-1; i>=0; i--){
 						let date = self.msgList[i].date
@@ -218,18 +232,31 @@ var app1 = new Vue({
 			sendMsg.date = this.dateSend
 			sendMsg.time = this.timeSend
 			sendMsg.content = this.inputContent
-			axios.post("http://127.0.0.1:8000/message/",sendMsg)
+			if(this.selectedClass === ""){
+				alert("Please choose class.")
+				return
+			}
+			if(this.inputContent === undefined||this.inputContent === ""){//this.inputContent.indexOf(" ") >= 0
+				alert("Please enter comments.")
+				return
+			}
+			else{
+				console.log(self.selectedClass)
+				sendMsg.Class = self.selectedClass
+				axios.post("http://127.0.0.1:8000/message/",sendMsg)
 				.then(function(response){
 					console.log(response.data)
 					console.log(response.status)
 					console.log(response.statusText)
 					console.log(response.headers)
 					console.log(response.config)
-					console.log(self.selectedClass)
 					self.msgSend = response.data
 					let date = self.msgSend.date
 					let time = self.msgSend.time
 					self.msgSend.showtime = date.substring(0,4) + "/" + date.substring(4,6) + "/" + date.substring(6,8) + " " + time.substring(0,2) + ":" + time.substring(2,4)
+					if(typeof(self.msgList) === "undefined"){
+						self.msgList = []
+					}
 					self.msgList.push({
 						userName : self.msgSend.userName,
 						content : self.msgSend.content,
@@ -247,9 +274,6 @@ var app1 = new Vue({
 				.catch(function(error){
 					console.log(error)
 				})
-			if(this.inputContent === ""){
-				alert("Please enter comments")
-				return
 			}
 			this.inputContent = ""
 		},
