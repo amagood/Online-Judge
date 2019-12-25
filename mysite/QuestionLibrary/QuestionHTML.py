@@ -49,8 +49,8 @@ class Question_Library():
           <a class="nav-link" href="../index.html"><img class="navbarimage" src={% static "QuestionData/image/home.svg" %} /> Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" v-if="whichShow === 'teacher'" href="../teacherProblem.html"><img class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
-          <a class="nav-link" v-else-if="whichShow === 'student'" href="../studentProblem.html"><img class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
+          <a class="nav-link" v-if="whichShow === 'teacher'" href="./teacherProblem.html"><img class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
+          <a class="nav-link" v-else-if="whichShow === 'student'" href="./studentProblem.html"><img class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="../ranking.html"><img class="navbarimage" src={% static "QuestionData/image/list-ordered.svg" %} /> Ranking<span class="sr-only">(current)</span></a>
