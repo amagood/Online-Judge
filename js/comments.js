@@ -231,7 +231,7 @@ var app1 = new Vue({
 			sendMsg.date = this.dateSend
 			sendMsg.time = this.timeSend
 			sendMsg.content = this.inputContent
-			if(this.inputContent.indexOf(" ") >= 0||this.inputContent === undefined||this.inputContent === ""){
+			if(this.inputContent === undefined||this.inputContent === ""){//this.inputContent.indexOf(" ") >= 0
 				alert("Please enter comments")
 				return
 			}
