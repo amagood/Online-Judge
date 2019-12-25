@@ -1,4 +1,4 @@
-<!--version1.3 輸入為空白時不傳送封包-->
+<!--version2.1 新增班級下拉選單-->
 <!--
   這裡是留言區
   圖片都放在image資料夾中
@@ -70,9 +70,9 @@
     <!--留言板區域-->
     <div id="app1">
 			<div class="message">
-        <div v-show="nowFalse" class="form-group">
+        <div class="form-group">
           <label for="exampleFormControlSelect1">class</label>
-          <select v-on:change="showMessages()" class="form-control">
+          <select v-model="selectedClass" v-on:change="showMessages()" class="form-control">
             <option :selectedClass="classSet.Class" v-for="classSet in classSet">${ classSet.Class }</option>
           </select>
         </div>

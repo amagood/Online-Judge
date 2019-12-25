@@ -1,8 +1,9 @@
 //選擇班級後送出
 var showMessageAction = {
 	"action" : "show_message",
+	"userName" : localStorage.getItem("userName"),
 	"hash" : localStorage.getItem("hash"),
-	"Class" : "",
+	"Class" : "", //尚未設定
 	
 	"message" :[ 
 		{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
@@ -15,6 +16,7 @@ var sendMsg = {
 	"action" : "send_message",
 	"userName" : "",
 	"date" : "",
+	"Class" : "", //尚未設定
 	"time" : "",
 	"content" : "",
 	"hash" : localStorage.getItem("hash"),
@@ -136,14 +138,10 @@ var app1 = new Vue({
 		candelete : false,
 		classSet : [],   //使用者的班級列表(或全部?)
 		selectedClass : "", //選擇的班級
-		//nowFalse : false,   //班級列表先藏起來
 	},
 	created(){
 		this.checkID()
 		this.setClass()
-	},
-	mounted(){
-		this.showMessages()
 	},
 	methods : {
 		checkID(){
@@ -169,6 +167,8 @@ var app1 = new Vue({
 		},
 		showMessages(){//點擊班級列表時秀出所點擊班級之留言
 			let self = this
+			console.log(self.selectedClass)
+			showMessageAction.Class = self.selectedClass
 			axios.post("https://httpbin.org/post",showMessageAction)
 				.then(function(response){
 					console.log(response.data)
@@ -176,7 +176,6 @@ var app1 = new Vue({
 					console.log(response.statusText)
 					console.log(response.headers)
 					console.log(response.config)
-					console.log(self.selectedClass)
 					self.msgList = response.data.json.message
 					for(let i=self.msgList.length-1; i>=0; i--){
 						let date = self.msgList[i].date
@@ -237,6 +236,8 @@ var app1 = new Vue({
 				return
 			}
 			else{
+				console.log(self.selectedClass)
+				sendMsg.Class = self.selectedClass
 				axios.post("https://httpbin.org/post",sendMsg)
 				.then(function(response){
 					console.log(response.data)
@@ -244,7 +245,6 @@ var app1 = new Vue({
 					console.log(response.statusText)
 					console.log(response.headers)
 					console.log(response.config)
-					console.log(self.selectedClass)
 					self.msgSend = response.data.json
 					let date = self.msgSend.date
 					let time = self.msgSend.time
