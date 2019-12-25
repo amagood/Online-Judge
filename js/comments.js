@@ -231,8 +231,12 @@ var app1 = new Vue({
 			sendMsg.date = this.dateSend
 			sendMsg.time = this.timeSend
 			sendMsg.content = this.inputContent
+			if(this.selectedClass === ""){
+				alert("Please choose class.")
+				return
+			}
 			if(this.inputContent === undefined||this.inputContent === ""){//this.inputContent.indexOf(" ") >= 0
-				alert("Please enter comments")
+				alert("Please enter comments.")
 				return
 			}
 			else{

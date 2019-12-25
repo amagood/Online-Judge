@@ -7,7 +7,7 @@ var attendRank = {
   questionNum : "",
   userName : localStorage.getItem("userName"),
 
-  //status : "success",
+  status : "success",
 }
 //選擇不參加後送出
 var notAttendRank = {
@@ -18,7 +18,7 @@ var notAttendRank = {
   questionNum : "",
   userName : localStorage.getItem("userName"),
 
-  //status : "fail",
+  status : "fail",
 }
 //填寫題號enter後送出
 var rankAction = {
@@ -28,7 +28,7 @@ var rankAction = {
   Class : "",
   hash : localStorage.getItem("hash"),
 
-  /*userData : [
+  userData : [
     {
       name : "abb",
       ACTimes : 100,
@@ -53,7 +53,7 @@ var rankAction = {
       AttendStatus : true,
       passTime : "0.00000001",
     },
-  ]*/
+  ]
 }
 //一開始送出
 var collectClass = {
