@@ -76,17 +76,23 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <button type="button" v-show="isShow" v-on:click="sendNotAttendMSG" class="btn btn-outline-success attendButton">
-          Not Attend
-        </button>
         <button type="button" v-show="isShow" v-on:click="sendAttendMSG" class="btn btn-outline-success attendButton">
           Attend Ranking
+        </button>
+        <button type="button" v-show="isShow" v-on:click="sendNotAttendMSG" class="btn btn-outline-success attendButton">
+          Not Attend
         </button>
         <div id="search-btn" class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">SEARCH</span>
           </div>
           <input type="text" v-model="qsNumber" v-on:keyup.enter="createRankList" class="form-control" placeholder="question ID" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">class</label>
+          <select v-model="selectedClass" class="form-control">
+            <option :selectedClass="classSet.Class" v-for="classSet in classSet">${ classSet.Class }</option>
+          </select>
         </div>
       </div>
 

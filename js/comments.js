@@ -3,7 +3,7 @@ var showMessageAction = {
 	"action" : "show_message",
 	"userName" : localStorage.getItem("userName"),
 	"hash" : localStorage.getItem("hash"),
-	"Class" : "", //尚未設定
+	"Class" : "", 
 	
 	"message" :[ 
 		{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
@@ -16,7 +16,7 @@ var sendMsg = {
 	"action" : "send_message",
 	"userName" : "",
 	"date" : "",
-	"Class" : "", //尚未設定
+	"Class" : "",
 	"time" : "",
 	"content" : "",
 	"hash" : localStorage.getItem("hash"),
@@ -231,7 +231,7 @@ var app1 = new Vue({
 			sendMsg.date = this.dateSend
 			sendMsg.time = this.timeSend
 			sendMsg.content = this.inputContent
-			if(this.inputContent.indexOf(" ") >= 0||this.inputContent === null){
+			if(this.inputContent.indexOf(" ") >= 0||this.inputContent === null||this.inputContent === undefined||this.inputContent === ""){
 				alert("Please enter comments")
 				return
 			}

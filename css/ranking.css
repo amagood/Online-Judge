@@ -8,7 +8,25 @@
 
 .attendButton{
 	margin: 10px 0px 5px 8px;
-	float:right;
+	float:left;
+}
+
+.form-group{
+	margin-top: 12px;
+	display: inline-block;
+	float: right;
+}
+
+.form-group label{
+	float: left;
+	line-height: 30px;
+	margin-right: 4px;
+	font-size: 21px;
+}
+
+.form-group select{
+	width: 120px;
+	height: 36px;
 }
 
 #search-btn{

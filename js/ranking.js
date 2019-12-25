@@ -3,6 +3,7 @@ var attendRank = {
   action : "attend_rank",
   attendStatus : "attend",
   hash : localStorage.getItem("hash"),
+  Class : "", //該學生所選擇班級
   questionNum : "",
   userName : localStorage.getItem("userName"),
 
@@ -13,6 +14,7 @@ var notAttendRank = {
   action : "attend_rank",
   attendStatus : "notAttend",
   hash : localStorage.getItem("hash"),
+  Class : "",
   questionNum : "",
   userName : localStorage.getItem("userName"),
 
@@ -23,7 +25,7 @@ var rankAction = {
   action : "rank",
   questionNum : "", //題目編號
   userName : localStorage.getItem("userName"),
-  Class : "", //該學生所選擇班級
+  Class : "",
   hash : localStorage.getItem("hash"),
 
   userData : [
@@ -52,6 +54,19 @@ var rankAction = {
       passTime : "0.00000001",
     },
   ]
+}
+//一開始送出
+var collectClass = {
+	"action" : "selectClass",
+	"userName" : localStorage.getItem("userName"),
+	"hash" : localStorage.getItem("hash"),
+
+	"Classes":
+	[
+		{"Class" : "CSIE110"},
+		{"Class" : "CSIE111"},
+		{"Class" : "LOL201"},
+	]
 }
 
 //----navbar的設定----
@@ -102,14 +117,29 @@ var app1 = new Vue({
     isShow : false,
     qsNumber :"",
     clock : "",
+    classSet : [],   //使用者的班級列表(或全部?)
+    selectedClass : "", //選擇的班級
   },
   created(){
     this.setTime()
-  },
-  mounted(){
-    
+    this.setClass()
   },
   methods:{
+    setClass(){//取得使用者參加之班級
+			let self = this
+			axios.post("https://httpbin.org/post",collectClass)
+				.then(function(response){
+					console.log(response.data)
+					console.log(response.status)
+					console.log(response.statusText)
+					console.log(response.headers)
+					console.log(response.config)
+					self.classSet = response.data.json.Classes
+				})
+				.catch(function(error){
+					console.log(error)
+				})
+		},
     attendButtonShow(){
       let self = this
       if(localStorage.getItem("who") == "student"){
@@ -138,12 +168,19 @@ var app1 = new Vue({
       this.clock += mm
     },
     createRankList(){
-      if(this.qsNumber == ""){
+      if(this.selectedClass === ""){
+        alert("Please choose your class.")
+        return
+      }
+      if(this.qsNumber.indexOf(" ") >= 0||this.qsNumber === null||this.qsNumber === undefined||this.qsNumber ===""){
         alert("Please enter questionID.")
+        return
       }
       else{
         let self = this;
-        console.log(this.qsNumber)
+        console.log(self.qsNumber)
+        console.log(self.selectedClass)
+        rankAction.Class = self.selectedClass
         rankAction.questionNum = this.qsNumber
         notAttendRank.questionNum = this.qsNumber
         attendRank.questionNum = this.qsNumber
@@ -170,6 +207,8 @@ var app1 = new Vue({
       this.attendButtonShow();
     },
     sendAttendMSG(){
+      console.log(this.selectedClass)
+      attendRank.Class = this.selectedClass
       axios.post("https://httpbin.org/post",attendRank)
       .then(function(response){
         console.log(response.data)
@@ -191,6 +230,8 @@ var app1 = new Vue({
       this.setTime()
     },
     sendNotAttendMSG(){
+      console.log(this.selectedClass)
+      notAttendRank.Class = this.selectedClass
       axios.post("https://httpbin.org/post",notAttendRank)
       .then(function(response){
         console.log(response.data)
