@@ -22,7 +22,7 @@ def DataBase_Operation(Summited_Question_ID, Summited_User_Name, Summited_Output
     
     ''' ---Checking Rank Order--- '''
     Rank.objects.filter(Rank_Question__Question_ID = Summited_Question_ID).delete()
-    New_Rank = Summary.objects.filter(Summary_Question__Question_ID = Summited_Question_ID, Summary_Attend = True).order_by('Summary_AC_Count').reverse()[:100:]
+    New_Rank = Summary.objects.filter(Summary_Question__Question_ID = Summited_Question_ID, Summary_Attend = True).order_by('Summary_Runtime')[:100:]
     for i in range(len(New_Rank)):
         Rank(Rank_Question = New_Rank[i].Summary_Question, Rank_User = New_Rank[i].Summary_User, Rank_Order = i).save()
 

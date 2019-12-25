@@ -54,7 +54,7 @@ def Rank_Attend_json(Request_Question, if_attend, UserName, UserHash):
         else:
             User_Summary.update(Summary_Attend = False)
         Rank.objects.filter(Rank_Question__Question_ID = Request_Question).delete()
-        New_Rank = Summary.objects.filter(Summary_Question__Question_ID = Request_Question, Summary_Attend = True).order_by('Summary_AC_Count').reverse()[:100:]
+        New_Rank = Summary.objects.filter(Summary_Question__Question_ID = Request_Question, Summary_Attend = True).order_by('Summary_Runtime')[:100:]
         print(New_Rank)
         for i in range(len(New_Rank)):
             Rank(Rank_Question = New_Rank[i].Summary_Question, Rank_User = New_Rank[i].Summary_User, Rank_Order = i).save()

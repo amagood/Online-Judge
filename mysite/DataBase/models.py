@@ -4,7 +4,7 @@ from django.db import models
     Before using new version of models.py is better to flush the original database data (if you have any) to decrease the problem you might meet
     
     Version Note:
-    Current Version: V2.3
+    Current Version: V2.4
     
     Version 1
         V1.0 inital release for V.1 judge demo with no group functionality
@@ -23,6 +23,7 @@ from django.db import models
              adding Summary_Attend for Attend function default to False -> no auto attend
         V2.3 adding Summit Runtime for future function -> save the runtime for your simmit
              adding Summary Runtime for future function -> save the shortest runtime you have in a Question
+        V2.4 adding Chat_Date_str and Data_Time_str with string to match API
     
     If you encounter any problem you can't solve or want to change anything please contact me
     
@@ -77,7 +78,9 @@ class Chat(models.Model):
     Chat_Group = models.ForeignKey(Group, related_name='Chat', blank=True, null=True, on_delete=models.CASCADE) # two way relation with Group
     Chat_Message = models.CharField(blank=True, max_length = 255) # might be changing
     Chat_User = models.ForeignKey(User, related_name='+', blank=True, null=True, on_delete=models.CASCADE) # one way relation with User
-    Chat_Time = models.DateTimeField(auto_now_add=True) # time on create
+    Chat_Time = models.DateTimeField(auto_now_add=True) # will be it's creation time
+    Chat_Date_Str = models.CharField(max_length = 40, blank=True)
+    Chat_Time_Str = models.CharField(max_length = 40, blank=True)
     def __str__(self):
         return self.Chat_Message # for debug, can be change for your own purpose
 

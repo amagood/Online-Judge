@@ -2,9 +2,8 @@
 var attendRank = {
   action : "attend_rank",
   attendStatus : "attend",
-  userName : "amagood", // temp debug purpose
-  //hash : localStorage.getItem("hash"),
-  hash : "1234567890987654321234567", // temp debug purpose
+  userName : localStorage.getItem("userName"),
+  hash : localStorage.getItem("hash"),
   questionNum : "",
 
   status : "success",
@@ -13,9 +12,8 @@ var attendRank = {
 var notAttendRank = {
   action : "attend_rank",
   attendStatus : "notAttend",
-  userName : "amagood", // temp debug purpose
-  //hash : localStorage.getItem("hash"),
-  hash : "1234567890987654321234567", // temp debug purpose
+  userName : localStorage.getItem("userName"),
+  hash : localStorage.getItem("hash"),
   questionNum : "",
 
   status : "fail",
@@ -24,11 +22,9 @@ var notAttendRank = {
 var rankAction = {
   action : "rank",
   questionNum : "", //題目編號
-  //userName : localStorage.getItem("userName"),
-  userName : "amagood", // temp debug purpose
+  userName : localStorage.getItem("userName"),
   Class : "", //該學生所選擇班級
-  //hash : localStorage.getItem("hash"),
-  hash : "1234567890987654321234567", // temp debug purpose
+  hash : localStorage.getItem("hash"),
 
   /*userData : [
     {
