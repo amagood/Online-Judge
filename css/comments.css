@@ -27,12 +27,18 @@
 
 .form-group label{
 	float: left;
-	line-height: 42px;
+	line-height: 30px;
 	margin-right: 4px;
+	font-size: 18px;
 }
 
 .form-group select{
 	width: 120px;
+	height: 30px;
+}
+
+.input-area{
+	float: right;
 }
 
 .message{

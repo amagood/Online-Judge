@@ -76,8 +76,10 @@
             <option :selectedClass="classSet.Class" v-for="classSet in classSet">${ classSet.Class }</option>
           </select>
         </div>
-				<v-textarea :who="who" v-model="inputContent"></v-textarea>
-				<button @click="handleSend" type="button" class="btn btn-success">Next</button>
+        <div class="input-area">
+          <v-textarea :who="who" v-model="inputContent"></v-textarea>
+          <button @click="handleSend" type="button" class="btn btn-success">Next</button>
+        </div>
 			</div>
 			<div class="list">
 				<v-list :list="list" :candelete="candelete" @reply="handleReply" @delete="handleDelete"></v-list>
