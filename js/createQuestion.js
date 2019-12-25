@@ -26,7 +26,8 @@ var testObj = {
   "hash" : ""
 
 }
-var postURL = ""; //<--URL
+var postURL = ""; //<--建立題目URL
+var testURL = ""; //<--測試測資URL
 var tmpObj = {};
 var tmpObj2 = {};
 
@@ -234,7 +235,7 @@ new Vue({
           testObj.language = "python";
         }
       
-        axios.post(postURL,testObj)
+        axios.post(testURL,testObj)
           .then(function (response) {
             console.log(response);
             tmpObj = response.data;
