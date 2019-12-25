@@ -136,7 +136,7 @@ var app1 = new Vue({
 		candelete : false,
 		classSet : [],   //使用者的班級列表(或全部?)
 		selectedClass : "", //選擇的班級
-		nowFalse : false,   //班級列表先藏起來
+		//nowFalse : false,   //班級列表先藏起來
 	},
 	created(){
 		this.checkID()
@@ -232,7 +232,12 @@ var app1 = new Vue({
 			sendMsg.date = this.dateSend
 			sendMsg.time = this.timeSend
 			sendMsg.content = this.inputContent
-			axios.post("https://httpbin.org/post",sendMsg)
+			if(this.inputContent.indexOf(" ") >= 0||this.inputContent === null){
+				alert("Please enter comments")
+				return
+			}
+			else{
+				axios.post("https://httpbin.org/post",sendMsg)
 				.then(function(response){
 					console.log(response.data)
 					console.log(response.status)
@@ -264,9 +269,6 @@ var app1 = new Vue({
 				.catch(function(error){
 					console.log(error)
 				})
-			if(this.inputContent === ""){
-				alert("Please enter comments")
-				return
 			}
 			this.inputContent = ""
 		},
