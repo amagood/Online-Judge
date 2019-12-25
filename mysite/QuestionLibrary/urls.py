@@ -17,9 +17,13 @@ from django.urls import path
 from QuestionLibrary.views import responseGetQuestion
 from QuestionLibrary.views import responseCreateQuestion
 from QuestionLibrary.views import problemDetail
+from QuestionLibrary.views import teacherProblem
+#from QuestionLibrary.views import studentProblem
 
 urlpatterns = [
-    path('problem', responseGetQuestion ),
-    path('createproblem', responseCreateQuestion ),
-    path('p<int:num>', problemDetail),
+    path('studentProblem.html', responseGetQuestion ),
+    path('teacherProblem.html', teacherProblem ),
+    #path('studentProblem.html', studentProblem ),
+    path('createQuestion.html', responseCreateQuestion ),
+    path('p<int:num>', problemDetail ),
 ]

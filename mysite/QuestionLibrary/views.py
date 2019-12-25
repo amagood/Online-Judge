@@ -1,18 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
-
-'''
-#TEST VIEW
-from datetime import datetime
-from django.shortcuts import render
-def problem(request):
-    return render(request, 'problem.html', {
-        'current_time': str(datetime.now()),
-    })
-#END TEST VIEW
-'''
-
 from django.http import HttpResponse
 from DataBase.models import Question
 import QuestionLibrary.GetQuestion
@@ -32,7 +19,7 @@ def responseGetQuestion(request):
             "hash" : req['hash'],
         }
         return HttpResponse(json.dumps(data))
-    return render(request,'QuestionData/problem.html',{})
+    return render(request,'QuestionData/studentProblem.html',{})
 
 def responseCreateQuestion(request):
     if request.method == "POST":
@@ -45,8 +32,16 @@ def responseCreateQuestion(request):
             "hash" : req['hash'],
         }
         return HttpResponse(json.dumps(data))
-    return render(request,'QuestionData/createproblem.html',{})
+    return render(request,'QuestionData/createQuestion.html',{})
 
 def problemDetail(request,num=1):
     purl='QuestionData/p{:05d}/p{:05d}.html'.format(num,num)
     return render(request,purl,{})
+
+def teacherProblem(request):
+    return render(request,'QuestionData/teacherProblem.html',{})
+
+'''
+def studentProblem(request):
+    return render(request,'QuestionData/studentProblem.html',{})
+'''

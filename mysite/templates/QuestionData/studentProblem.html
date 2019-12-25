@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="https://unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.css">
   <!--studentProblem.css-->
   {% load static %}
-  <link rel="stylesheet" href={% static "css/studentProblem.css" %}>
+  <link rel="stylesheet" href={% static "QuestionData/css/studentProblem.css" %}>
 </head>
 
 <body>
@@ -32,21 +32,21 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href={% static "index.html" %}><img class="navbarimage"
-                src={% static "image/home.svg" %} /> Home</a>
+                src={% static "QuestionData/image/home.svg" %} /> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href={% static "teacherProblem.html" %}><img
-                class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href={% static "studentProblem.html" %}><img
-                class="navbarimage" src={% static "image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img
+                class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img
+                class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href={% static "ranking.html" %}><img class="navbarimage"
-                src={% static "image/list-ordered.svg" %} /> Ranking<span class="sr-only">(current)</span></a>
+                src={% static "QuestionData/image/list-ordered.svg" %} /> Ranking<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href={% static "comments.html" %}><img class="navbarimage"
-                src={% static "image/comments-regular.svg" %} /> Comments</a>
+                src={% static "QuestionData/image/comments-regular.svg" %} /> Comments</a>
           </li>
         </ul>
         <ul class="navbar-nav">
@@ -55,15 +55,15 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href={% static "register.html" %}><img class="navbarimage"
-                src={% static "image/address-book-regular.svg" %} /> Register</a>
+                src={% static "QuestionData/image/address-book-regular.svg" %} /> Register</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href={% static "login.html" %}><img class="navbarimage"
-                src={% static "image/sign-in-alt-solid.svg %}" /> Login</a>
+                src={% static "QuestionData/image/sign-in-alt-solid.svg" %} /> Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" v-on:click="clearStorage()" href={% static "index.html" %}><img class="navbarimage"
-                src={% static "image/sign-out-alt-solid.svg" %} /> Logout</a>
+                src={% static "QuestionData/image/sign-out-alt-solid.svg" %} /> Logout</a>
           </li>
         </ul>
       </div>
@@ -154,7 +154,7 @@
   <script src='http://unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.js'></script>
   <!--axios-->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src={% static "js/studentProblem.js" %}></script>
+  <script src={% static "QuestionData/js/studentProblem.js" %}></script>
 </body>
 
 </html>

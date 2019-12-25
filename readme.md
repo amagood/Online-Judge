@@ -100,3 +100,6 @@ response:
     * folder path change
     * add html urls
     * css&js link error
+  * v1.8 2019/12/25
+    * fix css&js link error
+    * integration front-end
