@@ -19,7 +19,8 @@ def Single_Rank(Current_Rank):
             "name" : Current_User,
             "ACTimes" : Current_AcTime,
             "CommitTimes" : Current_CommitTime,
-            "rank" : Current_Rank_No
+            "rank" : Current_Rank_No,
+            "passTime" : Current_Summary.Summary_Runtime
         }
     return Rank_Single_Json
 
@@ -57,7 +58,7 @@ def Rank_Attend_json(Request_Question, if_attend, UserName, UserHash):
         New_Rank = Summary.objects.filter(Summary_Question__Question_ID = Request_Question, Summary_Attend = True).order_by('Summary_Runtime')[:100:]
         print(New_Rank)
         for i in range(len(New_Rank)):
-            Rank(Rank_Question = New_Rank[i].Summary_Question, Rank_User = New_Rank[i].Summary_User, Rank_Order = i).save()
+            Rank(Rank_Question = New_Rank[i].Summary_Question, Rank_User = New_Rank[i].Summary_User, Rank_Order = i + 1).save()
         Return_Data['status'] = 'success'
         return Return_Data
     Return_Data['status'] = 'fail'
