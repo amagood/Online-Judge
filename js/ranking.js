@@ -172,7 +172,7 @@ var app1 = new Vue({
         alert("Please choose your class.")
         return
       }
-      if(this.qsNumber.indexOf(" ") >= 0||this.qsNumber === null||this.qsNumber === undefined||this.qsNumber ===""){
+      if(this.qsNumber.indexOf(" ") >= 0||this.qsNumber === undefined||this.qsNumber ===""){
         alert("Please enter questionID.")
         return
       }
