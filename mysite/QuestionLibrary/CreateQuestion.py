@@ -29,3 +29,9 @@ def responseCreateQuestion(questionName,PDF,questionContent,language,sampleProgr
         return 'success'
     except:
         return 'error'
+
+def responseVerifyStats(language,sampleProgram,tdInput,tdOutput):
+    try:
+        return 'verified'
+    except:
+        return 'wrong'

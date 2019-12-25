@@ -31,7 +31,8 @@ class Question_Library():
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
   <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
-  <link rel="stylesheet" href="../css/problem.css">
+  {% load static %}
+  <link rel="stylesheet" href={% static "QuestionData/css/problem.css" %}>
 </head>
 
 <body>
@@ -45,17 +46,17 @@ class Question_Library():
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="../index.html"><img class="navbarimage" src="../image/home.svg" /> Home</a>
+          <a class="nav-link" href="../index.html"><img class="navbarimage" src={% static "QuestionData/image/home.svg" %} /> Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" v-if="whichShow === 'teacher'" href="../teacherProblem.html"><img class="navbarimage" src="../image/file.svg" /> Problems</a>
-          <a class="nav-link" v-else-if="whichShow === 'student'" href="../studentProblem.html"><img class="navbarimage" src="../image/file.svg" /> Problems</a>
+          <a class="nav-link" v-if="whichShow === 'teacher'" href="../teacherProblem.html"><img class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
+          <a class="nav-link" v-else-if="whichShow === 'student'" href="../studentProblem.html"><img class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="../ranking.html"><img class="navbarimage" src="../image/list-ordered.svg" /> Ranking<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="../ranking.html"><img class="navbarimage" src={% static "QuestionData/image/list-ordered.svg" %} /> Ranking<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../comments.html"><img class="navbarimage" src="../image/comments-regular.svg" /> Comments</a>
+          <a class="nav-link" href="../comments.html"><img class="navbarimage" src={% static "QuestionData/image/comments-regular.svg" %} /> Comments</a>
         </li>
       </ul>
       <ul class="navbar-nav">
@@ -63,13 +64,13 @@ class Question_Library():
           <span id="username">${ name } &nbsp</span>
         </li>
         <li class="nav-item">
-          <a class="nav-link" v-show="regIsShow" href="../register.html"><img class="navbarimage" src="../image/address-book-regular.svg" /> Register</a>
+          <a class="nav-link" v-show="regIsShow" href="../register.html"><img class="navbarimage" src={% static "QuestionData/image/address-book-regular.svg" %} /> Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../login.html"><img class="navbarimage" src="../image/sign-in-alt-solid.svg" /> Login</a>
+          <a class="nav-link" href="../login.html"><img class="navbarimage" src={% static "QuestionData/image/sign-in-alt-solid.svg" %} /> Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" v-on:click="clearStorage()" href="../index.html"><img class="navbarimage" src="../image/sign-out-alt-solid.svg"/> Logout</a>
+          <a class="nav-link" v-on:click="clearStorage()" href="../index.html"><img class="navbarimage" src={% static "QuestionData/image/sign-out-alt-solid.svg" %} /> Logout</a>
         </li>
       </ul>
     </div>
@@ -91,14 +92,14 @@ class Question_Library():
     <div class="sampleInOutContainer">
       <div class="sampleInOut">
         <span class="smallTitle">Sample Input</span>
-        <img id="imgCopyIn" src="../image/copy.svg" alt="" onclick="copyFn('sampleIn')" style="cursor: pointer;">
+        <img id="imgCopyIn" src={% static "QuestionData/image/copy.svg" %} alt="" onclick="copyFn('sampleIn')" style="cursor: pointer;">
         <pre id="sampleIn" class="samplePre">'''
         html_str+=SampleInput
         html_str+='''</pre>
       </div>
       <div class="sampleInOut">
         <span class="smallTitle">Sample Out</span>
-        <img id="imgCopyOut" src="../image/copy.svg" alt="" onclick="copyFn('sampleOut')" style="cursor: pointer;">
+        <img id="imgCopyOut" src={% static "QuestionData/image/copy.svg" %} alt="" onclick="copyFn('sampleOut')" style="cursor: pointer;">
         <pre id="sampleOut" class="samplePre">'''
         html_str+=SampleOut
         html_str+='''</pre>
@@ -216,12 +217,12 @@ class Question_Library():
           <div class="sampleInOutContainer">
             <div class="sampleInOut">
               <span class="smallTitle2">Wrong Output</span>
-              <img src="../image/copy.svg" alt="" onclick="copyFn('wrongOutput')" style="cursor: pointer;">
+              <img src={% static "QuestionData/image/copy.svg" %} alt="" onclick="copyFn('wrongOutput')" style="cursor: pointer;">
               <div v-html="htmlWrongOutput"></div>
             </div>
             <div class="sampleInOut">
               <span class="smallTitle2">Expected Output</span>
-              <img src="../image/copy.svg" alt="" onclick="copyFn('expectedOutput')" style="cursor: pointer;">
+              <img src={% static "QuestionData/image/copy.svg" %} alt="" onclick="copyFn('expectedOutput')" style="cursor: pointer;">
               <div v-html="htmlExpectedOutput"></div>
             </div>
           </div>
@@ -255,7 +256,7 @@ class Question_Library():
   <!-- set ace -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js" integrity="sha256-CVkji/u32aj2TeC+D13f7scFSIfphw2pmu4LaKWMSY8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ext-language_tools.js" integrity="sha256-5GsAp93HE/XYlhrUPMw4VBAoawG9n3c7+DbQE4tRwW0=" crossorigin="anonymous"></script>
-  <script src="../js/problem.js"></script>
+  <script src={% static "QuestionData/js/problem.js" %}></script>
   <script>
     var qID = "p000";
     var initCode = ``;

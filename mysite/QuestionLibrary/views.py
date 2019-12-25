@@ -11,27 +11,50 @@ import json
 def responseGetQuestion(request):
     if request.method == "POST":
         req=json.loads(request.body.decode('utf-8'))
-        qLib=QuestionLibrary.GetQuestion.responseGetQuestion(req['questionNum'],req['questionPage'],req['questionSequence'],req['questionTarget'],req['questionDegree'],req['selectClass'],req['sortDesc'])
-        data={
-            "questionLib" : qLib,
-            "userName" : req['userName'],
-            "Class" : req['selectClass'],
-            "hash" : req['hash'],
-        }
-        return HttpResponse(json.dumps(data))
+        action=req['action']
+        if action=='questionLib':
+            qLib=QuestionLibrary.GetQuestion.responseGetQuestion(req['questionNum'],req['questionPage'],req['sequence'],req['tag'],req['degree'],req['Class'],req['sortDesc'])
+            data={
+                "questionLib" : qLib,
+                "userName" : req['userName'],
+                "Class" : req['Class'],
+                "hash" : req['hash'],
+            }
+            return HttpResponse(json.dumps(data))
+        else:
+            data={
+                "status" : "parse_error",
+            }
+            return HttpResponse(json.dumps(data))
     return render(request,'QuestionData/studentProblem.html',{})
 
 def responseCreateQuestion(request):
     if request.method == "POST":
         req=json.loads(request.body.decode('utf-8'))
-        submitStats=QuestionLibrary.CreateQuestion.responseCreateQuestion(req['questionName'],req['PDF'],req['questionContent'],req['language'],req['sampleProgram'],req['exampleInput'],req['exampleOutput'],req['input'],req['output'],req['tag'],req['difficulty'])
-        data={
-            "submitStats" : submitStats,
-            "userName" : req['userName'],
-            "Class" : req['Class'],
-            "hash" : req['hash'],
-        }
-        return HttpResponse(json.dumps(data))
+        action=req['action']
+        if action=='createQ':
+            submitStats=QuestionLibrary.CreateQuestion.responseCreateQuestion(req['questionName'],req['PDF'],req['questionContent'],req['language'],req['sampleProgram'],req['exampleInput'],req['exampleOutput'],req['input'],req['output'],req['tag'],req['difficulty'])
+            data={
+                "submitStats" : submitStats,
+                "userName" : req['userName'],
+                "Class" : req['Class'],
+                "hash" : req['hash'],
+            }
+            return HttpResponse(json.dumps(data))
+        elif action=='verify_td':
+            verifyStats=QuestionLibrary.CreateQuestion.responseVerifyStats(req['language'],req['sampleProgram'],req['tdInput'],req['tdOutput'])
+            data={
+                "stats" : verifyStats,
+                "userName" : req['userName'],
+                "Class" : req['Class'],
+                "hash" : req['hash'],
+            }
+            return HttpResponse(json.dumps(data))
+        else:
+            data={
+                "status" : "parse_error",
+            }
+            return HttpResponse(json.dumps(data))
     return render(request,'QuestionData/createQuestion.html',{})
 
 def problemDetail(request,num=1):
