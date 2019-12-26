@@ -24,6 +24,8 @@ p000_local.html for local test
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
 ----
+### 2019/12/26 Problem with PDF
+	p000pdf.html p000pdf.pdf
 ### 2019/12/23 Login before submit
 	js disable submit button when user is not logged in
 ### 2019/12/23 qID
