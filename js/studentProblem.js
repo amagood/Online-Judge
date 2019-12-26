@@ -157,8 +157,9 @@ var probapp = new Vue({
       axios
         .post(postURL, questionLibObj)
         .then(function (response) {
-          console.log(response)
-          tmpobj =response.data          
+          console.log(response.data)
+          console.log(JSON.parse(response.data))
+          tmpobj =JSON.parse(response.data)       
           probapp.items = tmpobj.questionLib
           // Set the initial number of items、totalRows
           probapp.totalRows = probapp.items.length
