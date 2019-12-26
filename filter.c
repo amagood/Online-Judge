@@ -72,7 +72,6 @@ int main_hook(int argc, char **argv, char **envp) {
 		perror("prctl set filter");
 		exit(EXIT_FAILURE);
 	}
-	printf("im here\n");
     int ret = main_orig(argc, argv, envp);
     return ret;
 }
