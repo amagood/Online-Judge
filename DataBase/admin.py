@@ -6,6 +6,7 @@ from .models import Summit
 from .models import Summary
 from .models import Rank
 from .models import Category
+from .models import Chat
 
 admin.site.register(Group)
 admin.site.register(User)
@@ -14,3 +15,4 @@ admin.site.register(Summit)
 admin.site.register(Summary)
 admin.site.register(Rank)
 admin.site.register(Category)
+admin.site.register(Chat)

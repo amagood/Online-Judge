@@ -4,7 +4,7 @@ from django.db import models
     Before using new version of models.py is better to flush the original database data (if you have any) to decrease the problem you might meet
     
     Version Note:
-    Current Version: V2.4
+    Current Version: V2.5
     
     Version 1
         V1.0 inital release for V.1 judge demo with no group functionality
@@ -24,6 +24,7 @@ from django.db import models
         V2.3 adding Summit Runtime for future function -> save the runtime for your simmit
              adding Summary Runtime for future function -> save the shortest runtime you have in a Question
         V2.4 adding Chat_Date_str and Data_Time_str with string to match API
+        V2.5 Change Summary and Summit Rumtime imto int to encounter negetive number for not AC result
     
     If you encounter any problem you can't solve or want to change anything please contact me
     
@@ -92,7 +93,7 @@ class Summit(models.Model):
     # Summit_Question_ID = models.PositiveIntegerField(default = 0)
     Summit_Time = models.DateTimeField(auto_now_add=True) # will be it's creation time
     Summit_Output = models.CharField(default = 'WA', max_length = 10) # no output longer than 10
-    Summit_Runtime = models.PositiveIntegerField(default = 0) # not yet finish
+    Summit_Runtime = models.IntegerField(default = 0) # not yet finish
     def __str__(self):
         return self.Summit_Question.Question_Name # for debug, can be change for your own purpose
 
@@ -102,7 +103,7 @@ class Summary(models.Model):
     # Summary_Question_ID = models.PositiveIntegerField(default = 0)
     Summary_Count = models.PositiveIntegerField(default = 1)
     Summary_AC_Count = models.PositiveIntegerField(default = 0) # Summary Count >= Summary AC Count
-    Summary_Runtime = models.PositiveIntegerField(default = 0) # not yet finish
+    Summary_Runtime = models.IntegerField(default = 0) # not yet finish
     Summary_Attend = models.BooleanField(default = False)
     def __str__(self):
         return self.Summary_Question.Question_Name # for debug ,can be change for your own purpose

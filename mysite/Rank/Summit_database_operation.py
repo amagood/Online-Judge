@@ -16,13 +16,13 @@ def DataBase_Operation(Summited_Question_ID, Summited_User_Name, Summited_Output
     else:
         Current_Count = Current_Summary[0].Summary_Count
         Current_AC_Count = Current_Summary[0].Summary_AC_Count
-        Current_Summary.update(Summary_Count = Current_Count + 1, Summary_AC_Count = Current_AC_Count + 1 if Summited_Output == 'AC' else 0)
-        if(Current_Summary[0].Summary_Runtime > Summited_Runtime):
+        Current_Summary.update(Summary_Count = Current_Count + 1, Summary_AC_Count = Current_AC_Count + (1 if Summited_Output == 'AC' else 0))
+        if(Current_Summary[0].Summary_Runtime > Summited_Runtime and Summited_Runtime >= 0):
             Current_Summary.update(Summary_Runtime = Summited_Runtime)
     
     ''' ---Checking Rank Order--- '''
     Rank.objects.filter(Rank_Question__Question_ID = Summited_Question_ID).delete()
-    New_Rank = Summary.objects.filter(Summary_Question__Question_ID = Summited_Question_ID, Summary_Attend = True).order_by('Summary_Runtime')[:100:]
+    New_Rank = Summary.objects.filter(Summary_Question__Question_ID = Summited_Question_ID, Summary_Attend = True, Summary_Runtime__gte = 0).order_by('Summary_Runtime')[:100:]
     for i in range(len(New_Rank)):
         Rank(Rank_Question = New_Rank[i].Summary_Question, Rank_User = New_Rank[i].Summary_User, Rank_Order = i + 1).save()
 
