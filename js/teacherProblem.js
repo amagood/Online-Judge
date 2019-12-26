@@ -164,16 +164,17 @@ var probapp = new Vue({
     getQuestionData() {
       axios
         .post(postURL, questionLibObj)
-        .then(response => {
+        .then(function (response) {
+          console.log(response)
           tmpobj =response.data          
-          this.items = tmpobj.questionLib
+          probapp.items = tmpobj.questionLib
           // Set the initial number of items、totalRows
-          this.totalRows = this.items.length
+          probapp.totalRows = probapp.items.length
           console.log(questionLibObj)
           console.log("get new data from postURL")
 
           //determine get data due to loading
-          this.noGetData = false
+          probapp.noGetData = false
         })
         .catch(function (error) {
           console.log(error);
