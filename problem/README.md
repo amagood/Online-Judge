@@ -23,7 +23,51 @@ p000_local.html for local test
 - Go to:  
 `Ctrl-L` : Go to line  
 `Ctrl-Down/Up` : Scroll line down/up  
+---
+## API
+```
+{  //submit request
+    "action" : "submit_code",
+    "qID" : ex"p001",
+    "language" : "cpp"||"c"||"python",
+    "fileAmount": 0,
+    "file":
+    {
+        "file1" : "code_string..................",  //main.cpp || main.c
+        "file2" : "code_string..................",
+        "file3" : "code_string.................."
+    },
+    "headerFileAmount": 0,
+    "headerFile":
+    {
+        "file1" : "code_string..................",  //1.h
+        "file2" : "code_string..................",  //2.h
+        "file3" : "code_string.................."   //3.h
+    },
+    "userName" : ex"amagood",
+    "Class" : ex"CSIE110",
+    "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
+}
+```
+```
+{  //submit response
+    "codeState" : "AC" || "CE" || "TLE" || "WA" || "MLE",
+    "errorMessage" : ex"string..........",
+    "exeTime" : ex"99999ms",
+    "errorOutputCompare" : "size",
+    "OutputAvailable": "true" || "false",
+    "wrongOutput" : "0",
+    "expectedOutput" : "3",
+    "memoryUsage" : "72KB",
+    "verdictTime" : "11:59:59  2019/01/01"
+    "userName" : ex"amagood",
+    "Class" : ex"CSIE110",
+    "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
+}
+```
 ----
+### 2019/12/27 WA output available
+	html js hide output result when outputAvailable is false
 ### 2019/12/26 Problem with PDF
 	p000pdf.html p000pdf.pdf
 ### 2019/12/23 Login before submit

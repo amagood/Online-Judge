@@ -1,4 +1,4 @@
-﻿// 20191223
+﻿// 20191227
 // navbar
 
 
@@ -249,6 +249,7 @@ var app3 = new Vue({
     errorMessage: "",
     exeTime: "",
     errorOutputCompare: "",
+    OutputAvailable: false,
     htmlWrongOutput: "",
     htmlExpectedOutput: "",
     memoryUsage: "",
@@ -298,6 +299,7 @@ var app3 = new Vue({
           app3.errorMessage        = tmpObj.errorMessage;
           app3.exeTime             = tmpObj.exeTime;
           app3.errorOutputCompare  = tmpObj.errorOutputCompare;
+          app3.OutputAvailable     = (tmpObj.OutputAvailable == "true");
           app3.htmlWrongOutput     = '<pre id="wrongOutput" class="samplePre2">' + tmpObj.wrongOutput + '</pre>';
           app3.htmlExpectedOutput  = '<pre id="expectedOutput" class="samplePre2">' + tmpObj.expectedOutput + '</pre>';
           app3.memoryUsage         = tmpObj.memoryUsage;

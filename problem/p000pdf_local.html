@@ -1,4 +1,4 @@
-<!-- 20191226 -->
+<!-- 20191227 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -165,7 +165,8 @@
               <span>${ verdictTime }</span>
             </div>
           </div>
-          <div class="sampleInOutContainer">
+          <div v-if="!OutputAvailable">Details are not available.</div>
+          <div v-if="OutputAvailable" class="sampleInOutContainer">
             <div class="sampleInOut">
               <span class="smallTitle2">Wrong Output</span>
               <img src="../image/copy.svg" alt="" onclick="copyFn('wrongOutput')" style="cursor: pointer;">
