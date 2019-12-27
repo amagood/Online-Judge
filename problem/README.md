@@ -66,6 +66,8 @@ p000_local.html for local test
 }
 ```
 ----
+### 2019/12/27 Tab
+	html css js only p000_local.html will work correctly
 ### 2019/12/27 WA output available
 	html js hide output result when outputAvailable is false
 ### 2019/12/26 Problem with PDF

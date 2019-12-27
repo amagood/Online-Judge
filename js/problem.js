@@ -40,7 +40,7 @@ var navapp = new Vue({
 })
 
 
-// app2 for lang, copy toolip, copy popup, theme
+// app2 for lang, copy toolip, copy popup, theme, tab
 
 
 var app2 = new Vue({
@@ -107,6 +107,15 @@ var app2 = new Vue({
     clickTheme() {
       var acePath = 'ace/theme/' + this.themeSelected;
       editor.setTheme(acePath);
+    },
+    openTab(id) {
+      var i = 0;
+      var tabContent = document.getElementsByClassName("tabContent");
+      for (i=0; i<tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+      }
+      document.getElementById(id).style.display = "block";
+      uploadFileApp.uploadFileMode = (id == "uploadFileTab");
     }
   }
 })
@@ -151,7 +160,7 @@ var uploadFileApp = new Vue({
   delimiters: ['${', '}'],
   el: "#uploadFileApp",
   data: {
-    showUploadFileBlock: false,
+    uploadFileMode: false,
     showHeaderFile: true,
     showImplementFilesInvalidMsg: false,
     showHeaderFilesInvalidMsg: false,
@@ -266,7 +275,7 @@ var app3 = new Vue({
     submitCode() {
       document.getElementById("submitBtn").setAttribute("disabled", "disabled");
       this.showSpinner = true;
-      if (uploadFileApp.showUploadFileBlock) {
+      if (uploadFileApp.uploadFileMode) {
         copyFileStringsToSubmitObj();
         if (uploadFileApp.implementFile != null)
           submitObj.fileAmount = 1 + uploadFileApp.implementFile.length;
@@ -328,6 +337,7 @@ var userInfo = {
 }
 
 window.onload = function() {
+  app2.openTab("codeEditorTab");
   userInfo.who = localStorage.getItem("who");
   userInfo.userName = localStorage.getItem("userName");
   userInfo.hash = localStorage.getItem("hash");
