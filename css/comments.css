@@ -2,12 +2,15 @@
   background-color: #56fd96;
 }
 
+#navapp{
+	width: auto;
+}
 .navbarimage{
   width: 23px;
 }
 
 #app1{
-  width: 500px;
+  width: 700px;
   margin: 0 auto;
 }
 
@@ -21,8 +24,9 @@
 }
 
 .form-group{
-	margin-top: 12px;
+	margin-top: 20px;
 	display: inline-block;
+	float: left;
 }
 
 .form-group label{
@@ -38,8 +42,8 @@
 }
 
 .message{
-	width: 470px;
-	text-align: right;
+	width: 700px;
+	/*text-align: center;*/
 }
 
 .message span{
@@ -78,10 +82,11 @@
 	border-radius: 4px;
 	cursor: pointer;
 	outline: none;
+	float: right;
 }
 
 .list{
-	margin-top: 20px;
+	margin-top: 80px;
 }
 
 .list-item{

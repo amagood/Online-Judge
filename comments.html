@@ -1,7 +1,11 @@
-<!--version2.6 更改切換班級清空留言方式-->
 <!--
-  這裡是留言區
-  圖片都放在image資料夾中
+  version2.7
+    1.定時5秒刷新留言
+    2.留言頭尾去除空白
+    3.顯示留言樓層
+    4.reply留言改為針對樓層
+    5.刪除delete功能(因為當初沒開API)
+    6.版面調整
 -->
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
@@ -12,8 +16,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
     />
-    <!--連接CSS-->
     {% load static %}
+    <!--連接CSS-->
     <link rel="stylesheet" type="text/css" href= {% static "css/comments.css" %}>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -41,8 +45,8 @@
             <a class="nav-link" href= {% static "index.html" %}><img class="navbarimage" src= {% static "image/home.svg" %}/> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href= {% static "teacherProblem.html" %}><img class="navbarimage" src= {% static "image/file.svg" %}/> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href= {% static "studentProblem.html" %}><img class="navbarimage" src= {% static "image/file.svg" %}/> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href= {% static "teacherProblem.html %}"><img class="navbarimage" src= {% static "image/file.svg" %}/> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href= {% static "studentProblem.html %}"><img class="navbarimage" src= {% static "image/file.svg" %}/> Problems</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href= {% static "ranking.html" %}><img class="navbarimage" src= {% static "image/list-ordered.svg" %}/> Ranking</a>
@@ -62,7 +66,7 @@
             <a class="nav-link" href= {% static "login.html" %}><img class="navbarimage" src= {% static "image/sign-in-alt-solid.svg" %}/> Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-on:click="clearStorage()" href= {% static "index.html" %}><img class="navbarimage" src= {% static "image/sign-out-alt-solid.svg" %}/> Logout</a>
+            <a class="nav-link" v-on:click="clearStorage()" href= {% static "index.html" %}><img class="navbarimage" src= {% static  {% static "image/sign-out-alt-solid.svg" %}/> Logout</a>
           </li>
         </ul>
       </div>
@@ -77,38 +81,35 @@
             <option :selectedClass="classSet.Class" v-for="classSet in classSet">${ classSet.Class }</option>
           </select>
         </div>
-        <v-textarea :who="who" v-model="inputContent"></v-textarea>
-        <button @click="handleSend" type="button" class="btn btn-success">Next</button>
+        <div>
+          <span>${ username }:<br>(${ who })</span>
+          <textarea　v-model="inputmsg" placeholder="send a comment"></textarea>
+        </div>
+        <button @click="handleSend" type="button" class="btn btn-outline-success">Next</button>
 			</div>
 			<div class="list">
-				<v-list :list="list" :candelete="candelete" @reply="handleReply" @delete="handleDelete"></v-list>
+				<v-list :list="list" @reply="handleReply"></v-list>
 			</div>
 		</div>
 
-    <!--comments template-->   
-    <!--輸入區域-->
-		<script type="text/template" id="v-textarea">
-			<div>
-        <span>${ username }:<br>(${ who })</span>
-				<textarea :value="value" placeholder="send a comment" @input="$emit('input', $event.target.value)"></textarea>
-			</div>
-		</script>
-    
+    <!--comments template-->      
     <!--顯示區域-->
 		<script type="text/template" id="v-list">
 			<div>
-        <div class="list-item" v-for="(item, index) in itemlist">
+        <div class="list-item shadow p-3 mb-5 bg-light rounded" v-for="(item, index) in itemlist">
           <span>${ item.name }:</span>     <!--沒開取身份的api:<span>${ item.name }:<br>(${ item.who })</span>-->
           <div class="list-msg">
             <p id="show-message">${ item.message }</p>
             <span>${ item.time }</span>
-            <button v-show="candelete" type="button" @click="handleDelete(index)" class="list-reply btn btn-outline-success">Delete</button>
             <button type="button" @click="handleReply(index)" class="list-reply btn btn-outline-success">Reply</button>
+            <button type="button" id="list-floor" class="btn btn-success">
+              Floor ${ item.floor }
+            </button>
           </div>
         </div>
       </div>
 		</script>
-
+    
     <!--js-->
     <script src= {% static "js/comments.js" %}></script>
   </body>

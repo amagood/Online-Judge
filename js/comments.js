@@ -74,27 +74,7 @@ var navapp = new Vue({
 	},
 })
 
-//----留言內容輸入----
-Vue.component('v-textarea', {
-	delimiters : ['${', '}'],
-	template: '#v-textarea',
-	props : {
-		who : {
-			type : String,
-			default : ""
-		},
-		value : {
-			type : String,
-			default : ""
-		},
-		username : {
-			type : String,
-			default : localStorage.getItem("userName")
-		}
-	},
-});
-
-//----留言結果顯示----
+//----個別留言結果顯示----
 Vue.component("v-list", {
 	delimiters : ['${', '}'],
 	template : '#v-list',
@@ -102,9 +82,6 @@ Vue.component("v-list", {
 		list : {
 			type : Array,
 			default : []
-		},
-		candelete: {
-			type : Boolean
 		},
 	},
 	data : function(){
@@ -116,41 +93,47 @@ Vue.component("v-list", {
 		handleReply(index){
 			this.$emit("reply", index)
 		},
-		handleDelete(index){
-			this.$emit("delete", index)
-		}
 	}
 });
 
-//----留言區域父組件---
+//----選班級,輸入和顯示留言---
 var app1 = new Vue({
 	delimiters : ['${', '}'],
 	el : "#app1",
 	data : {
-		inputContent : "", //使用者輸入訊息
+		inputmsg : "", //使用者輸入訊息
 		list : [],      //準備顯示的資訊列表
 		msgList : [],    //接收其他人的訊息列表
+		msgCheck : {},  //確認最後一筆訊息是否相同
 		msgSend : "",    //接收使用者傳的訊息
 		dateSend : "",   //送出的日期
 		timeSend : "",   //送出的時間
 		username : localStorage.getItem("userName"),
 		who : localStorage.getItem("who"),
-		candelete : false,
 		classSet : [],   //使用者的班級列表(或全部?)
 		selectedClass : "", //選擇的班級
+		timerCall : "",  //定時呼叫request
+		callFromBack : false //是否為定時呼叫
 	},
 	created(){
-		this.checkID()
 		this.setClass()
 	},
+	mounted(){
+		this.timerCall = setInterval(this.reqCall,5000)
+	},
+	beforeDestroy() {
+		clearInterval(this.timerCall);
+	},
 	methods : {
-		checkID(){
+		reqCall(){   //5秒定時呼叫
 			let self = this
-			if(self.who === "admin"){
-				self.candelete = true
+			this.setClass()
+			if(self.selectedClass !== ""){
+				callFromBack = true
+				this.showMessages()
 			}
 		},
-		setClass(){//取得使用者參加之班級
+		setClass(){   //取得使用者參加之班級
 			let self = this
 			axios.post("https://httpbin.org/post",collectClass)
 				.then(function(response){
@@ -159,15 +142,14 @@ var app1 = new Vue({
 					console.log(response.statusText)
 					console.log(response.headers)
 					console.log(response.config)
-					self.classSet = response.data.Classes
+					self.classSet = response.data.Classes  //data.json
 				})
 				.catch(function(error){
 					console.log(error)
 				})
 		},
-		showMessages(){//點擊班級列表時秀出所點擊班級之留言
+		showMessages(){   //點擊班級列表時秀出所點擊班級之留言
 			let self = this
-			self.list.splice(0,self.list.length)
 			console.log(self.selectedClass)
 			showMessageAction.Class = self.selectedClass
 			axios.post("https://httpbin.org/post",showMessageAction)
@@ -177,15 +159,37 @@ var app1 = new Vue({
 					console.log(response.statusText)
 					console.log(response.headers)
 					console.log(response.config)
-					self.msgList = response.data.message
+					self.msgCheck = self.msgList[self.msgList.length-1]
+					self.msgList = response.data.message  //data.json
+					if(self.callFromBack === true && self.msgCheck.date === self.msgList[self.msgList.length-1].date && self.msgCheck.time === self.msgList[self.msgList.length-1].time){
+						self.callFromBack = false
+						return
+					}
+					else{
+						self.list.splice(0,self.list.length)
+					}
 					for(let i=self.msgList.length-1; i>=0; i--){
 						let date = self.msgList[i].date
 						let time = self.msgList[i].time
+						self.msgList[i].floor = self.msgList.length - i
+						if(self.msgList[i].floor%10 === 1){
+							self.msgList[i].floor += "st" 
+						}
+						else if(self.msgList[i].floor%10 === 2){
+							self.msgList[i].floor += "nd" 
+						}
+						else if(self.msgList[i].floor%10 === 3){
+							self.msgList[i].floor += "rd" 
+						}
+						else{
+							self.msgList[i].floor += "th" 
+						}
 						self.msgList[i].showtime = date.substring(0,4) + "/" + date.substring(4,6) + "/" + date.substring(6,8) + " " + time.substring(0,2) + ":" + time.substring(2,4)
 						self.list.push({
 							name : self.msgList[i].userName,
 							message : self.msgList[i].content,
 							time : self.msgList[i].showtime,
+							floor : self.msgList[i].floor,
 						})
 					}
 				})
@@ -193,7 +197,7 @@ var app1 = new Vue({
 					console.log(error)
 				})
 		},
-		setTime(){//設定觸發時的時間
+		setTime(){   //設定觸發時的時間
 			let self = this
 			self.dateSend = ""
 			self.timeSend = ""
@@ -231,12 +235,12 @@ var app1 = new Vue({
 			sendMsg.userName = localStorage.getItem("userName")
 			sendMsg.date = this.dateSend
 			sendMsg.time = this.timeSend
-			sendMsg.content = this.inputContent
+			sendMsg.content = this.inputmsg.trim()
 			if(this.selectedClass === ""){
 				alert("Please choose class.")
 				return
 			}
-			if(this.inputContent === undefined||this.inputContent === ""){//this.inputContent.indexOf(" ") >= 0
+			if(sendMsg.content === undefined||sendMsg.content === ""){
 				alert("Please enter comments.")
 				return
 			}
@@ -250,7 +254,7 @@ var app1 = new Vue({
 					console.log(response.statusText)
 					console.log(response.headers)
 					console.log(response.config)
-					self.msgSend = response.data
+					self.msgSend = response.data //data.json
 					let date = self.msgSend.date
 					let time = self.msgSend.time
 					self.msgSend.showtime = date.substring(0,4) + "/" + date.substring(4,6) + "/" + date.substring(6,8) + " " + time.substring(0,2) + ":" + time.substring(2,4)
@@ -275,14 +279,11 @@ var app1 = new Vue({
 					console.log(error)
 				})
 			}
-			this.inputContent = ""
+			this.inputmsg = ""
 		},
 		handleReply : function(index){
-			var name = this.list[index].name;
-			this.inputContent = "reply@" + name + ": ";
+			var floor = this.list[index].floor;
+			this.inputmsg = "reply@ Floor " + floor + ": ";
 		},
-		handleDelete : function(index){
-			this.list.splice(index, 1)
-		}
 	}
 });
