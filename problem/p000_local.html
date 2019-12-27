@@ -1,4 +1,4 @@
-﻿<!-- 20191227 -->
+﻿<!-- 20191227 3 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -123,12 +123,12 @@
     </div>
     <div id="uploadFileTab" class="tabContent">
       <div id="uploadFileApp" class="uploadFileBlock">
-        <span>main</span>
+        <span class="fileTypeTitle">Main</span>
         <b-form-file id="file-default" v-model="mainFile" v-on:input="checkMainFile" accept=".c, .cpp, .py"></b-form-file>
-        <span>files</span>
+        <span class="fileTypeTitle">Files</span><span>(Please named as code1.cpp/c/py, code2.cpp/c/py, code3.cpp/c/py...)</span>
         <b-form-file id="file-default" v-model="implementFile" v-on:input="checkImplementFiles" accept=".c, .cpp, .py" multiple></b-form-file>
         <div v-show="showHeaderFile">
-          <span>header files</span>
+          <span class="fileTypeTitle">Header files</span><span>(Please named as code1.h, code2.h, code3.h)</span>
           <b-form-file id="file-default" v-model="headerFile" v-on:input="checkHeaderFiles" accept=".h" multiple></b-form-file>
         </div>
         <span v-show="showImplementFilesInvalidMsg" style="color: red;">${ implementFilesInvalidMsg }</span>

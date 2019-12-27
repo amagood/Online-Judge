@@ -1,4 +1,4 @@
-/* 20191212 */
+/* 20191227 3 */
 /*
   mainColor: MediumSeaGreen / #01f97d
   backgroundColor: lightgray
@@ -297,7 +297,12 @@ body.fullScreen {
 }
 
 #file-default {
-  padding-top: 30px;
+  padding-top: 40px;
+}
+
+.fileTypeTitle {
+  font-size: 20px;
+  margin-right: 10px;
 }
 
 /* tabs */

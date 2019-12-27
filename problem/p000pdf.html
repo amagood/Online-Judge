@@ -1,4 +1,4 @@
-<!-- 20191227 -->
+<!-- 20191227 3 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +10,7 @@
   <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
   <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
   {% load static %}
-  <link rel="stylesheet" href={% static "polls/css/problem.css" %}>
+  <link rel="stylesheet" href={% static "IDE/css/problem.css" %}>
 </head>
 
 <body>
@@ -24,17 +24,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="../index.html"><img class="navbarimage" src="../image/home.svg" /> Home</a>
+          <a class="nav-link" href="../index.html"><img class="navbarimage" src={% static "IDE/image/home.svg" %}/> Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" v-if="whichShow === 'teacher'" href="../teacherProblem.html"><img class="navbarimage" src="../image/file.svg" /> Problems</a>
-          <a class="nav-link" v-else-if="whichShow === 'student'" href="../studentProblem.html"><img class="navbarimage" src="../image/file.svg" /> Problems</a>
+          <a class="nav-link" v-if="whichShow === 'teacher'" href="../teacherProblem.html"><img class="navbarimage" src={% static "IDE/image/file.svg" %}/> Problems</a>
+          <a class="nav-link" v-else-if="whichShow === 'student'" href="../studentProblem.html"><img class="navbarimage" src={% static "IDE/image/file.svg" %}/> Problems</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="../ranking.html"><img class="navbarimage" src="../image/list-ordered.svg" /> Ranking<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="../ranking.html"><img class="navbarimage" src={% static "IDE/image/list-ordered.svg" %}/> Ranking<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../comments.html"><img class="navbarimage" src="../image/comments-regular.svg" /> Comments</a>
+          <a class="nav-link" href="../comments.html"><img class="navbarimage" src={% static "IDE/image/comments-regular.svg" %}/> Comments</a>
         </li>
       </ul>
       <ul class="navbar-nav">
@@ -42,13 +42,13 @@
           <span id="username">${ name } &nbsp</span>
         </li>
         <li class="nav-item">
-          <a class="nav-link" v-show="regIsShow" href="../register.html"><img class="navbarimage" src="../image/address-book-regular.svg" /> Register</a>
+          <a class="nav-link" v-show="regIsShow" href="../register.html"><img class="navbarimage" src={% static "IDE/image/address-book-regular.svg" %}/>> Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../login.html"><img class="navbarimage" src="../image/sign-in-alt-solid.svg" /> Login</a>
+          <a class="nav-link" href="../../../login"><img class="navbarimage" src={% static "IDE/image/sign-in-alt-solid.svg" %}/> Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" v-on:click="clearStorage()" href="../index.html"><img class="navbarimage" src="../image/sign-out-alt-solid.svg"/> Logout</a>
+          <a class="nav-link" v-on:click="clearStorage()" href="../index.html"><img class="navbarimage" src={% static "IDE/image/sign-out-alt-solid.svg" %}/> Logout</a>
         </li>
       </ul>
     </div>
@@ -84,36 +84,42 @@
         <!-- Lang dropdown end -->
         <!-- select form -->
         <div class="themeFlexBox">
-          <span class="themeLbl">Theme:</span>
+          <span class="themeLbl">Editor theme:</span>
           <b-form-select class="themeSelect" v-model="themeSelected" v-on:change="clickTheme()" :options="themeOptions">
           </b-form-select>
         </div>
         <!-- select form end -->
+      </div>
+      <!-- tab links -->
+      <b-tabs id="tabBlock" style="margin-top: 10px;" active-nav-item-class="font-weight-bold text-uppercase text-secondary" no-key-nav>
+        <b-tab title="Code editor" active v-on:click="openTab('codeEditorTab')"></b-tab>
+        <b-tab title="Upload files" v-on:click="openTab('uploadFileTab')"></b-tab>
+      </b-tabs>
+    </div>
+    <!-- tab content -->
+    <div id="codeEditorTab" class="tabContent">
+      <div id="aceEditorContainer" class=" aceEditorContainer">
+        <pre id="aceEditor"></pre>
+      </div>
+      <!-- dragbar -->
+      <div class="dragbar" id="dragbar"></div>
+      <!-- dragbar end -->
+    </div>
+    <div id="uploadFileTab" class="tabContent">
+      <div id="uploadFileApp" class="uploadFileBlock">
+        <span class="fileTypeTitle">Main</span>
+        <b-form-file id="file-default" v-model="mainFile" v-on:input="checkMainFile" accept=".c, .cpp, .py"></b-form-file>
+        <span class="fileTypeTitle">Files</span><span>(Please named as code1.cpp/c/py, code2.cpp/c/py, code3.cpp/c/py...)</span>
+        <b-form-file id="file-default" v-model="implementFile" v-on:input="checkImplementFiles" accept=".c, .cpp, .py" multiple></b-form-file>
+        <div v-show="showHeaderFile">
+          <span class="fileTypeTitle">Header files</span><span>(Please named as code1.h, code2.h, code3.h)</span>
+          <b-form-file id="file-default" v-model="headerFile" v-on:input="checkHeaderFiles" accept=".h" multiple></b-form-file>
         </div>
+        <span v-show="showImplementFilesInvalidMsg" style="color: red;">${ implementFilesInvalidMsg }</span>
+        <span v-show="showHeaderFilesInvalidMsg" style="color: red;">${ headerFilesInvalidMsg }</span>
+      </div>
     </div>
-    <div id="uploadFileApp">
-      <b-button id="uploadFileBtn" v-on:click="showUploadFileBlock = !showUploadFileBlock" :pressed="showUploadFileBlock" size="sm" variant="outline-secondary" title="submit uploaded files when this button is toggled">Upload files</b-button>
-      <transition name="fade">
-        <div class="uploadFileBlock" v-show="showUploadFileBlock">
-          <span>main</span>
-          <b-form-file id="file-default" v-model="mainFile" v-on:input="checkMainFile" accept=".c, .cpp, .py"></b-form-file>
-          <span>files</span>
-          <b-form-file id="file-default" v-model="implementFile" v-on:input="checkImplementFiles" accept=".c, .cpp, .py" multiple></b-form-file>
-          <div v-show="showHeaderFile">
-            <span>header files</span>
-            <b-form-file id="file-default" v-model="headerFile" v-on:input="checkHeaderFiles" accept=".h" multiple></b-form-file>
-          </div>
-          <span v-show="showImplementFilesInvalidMsg" style="color: red;">${ implementFilesInvalidMsg }</span>
-          <span v-show="showHeaderFilesInvalidMsg" style="color: red;">${ headerFilesInvalidMsg }</span>
-        </div>
-      </transition>
-    </div>
-    <div id="aceEditorContainer" class=" aceEditorContainer">
-      <pre id="aceEditor"></pre>
-    </div>
-    <!-- dragbar -->
-    <div class="dragbar" id="dragbar"></div>
-    <!-- dragbar end -->
+    <!-- tab content end -->
     <div id="app3">
       <div class="d-flex justify-content-end mb-3">
         <transition name="fade">
@@ -170,12 +176,12 @@
           <div v-if="OutputAvailable" class="sampleInOutContainer">
             <div class="sampleInOut">
               <span class="smallTitle2">Wrong Output</span>
-              <img src={% static "polls/image/copy.svg" %} alt="" onclick="copyFn('wrongOutput')" style="cursor: pointer;">
+              <img src={% static "IDE/image/copy.svg" %} alt="" onclick="copyFn('wrongOutput')" style="cursor: pointer;">
               <div v-html="htmlWrongOutput"></div>
             </div>
             <div class="sampleInOut">
               <span class="smallTitle2">Expected Output</span>
-              <img src={% static "polls/image/copy.svg" %} alt="" onclick="copyFn('expectedOutput')" style="cursor: pointer;">
+              <img src={% static "IDE/image/copy.svg" %} alt="" onclick="copyFn('expectedOutput')" style="cursor: pointer;">
               <div v-html="htmlExpectedOutput"></div>
             </div>
           </div>
@@ -209,7 +215,7 @@
   <!-- set ace -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js" integrity="sha256-CVkji/u32aj2TeC+D13f7scFSIfphw2pmu4LaKWMSY8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ext-language_tools.js" integrity="sha256-5GsAp93HE/XYlhrUPMw4VBAoawG9n3c7+DbQE4tRwW0=" crossorigin="anonymous"></script>
-  <script src={% static "polls/js/problem.js" %}></script>
+  <script src={% static "IDE/js/problem.js" %}></script>
   <script>
     var qID = "p000";
     var initCode = ``;
