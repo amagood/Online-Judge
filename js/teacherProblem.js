@@ -42,7 +42,7 @@ var questionLibObj = {
   "questionPage": "1",//1 means select the top 20 question
   "sortDesc": "false",//false:升序
   "sequence": "id",//排序方式
-  "tag": "tag",//filter
+  "target": "tag",//filter
   "degree": "degree",//filter
   "userName": "amagood",
   "Class": "CSIE110",
@@ -82,7 +82,7 @@ var probapp = new Vue({
         formatter: "problemLink"
       },
       {
-        key: "tag",
+        key: "target",
         label: "Tag",
         sortable: true
       },
@@ -150,7 +150,7 @@ var probapp = new Vue({
       this.noGetData = true
       this.Degree = "degree"
       this.Tag = "tag"
-      questionLibObj.tag = this.Tag
+      questionLibObj.target = this.Tag
       questionLibObj.degree = this.Degree
       //console.log(questionLibObj)
       //postURL = "https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22p000%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
@@ -165,8 +165,8 @@ var probapp = new Vue({
       axios
         .post(postURL, questionLibObj)
         .then(function (response) {
-          console.log(response.data)
-          console.log(JSON.parse(response.data))
+          //console.log(response.data)
+          //console.log(JSON.parse(response.data))
           tmpobj =JSON.parse(response.data)         
           probapp.items = tmpobj.questionLib
           // Set the initial number of items、totalRows
@@ -187,7 +187,7 @@ var probapp = new Vue({
     //html dropdown buttom(block 1)
     clickTag(Tag) {
       this.Tag = Tag
-      questionLibObj.tag = this.Tag
+      questionLibObj.target = this.Tag
       this.Degree = "degree"
       questionLibObj.degree = "degree"
       if (Tag != "tag") {
@@ -202,7 +202,7 @@ var probapp = new Vue({
       this.Degree = Degree
       questionLibObj.degree = this.Degree
       this.Tag = "tag"
-      questionLibObj.tag = "tag"
+      questionLibObj.target = "tag"
       if (Degree != "degree") {
         this.noGetData = true
         this.noFilterData = true
