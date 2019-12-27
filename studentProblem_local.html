@@ -118,7 +118,7 @@
             </template>
             <!--problemLink-->
             <template v-slot:cell(title)="data">
-              <a :href="`problem/${data.item.id.replace(/[^a-z][^0-9]+/i,'')}.html`">${ data.value }</a>
+              <a :href="`problem/${data.item.id}.html`">${ data.value }</a>
             </template>
             <template v-slot:cell(percentagePassing)="data">
               ${ data.item.percentagePassing } %
