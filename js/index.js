@@ -1,8 +1,7 @@
 /*
 	2019/12/29
-	version1.3 
-		1.修改home圖片
-		2.login後不再顯示login
+	version1.4
+    1.登入才顯示名稱
 */
 var app1 = new Vue({
 	delimiters : ['${', '}'],

@@ -40,25 +40,30 @@ var collectClass = {
 var navapp = new Vue({
 	delimiters : ['${', '}'],
 	el : "#navapp",
-	data:{
-		whichShow : "",
-		regIsShow : false,
+	data : {
 		userid : "",
 		name : "",
+		isShow : false, //題目庫顯示
+		regIsShow : false, //註冊頁顯示
+		logIsShow : true, //登入頁顯示
+		whichShow : "",
 	},
-	created(){
+	created() {
 		this.chooseProblems()
-		this.canRegister()
+    this.canRegister()
+    this.canLogin()
 	},
-	methods:{
+	methods: {
 		chooseProblems(){
 			let self = this
 			self.name = localStorage.getItem("userName")
 			self.userid = localStorage.getItem("who")
 			if(self.userid === "admin"||self.userid === "teacher"){
+				self.isShow = true
 				self.whichShow = "teacher"
 			}
 			else if(self.userid === "student"){
+				self.isShow = true
 				self.whichShow = "student"
 			}
 		},
@@ -68,10 +73,17 @@ var navapp = new Vue({
 			if(self.userid === "admin"){
 				self.regIsShow = true
 			}
+    },
+    canLogin(){
+			let self = this
+			self.userid = localStorage.getItem("userName")
+			if(self.userid){
+				self.logIsShow = false
+			}
 		},
 		clearStorage(){
-			localStorage.clear()
-		}
+			localStorage.clear();
+		},
 	},
 })
 

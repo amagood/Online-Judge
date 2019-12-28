@@ -1,13 +1,41 @@
 /* 2019/12/29 */
 .navbarset{
-  background-color: #56fd96;
+  background-color: #CCFF99;
 }
 
-#navapp{
-	max-width: auto;
-}
 .navbarimage{
   width: 23px;
+  height:40px;
+  max-width:100%;
+  max-height:100%;
+}
+
+p{
+  font-size: 16px;
+}
+
+#username{
+	font-size: 20px;
+	line-height: 52px;
+}
+
+.img-home{
+  width:130px;
+  height:40px;
+  max-width:100%;
+  max-height:100%;
+}
+
+ul a {
+  color: #42b983;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul a:hover {
+  color: #42b983;
+  text-decoration: none;
 }
 
 #app1{
@@ -71,6 +99,7 @@
 	}
 
 .message{
+	width: 100%;
 	max-width: 500px;
 	white-space: nowrap;
 	margin: 0px auto;
