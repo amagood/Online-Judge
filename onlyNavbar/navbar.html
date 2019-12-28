@@ -1,84 +1,106 @@
 <!--
     active 這個class,以及 <span class="sr-only">(current)</span> 這個標籤移到要貼上的頁面的欄位下
 
-    12/02修正: 
+    12/02: 
       class="navbar-toggler"旁邊增加以下標籤 data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
       class="collapse navbar-collapse"旁邊增加 id="navbarSupportedContent"
       用${ name }標記使用者名稱在register按鈕左邊 (理論上使用者在除了首頁、註冊和登入畫面都應該是登入的狀態)
-    12/16修正:
+    12/16:
       register的按鈕新增v-show="regIsShow"屬性,只有身份為admin才能顯示註冊
+    12/29:
+      把home新的圖放上去
+      根據大小縮放變成捲軸
+      新的圖logo.png要放到image資料夾裡
     -->
-<nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-  <a class="navbar-brand" href="index.html">GreenTeam</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
-        <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="ranking.html"><img class="navbarimage" src="image/list-ordered.svg" /> Ranking<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="comments.html"><img class="navbarimage" src="image/comments-regular.svg" /> Comments</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <span id="username">${ name } &nbsp</span>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" v-show="regIsShow" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" v-on:click="clearStorage()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<div id="app1">
+  <!--網頁上方的navbar, 格式設定在index.css檔中-->
+  <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+    <a class="navbar-brand" href="index.html"><img class="img-home" src="image/logo.png" /></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
+          <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" v-show="isShow" href="ranking.html"><img class="navbarimage" src="image/list-ordered.svg" /> Ranking</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" v-show="isShow" href="comments.html"><img class="navbarimage" src="image/comments-regular.svg" /> Comments</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <span id="username">Hello! ${ name } &nbsp</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" v-show="regIsShow" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" v-show="canLogin" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" v-on:click="clearStorage()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
 <script>
-  var navapp = new Vue({
-    el : "#navapp",
-    data :{
-      whichShow : "",//顯示哪個題目庫
-      regIsShow : "",//顯示註冊鈕
-      userid : "",
-      name : localStorage.getItem("userName"),
+  var app1 = new Vue({
+	delimiters : ['${', '}'],
+	el : "#app1",
+	data : {
+		userid : "",
+		name : "",
+		isShow : false, //題目庫顯示
+		regIsShow : false, //註冊頁顯示
+		logIsShow : true, //登入頁顯示
+		whichShow : "",
+	},
+	created() {
+		this.test()
+		this.chooseProblems()
+    this.canRegister()
+    this.canLogin()
+	},
+	methods: {
+		chooseProblems(){
+			let self = this
+			self.name = localStorage.getItem("userName")
+			self.userid = localStorage.getItem("who")
+			if(self.userid === "admin"||self.userid === "teacher"){
+				self.isShow = true
+				self.whichShow = "teacher"
+			}
+			else if(self.userid === "student"){
+				self.isShow = true
+				self.whichShow = "student"
+			}
+		},
+		canRegister(){
+			let self = this
+			self.userid = localStorage.getItem("who")
+			if(self.userid === "admin"){
+				self.regIsShow = true
+			}
     },
-    created() {
-      this.chooseProblems()
-      this.canRegister()
-    },
-    methods: {
-      chooseProblems(){
-        let self = this
-        self.userid = localStorage.getItem("who")
-        if(self.userid === "admin"||self.userid === "teacher"){
-          self.whichShow = "teacher"
-        }
-        else if(self.userid === "student"){
-          self.whichShow = "student"
-        }
-      },
-      canRegister(){
-        let self = this
-        self.userid = localStorage.getItem("who")
-        if(self.userid === "admin"){
-          self.regIsShow = true
-        }
-      },
-      clearStorage(){
-        localStorage.clear();
-      },
-    },
-  })
+    canLogin(){
+			let self = this
+			self.userid = localStorage.getItem("userName")
+			if(self.userid){
+				self.logIsShow = false
+			}
+		},
+		clearStorage(){
+			localStorage.clear();
+		},
+	},
+})
 </script>

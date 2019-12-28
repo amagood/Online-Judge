@@ -1,6 +1,8 @@
 /*
-	2019/12/16
-	version1.2 只有管理員(admin)顯示註冊按鈕
+	2019/12/29
+	version1.3 
+		1.修改home圖片
+		2.login後不再顯示login
 */
 var app1 = new Vue({
 	delimiters : ['${', '}'],
@@ -10,12 +12,14 @@ var app1 = new Vue({
 		name : "",
 		isShow : false, //題目庫顯示
 		regIsShow : false, //註冊頁顯示
+		logIsShow : true, //登入頁顯示
 		whichShow : "",
 	},
 	created() {
-		this.test()
+		// this.test()
 		this.chooseProblems()
 		this.canRegister()
+		this.canLogin()
 	},
 	methods: {
 		test(){//測試
@@ -42,6 +46,13 @@ var app1 = new Vue({
 			self.userid = localStorage.getItem("who")
 			if(self.userid === "admin"){
 				self.regIsShow = true
+			}
+		},
+		canLogin(){
+			let self = this
+			self.userid = localStorage.getItem("userName")
+			if(self.userid){
+				self.logIsShow = false
 			}
 		},
 		clearStorage(){
