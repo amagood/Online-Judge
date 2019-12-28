@@ -1,3 +1,4 @@
+// 2019/12/29
 //選擇班級後送出
 var showMessageAction = {
 	"action" : "show_message",
@@ -5,11 +6,11 @@ var showMessageAction = {
 	"hash" : localStorage.getItem("hash"),
 	"Class" : "", 
 	
-	/*"message" :[ 
-		{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
-		{"userName" :　"87man", "date" : "20191016", "time" : "1900", "content" : "oh,haha"},
-		{"userName" :　"charlieyang", "date" : "20191126", "time" : "1915", "content" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
-	],*/
+	// "message" :[ 
+	// 	{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
+	// 	{"userName" :　"87man", "date" : "20191016", "time" : "1900", "content" : "oh,haha"},
+	// 	{"userName" :　"charlieyang", "date" : "20191126", "time" : "1915", "content" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
+	// ],
 }
 //按下next後送出
 var sendMsg = {
@@ -27,12 +28,12 @@ var collectClass = {
 	"userName" : localStorage.getItem("userName"),
 	"hash" : localStorage.getItem("hash"),
 
-	/*"Classes":
-	[
-		{"Class" : "CSIE110"},
-		{"Class" : "CSIE111"},
-		{"Class" : "LOL201"},
-	]*/
+	// "Classes":
+	// [
+	// 	{"Class" : "CSIE110"},
+	// 	{"Class" : "CSIE111"},
+	// 	{"Class" : "LOL201"},
+	// ]
 }
 
 //----navbar設定----
@@ -113,7 +114,8 @@ var app1 = new Vue({
 		classSet : [],   //使用者的班級列表(或全部?)
 		selectedClass : "", //選擇的班級
 		timerCall : "",  //定時呼叫request
-		callFromBack : false //是否為定時呼叫
+		callFromBack : false, //是否為定時呼叫
+		noShow : false, //暫時不要顯示
 	},
 	created(){
 		this.setClass()
@@ -171,7 +173,7 @@ var app1 = new Vue({
 					for(let i=self.msgList.length-1; i>=0; i--){
 						let date = self.msgList[i].date
 						let time = self.msgList[i].time
-						self.msgList[i].floor = self.msgList.length - i
+						self.msgList[i].floor = i+1
 						if(self.msgList[i].floor%10 === 1){
 							self.msgList[i].floor += "st" 
 						}

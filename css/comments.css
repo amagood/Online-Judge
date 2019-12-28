@@ -1,17 +1,19 @@
+/* 2019/12/29 */
 .navbarset{
   background-color: #56fd96;
 }
 
 #navapp{
-	width: auto;
+	max-width: auto;
 }
 .navbarimage{
   width: 23px;
 }
 
 #app1{
-  width: 700px;
-  margin: 0 auto;
+  max-width: 900px;
+	margin: 0 auto;
+	
 }
 
 [v-cloak]{
@@ -24,42 +26,82 @@
 }
 
 .form-group{
-	margin-top: 20px;
-	display: inline-block;
-	float: left;
+	display: inline;
 }
 
 .form-group label{
 	float: left;
 	line-height: 30px;
 	margin-right: 4px;
-	font-size: 18px;
+	font-size: 16px;
 }
 
-.form-group select{
-	width: 120px;
+.form-control{
+	max-width: 120px;
 	height: 30px;
 }
 
-.message{
-	width: 700px;
-	/*text-align: center;*/
+.col1 {
+	width: 100px;
+	display: inline-block; 
+	margin: 0 auto;
 }
 
-.message span{
+.label1 {
+	text-align: right;
+}
+
+.col2 {
+	width:300px;
+	display: inline-block; 
+	margin: 0 auto;
+}
+
+.col13 {
+	width: 200px;
+	display: inline-block; 
+	margin: 0 auto;
+	background-color: #3399ff;
+}
+
+
+.inline { 
+	display: inline-block; 
+	margin:0px auto; 
+	}
+
+.message{
+	max-width: 500px;
+	white-space: nowrap;
+	margin: 0px auto;
+}
+
+.user-msg{
 	display: inline-block;
 	width: 100px;
-	vertical-align: top;
-	margin-top: 20px;
-	margin-right: 4px;
+	/* vertical-align: bottom; */
 	text-align:right;
+	margin:0px auto; 
 }
 
-.message textarea{
+
+.next{
+	max-width:100px;
+	height: 40px;
+	padding: 4px 6px;
+	margin-top: -30px;
+}
+
+/* .search-floor{
+	padding-bottom: -25px;
+	max-width: 200px;
+} */
+
+.input-area{
 	width:300px;
-	height: 32px;
-	padding: 0 6px;
-	margin-top: 20px;
+	height: 60px;
+	padding: 4px 6px;
+	margin-top: 15px;
 	color: #657180;
 	border: 1px solid #d7dde4;
 	border-radius: 4px;
@@ -67,13 +109,8 @@
 	outline: none;
 }
 
-.message textarea:focus{
+.input-area:focus{
 	border: 1px solid #3399ff;
-}
-
-.message textarea{
-	height: 60px;
-	padding: 4px 6px;
 }
 
 .message button{
@@ -82,7 +119,6 @@
 	border-radius: 4px;
 	cursor: pointer;
 	outline: none;
-	float: right;
 }
 
 .list{
@@ -90,14 +126,15 @@
 }
 
 .list-item{
-	padding: 10px;
+	padding: 5px;
+	background-color:#e7faeee5 ;
 	border-bottom: 1px solid #e3e8ee;
 	overflow: hidden;
 }
 
 .list-item span{
 	display: block;
-	width: 110px;
+	max-width: 110px;
 	float: left;
 	color:rgb(51, 177, 51);
 	text-align:right;
@@ -118,7 +155,7 @@
 }
 
 .list-msg span{
-	width: 80px;
+	max-width: 80px;
 	float: right;
 	font-size: 14px;
 	text-align: justify;
@@ -130,6 +167,12 @@
 	color: #9EA7B4;
 	padding: 20px;
 }
+
+/* .search-btn{
+	max-width: 500px;
+	margin: 0 auto;
+	padding-top: 20px;
+} */
 
 #username{
 	font-size: 20px;
