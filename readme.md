@@ -2,9 +2,10 @@ README
  
 How to use
 1. add 'register' into INSTALLED_APPS which in settings.py
-2. put html file in template/register/
-3. put static files(js,css...) in static/
-4. change page_route which in Register_View.py to link with html file
+2. add path by include 'register.urls' in urls.py
+3. put html file in template/register/
+4. put static files(js,css...) in static/
+5. change page_route which in Register_View.py to link with html file
 
 
 Function Description
