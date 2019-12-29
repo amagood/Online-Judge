@@ -73,64 +73,64 @@ ul a:hover {
 	width: 100px;
 	display: inline-block; 
 	margin: 0 auto;
+	vertical-align: top;
+	text-align: right;
 }
 
 .label1 {
 	text-align: right;
+	vertical-align: top;
 }
 
 .col2 {
 	width:300px;
 	display: inline-block; 
 	margin: 0 auto;
+	vertical-align: top;
 }
 
-.col13 {
-	width: 200px;
+.col3 {
+	width: 100px;
 	display: inline-block; 
 	margin: 0 auto;
-	background-color: #3399ff;
+	padding-top: 20px;
 }
 
-
-.inline { 
+.inline{ 
 	display: inline-block; 
 	margin:0px auto; 
-	}
+}
 
 .message{
 	width: 100%;
 	max-width: 500px;
 	white-space: nowrap;
 	margin: 0px auto;
+	vertical-align: top;
+	margin-top: 15px;
 }
 
 .user-msg{
 	display: inline-block;
 	width: 100px;
-	/* vertical-align: bottom; */
 	text-align:right;
 	margin:0px auto; 
 }
 
-
-.next{
-	max-width:100px;
-	height: 40px;
-	padding: 4px 6px;
-	margin-top: -30px;
+.search-img{
+	width: 35px;
+	height: 24px;
 }
 
-/* .search-floor{
-	padding-bottom: -25px;
-	max-width: 200px;
-} */
+.next{
+	max-width:80px;
+	height: 38px;
+}
 
 .input-area{
 	width:300px;
 	height: 60px;
 	padding: 4px 6px;
-	margin-top: 15px;
 	color: #657180;
 	border: 1px solid #d7dde4;
 	border-radius: 4px;
@@ -196,18 +196,6 @@ ul a:hover {
 	color: #9EA7B4;
 	padding: 20px;
 }
-
-/* .search-btn{
-	max-width: 500px;
-	margin: 0 auto;
-	padding-top: 20px;
-} */
-
-#username{
-	font-size: 20px;
-	line-height: 42px;
-}
-
 #show-message{
 	word-wrap:break-word;
 	margin-left: 4px;
