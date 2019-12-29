@@ -1,8 +1,11 @@
 README
-
+ 
 How to use
-1. place Register.py and Register_View.py in same folder
-2. add path in url.py and link with ResponseRegisterStatus
+1. add 'register' into INSTALLED_APPS which in settings.py
+2. put html file in template/register/
+3. put static files(js,css...) in static/
+4. change page_route which in Register_View.py to link with html file
+
 
 Function Description
 
