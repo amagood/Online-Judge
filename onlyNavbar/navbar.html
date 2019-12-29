@@ -41,12 +41,6 @@
           <span id="username" v-show="isShow">Hello! ${ name } &nbsp</span>
         </li>
         <li class="nav-item">
-          <a class="nav-link" v-show="regIsShow" href="register.html"><img class="navbarimage" src="image/address-book-regular.svg" /> Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" v-show="canLogin" href="login.html"><img class="navbarimage" src="image/sign-in-alt-solid.svg" /> Login</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" v-on:click="clearStorage()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
         </li>
       </ul>

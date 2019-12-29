@@ -34,24 +34,24 @@
   <body>
     <!--navbar, 格式設定在ranking.css檔中-->
     <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href= {% static "index.html" %}/><img class="img-home" src= {% static "image/logo.png" %}/></a>
+      <a class="navbar-brand" href= {% static "/static/index.html" %}/><img class="img-home" src= {% static "/static/image/logo.png" %}/></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href= {% static "index.html" %}/><img class="navbarimage" src= {% static "image/home.svg" %}/> Home</a>
+            <a class="nav-link" href= {% static "/static/index.html" %}/><img class="navbarimage" src= {% static "/static/image/home.svg" %}/> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href= {% static "teacherProblem.html" %}/><img class="navbarimage" src= {% static "image/file.svg" %}/> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href= {% static "studentProblem.html" %}/><img class="navbarimage" src= {% static "image/file.svg" %}/> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href= {% static "/static/teacherProblem.html" %}/><img class="navbarimage" src= {% static "/static/image/file.svg" %}/> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href= {% static "/static/studentProblem.html" %}/><img class="navbarimage" src= {% static "/static/image/file.svg" %}/> Problems</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" v-show="isShow" href= {% static "ranking.html" %}/><img class="navbarimage" src= {% static "image/list-ordered.svg" %}/> Ranking<span class="sr-only">(current)</span></a>
+            <a class="nav-link active" v-show="isShow" href="../Rank"/><img class="navbarimage" src= {% static "/static/image/list-ordered.svg" %}/> Ranking<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-show="isShow" href= {% static "comments.html" %}/><img class="navbarimage" src= {% static "image/comments-regular.svg" %}/> Comments</a>
+            <a class="nav-link" v-show="isShow" href="../message"/><img class="navbarimage" src= {% static "/static/image/comments-regular.svg" %}/> Comments</a>
           </li>
         </ul>
         <ul class="navbar-nav">
@@ -59,13 +59,7 @@
             <span id="username" v-show="isShow">Hello! ${ name } &nbsp</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-show="regIsShow" href= {% static "register.html" %}/><img class="navbarimage" src= {% static "image/address-book-regular.svg" %}/> Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" v-show="logIsShow" href= {% static "login.html" %}/><img class="navbarimage" src= {% static "image/sign-in-alt-solid.svg" %}/> Login</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" v-on:click="clearStorage()" href= {% static "index.html" %}/><img class="navbarimage" src= {% static "image/sign-out-alt-solid.svg" %}/> Logout</a>
+              <a class="nav-link" v-on:click="clearStorage()" href= {% static "/static/index.html" %}/><img class="navbarimage" src= {% static "/static/image/sign-out-alt-solid.svg" %}/> Logout</a>
           </li>
         </ul>
       </div>
@@ -101,7 +95,7 @@
           </div>
           <div class="col3">
             <button @click="createRankList" type="button" class="btn btn-outline-success">
-              <img class="search-img" src= {% static "image/search-solid.svg" %}/>
+              <img class="search-img" src= {% static "/static/image/search-solid.svg" %}/>
             </button>
           </div>
           <div class="alert alert-success fade show" role="alert">
@@ -140,6 +134,6 @@
     </div>
 
     <!--js-->
-    <script src= {% static "js/ranking.js" %}/></script>
+    <script src= {% static "/static/message/js/ranking.js" %}/></script>
   </body>
 </html>
