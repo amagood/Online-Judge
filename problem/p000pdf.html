@@ -1,4 +1,4 @@
-<!-- 20191227 3 -->
+<!-- 20191231 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,43 +16,39 @@
 <body>
   <!-- partial:index.partial.html -->
   <!-- navbar -->
-  <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-    <a class="navbar-brand" href="../index.html">GreenTeam</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="../index.html"><img class="navbarimage" src={% static "IDE/image/home.svg" %}/> Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" v-if="whichShow === 'teacher'" href="../teacherProblem.html"><img class="navbarimage" src={% static "IDE/image/file.svg" %}/> Problems</a>
-          <a class="nav-link" v-else-if="whichShow === 'student'" href="../studentProblem.html"><img class="navbarimage" src={% static "IDE/image/file.svg" %}/> Problems</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="../ranking.html"><img class="navbarimage" src={% static "IDE/image/list-ordered.svg" %}/> Ranking<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../comments.html"><img class="navbarimage" src={% static "IDE/image/comments-regular.svg" %}/> Comments</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <span id="username">${ name } &nbsp</span>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" v-show="regIsShow" href="../register.html"><img class="navbarimage" src={% static "IDE/image/address-book-regular.svg" %}/>> Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../../../login"><img class="navbarimage" src={% static "IDE/image/sign-in-alt-solid.svg" %}/> Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" v-on:click="clearStorage()" href="../index.html"><img class="navbarimage" src={% static "IDE/image/sign-out-alt-solid.svg" %}/> Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <div id="app1">
+    <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+      <a class="navbar-brand" href="/index"><img class="img-home" src= {% static "/IDE/image/logo.png" %} /></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/index"><img class="navbarimage" src= {% static "/IDE/image/home.svg" %}/> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-if="whichShow === 'teacher'" href="/teacherProblem"><img class="navbarimage" src= {% static "/IDE/image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href="/studentProblem"><img class="navbarimage" src= {% static "/IDE/image/file.svg" %} /> Problems</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-show="isShow" href="/ranking"><img class="navbarimage" src= {% static "/IDE/image/list-ordered.svg" %} /> Ranking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-show="isShow" href="/comments"><img class="navbarimage" src= {% static "/IDE/image/comments-regular.svg" %} /> Comments</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <span id="username" v-show="isShow">Hello! ${ name } &nbsp</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-on:click="clearStorage()" href="/index"><img class="navbarimage" src= {% static "/IDE/image/sign-out-alt-solid.svg" %}/> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
   <!-- navbar end -->
   <!-- mainBlock1 -->
   <div id="mainBlock1" class="mainBlock1">
@@ -65,6 +61,10 @@
   <div id="mainBlock2" class="mainBlock2">
     <div id="app2" style="position: relative;">
       <!-- tooltip for copy SampleInOut -->
+      <b-tooltip target="imgCopyIn" title="Copy the sample input"></b-tooltip>
+      <b-tooltip target="imgCopyOut" title="Copy the sample output"></b-tooltip>
+      <b-tooltip target="imgWrongOutput" title="Copy the wrong output"></b-tooltip>
+      <b-tooltip target="imgExpectedOutput" title="Copy the expected output"></b-tooltip>
       <transition name="slide-fade-popup">
         <div class="copyPopup" v-show="showCopyPopup">
           <p>Copied!</p>
@@ -107,7 +107,7 @@
     </div>
     <div id="uploadFileTab" class="tabContent">
       <div id="uploadFileApp" class="uploadFileBlock">
-        <span class="fileTypeTitle">Main</span>
+        <span class="fileTypeTitle">Main</span><span>(Please include header files: code1.h, code2.h ... in cpp/c. Import code1.py, code2.py ... in python.)</span>
         <b-form-file id="file-default" v-model="mainFile" v-on:input="checkMainFile" accept=".c, .cpp, .py"></b-form-file>
         <span class="fileTypeTitle">Files</span><span>(Please named as code1.cpp/c/py, code2.cpp/c/py, code3.cpp/c/py...)</span>
         <b-form-file id="file-default" v-model="implementFile" v-on:input="checkImplementFiles" accept=".c, .cpp, .py" multiple></b-form-file>
@@ -163,7 +163,7 @@
         </div>
       </transition>
       <transition name="slide-fade">
-        <div class="resultRed" v-if="showWA">
+        <div class="resultRed" v-show="showWA">
           <div class="d-flex">
             <div class="flex-fill">
               <span class="codeState">${ codeState }</span>
@@ -172,16 +172,16 @@
               <span>${ verdictTime }</span>
             </div>
           </div>
-          <div v-if="!OutputAvailable">Details are not available.</div>
-          <div v-if="OutputAvailable" class="sampleInOutContainer">
+          <div v-show="!OutputAvailable">Details are not available.</div>
+          <div v-show="OutputAvailable" class="sampleInOutContainer">
             <div class="sampleInOut">
               <span class="smallTitle2">Wrong Output</span>
-              <img src={% static "IDE/image/copy.svg" %} alt="" onclick="copyFn('wrongOutput')" style="cursor: pointer;">
+              <img id="imgWrongOutput" src={% static "IDE/image/copy.svg" %} alt="" onclick="copyFn('wrongOutput')" style="cursor: pointer;">
               <div v-html="htmlWrongOutput"></div>
             </div>
             <div class="sampleInOut">
               <span class="smallTitle2">Expected Output</span>
-              <img src={% static "IDE/image/copy.svg" %} alt="" onclick="copyFn('expectedOutput')" style="cursor: pointer;">
+              <img id="imgExpectedOutput" src={% static "IDE/image/copy.svg" %} alt="" onclick="copyFn('expectedOutput')" style="cursor: pointer;">
               <div v-html="htmlExpectedOutput"></div>
             </div>
           </div>
@@ -207,6 +207,10 @@
     </div>
   </div>
   <!-- mainBlock2 end -->
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <!-- partial -->
   <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
   <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>

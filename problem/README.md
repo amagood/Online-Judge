@@ -66,6 +66,11 @@ p000_local.html for local test
 }
 ```
 ----
+### 2019/12/31 Navbar, tooltip, main file direction
+	html css js image
+	navbar update: front-end-charlie532 2019/12/30 comments,rank移除註冊和登入按鈕, 修正rank,index路徑連結
+	add tooltips for wrong output and expected output img
+	add a direction after main file title in upload file block
 ### 2019/12/27 Tab, File naming
 	html css remind users to naming file
 ### 2019/12/27 Tab

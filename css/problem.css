@@ -1,4 +1,4 @@
-/* 20191227 3 */
+/* 20191231 */
 /*
   mainColor: MediumSeaGreen / #01f97d
   backgroundColor: lightgray
@@ -11,11 +11,30 @@
 /* navbar */
 
 .navbarset{
-  background-color: #56fd96;
+  background-color: #CCFF99;
 }
 
 .navbarimage{
   width: 23px;
+  height:40px;
+  max-width:100%;
+  max-height:100%;
+}
+
+p{
+  font-size: 16px;
+}
+
+#username{
+  font-size: 20px;
+  line-height: 52px;
+}
+
+.img-home{
+  width:130px;
+  height:40px;
+  max-width:100%;
+  max-height:100%;
 }
 
 /*  */
