@@ -1,7 +1,7 @@
 html { visibility: hidden; }
 
 body{
-  background-color: lightgray;/*#d3d3d3*/
+  background-color: rgb(242, 252, 233);/*#d3d3d3*/
   font-family: "微軟正黑體";
 }
 
@@ -35,7 +35,7 @@ p{
 /*navbar end*/
 
 .problemLib{
-  max-width: 1300px;
+  max-width: 1400px;
   min-height: 600px;
   max-height: 1400px;
   padding: 30px;
@@ -45,6 +45,15 @@ p{
   border-radius: 10px;
 }
 
+.dropdown{
+  margin-left: 10px;
+  variant="outline-secondary";
+}
+
+.table0{
+  margin-top: 20px;
+  min-height: 450px;"
+}
 /* Table設定 
 .problemTable{
   width:100% ;

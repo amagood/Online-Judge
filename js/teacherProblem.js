@@ -43,13 +43,28 @@ var questionLibObj = {
   "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
 var tmpobj = {}
-var postURL = ""
-//test postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title02%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title03%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title04%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title05%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
+//var postURL = ""
+var postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title02%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title03%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title04%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title05%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
+
+var addQuestionToClass ={
+  "action" : "addClass",
+  "addQuestionId" : [],
+  "userName" : "amagood",
+  "Class" : "CSIE110",
+  "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
+}
+
+var objItems=[]//add class
 
 var probapp = new Vue({
   delimiters: ['${', '}'],
   el: "#probapp",
   data: {
+    isSelected:false,//判斷目前有無選擇
+    noClassShow:true,//判斷目前有無班級
+    createClassList:'',//create new class存放新班名字
+    classList:[],//存class name list
+    //add class
     noGetData: true,//loading
     noFilterData: false,//判斷filter
     Tag: "tag",//for dropdown buttom
@@ -60,10 +75,7 @@ var probapp = new Vue({
     //perPage: 20,//一頁幾行
     currentPage: 1,//當前頁數
     totalRows: 1,//總行數
-    selectMode: 'range',//選擇模式
-    //showDismissibleAlert: false,//add class bar 
-    //modes: ['multi', 'single', 'range'],選擇模式多選、一次一行、shirt/ctrl選範圍
-    //pageOptions: [5,10, 15],//使用者選擇當前頁數
+    selectMode: 'multi',//選擇模式['multi', 'single', 'range']
     fields: [//table 每列項目,用來取整列值
       {
         key: "id",
@@ -103,6 +115,7 @@ var probapp = new Vue({
       },
       {
         key: "selected",
+        label:" ",//add class
         sortable: false
       }
     ],
@@ -161,7 +174,7 @@ var probapp = new Vue({
         .then(function (response) {
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          tmpobj =response.data
+          tmpobj =JSON.parse(response.data.freeform)
           probapp.items = tmpobj.questionLib
           /*set problem link*/
           for(i=0;i<tmpobj.questionLib.length;i++){
@@ -201,7 +214,6 @@ var probapp = new Vue({
       if (Tag != "tag") {
         this.noGetData = true
         this.noFilterData = true
-        //postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22p000%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
         this.getQuestionData()
         console.log("tag sort get data")
       }
@@ -223,6 +235,80 @@ var probapp = new Vue({
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
       this.currentPage = 1
+    },
+    //add class
+    whenRowSelected(items){//判斷目前有無選擇<b-table @row-selected="whenRowSelected">
+      if(items.length){
+        this.isSelected=true
+        objItems=items
+      }
+      else{
+        this.isSelected=false
+      }
+    },
+    showModal(){//有選擇-->open Add to modal
+      if(this.isSelected){
+        this.$refs["classModal"].show()
+      }
+      else{
+        this.$bvToast.toast(`Please choose the problem row first!`, {
+          title: 'Warning',
+          variant: "danger",
+          toaster: "b-toaster-top-center"
+        })
+      }
+    },
+    clickCreate(evt){//creat new class
+      evt.preventDefault()
+      this.$refs['classModal'].hide()
+      var obj=new Object();
+      obj.name=this.createClassList
+      obj.items=objItems
+      //console.log(obj)
+      this.classList.push(obj)
+      //console.log(this.classList)
+      this.noClassShow=false
+      //initial
+      this.createClassList=''
+      objItems=[]
+      this.clearSelected()
+      //finish
+      this.makeToast()
+    },
+    clickClass(items){//少了取消filter class,整理版面
+      console.log(items)//目前排序資料
+      this.items=items
+    },
+    clickAddToList(classList){//將選取題目加入目前已存在班級
+      this.$refs['classModal'].hide()
+      var obj=new Object();
+      for(var i=0;i<this.classList.length;i++)
+      {
+        if(this.classList[i]==classList){
+          console.log(objItems)
+          for(var j=0;j<objItems.length;j++){
+            this.classList[i].items.push(objItems[j])
+
+          }
+          console.log(this.classList[i].items)
+          //跳出for
+        }
+      }
+      objItems=[]
+      this.clearSelected()
+      this.makeToast()
+    },
+    clearSelected() {//清空選取
+      this.$refs.selectableTable.clearSelected()//<b-table  ref="selectableTable">
+    },
+    makeToast(append = false) {//成功加入班級提醒
+      this.$bvToast.toast(`Add success`, {
+        title: 'Success',
+        autoHideDelay: 2000,//2 sec
+        appendToast: append,
+        variant: "success",
+        toaster: "b-toaster-top-center"
+      })
     }
   },//method end
 
@@ -230,6 +316,6 @@ var probapp = new Vue({
 
 
 window.onload = () => {
-  document.getElementById("problemLib").className = "problemLib w3-animate-opacity";
+  //document.getElementById("probapp").className = "problemLib w3-animate-opacity";
   document.getElementsByTagName("html")[0].style.visibility = "visible";
 }

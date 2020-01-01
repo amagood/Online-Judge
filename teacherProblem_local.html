@@ -54,8 +54,7 @@
     </nav>
     <!--navbar end-->
 
-    <div id="problemLib" class="problemLib">
-      <div id="probapp">
+      <div id="probapp" class="problemLib">
         <!--block 1 sortMenu-->
         <b-row>
           <b-col>
@@ -70,21 +69,23 @@
               <b-dropdown-item @click="filter = 'sort'" v-on:click="clickTag('sort')">sort</b-dropdown-item>
               <b-dropdown-item @click="filter = 'dp'" v-on:click="clickTag('dp')">Dynamic programming</b-dropdown-item>
             </b-dropdown>
-            <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
+            <b-dropdown dropup v-bind:text="Degree" variant="secondary" class="dropdown">
               <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('degree')">all</b-dropdown-item>
               <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
               <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
               <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
             </b-dropdown>
-            <b-dropdown dropup text="Class" variant="outline-secondary" style="margin-left: 10px">
-              <!--turn right-->
-              <b-dropdown-item>Class A</b-dropdown-item>
-              <b-dropdown-item>Class B</b-dropdown-item>
-              <b-dropdown-item>Class C</b-dropdown-item>
+            <b-dropdown dropup text="Class" variant="outline-secondary" class="dropdown">
+              <b-dropdown-text style="width: 240px;" v-if="noClassShow">
+                There are no class.
+                Open a new class using the <b>Class</b> button .
+              </b-dropdown-text>
+              <b-dropdown-item v-else><strong>All Problem</strong></b-dropdown-item>
+              <b-dropdown-item v-for="i in classList" :key="'dyn-tab-' + classList.lenght" @click="clickClass(i.items)">${i.name} </b-dropdown-item>
             </b-dropdown>
-            <b-dropdown dropup text="Add" variant="outline-secondary" style="margin-left: 10px">
-              <!--turn right-->
-              <b-dropdown-item>Class</b-dropdown-item>
+            <b-dropdown dropup text="Add" variant="outline-secondary">
+              <b-dropdown-item @click="showModal">Class</b-dropdown-item>
+              <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-item href="createQuestion.html">Problem</b-dropdown-item>
             </b-dropdown>
           </b-col>
@@ -103,10 +104,11 @@
         </b-row>
 
         <!--block 2 Problem-->
-        <div style="margin-top: 20px; min-height: 480px;">
+        <div class="table0">
           <b-table selectable sticky hover responsive id="problemTable" :items="items" :fields="fields"
             :per-page="questionLibObj.questionNum" :current-page="currentPage" :filter="filter" @filtered="onFiltered"
-            :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :busy="noGetData" :select-mode="selectMode">
+            :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :busy="noGetData" :select-mode="selectMode"
+            @row-selected="whenRowSelected"  ref="selectableTable">
             <!--loading-->
             <template v-slot:table-busy>
               <div class="text-center text-success " style="margin-top:30px">
@@ -126,6 +128,28 @@
               <template v-if="rowSelected">
                 <span aria-hidden="true">&check;</span>
                 <span class="sr-only">Selected</span>
+                <!--Add to class modal-->
+                <b-modal ref="classModal" title="Add To" :header-bg-variant="'secondary'" :header-text-variant="'light'"
+                  :footer-bg-variant="'light'">
+                  <div v-if="noClassShow">
+                    There are no class.
+                    <br/>
+                    Please create class first！
+                  </div>
+                  <b-list-group v-else>
+                    <b-list-group-item button v-for="i in classList" :key="'dyn-tab-' + classList.lenght" @click="clickAddToList(i)">${i.name}</b-list-group-item>
+                  </b-list-group>
+                  <template v-slot:modal-footer>
+                    <div class="w-100">
+                      <b-form @submit="clickCreate">
+                        <b-form-group label="Create New Class :">
+                        <b-form-input v-model="createClassList" placeholder="Input class name" required></b-form-input>
+                        </b-form-group>
+                        <b-button pill variant="primary" class="float-right" type="submit">Create</b-button>
+                      </b-form>
+                    </div>
+                  </template>
+                </b-modal>
               </template>
               <template v-else>
                 <span aria-hidden="true">&nbsp;</span>
@@ -137,17 +161,11 @@
 
         <!--block 3 Page-->
         <div>
-          <!--使用者選擇per page
-          <b-form-group label="Per page" label-cols-sm="6" label-cols-md="4" label-cols-lg="3" label-align-sm="right"
-            label-for="perPageSelect" class="mb-0">
-            <b-form-select v-model="perPage" id="perPageSelect" :options="pageOptions"></b-form-select>
-          </b-form-group>-->
           <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="questionLibObj.questionNum"
             aria-controls="problemTable" align="center">
           </b-pagination>
         </div>
       </div>
-    </div>
   </body>
 
   <!-- Optional JavaScript -->
