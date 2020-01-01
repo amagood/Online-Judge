@@ -131,7 +131,7 @@
             </template>
             <!--problemLink-->
             <template v-slot:cell(title)="data">
-              <a :href=data.item.link>${ data.item.title }</a>
+              <a :href="data.item.link">${ data.item.title }</a>
             </template>
             <template v-slot:cell(percentagePassing)="data">
               ${ data.item.percentagePassing } %

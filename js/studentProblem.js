@@ -171,17 +171,17 @@ var probapp = new Vue({
           //set problem link
           for(i=0;i<tmpobj.questionLib.length;i++){
             probapp.items[i]={
-              "id":probapp.items[i].id,
-              "title":probapp.items[i].title,
-              "target":probapp.items[i].target,
-              "degree":probapp.items[i].degree,
-              "percentagePassing":probapp.items[i].percentagePassing,
-              "respondent":probapp.items[i].respondent,
-              "inputTime":probapp.items[i].inputTime,
-              "link":"problem/"+probapp.items[i].id+".html"
+              "id":tmpobj.questionLib[i].id,
+              "title":tmpobj.questionLib[i].title,
+              "target":tmpobj.questionLib[i].target,
+              "degree":tmpobj.questionLib[i].degree,
+              "percentagePassing":tmpobj.questionLib[i].percentagePassing,
+              "respondent":tmpobj.questionLib[i].respondent,
+              "inputTime":tmpobj.questionLib[i].inputTime,
+              "link":"problem/"+tmpobj.questionLib[i].id+".html"
             }
           }
-          //console.log(probapp.items)
+          console.log(probapp.items)
           // Set the initial number of items、totalRows
           probapp.totalRows = probapp.items.length
           //console.log(questionLibObj)
