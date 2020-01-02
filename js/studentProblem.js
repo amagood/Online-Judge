@@ -200,6 +200,7 @@ var probapp = new Vue({
       if (Tag != "tag") {
         this.noGetData = true
         this.noFilterData = true
+        //console.log(questionLibObj)
         this.getQuestionData()
         console.log("tag sort get data")
       }
@@ -212,6 +213,7 @@ var probapp = new Vue({
       if (Degree != "degree") {
         this.noGetData = true
         this.noFilterData = true
+        //console.log(questionLibObj)
         this.getQuestionData()
         console.log("degree sort get data")
       }

@@ -1,4 +1,4 @@
-<!--20191225-->
+<!--20200102-->
 <!doctype html>
 <html lang="zh-Hant-TW">
 
@@ -58,7 +58,7 @@
         <!--block 1 sortMenu-->
         <b-row>
           <b-col>
-            <b-dropdown dropup v-bind:text="Tag" variant="secondary">
+            <b-dropdown v-bind:text="Tag" variant="secondary">
               <b-dropdown-item @click="filter = ''" v-on:click="clickTag('tag')">all</b-dropdown-item>
               <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTag('loop')">loop</b-dropdown-item>
               <b-dropdown-item @click="filter = 'if'" v-on:click="clickTag('if')">if</b-dropdown-item>
@@ -69,21 +69,23 @@
               <b-dropdown-item @click="filter = 'sort'" v-on:click="clickTag('sort')">sort</b-dropdown-item>
               <b-dropdown-item @click="filter = 'dp'" v-on:click="clickTag('dp')">Dynamic programming</b-dropdown-item>
             </b-dropdown>
-            <b-dropdown dropup v-bind:text="Degree" variant="secondary" class="dropdown">
+            <b-dropdown v-bind:text="Degree" variant="secondary" class="dropdown">
               <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('degree')">all</b-dropdown-item>
               <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
               <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
               <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
             </b-dropdown>
-            <b-dropdown dropup text="Class" variant="outline-secondary" class="dropdown">
-              <b-dropdown-text style="width: 240px;" v-if="noClassShow">
+            <b-dropdown v-bind:text="classButtonText" variant="outline-secondary" class="dropdown">
+              <b-dropdown-item v-on:click="clickClass('All Problem')" @click="filter = ''"><b class="text-info">All Problem</b></b-dropdown-item>
+              <b-dropdown-divider></b-dropdown-divider>
+              <b-dropdown-text style="width: 240px;" v-if="!classList.length">
                 There are no class.
-                Open a new class using the <b>Class</b> button .
+                Open a new class using the <b class="text-danger">Class</b> button .
               </b-dropdown-text>
-              <b-dropdown-item v-else><strong>All Problem</strong></b-dropdown-item>
-              <b-dropdown-item v-for="i in classList" :key="'dyn-tab-' + classList.lenght" @click="clickClass(i.items)">${i.name} </b-dropdown-item>
+              <b-dropdown-header v-else="!noClassShow">Class</b-dropdown-header>
+              <b-dropdown-item v-for="i in classList" :key="'dyn-tab-' + classList.lenght" v-on:click="clickClass(i.class)" @click="filter = ''">${i.class} </b-dropdown-item>
             </b-dropdown>
-            <b-dropdown dropup text="Add" variant="outline-secondary">
+            <b-dropdown text="Add" variant="outline-secondary" class="dropdown">
               <b-dropdown-item @click="showModal">Class</b-dropdown-item>
               <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-item href="createQuestion.html">Problem</b-dropdown-item>
@@ -118,7 +120,7 @@
             </template>
             <!--problemLink-->
             <template v-slot:cell(title)="data">
-              <a :href="data.item.link">${ data.item.title }</a>
+              <a :href="data.item.link"><b class="text-info">${ data.item.title }</b></a>
             </template>
             <template v-slot:cell(percentagePassing)="data">
               ${ data.item.percentagePassing } %
@@ -131,21 +133,21 @@
                 <!--Add to class modal-->
                 <b-modal ref="classModal" title="Add To" :header-bg-variant="'secondary'" :header-text-variant="'light'"
                   :footer-bg-variant="'light'">
-                  <div v-if="noClassShow">
+                  <div v-if="!classList.length">
                     There are no class.
                     <br/>
                     Please create class first！
                   </div>
                   <b-list-group v-else>
-                    <b-list-group-item button v-for="i in classList" :key="'dyn-tab-' + classList.lenght" @click="clickAddToList(i)">${i.name}</b-list-group-item>
+                    <b-list-group-item button v-for="i in classList" :key="'dyn-tab-' + classList.lenght" @click="clickAddToList(i.class)">${i.class}</b-list-group-item>
                   </b-list-group>
                   <template v-slot:modal-footer>
                     <div class="w-100">
                       <b-form @submit="clickCreate">
                         <b-form-group label="Create New Class :">
-                        <b-form-input v-model="createClassList" placeholder="Input class name" required></b-form-input>
+                        <b-form-input v-model="createClassName" placeholder="Input class name" required></b-form-input>
                         </b-form-group>
-                        <b-button pill variant="primary" class="float-right" type="submit">Create</b-button>
+                        <b-button pill variant="info" class="float-right" type="submit">Create</b-button>
                       </b-form>
                     </div>
                   </template>
