@@ -13,7 +13,7 @@ def responseGetQuestion(request):
         req=json.loads(request.body.decode('utf-8'))
         action=req['action']
         if action=='questionLib':
-            qLib=QuestionLibrary.GetQuestion.responseGetQuestion(req['questionNum'],req['questionPage'],req['sequence'],req['tag'],req['degree'],req['Class'],req['sortDesc'])
+            qLib=QuestionLibrary.GetQuestion.responseGetQuestion(req['questionNum'],req['questionPage'],req['sequence'],req['target'],req['degree'],req['Class'],req['sortDesc'])
             data={
                 "questionLib" : qLib,
                 "userName" : req['userName'],
@@ -59,6 +59,10 @@ def responseCreateQuestion(request):
 
 def problemDetail(request,num=1):
     purl='QuestionData/p{:05d}/p{:05d}.html'.format(num,num)
+    return render(request,purl,{})
+
+def pdfDetail(request,num=1):
+    purl='QuestionData/p{:05d}/p{:05d}pdf.pdf'.format(num,num)
     return render(request,purl,{})
 
 def teacherProblem(request):

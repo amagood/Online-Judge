@@ -11,14 +11,14 @@ class Question_Library():
         self.QuestionID = QuestionID
         if not os.path.isdir(self.path):
             os.mkdir(self.path)
-    def addQuestion(self,Title,Tags,Description,SampleInput,SampleOut,SampleCode,FileNameExtention):
+    def addQuestion(self,Title,Tags,Description,SampleInput,SampleOut,SampleCode,FileNameExtention,pdf):
         p_path=self.path+'/{}'.format(self.QuestionID)
         if not os.path.isdir(p_path):
             os.mkdir(p_path)
         h_path=p_path+'/{}.html'.format(self.QuestionID)
         f=open(h_path,"w")
         html_str=''
-        html_str+='''﻿<!-- 20191223 -->
+        html_str+='''﻿<!-- 20191231 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,43 +38,39 @@ class Question_Library():
 <body>
   <!-- partial:index.partial.html -->
   <!-- navbar -->
-  <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-    <a class="navbar-brand" href="../index.html">GreenTeam</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="../index.html"><img class="navbarimage" src={% static "QuestionData/image/home.svg" %} /> Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" v-if="whichShow === 'teacher'" href="./teacherProblem.html"><img class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
-          <a class="nav-link" v-else-if="whichShow === 'student'" href="./studentProblem.html"><img class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="../ranking.html"><img class="navbarimage" src={% static "QuestionData/image/list-ordered.svg" %} /> Ranking<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../comments.html"><img class="navbarimage" src={% static "QuestionData/image/comments-regular.svg" %} /> Comments</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <span id="username">${ name } &nbsp</span>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" v-show="regIsShow" href="../register.html"><img class="navbarimage" src={% static "QuestionData/image/address-book-regular.svg" %} /> Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../login.html"><img class="navbarimage" src={% static "QuestionData/image/sign-in-alt-solid.svg" %} /> Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" v-on:click="clearStorage()" href="../index.html"><img class="navbarimage" src={% static "QuestionData/image/sign-out-alt-solid.svg" %} /> Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <div id="app1">
+    <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+      <a class="navbar-brand" href="/index"><img class="img-home" src= {% static "QuestionData/image/logo.png" %} /></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/index"><img class="navbarimage" src= {% static "QuestionData/image/home.svg" %}/> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-if="whichShow === 'teacher'" href="/teacherProblem"><img class="navbarimage" src= {% static "QuestionData/image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href="/studentProblem"><img class="navbarimage" src= {% static "QuestionData/image/file.svg" %} /> Problems</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-show="isShow" href="/ranking"><img class="navbarimage" src= {% static "QuestionData/image/list-ordered.svg" %} /> Ranking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-show="isShow" href="/comments"><img class="navbarimage" src= {% static "QuestionData/image/comments-regular.svg" %} /> Comments</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <span id="username" v-show="isShow">Hello! ${ name } &nbsp</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-on:click="clearStorage()" href="/index"><img class="navbarimage" src= {% static "QuestionData/image/sign-out-alt-solid.svg" %}/> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
   <!-- navbar end -->
   <!-- mainBlock1 -->
   <div id="mainBlock1" class="mainBlock1">
@@ -84,28 +80,35 @@ class Question_Library():
       <p>'''
         for tag in Tags:
             html_str+='#{} '.format(tag)
-        html_str+='''</p>
-      <p class="smallTitle">Description</p>
+        html_str+='''</p>'''
+        if True:#pdf==''
+            html_str+='''<p class="smallTitle">Description</p>
       <p class="content">'''
-        html_str+=Description
-        html_str+='''</p>
+            html_str+=Description
+            html_str+='''</p>
     <div class="sampleInOutContainer">
       <div class="sampleInOut">
         <span class="smallTitle">Sample Input</span>
         <img id="imgCopyIn" src={% static "QuestionData/image/copy.svg" %} alt="" onclick="copyFn('sampleIn')" style="cursor: pointer;">
         <pre id="sampleIn" class="samplePre">'''
-        html_str+=SampleInput
-        html_str+='''</pre>
+            html_str+=SampleInput
+            html_str+='''</pre>
       </div>
       <div class="sampleInOut">
         <span class="smallTitle">Sample Out</span>
         <img id="imgCopyOut" src={% static "QuestionData/image/copy.svg" %} alt="" onclick="copyFn('sampleOut')" style="cursor: pointer;">
         <pre id="sampleOut" class="samplePre">'''
-        html_str+=SampleOut
-        html_str+='''</pre>
+            html_str+=SampleOut
+            html_str+='''</pre>
       </div>
-    </div>
-  </div>
+    </div>'''
+        else:
+            html_str+='<iframe src="{}pdf.pdf" style="width: 100%; height: 800px;"></iframe>'.format(self.QuestionID)
+            c_path=p_path+'/{}pdf.pdf'.format(self.QuestionID)
+            f2=open(c_path,"w")
+            f2.write(pdf)
+            f2.close()
+        html_str+='''</div>
   <!-- mainBlock1 end -->
   <!-- mainBlock2 -->
   <div id="mainBlock2" class="mainBlock2">

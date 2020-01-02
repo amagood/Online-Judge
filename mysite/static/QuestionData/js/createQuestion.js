@@ -176,6 +176,7 @@ new Vue({
             } 
           }
         }
+        questionObj.tag=questionObj.tag='';
         for (i=0; i<document.getElementsByTagName('input').length; i+=1) 
         {
           if(document.getElementsByTagName('input')[i].type=='checkbox')
@@ -242,7 +243,7 @@ new Vue({
             //testMode = false;//等有Response要刪掉~~
             if(tmpObj.stats=="verified")
             {
-              alert('題目建立成功');
+              alert('測試正確!');
               testMode = false; //測試時註解
             }
             else

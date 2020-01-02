@@ -41,7 +41,9 @@ def responseGetQuestion(questionNum,questionPage,questionSequence,questionTarget
         else:
             questionList=questionList.order_by('inputTime')
     retQuesData=[]
+    #print('retQuesData')#Debug
     for eachQues in questionList:
+        #print('in for loop')#Debug
         passrate='0.00%'
         if eachQues.Question_Summit_Time!=0:
             passrate='{:.2%}'.format(eachQues.Question_AC_Count/eachQues.Question_Summit_Time)
@@ -49,12 +51,13 @@ def responseGetQuestion(questionNum,questionPage,questionSequence,questionTarget
         targets=' '.join(targetlist)
         Qdata = {
             "id":eachQues.Question_ID,
-            "tltle":eachQues.Question_Name,
+            "title":eachQues.Question_Name,
             "target":targets,
             "degree":eachQues.Question_difficulty,
             "percentagePassing":passrate,
-            "respondent":"100",
+            "respondent":eachQues.Question_Summit_Time,
             "inputTime":eachQues.Question_Create_Time.strftime("%Y%m%d"),
+            "link":'/QuestionLibrary/{}.html'.format(eachQues.Question_ID),
         }
         retQuesData.append(Qdata)
     return retQuesData

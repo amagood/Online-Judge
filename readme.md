@@ -33,10 +33,10 @@ response:
 ```
 {
     "questionLib":[
-      {"id":"a001","title":"title01","tag":"loop","degree":"easy","percentagePassing":"50","respondent":"100","inputTime":"20190101"},
-      {"id":"a002","title":"title01","tag":"loop","degree":"easy","percentagePassing":"50","respondent":"100","inputTime":"20190101"},
+      {"id":"a001","title":"title01","target":"loop","degree":"easy","percentagePassing":"50","respondent":"100","inputTime":"20190101","link":"/problem/a001.html"},
+      {"id":"a002","title":"title01","target":"loop","degree":"easy","percentagePassing":"50","respondent":"100","inputTime":"20190101","link":"/problem/a002.html"},
       ...
-      {"id":"a020","title":"title01","tag":"loop","degree":"easy","percentagePassing":"50","respondent":"100","inputTime":"20190101"}
+      {"id":"a020","title":"title01","target":"loop","degree":"easy","percentagePassing":"50","respondent":"100","inputTime":"20190101","link":"/problem/a020.html"}
     ],
     "userName" : ex"amagood",
     "Class" : ex"CSIE110",
@@ -134,3 +134,10 @@ response:
   * v1.10 2019/12/25
     * fix problem navbar href error
     * update API
+  * v1.11 2020/01/03
+    * question library button response: add "link"
+    * integration front-end
+    * bug: problem.html err
+    * bug: navbar link err
+    * bug: create difficulty & get question difficulty
+    * bug: problem pdf err

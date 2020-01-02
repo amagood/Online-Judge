@@ -1,4 +1,4 @@
-<!--20191216-->
+<!--20191225-->
 <!doctype html>
 <html lang="zh-Hant-TW">
 
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.css">
   <!--teacherProblem.css-->
   {% load static %}
-  <link rel="stylesheet" href={% static "QuestionData/css/teacherProblem.css" %}>
+  <link rel="stylesheet" href={% static "css/teacherProblem.css" %}>
   <title>teacherProblem</title>
 </head>
 
@@ -23,49 +23,33 @@
 
   <body>
     <!--navbar-->
-    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset"
-      style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href={% static "index.html" %}>GreenTeam</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+      <a class="navbar-brand" href= {% static "/static/index.html" %}/><img class="img-home" src= {% static "/static/image/logo.png" %}/></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href={% static "index.html" %}><img class="navbarimage"
-                src={% static "QuestionData/image/home.svg" %} /> Home</a>
+            <a class="nav-link" href= {% static "/static/index.html" %}/><img class="navbarimage" src= {% static "/static/image/home.svg" %}/> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img
-                class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img
-                class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href={% static "ranking.html" %}><img class="navbarimage"
-                src={% static "QuestionData/image/list-ordered.svg" %} /> Ranking<span class="sr-only">(current)</span></a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href= {% static "/static/teacherProblem.html" %}/><img class="navbarimage" src= {% static "/static/image/file.svg" %}/> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href= {% static "/static/studentProblem.html" %}/><img class="navbarimage" src= {% static "/static/image/file.svg" %}/> Problems</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href={% static "comments.html" %}><img class="navbarimage"
-                src={% static "QuestionData/image/comments-regular.svg" %} /> Comments</a>
+            <a class="nav-link active" v-show="isShow" href="../Rank"/><img class="navbarimage" src= {% static "/static/image/list-ordered.svg" %}/> Ranking<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-show="isShow" href="../message"/><img class="navbarimage" src= {% static "/static/image/comments-regular.svg" %}/> Comments</a>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <span id="username">${ name } &nbsp</span>
+            <span id="username" v-show="isShow">Hello! ${ name } &nbsp</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href={% static "register.html" %}><img class="navbarimage"
-                src={% static "QuestionData/image/address-book-regular.svg" %} /> Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href={% static "login.html" %}><img class="navbarimage"
-                src={% static "QuestionData/image/sign-in-alt-solid.svg" %} /> Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" v-on:click="clearStorage()" href={% static "index.html" %}><img class="navbarimage"
-                src={% static "QuestionData/image/sign-out-alt-solid.svg" %} /> Logout</a>
+              <a class="nav-link" v-on:click="clearStorage()" href= {% static "/static/index.html" %}/><img class="navbarimage" src= {% static "/static/image/sign-out-alt-solid.svg" %}/> Logout</a>
           </li>
         </ul>
       </div>
@@ -80,12 +64,13 @@
             <b-dropdown dropup v-bind:text="Tag" variant="secondary">
               <b-dropdown-item @click="filter = ''" v-on:click="clickTag('tag')">all</b-dropdown-item>
               <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTag('loop')">loop</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'if'" v-on:click="clickTag('if')">if</b-dropdown-item>
               <b-dropdown-item @click="filter = 'array'" v-on:click="clickTag('array')">array</b-dropdown-item>
               <b-dropdown-item @click="filter = 'string'" v-on:click="clickTag('string')">string</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'function'" v-on:click="clickTag('function')">function
-              </b-dropdown-item>
-              <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTag('pointer')">pointer
-              </b-dropdown-item>
+              <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTag('pointer')">pointer</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'binaryTree'" v-on:click="clickTag('binaryTree')">binary tree</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'sort'" v-on:click="clickTag('sort')">sort</b-dropdown-item>
+              <b-dropdown-item @click="filter = 'dp'" v-on:click="clickTag('dp')">Dynamic programming</b-dropdown-item>
             </b-dropdown>
             <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
               <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('degree')">all</b-dropdown-item>
@@ -133,7 +118,7 @@
             </template>
             <!--problemLink-->
             <template v-slot:cell(title)="data">
-              <a :href={% static "`problem/${data.item.id.replace(/[^a-z][^0-9]+/i,'')}.html`" %}>${ data.value }</a>
+              <a :href="data.item.link">${ data.item.title }</a>
             </template>
             <template v-slot:cell(percentagePassing)="data">
               ${ data.item.percentagePassing } %
@@ -184,7 +169,7 @@
   <script src='http://unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.js'></script>
   <!--axios-->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src={% static "QuestionData/js/teacherProblem.js" %}></script>
+  <script src={% static "js/teacherProblem.js" %}></script>
 </body>
 
 </html>

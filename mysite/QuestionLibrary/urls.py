@@ -17,6 +17,7 @@ from django.urls import path
 from QuestionLibrary.views import responseGetQuestion
 from QuestionLibrary.views import responseCreateQuestion
 from QuestionLibrary.views import problemDetail
+from QuestionLibrary.views import pdfDetail
 from QuestionLibrary.views import teacherProblem
 #from QuestionLibrary.views import studentProblem
 
@@ -25,5 +26,6 @@ urlpatterns = [
     path('teacherProblem.html', teacherProblem ),
     #path('studentProblem.html', studentProblem ),
     path('createQuestion.html', responseCreateQuestion ),
-    path('p<int:num>', problemDetail ),
+    path('problem/p<int:num>.html', problemDetail ),
+    path('problem/p<int:num>.pdf', pdfDetail ),
 ]

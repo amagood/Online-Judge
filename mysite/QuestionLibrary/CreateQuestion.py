@@ -25,7 +25,7 @@ def responseCreateQuestion(questionName,PDF,questionContent,language,sampleProgr
             FileNameExtention='cpp'
         if language=='python':
             FileNameExtention='py'
-        newHTML.addQuestion(questionName,tags,questionContent,exampleInput,exampleOutput,sampleProgram,FileNameExtention)
+        newHTML.addQuestion(questionName,tags,questionContent,exampleInput,exampleOutput,sampleProgram,FileNameExtention,PDF)
         return 'success'
     except:
         return 'error'

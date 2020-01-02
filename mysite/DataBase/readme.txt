@@ -17,7 +17,7 @@ After that use 	manage.py makemigrations
 And you should be good
 
 	by the way if you don't know you can manage the database by 
-		manage.py rumserver
+		manage.py runserver
 	after you use 
 		manage.py createsuperuser
 	this should be easier to debug the data in your database
