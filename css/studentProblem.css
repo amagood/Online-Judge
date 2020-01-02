@@ -1,7 +1,7 @@
 html { visibility: hidden; }
 
 body{
-  background-color: lightgray;/*#d3d3d3*/
+  background-color: rgb(242, 252, 233);/*#d3d3d3*/
   font-family: "微軟正黑體";
 }
 
@@ -35,18 +35,40 @@ p{
 /*navbar end*/
 
 .problemLib{
-  max-width: 1300px;
-  min-height: 600px;
-  max-height: 1300px;
+  max-width: 1400px;
+  min-height: 550px;
+  max-height: 1400px;
   padding: 30px;
   margin: 30px auto;
-  background-color: #f9fafb;
+  background-color: #ffffff;
   box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
   border-radius: 10px;
 }
+.dropdown{
+  margin-left: 10px;
+}
+.table0{
+  margin-top: 8px;
+  min-height: 450px;
+}
 
-
-/*Table設定 */
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+.page-link {
+  position: relative;
+  display: block;
+  padding: .5rem .75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #17a2b8;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+/*Table設定 
 .problemTable{
   width:100% ;
   border-collapse:collapse ;
@@ -72,7 +94,7 @@ p{
 .problemTable td:nth-child(7){
   width:8% ;
 }
-/* 
+
 .problemTable td{
   padding: 8px;
   border-bottom: 0.5px solid lightgray;
@@ -83,4 +105,4 @@ p{
   border-top: 3px solid  #3cb371;
   font-weight: bold;
 }
-/* Table設定 end */
+Table設定 end */

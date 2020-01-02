@@ -82,7 +82,7 @@
                 There are no class.
                 Open a new class using the <b class="text-danger">Class</b> button .
               </b-dropdown-text>
-              <b-dropdown-header v-else="!noClassShow">Class</b-dropdown-header>
+              <b-dropdown-header v-else >Class</b-dropdown-header>
               <b-dropdown-item v-for="i in classList" :key="'dyn-tab-' + classList.lenght" v-on:click="clickClass(i.class)" @click="filter = ''">${i.class} </b-dropdown-item>
             </b-dropdown>
             <b-dropdown text="Add" variant="outline-secondary" class="dropdown">

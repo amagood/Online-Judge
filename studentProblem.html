@@ -1,4 +1,4 @@
-<!--20191225-->
+<!--20200102-->
 <!doctype html>
 <html lang="zh-Hant-TW">
 
@@ -54,71 +54,78 @@
     </nav>
     <!--navbar end-->
 
-    <div id="problemLib" class="problemLib">
-      <div id="probapp">
-        <!--block 1 sortMenu-->
-        <b-row>
-          <b-col>
-            <b-dropdown dropup v-bind:text="Tag" variant="secondary">
-              <b-dropdown-item @click="filter = ''" v-on:click="clickTag('tag')">all</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTag('loop')">loop</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'if'" v-on:click="clickTag('if')">if</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'array'" v-on:click="clickTag('array')">array</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'string'" v-on:click="clickTag('string')">string</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTag('pointer')">pointer</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'binaryTree'" v-on:click="clickTag('binaryTree')">binary tree</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'sort'" v-on:click="clickTag('sort')">sort</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'dp'" v-on:click="clickTag('dp')">Dynamic programming</b-dropdown-item>
-            </b-dropdown>
-            <b-dropdown dropup v-bind:text="Degree" variant="secondary" style="margin-left: 10px">
-              <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('degree')">all</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
-            </b-dropdown>
-          </b-col>
-          <!--search/filter bar-->
-          <b-col sm="5">
-            <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput">
-              <b-input-group size="">
-                <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
-                </b-form-input>
-                <b-input-group-append>
-                  <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
-                </b-input-group-append>
-              </b-input-group>
-            </b-form-group>
-          </b-col>
-        </b-row>
+    <div id="probapp" class="problemLib">
+      <!--block 1 sortMenu-->
+      <b-row>
+        <b-col>
+          <b-dropdown v-bind:text="Tag" variant="secondary">
+            <b-dropdown-item @click="filter = ''" v-on:click="clickTag('tag')">all</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTag('loop')">loop</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'if'" v-on:click="clickTag('if')">if</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'array'" v-on:click="clickTag('array')">array</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'string'" v-on:click="clickTag('string')">string</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'pointer'" v-on:click="clickTag('pointer')">pointer</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'binaryTree'" v-on:click="clickTag('binaryTree')">binary tree</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'sort'" v-on:click="clickTag('sort')">sort</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'dp'" v-on:click="clickTag('dp')">Dynamic programming</b-dropdown-item>
+          </b-dropdown>
+          <b-dropdown v-bind:text="Degree" variant="secondary" class="dropdown">
+            <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('degree')">all</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
+          </b-dropdown>
+          <b-dropdown v-bind:text="classButtonText" variant="outline-secondary" class="dropdown">
+            <b-dropdown-item v-on:click="clickClass('All Problem')" @click="filter = ''"><b class="text-info">All Problem</b></b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-text style="width: 240px;" v-if="!classList.length">
+              There is no class.
+            </b-dropdown-text>
+            <b-dropdown-header v-else >Class</b-dropdown-header>
+            <b-dropdown-item v-for="i in classList" :key="'dyn-tab-' + classList.lenght" v-on:click="clickClass(i.class)" @click="filter = ''">${i.class} </b-dropdown-item>
+          </b-dropdown>
+        </b-col>
+        <!--search/filter bar-->
+        <b-col sm="5">
+          <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput">
+            <b-input-group size="">
+              <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
+              </b-form-input>
+              <b-input-group-append>
+                <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+              </b-input-group-append>
+            </b-input-group>
+          </b-form-group>
+        </b-col>
+      </b-row>
 
-        <!--block 2 Problem-->
-        <div style="margin-top: 20px; min-height: 480px;">
-          <b-table sticky hover responsive id="problemTable" :items="items" :fields="fields"
-            :per-page="questionLibObj.questionNum" :current-page="currentPage" :filter="filter" @filtered="onFiltered"
-            :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :busy="noGetData">
-            <!--loading-->
-            <template v-slot:table-busy>
-              <div class="text-center text-success " style="margin-top:30px">
-                <b-spinner class="align-middle" style="width: 3rem; height: 3rem; "></b-spinner>
-                <strong> Loading... </strong>
-              </div>
-            </template>
-            <!--problemLink-->
-            <template v-slot:cell(title)="data">
-              <a :href="data.item.link">${ data.item.title }</a>
-            </template>
-            <template v-slot:cell(percentagePassing)="data">
-              ${ data.item.percentagePassing } %
-            </template>
-          </b-table>
-        </div>
+      <!--block 2 Problem-->
+      <div class="table0">
+        <b-table sticky hover responsive id="problemTable" :items="items" :fields="fields"
+          :per-page="questionLibObj.questionNum" :current-page="currentPage" :filter="filter" @filtered="onFiltered"
+          :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :busy="noGetData">
+          <!--loading-->
+          <template v-slot:table-busy>
+            <div class="text-center text-success " style="margin-top:30px">
+              <b-spinner class="align-middle" style="width: 3rem; height: 3rem; "></b-spinner>
+              <strong> Loading... </strong>
+            </div>
+          </template>
+          <!--problemLink-->
+          <template v-slot:cell(title)="data">
+            <a :href="data.item.link">${ data.item.title }</a>
+          </template>
+          <template v-slot:cell(percentagePassing)="data">
+            ${ data.item.percentagePassing } %
+          </template>
+        </b-table>
+      </div>
 
-        <!--block 3 Page-->
-        <div style="margin-block-end:10px;">
-          <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="questionLibObj.questionNum"
-            aria-controls="problemTable" align="center">
-          </b-pagination>
-        </div>
+      <!--block 3 Page-->
+      <div style="margin-block-end:10px;">
+        <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="questionLibObj.questionNum"
+          aria-controls="problemTable" align="center">
+        </b-pagination>
       </div>
     </div>
   </body>
