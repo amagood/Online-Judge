@@ -1,7 +1,7 @@
 <!--
-  version2.3
-    1.版面調整
-    2.刪除顯示更新時間功能,因為每5秒固定會更新一次
+  version2.4
+    1.s改為ms
+    2.新增顯示語言
 -->
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
@@ -31,18 +31,18 @@
   <body>
     <!--navbar, 格式設定在ranking.css檔中-->
     <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href=" {% static "/static/index.html" %} "/><img class="img-home" src=" {% static "/static/image/logo.png" %} "/></a>
+      <a class="navbar-brand" href=" {% static "../" %} "/><img class="img-home" src=" {% static "/static/image/logo.png" %} "/></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href=" {% static "/static/index.html" %} "/><img class="navbarimage" src=" {% static "/static/image/home.svg" %} "/> Home</a>
+            <a class="nav-link" href=" {% static "../" %} "/><img class="navbarimage" src=" {% static "/static/image/home.svg" %} "/> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href=" {% static "/static/teacherProblem.html" %}/><img class="navbarimage" src=" {% static "/static/image/file.svg" %} "/> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href=" {% static "/static/studentProblem.html" %}/><img class="navbarimage" src=" {% static "/static/image/file.svg" %} "/> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href=" {% static "/static/QuestionLibrary/teacherProblem.html" %}/><img class="navbarimage" src=" {% static "/static/image/file.svg" %} "/> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href=" {% static "/static/QuestionLibrary/studentProblem.html" %}/><img class="navbarimage" src=" {% static "/static/image/file.svg" %} "/> Problems</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" v-show="isShow" href="../Rank"/><img class="navbarimage" src=" {% static "/static/image/list-ordered.svg" %} "/> Ranking<span class="sr-only">(current)</span></a>
@@ -56,7 +56,7 @@
             <span id="username" v-show="isShow">Hello! ${ name } &nbsp</span>
           </li>
           <li class="nav-item">
-              <a class="nav-link" v-on:click="clearStorage()" href=" {% static "/static/index.html" %} "/><img class="navbarimage" src=" {% static "/static/image/sign-out-alt-solid.svg" %} "/> Logout</a>
+              <a class="nav-link" v-on:click="clearStorage()" href=" {% static "../" %} "/><img class="navbarimage" src=" {% static "/static/image/sign-out-alt-solid.svg" %} "/> Logout</a>
           </li>
         </ul>
       </div>
@@ -113,7 +113,8 @@
               <th scope="col">Name</th>
               <th scope="col">Rate</th>
               <th scope="col">AC/Commit</th>
-              <th scope="col">Time used</th>
+              <th scope="col">Time used(ms)</th>
+              <th scope="col">Language</th>
             </tr>
           </thead>
           <tbody>
@@ -123,7 +124,8 @@
                 <td>${ user.name }</td>
                 <td>${ user.passRate } %</td>
                 <td>${ user.ACTimes } / ${ user.commitTimes }</td>
-                <td>${ user.passTime }s</td>
+                <td>${ user.passTime }ms</td>
+                <td>${ user.language }</td>
               </tr>
             </template>
           </tbody>

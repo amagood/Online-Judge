@@ -1,4 +1,3 @@
-// 2019/12/29
 //選擇班級後送出
 var showMessageAction = {
 	"action" : "show_message",
@@ -6,11 +5,11 @@ var showMessageAction = {
 	"hash" : localStorage.getItem("hash"),
 	"Class" : "", 
 	
-	"message" :[ 
-		{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
-		{"userName" :　"87man", "date" : "20191016", "time" : "1900", "content" : "oh,haha"},
-		{"userName" :　"wwwwwwwwwwwwwwwwwwww", "date" : "20191126", "time" : "1915", "content" : "AAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
-	],
+	// "message" :[ 
+	// 	{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
+	// 	{"userName" :　"87man", "date" : "20191016", "time" : "1900", "content" : "oh,haha"},
+	// 	{"userName" :　"wwwwwwwwwwwwwwwwwwww", "date" : "20191126", "time" : "1915", "content" : "AAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
+	// ],
 }
 //按下next後送出
 var sendMsg = {
@@ -28,12 +27,12 @@ var collectClass = {
 	"userName" : localStorage.getItem("userName"),
 	"hash" : localStorage.getItem("hash"),
 
-	"Classes":
-	[
-		{"Class" : "CSIE110"},
-		{"Class" : "CSIE111"},
-		{"Class" : "LOL201"},
-	]
+	// "Classes":
+	// [
+	// 	{"Class" : "CSIE110"},
+	// 	{"Class" : "CSIE111"},
+	// 	{"Class" : "LOL201"},
+	// ]
 }
 
 //----navbar設定----
@@ -138,7 +137,7 @@ var app1 = new Vue({
 					console.log(response.statusText)
 					console.log(response.headers)
 					console.log(response.config)
-					self.classSet = response.data.json.Classes  //data.json
+					self.classSet = response.data.Classes  //data.json
 				})
 				.catch(function(error){
 					console.log(error)
@@ -156,7 +155,7 @@ var app1 = new Vue({
 					console.log(response.headers)
 					console.log(response.config)
 					self.msgCheck = self.msgList[self.msgList.length-1]
-					self.msgList = response.data.json.message  //data.json
+					self.msgList = response.data.message  //data.json
 					if(self.callFromBack === true && self.msgCheck.date === self.msgList[self.msgList.length-1].date && self.msgCheck.time === self.msgList[self.msgList.length-1].time){
 						self.callFromBack = false
 						return
@@ -249,7 +248,7 @@ var app1 = new Vue({
 					console.log(response.statusText)
 					console.log(response.headers)
 					console.log(response.config)
-					self.msgSend = response.data.json //data.json
+					self.msgSend = response.data //data.json
 					let date = self.msgSend.date
 					let time = self.msgSend.time
 					self.msgSend.showtime = date.substring(0,4) + "/" + date.substring(4,6) + "/" + date.substring(6,8) + " " + time.substring(0,2) + ":" + time.substring(2,4)

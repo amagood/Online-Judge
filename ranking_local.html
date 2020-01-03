@@ -107,7 +107,8 @@
               <th scope="col">Name</th>
               <th scope="col">Rate</th>
               <th scope="col">AC/Commit</th>
-              <th scope="col">Time used</th>
+							<th scope="col">Time used(ms)</th>
+							<th scope="col">Language</th>
             </tr>
           </thead>
           <tbody>
@@ -117,7 +118,8 @@
                 <td>${ user.name }</td>
                 <td>${ user.passRate } %</td>
                 <td>${ user.ACTimes } / ${ user.commitTimes }</td>
-                <td>${ user.passTime }s</td>
+                <td>${ user.passTime }ms</td>
+                <td>${ user.language }</td>
               </tr>
             </template>
           </tbody>

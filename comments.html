@@ -34,18 +34,18 @@
   <body>
     <!--navbar, 格式設定在ranking.css檔中-->
     <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href=" {% static "/static/index.html" %} "/><img class="img-home" src=" {% static "/static/image/logo.png" %} "/></a>
+      <a class="navbar-brand" href=" {% static "../" %} "/><img class="img-home" src=" {% static "/static/image/logo.png" %} "/></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href=" {% static "/static/index.html" %} "/><img class="navbarimage" src=" {% static "/static/image/home.svg" %} "/> Home</a>
+            <a class="nav-link" href=" {% static "../" %} "/><img class="navbarimage" src=" {% static "/static/image/home.svg" %} "/> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href=" {% static "/static/teacherProblem.html" %} "/><img class="navbarimage" src=" {% static "/static/image/file.svg" %} "/> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href=" {% static "/static/studentProblem.html" %} "/><img class="navbarimage" src=" {% static "/static/image/file.svg" %} "/> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href=" {% static "/static/QuestionLibrary/teacherProblem.html" %} "/><img class="navbarimage" src=" {% static "/static/image/file.svg" %} "/> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href=" {% static "/static/QuestionLibrary/studentProblem.html" %} "/><img class="navbarimage" src=" {% static "/static/image/file.svg" %} "/> Problems</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" v-show="isShow" href="../Rank"/><img class="navbarimage" src=" {% static "/static/image/list-ordered.svg" %} "/> Ranking</a>
@@ -59,7 +59,7 @@
             <span id="username" v-show="isShow">Hello! ${ name } &nbsp</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-on:click="clearStorage()" href=" {% static "/static/index.html" %} "/><img class="navbarimage" src=" {% static "/static/image/sign-out-alt-solid.svg" %} "/> Logout</a>
+            <a class="nav-link" v-on:click="clearStorage()" href=" {% static "../" %} "/><img class="navbarimage" src=" {% static "/static/image/sign-out-alt-solid.svg" %} "/> Logout</a>
           </li>
         </ul>
       </div>
