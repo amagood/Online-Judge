@@ -66,11 +66,11 @@ ul a:hover {
 
 .form-control{
 	max-width: 120px;
-	height: 30px;
+	height: 34px;
 }
 
 .col1 {
-	width: 100px;
+	width: 240px;
 	display: inline-block; 
 	margin: 0 auto;
 	vertical-align: top;
@@ -79,7 +79,7 @@ ul a:hover {
 
 .label1 {
 	text-align: right;
-	vertical-align: top;
+	vertical-align: middle;
 }
 
 .col2 {
@@ -90,7 +90,7 @@ ul a:hover {
 }
 
 .col3 {
-	width: 100px;
+	width: 240px;
 	display: inline-block; 
 	margin: 0 auto;
 	padding-top: 20px;
@@ -103,7 +103,7 @@ ul a:hover {
 
 .message{
 	width: 100%;
-	max-width: 500px;
+	max-width: 780px;
 	white-space: nowrap;
 	margin: 0px auto;
 	vertical-align: top;
@@ -112,18 +112,18 @@ ul a:hover {
 
 .user-msg{
 	display: inline-block;
-	width: 100px;
+	width: 235px;
 	text-align:right;
 	margin:0px auto; 
 }
 
 .search-img{
-	width: 35px;
-	height: 24px;
+	width: 30px;
+	height: 20px;
 }
 
 .next{
-	max-width:80px;
+	max-width:56px;
 	height: 38px;
 }
 
@@ -166,9 +166,9 @@ ul a:hover {
 	max-width: 110px;
 	float: left;
 	color:rgb(51, 177, 51);
-	text-align:right;
+	text-align: start;
 	word-wrap: break-word; 
-	overflow:hidden;
+	overflow: hidden;
 }
 
 .list-msg{
@@ -199,4 +199,5 @@ ul a:hover {
 #show-message{
 	word-wrap:break-word;
 	margin-left: 4px;
+	white-space: pre-wrap;
 }

@@ -6,11 +6,11 @@ var showMessageAction = {
 	"hash" : localStorage.getItem("hash"),
 	"Class" : "", 
 	
-	// "message" :[ 
-	// 	{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
-	// 	{"userName" :　"87man", "date" : "20191016", "time" : "1900", "content" : "oh,haha"},
-	// 	{"userName" :　"charlieyang", "date" : "20191126", "time" : "1915", "content" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
-	// ],
+	"message" :[ 
+		{"userName" :　"cornerman", "date" : "20191015", "time" : "1159", "content" : "haha"},
+		{"userName" :　"87man", "date" : "20191016", "time" : "1900", "content" : "oh,haha"},
+		{"userName" :　"wwwwwwwwwwwwwwwwwwww", "date" : "20191126", "time" : "1915", "content" : "AAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
+	],
 }
 //按下next後送出
 var sendMsg = {
@@ -28,12 +28,12 @@ var collectClass = {
 	"userName" : localStorage.getItem("userName"),
 	"hash" : localStorage.getItem("hash"),
 
-	// "Classes":
-	// [
-	// 	{"Class" : "CSIE110"},
-	// 	{"Class" : "CSIE111"},
-	// 	{"Class" : "LOL201"},
-	// ]
+	"Classes":
+	[
+		{"Class" : "CSIE110"},
+		{"Class" : "CSIE111"},
+		{"Class" : "LOL201"},
+	]
 }
 
 //----navbar設定----
@@ -221,8 +221,6 @@ var app1 = new Vue({
 				self.timeSend += '0'
 			}
 			self.timeSend += String(mm)
-			console.log(self.dateSend)
-			console.log(self.timeSend)
     },
 		handleSend(){
 			let self = this
@@ -232,6 +230,7 @@ var app1 = new Vue({
 			sendMsg.date = this.dateSend
 			sendMsg.time = this.timeSend
 			sendMsg.content = this.inputmsg.trim()
+			console.log(sendMsg.content)
 			if(this.selectedClass === ""){
 				alert("Please choose class.")
 				return

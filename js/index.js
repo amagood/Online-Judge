@@ -15,7 +15,7 @@ var app1 = new Vue({
 		whichShow : "",
 	},
 	created() {
-		// this.test()
+		this.test()
 		this.chooseProblems()
 		this.canRegister()
 		this.canLogin()
@@ -23,7 +23,7 @@ var app1 = new Vue({
 	methods: {
 		test(){//測試
 			localStorage.setItem("who","student")
-			localStorage.setItem("userName","imtestman")
+			localStorage.setItem("userName","wwwwwwwwwwwwwwwwwwww")
 			let who = localStorage.getItem("who")
 			console.log(who)
 		},

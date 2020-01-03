@@ -7,7 +7,7 @@ var attendRank = {
   questionNum : "",
   userName : localStorage.getItem("userName"),
 
-  // status : "success",
+  status : "success",
 }
 //選擇不參加後送出
 var notAttendRank = {
@@ -18,7 +18,7 @@ var notAttendRank = {
   questionNum : "",
   userName : localStorage.getItem("userName"),
 
-  // status : "fail",
+  status : "fail",
 }
 //填寫題號enter後送出
 var rankAction = {
@@ -28,32 +28,32 @@ var rankAction = {
   Class : "",
   hash : localStorage.getItem("hash"),
 
-  // userData : [
-  //   {
-  //     name : "abb",
-  //     ACTimes : 100,
-  //     commitTimes : 130,
-  //     rank : 1,
-  //     AttendStatus : true,
-  //     passTime : "0.0001",
-  //   },
-  //   {
-  //     name : "aaa22",
-  //     ACTimes : 1,
-  //     commitTimes : 3,
-  //     rank : 2,
-  //     AttendStatus : true,
-  //     passTime : "0.000001",
-  //   },
-  //   {
-  //     name : "aaa",
-  //     ACTimes : 0,
-  //     commitTimes : 0,
-  //     rank : 3,
-  //     AttendStatus : true,
-  //     passTime : "0.00000001",
-  //   },
-  // ]
+  userData : [
+    {
+      name : "wwwwwwwwwwwwwwwwwwww",
+      ACTimes : 100,
+      commitTimes : 130,
+      rank : 1,
+      AttendStatus : true,
+      passTime : "0.0001",
+    },
+    {
+      name : "aaa22",
+      ACTimes : 1,
+      commitTimes : 3,
+      rank : 2,
+      AttendStatus : true,
+      passTime : "0.000001",
+    },
+    {
+      name : "aaa",
+      ACTimes : 0,
+      commitTimes : 0,
+      rank : 3,
+      AttendStatus : true,
+      passTime : "0.00000001",
+    },
+  ]
 }
 //一開始送出
 var collectClass = {
@@ -61,12 +61,12 @@ var collectClass = {
 	"userName" : localStorage.getItem("userName"),
 	"hash" : localStorage.getItem("hash"),
 
-	// "Classes":
-	// [
-	// 	{"Class" : "CSIE110"},
-	// 	{"Class" : "CSIE111"},
-	// 	{"Class" : "LOL201"},
-	// ]
+	"Classes":
+	[
+		{"Class" : "CSIE110"},
+		{"Class" : "CSIE111"},
+		{"Class" : "LOL201"},
+	]
 }
 
 //----navbar的設定----
@@ -219,7 +219,6 @@ var app1 = new Vue({
           console.log(response.statusText)
           console.log(response.headers)
           console.log(response.config)
-          console.log(response.data.json.questionNum)
           self.userdata = response.data.json.userData  //.data.json
           for(let i=0; i<self.userdata.length; i++){
             if(self.userdata[i].commitTimes == 0)
