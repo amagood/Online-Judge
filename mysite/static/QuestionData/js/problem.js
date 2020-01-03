@@ -1,46 +1,59 @@
-﻿// 20191223
+﻿// 20191231
 // navbar
 
 
-var navapp = new Vue({
-  delimiters: ['${', '}'],
-  el : "#navapp",
-  data :{
-    whichShow : "",//顯示哪個題目庫
-    regIsShow : "",//顯示註冊鈕
-    userid : "",
-    name : localStorage.getItem("userName"),
-  },
-  created() {
-    this.chooseProblems()
+var app1 = new Vue({
+	delimiters : ['${', '}'],
+	el : "#app1",
+	data : {
+		userid : "",
+		name : "",
+		isShow : false, //題目庫顯示
+		regIsShow : false, //註冊頁顯示
+		logIsShow : true, //登入頁顯示
+		whichShow : "",
+	},
+	created() {
+		this.chooseProblems()
     this.canRegister()
-  },
-  methods: {
-    chooseProblems(){
-      let self = this
-      self.userid = localStorage.getItem("who")
-      if(self.userid === "admin"||self.userid === "teacher"){
-        self.whichShow = "teacher"
-      }
-      else if(self.userid === "student"){
-        self.whichShow = "student"
-      }
+    this.canLogin()
+	},
+	methods: {
+		chooseProblems(){
+			let self = this
+			self.name = localStorage.getItem("userName")
+			self.userid = localStorage.getItem("who")
+			if(self.userid === "admin"||self.userid === "teacher"){
+				self.isShow = true
+				self.whichShow = "teacher"
+			}
+			else if(self.userid === "student"){
+				self.isShow = true
+				self.whichShow = "student"
+			}
+		},
+		canRegister(){
+			let self = this
+			self.userid = localStorage.getItem("who")
+			if(self.userid === "admin"){
+				self.regIsShow = true
+			}
     },
-    canRegister(){
-      let self = this
-      self.userid = localStorage.getItem("who")
-      if(self.userid === "admin"){
-        self.regIsShow = true
-      }
-    },
-    clearStorage(){
-      localStorage.clear();
-    },
-  },
+    canLogin(){
+			let self = this
+			self.userid = localStorage.getItem("userName")
+			if(self.userid){
+				self.logIsShow = false
+			}
+		},
+		clearStorage(){
+			localStorage.clear();
+		},
+	},
 })
 
 
-// app2 for lang, copy toolip, copy popup, theme
+// app2 for lang, copy toolip, copy popup, theme, tab
 
 
 var app2 = new Vue({
@@ -107,6 +120,15 @@ var app2 = new Vue({
     clickTheme() {
       var acePath = 'ace/theme/' + this.themeSelected;
       editor.setTheme(acePath);
+    },
+    openTab(id) {
+      var i = 0;
+      var tabContent = document.getElementsByClassName("tabContent");
+      for (i=0; i<tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+      }
+      document.getElementById(id).style.display = "block";
+      uploadFileApp.uploadFileMode = (id == "uploadFileTab");
     }
   }
 })
@@ -151,7 +173,7 @@ var uploadFileApp = new Vue({
   delimiters: ['${', '}'],
   el: "#uploadFileApp",
   data: {
-    showUploadFileBlock: false,
+    uploadFileMode: false,
     showHeaderFile: true,
     showImplementFilesInvalidMsg: false,
     showHeaderFilesInvalidMsg: false,
@@ -249,6 +271,7 @@ var app3 = new Vue({
     errorMessage: "",
     exeTime: "",
     errorOutputCompare: "",
+    OutputAvailable: false,
     htmlWrongOutput: "",
     htmlExpectedOutput: "",
     memoryUsage: "",
@@ -265,7 +288,7 @@ var app3 = new Vue({
     submitCode() {
       document.getElementById("submitBtn").setAttribute("disabled", "disabled");
       this.showSpinner = true;
-      if (uploadFileApp.showUploadFileBlock) {
+      if (uploadFileApp.uploadFileMode) {
         copyFileStringsToSubmitObj();
         if (uploadFileApp.implementFile != null)
           submitObj.fileAmount = 1 + uploadFileApp.implementFile.length;
@@ -298,6 +321,7 @@ var app3 = new Vue({
           app3.errorMessage        = tmpObj.errorMessage;
           app3.exeTime             = tmpObj.exeTime;
           app3.errorOutputCompare  = tmpObj.errorOutputCompare;
+          app3.OutputAvailable     = (tmpObj.OutputAvailable == "true");
           app3.htmlWrongOutput     = '<pre id="wrongOutput" class="samplePre2">' + tmpObj.wrongOutput + '</pre>';
           app3.htmlExpectedOutput  = '<pre id="expectedOutput" class="samplePre2">' + tmpObj.expectedOutput + '</pre>';
           app3.memoryUsage         = tmpObj.memoryUsage;
@@ -326,6 +350,7 @@ var userInfo = {
 }
 
 window.onload = function() {
+  app2.openTab("codeEditorTab");
   userInfo.who = localStorage.getItem("who");
   userInfo.userName = localStorage.getItem("userName");
   userInfo.hash = localStorage.getItem("hash");
@@ -339,7 +364,7 @@ window.onload = function() {
   submitObj.qID = qID;
   editor.setValue(initCode);
   document.getElementsByTagName("body")[0].className = "w3-animate-opacity";
-  document.getElementById("navapp").className = "navbar navbar-expand-lg navbar-light navbarset w3-animate-top";
+  document.getElementById("app1").className = "w3-animate-top";
   document.getElementById("mainBlock1").className = "mainBlock1 w3-animate-zoom";
   document.getElementById("mainBlock2").className = "mainBlock2 w3-animate-bottom";
   document.getElementsByTagName("html")[0].style.visibility = "visible";

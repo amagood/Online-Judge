@@ -141,3 +141,6 @@ response:
     * bug: navbar link err
     * bug: create difficulty & get question difficulty
     * bug: problem pdf err
+  * v1.12 2020/01/03
+    * fix: problem.html err(js version)
+    * fix: studentproblem sort

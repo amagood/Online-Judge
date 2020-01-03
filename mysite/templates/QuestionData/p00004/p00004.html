@@ -1,32 +1,10 @@
-# Question Library
-# +field: type
-# ----------
-# +addQuestion()
-# +deleteQuestion()
-
-import os
-class Question_Library():
-    path='./templates/QuestionData'
-    def __init__(self,QuestionID):
-        self.QuestionID = QuestionID
-        if not os.path.isdir(self.path):
-            os.mkdir(self.path)
-    def addQuestion(self,Title,Tags,Description,SampleInput,SampleOut,SampleCode,FileNameExtention,pdf):
-        p_path=self.path+'/{}'.format(self.QuestionID)
-        if not os.path.isdir(p_path):
-            os.mkdir(p_path)
-        h_path=p_path+'/{}.html'.format(self.QuestionID)
-        f=open(h_path,"w")
-        html_str=''
-        html_str+='''﻿﻿<!-- 20191231 -->
+﻿﻿<!-- 20191231 -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
-  <title>'''
-        html_str+=Title
-        html_str+='''</title>
+  <title>題目名稱004</title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
@@ -74,41 +52,21 @@ class Question_Library():
   <!-- navbar end -->
   <!-- mainBlock1 -->
   <div id="mainBlock1" class="mainBlock1">
-    <h1 class="bigTitle">'''
-        html_str+=Title
-        html_str+='''</h1>
-    <p>'''
-        for tag in Tags:
-            html_str+='#{} '.format(tag)
-        html_str+='''</p>'''
-        if True:#pdf==''
-            html_str+='''<p class="smallTitle">Description</p>
-    <p class="content">'''
-            html_str+=Description
-            html_str+='''</p>
+    <h1 class="bigTitle">題目名稱004</h1>
+    <p>#sort #dp </p><p class="smallTitle">Description</p>
+    <p class="content">題目敘述blablablablabla</p>
     <div class="sampleInOutContainer">
       <div class="sampleInOut">
         <span class="smallTitle">Sample Input</span>
         <img id="imgCopyIn" src={% static "QuestionData/image/copy.svg" %} alt="" onclick="copyFn('sampleIn')" style="cursor: pointer;">
-        <pre id="sampleIn" class="samplePre">'''
-            html_str+=SampleInput
-            html_str+='''</pre>
+        <pre id="sampleIn" class="samplePre">9 8 7</pre>
       </div>
       <div class="sampleInOut">
         <span class="smallTitle">Sample Out</span>
         <img id="imgCopyOut" src={% static "QuestionData/image/copy.svg" %} alt="" onclick="copyFn('sampleOut')" style="cursor: pointer;">
-        <pre id="sampleOut" class="samplePre">'''
-            html_str+=SampleOut
-            html_str+='''</pre>
+        <pre id="sampleOut" class="samplePre">24</pre>
       </div>
-    </div>'''
-        else:
-            html_str+='<iframe src="{}pdf.pdf" style="width: 100%; height: 800px;"></iframe>'.format(self.QuestionID)
-            c_path=p_path+'/{}pdf.pdf'.format(self.QuestionID)
-            f2=open(c_path,"w")
-            f2.write(pdf)
-            f2.close()
-        html_str+='''</div>
+    </div></div>
   <!-- mainBlock1 end -->
   <!-- mainBlock2 -->
   <div id="mainBlock2" class="mainBlock2">
@@ -279,49 +237,4 @@ class Question_Library():
   </script>
 </body>
 
-</html>'''
-        f.write(html_str)
-        f.close()
-        c_path=p_path+'/{}exampleCode.{}'.format(self.QuestionID,FileNameExtention)
-        f=open(c_path,"w")
-        f.write(SampleCode)
-        f.close()
-    def deleteQuestion(self,QuestionID):
-        self.QuestionID = QuestionID
-        p_path=self.path+'/{}'.format(self.QuestionID)
-        if os.path.isdir(p_path):
-            files=os.listdir(p_path)
-            for file in files:
-                f_path=p_path+'/'+file
-                os.remove(f_path)
-            os.rmdir(p_path)
-        #delete html&code
-
-# folder PATH:
-# ./QuestionData/"QuestionID"/"QuestionID".html
-#                             "QuestionID"exampleCode.c
-#                             "QuestionID"exampleCode.cpp
-#                             "QuestionID"exampleCode.py
-#               /css
-#               /js
-#               /image
-
-#Question_Lirbrary(str: QuestionID)
-#question.addQuestion(str:title, list(str1,str2,...):tags, str:description, str:sample input description, str:sample output description, str:exampleCode, str:FileNameExtension)
-#question.deleteQuestion(str: QuestionID)
-
-#####TestUnderWTFLine#####
-
-# a=Question_Lirbrary('p00001')#start a question 'a' which id is 'p00001'
-# input_title='myTitle'                       #here is title
-# input_tags=['myTag1', 'myTag2', 'myTag3']   #Tags
-# input_description='Here is description.'    #problem description
-# input_sampleinput='1 2'                     #sample input
-# input_sampleoutput='3'                      #sample output
-#                                             #sample code
-# input_samplecode='''import os
-# print(\'a\')
-# '''
-# input_filenameextension='py'                #filename extension
-# a.addQuestion(input_title,input_tags,input_description,input_sampleinput,input_sampleoutput,input_samplecode,input_filenameextension)#create problem a
-# #a.deleteQuestion('p00001')#delete problem a's folder
+</html>

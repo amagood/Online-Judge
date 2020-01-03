@@ -10,36 +10,6 @@ def responseGetQuestion(questionNum,questionPage,questionSequence,questionTarget
         questionList=questionList.filter(Question_Category__Category_Name=questionTarget)
     if questionDegree!='degree':
         questionList=questionList.filter(Question_difficulty__exact=questionDegree)
-    if questionSequence=='id':
-        if sortDesc=='true':
-            questionList=questionList.order_by('-id')
-        else:
-            questionList=questionList.order_by('id')
-    elif questionSequence=='tag':
-        if sortDesc=='true':
-            questionList=questionList.order_by('-tag')
-        else:
-            questionList=questionList.order_by('tag')
-    elif questionSequence=='degree':
-        if sortDesc=='true':
-            questionList=questionList.order_by('-degree')
-        else:
-            questionList=questionList.order_by('degree')
-    elif questionSequence=='percentagePassing':
-        if sortDesc=='true':
-            questionList=questionList.order_by('-percentagePassing')
-        else:
-            questionList=questionList.order_by('percentagePassing')
-    elif questionSequence=='respondent':
-        if sortDesc=='true':
-            questionList=questionList.order_by('-respondent')
-        else:
-            questionList=questionList.order_by('respondent')
-    elif questionSequence=='inputTime':
-        if sortDesc=='true':
-            questionList=questionList.order_by('-inputTime')
-        else:
-            questionList=questionList.order_by('inputTime')
     retQuesData=[]
     #print('retQuesData')#Debug
     for eachQues in questionList:
@@ -57,7 +27,23 @@ def responseGetQuestion(questionNum,questionPage,questionSequence,questionTarget
             "percentagePassing":passrate,
             "respondent":eachQues.Question_Summit_Time,
             "inputTime":eachQues.Question_Create_Time.strftime("%Y%m%d"),
-            "link":'/QuestionLibrary/{}.html'.format(eachQues.Question_ID),
+            "link":'/problem/{}.html'.format(eachQues.Question_ID),
         }
         retQuesData.append(Qdata)
+    resv=False
+    if sortDesc=='true':
+        resv=True
+    #print(questionSequence)
+    if questionSequence=='':
+        questionSequence='title'
+    retQuesData = sorted(retQuesData, key=lambda k: k[questionSequence], reverse=resv)
+    '''qpage=int(questionPage) # return all
+    qnum=int(questionNum)
+    qlistlen=len(retQuesData)
+    if qlistlen<qnum*(qpage-1) or qpage<=0:
+        retQuesData=[]
+    elif qlistlen<qnum*(qpage):
+        retQuesData=retQuesData[qnum*(qpage-1):]
+    else:
+        retQuesData=retQuesData[qnum*(qpage-1):qnum*(qpage)]'''
     return retQuesData
