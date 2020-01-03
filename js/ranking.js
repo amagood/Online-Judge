@@ -3,6 +3,7 @@ var attendRank = {
   action : "attend_rank",
   attendStatus : "attend",
   hash : localStorage.getItem("hash"),
+  Class : "", //該學生所選擇班級
   questionNum : "",
   userName : localStorage.getItem("userName"),
 
@@ -13,6 +14,7 @@ var notAttendRank = {
   action : "attend_rank",
   attendStatus : "notAttend",
   hash : localStorage.getItem("hash"),
+  Class : "",
   questionNum : "",
   userName : localStorage.getItem("userName"),
 
@@ -23,12 +25,12 @@ var rankAction = {
   action : "rank",
   questionNum : "", //題目編號
   userName : localStorage.getItem("userName"),
-  Class : "", //該學生所選擇班級
+  Class : "",
   hash : localStorage.getItem("hash"),
 
   userData : [
     {
-      name : "abb",
+      name : "wwwwwwwwwwwwwwwwwwww",
       ACTimes : 100,
       commitTimes : 130,
       rank : 1,
@@ -53,35 +55,51 @@ var rankAction = {
     },
   ]
 }
+//一開始送出
+var collectClass = {
+	"action" : "selectClass",
+	"userName" : localStorage.getItem("userName"),
+	"hash" : localStorage.getItem("hash"),
+
+	"Classes":
+	[
+		{"Class" : "CSIE110"},
+		{"Class" : "CSIE111"},
+		{"Class" : "LOL201"},
+	]
+}
 
 //----navbar的設定----
 var navapp = new Vue({
-  delimiters : ['${', '}'],
-  el : "#navapp",
-  data : {
-    whichShow : "",
-    userid : "",
-    name : "",
-  },
-  created(){
-    this.chooseProblems()
-  },
-  methods:{
-    chooseProblems(){
-      let self = this
-      self.name = localStorage.getItem("userName")
-      self.userid = localStorage.getItem("who")
-      if(self.userid === "admin"||self.userid === "teacher"){
-        self.whichShow = "teacher"
-      }
-      else if(self.userid === "student"){
-        self.whichShow = "student"
-      }
-    },
-    clearStorage(){
-      localStorage.clear()
-    },
-  },
+	delimiters : ['${', '}'],
+	el : "#navapp",
+	data : {
+		userid : "",
+		name : "",
+		isShow : false, //題目庫顯示
+		whichShow : "",
+	},
+	created() {
+		this.chooseProblems()
+	},
+	methods: {
+		chooseProblems(){
+			let self = this
+			self.name = localStorage.getItem("userName")
+			self.userid = localStorage.getItem("who")
+			if(self.userid === "admin"||self.userid === "teacher"){
+				self.isShow = true
+				self.whichShow = "teacher"
+			}
+			else if(self.userid === "student"){
+				self.isShow = true
+				self.whichShow = "student"
+			}
+		},
+		clearStorage(){
+			localStorage.clear();
+		},
+	},
 })
 
 //----執行使用者是否加入排名,並根據輸入題號和選擇的班級列表----
@@ -91,16 +109,50 @@ var app1 = new Vue({
   data : {
     userdata : [],
     isShow : false,
-    qsNumber :"",
+    qsNumber :"",    //原本輸入的編號
+    enterQSNum : "", //上次enter的編號
+    isSearch : false, //是否搜尋過
     clock : "",
+    classSet : [],   //使用者的班級列表(或全部?)
+    selectedClass : "", //選擇的班級
+    timerCall : "", //定時呼叫req
+    callFromBack : false,  //是否定時呼叫
+    enterPressed : false,  //是否已按過enter
   },
   created(){
     this.setTime()
+    this.setClass()
   },
   mounted(){
-    
-  },
+		this.timerCall = setInterval(this.reqCall,5000)
+	},
+	beforeDestroy() {
+		clearInterval(this.timerCall);
+	},
   methods:{
+    reqCall(){   //5秒定時呼叫
+      this.setClass()
+      this.setTime()
+      if(self.selectedClass !== ""){
+				this.callFromBack = true
+				this.createRankList()
+			}
+		},
+    setClass(){//取得使用者參加之班級
+			let self = this
+			axios.post("https://httpbin.org/post",collectClass)
+				.then(function(response){
+					console.log(response.data)
+					console.log(response.status)
+					console.log(response.statusText)
+					console.log(response.headers)
+					console.log(response.config)
+					self.classSet = response.data.json.Classes  //data.json
+				})
+				.catch(function(error){
+					console.log(error)
+				})
+		},
     attendButtonShow(){
       let self = this
       if(localStorage.getItem("who") == "student"){
@@ -129,38 +181,63 @@ var app1 = new Vue({
       this.clock += mm
     },
     createRankList(){
-      if(this.qsNumber == ""){
+      if(this.callFromBack === false && this.qsNumber.trim() !== ""){   //若按下enter輸入,留下前一次輸入編號做重新req
+        this.isSearch = true
+        this.enterQSNum = this.qsNumber.trim()
+      }
+      if(this.selectedClass === "" && this.callFromBack === false){
+        alert("Please choose your class.")
+        return
+      }
+      if(this.qsNumber.trim() === "" && this.callFromBack === false){
         alert("Please enter questionID.")
+        return
       }
-      else{
-        let self = this;
-        console.log(this.qsNumber)
-        rankAction.questionNum = this.qsNumber
-        notAttendRank.questionNum = this.qsNumber
-        attendRank.questionNum = this.qsNumber
-        axios.post("https://httpbin.org/post",rankAction)
-          .then(function(response){
-            console.log(response.data)
-            console.log(response.status)
-            console.log(response.statusText)
-            console.log(response.headers)
-            console.log(response.config)
-            console.log(response.data.questionNum)
-            self.userdata = response.data.json.userData
-            for(let i=0; i<self.userdata.length; i++){
-              if(self.userdata[i].commitTimes == 0)
-                self.userdata[i].passRate = 0
-              else
-                self.userdata[i].passRate = ((self.userdata[i].ACTimes*100)/self.userdata[i].commitTimes).toFixed(2)
-            }
-          })
-          .catch(function(error){
-            console.log(error)
-          })
+      if(this.qsNumber.trim().indexOf(" ") >= 0 && this.callFromBack === false){
+        alert("Please enter correct questionID.")
+        return
       }
-      this.attendButtonShow();
+      if(this.enterPressed === false && this.callFromBack === false){   //若按過enter才重複發送req
+        this.enterPressed = true
+      }
+      if(this.enterPressed === false && this.callFromBack === true){ 
+        this.callFromBack = false
+        return
+      }
+      let verifiedQsNum = this.enterQSNum
+      let self = this;
+      console.log(verifiedQsNum)
+      console.log(self.selectedClass)
+      rankAction.Class = self.selectedClass
+      rankAction.questionNum = verifiedQsNum
+      notAttendRank.questionNum = verifiedQsNum
+      attendRank.questionNum = verifiedQsNum
+      axios.post("https://httpbin.org/post",rankAction)
+        .then(function(response){
+          console.log(response.data)
+          console.log(response.status)
+          console.log(response.statusText)
+          console.log(response.headers)
+          console.log(response.config)
+          self.userdata = response.data.json.userData  //.data.json
+          for(let i=0; i<self.userdata.length; i++){
+            if(self.userdata[i].commitTimes == 0)
+              self.userdata[i].passRate = 0
+            else
+              self.userdata[i].passRate = ((self.userdata[i].ACTimes*100)/self.userdata[i].commitTimes).toFixed(2)
+          }
+        })
+        .catch(function(error){
+          console.log(error)
+        })
+      if(self.callFromBack === false){
+        self.attendButtonShow();
+      }
+      this.callFromBack = false
     },
     sendAttendMSG(){
+      console.log(this.selectedClass)
+      attendRank.Class = this.selectedClass
       axios.post("https://httpbin.org/post",attendRank)
       .then(function(response){
         console.log(response.data)
@@ -168,7 +245,7 @@ var app1 = new Vue({
         console.log(response.statusText)
         console.log(response.headers)
         console.log(response.config)
-        if(response.data.json.status == "success"){
+        if(response.data.json.status == "success"){   //data.json
           alert("Congratulations! You successful attend!")
         }
         else{
@@ -182,6 +259,8 @@ var app1 = new Vue({
       this.setTime()
     },
     sendNotAttendMSG(){
+      console.log(this.selectedClass)
+      notAttendRank.Class = this.selectedClass
       axios.post("https://httpbin.org/post",notAttendRank)
       .then(function(response){
         console.log(response.data)
@@ -189,7 +268,7 @@ var app1 = new Vue({
         console.log(response.statusText)
         console.log(response.headers)
         console.log(response.config)
-        if(response.data.json.status == "fail"){
+        if(response.data.json.status == "fail"){   //data.json
           alert("OK! Maybe next time!")
         }
         else{

@@ -1,11 +1,3 @@
-<!-- 2019/12/29 -->
-<!--
-  version2.11
-    1.版面微調
-    2.去除輸入框輸入文字紅色波浪底線
-    3.輸入框可進行換行,以\n字元儲存
-    4.使用者名稱最多可容納20個w字元而不跑版
--->
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
   <head>
@@ -15,9 +7,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
     />
-    {% load static %}
     <!--連接CSS-->
-    <link rel="stylesheet" type="text/css" href=" {% static "/static/message/css/comments.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="css/comments.css"/>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -34,24 +25,24 @@
   <body>
     <!--navbar, 格式設定在ranking.css檔中-->
     <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href=" {% static "/static/index.html" %} "/><img class="img-home" src=" {% static "/static/image/logo.png" %} "/></a>
+      <a class="navbar-brand" href="index_local.html"/><img class="img-home" src="image/logo.png"/></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href=" {% static "/static/index.html" %} "/><img class="navbarimage" src=" {% static "/static/image/home.svg" %} "/> Home</a>
+            <a class="nav-link" href="index_local.html"/><img class="navbarimage" src="image/home.svg"/> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href=" {% static "/static/teacherProblem.html" %} "/><img class="navbarimage" src=" {% static "/static/image/file.svg" %} "/> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href=" {% static "/static/studentProblem.html" %} "/><img class="navbarimage" src=" {% static "/static/image/file.svg" %} "/> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"/><img class="navbarimage" src="image/file.svg"/> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"/><img class="navbarimage" src="image/file.svg"/> Problems</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-show="isShow" href="../Rank"/><img class="navbarimage" src=" {% static "/static/image/list-ordered.svg" %} "/> Ranking</a>
+            <a class="nav-link" v-show="isShow" href="ranking_local.html"/><img class="navbarimage" src="image/list-ordered.svg"/> Ranking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" v-show="isShow" href="../message" /><img class="navbarimage" src=" {% static "/static/image/comments-regular.svg" %} "/> Comments<span class="sr-only">(current)</span></a>
+            <a class="nav-link active" v-show="isShow" href="comment_local.html" /><img class="navbarimage" src="image/comments-regular.svg"/> Comments<span class="sr-only">(current)</span></a>
           </li>
         </ul>
         <ul class="navbar-nav">
@@ -59,7 +50,7 @@
             <span id="username" v-show="isShow">Hello! ${ name } &nbsp</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-on:click="clearStorage()" href=" {% static "/static/index.html" %} "/><img class="navbarimage" src=" {% static "/static/image/sign-out-alt-solid.svg" %} "/> Logout</a>
+              <a class="nav-link" v-on:click="clearStorage()" href="index_local.html"/><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
           </li>
         </ul>
       </div>
@@ -76,7 +67,7 @@
         </div>
         <div class="inline col3">
           <button @click="handleSend" type="button" class="btn btn-outline-success next">
-            <img class="search-img" src=" {% static "/static/image/right-arrow.svg" %} "/>
+            <img class="search-img" src="image/right-arrow.svg"/>
           </button>
         </div>
       </div>
@@ -88,8 +79,8 @@
           <select class="form-control" v-model="selectedClass" v-on:change="showMessages()">
             <option :selectedClass="classSet.Class" v-for="classSet in classSet">${ classSet.Class }</option>
           </select>
-        </div>
-        <!-- 搜尋floor欄 -->
+				</div>
+				<!-- 搜尋floor欄 -->
         <!-- <div class="active-purple-3 active-purple-4 mb-4 search-btn inline ">
           <input class="form-control search-floor" type="text" v-show="noShow" v-on:keyup.enter="" placeholder="search floor,ex:1,2,3..." aria-label="Search">
         </div> -->
@@ -118,6 +109,6 @@
 		</script>
     
     <!--js-->
-    <script src=" {% static "/static/message/js/comments.js" %} "/></script>
+    <script src="js/comments.js"/></script>
   </body>
 </html>

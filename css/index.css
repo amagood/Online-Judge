@@ -1,9 +1,14 @@
+/* 20191228 */
+
 .navbarset{
-  background-color: #56fd96;
+  background-color: #CCFF99;
 }
 
 .navbarimage{
   width: 23px;
+  height:40px;
+  max-width:100%;
+  max-height:100%;
 }
 
 p{
@@ -12,5 +17,50 @@ p{
 
 #username{
   font-size: 20px;
-  line-height: 42px;
+  line-height: 52px;
+}
+
+.img-home{
+  width:130px;
+  height:40px;
+  max-width:100%;
+  max-height:100%;
+}
+
+.centerContainer {
+  max-width: 900px;
+  padding: 30px;
+  margin: 30px auto;
+}
+
+.shortcutKey {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  margin-right: 0.75rem;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  color: black;
+  background-color: rgba(27,31,35,0.05);
+}
+
+.fileTypeTitle {
+  font-weight: 600;
+  margin-right: 0.75rem;
+}
+
+ul a {
+  color: #42b983;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul a:hover {
+  color: #42b983;
+  text-decoration: none;
 }
