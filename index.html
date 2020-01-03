@@ -35,14 +35,14 @@
     <div id="app1">
       <!--網頁上方的navbar, 格式設定在index.css檔中-->
       <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-        <a class="navbar-brand" href=" {% static "../" %} "/><img class="img-home" src=" {% static "/static/image/logo.png" %} "/></a>
+        <a class="navbar-brand" href=" {% static "../main" %} "/><img class="img-home" src=" {% static "/static/image/logo.png" %} "/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link active" href=" {% static "../" %} "/><img class="navbarimage" src=" {% static "/static/image/home.svg" %} "/> Home<span class="sr-only">(current)</span></a>
+              <a class="nav-link active" href=" {% static "../main" %} "/><img class="navbarimage" src=" {% static "/static/image/home.svg" %} "/> Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" v-if="whichShow === 'teacher'" href=" {% static "/static/QuestionLibrary/teacherProblem.html" %} "/><img class="navbarimage" src=" {% static "/static/image/file.svg" %} "/> Problems</a>
@@ -66,7 +66,7 @@
               <a class="nav-link" v-show="logIsShow" href="../login"/><img class="navbarimage" src=" {% static "/static/image/sign-in-alt-solid.svg" %} "/> Login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" v-on:click="clearStorage()" href=" {% static "../" %} "/><img class="navbarimage" src=" {% static "/static/image/sign-out-alt-solid.svg" %} "/> Logout</a>
+                <a class="nav-link" v-on:click="clearStorage()" href=" {% static "../main" %} "/><img class="navbarimage" src=" {% static "/static/image/sign-out-alt-solid.svg" %} "/> Logout</a>
             </li>
           </ul>
         </div>
