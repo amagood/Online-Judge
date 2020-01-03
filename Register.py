@@ -63,7 +63,7 @@ def _Is_Password_Legal(jsonDict):
 def _Is_Identity_Legal(jsonDict):
 	try:
 		if not re.search('^teacher$|^student$',jsonDict['who']):
-			_Change_Err_Msg('IDENTITY IS NOT EXSISIT')
+			_Change_Err_Msg('IDENTITY IS NOT EXIST')
 			return False
 		return True
 	except:
