@@ -16,9 +16,15 @@ def ResponseRegisterStatus(request):#request for register#
 		except:
 			jsonPost = {}
 		if Register.AddAccount(jsonPost):
-			retDict = {'stats':'success'}
+			retDict = {
+				'stats':'success',
+				'err_msg':''
+			}
 		else:
-			retDict = {'stats':'error'}
+			retDict = {
+				'stats':'error',
+				'err_msg':Register.ERR_MASSAGE()
+			}
 		return JsonResponse(retDict)
 	else:
 		return render(request,page_route,{})
