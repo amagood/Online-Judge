@@ -4,7 +4,10 @@ var questionObj = {
   "PDF" : "",
   "questionContent" : "",
   "language" : "",
-  "sampleProgram" : "",
+  "sampleMain" : "", 
+  "sampleFile" : "",
+  "sampleHeader" : "",
+  "sampleFillIn" : "", //填空程式碼 (如果沒有要製成填空題則為空字串
   "exampleInput" : "",
   "exampleOutput" : "",
   "input" : "",
@@ -18,7 +21,10 @@ var questionObj = {
 var testObj = {
   "action" : "verify_td",
   "language" : "",
-  "sampleProgram" : "",
+  "sampleMain" : "",
+  "sampleFile" : "",
+  "sampleHeader" : "",
+  "sampleFillIn" : "",//填空程式碼 (如果沒有要製成填空題則為空字串
   "tdInput" : "",
   "tdOutput" : "",
   "userName" : "",
@@ -26,8 +32,8 @@ var testObj = {
   "hash" : ""
 
 }
-var postURL = ""; //<--建立題目URL
-var testURL = ""; //<--測試測資URL
+var postURL = "https://httpbin.org/response-headers?freeform="; //<--建立題目URL
+var testURL = "https://httpbin.org/response-headers?freeform="; //<--測試測資URL
 var tmpObj = {};
 var tmpObj2 = {};
 
@@ -89,17 +95,58 @@ function inputPDF()
   }
 }
 
-function inputExampleCode()
+function inputExampleMain()
 {
-  var file = document.getElementById("id_exampleCode").files[0];
+  var file = document.getElementById("id_exampleMain").files[0];
   var read = new FileReader();
   read.readAsBinaryString(file);
   
   read.onloadend = function(){
     testMode = true;
     console.log(read.result);
-    testObj.sampleProgram=read.result;
-    questionObj.sampleProgram=read.result;
+    testObj.sampleMain=read.result;
+    questionObj.sampleMain=read.result;
+  }
+}
+
+function inputExampleFile()
+{
+  var file = document.getElementById("id_exampleFile").files[0];
+  var read = new FileReader();
+  read.readAsBinaryString(file);
+  
+  read.onloadend = function(){
+    testMode = true;
+    console.log(read.result);
+    testObj.sampleFile=read.result;
+    questionObj.sampleFile=read.result;
+  }
+}
+
+function inputExampleHeader()
+{
+  var file = document.getElementById("id_exampleHeader").files[0];
+  var read = new FileReader();
+  read.readAsBinaryString(file);
+  
+  read.onloadend = function(){
+    testMode = true;
+    console.log(read.result);
+    testObj.sampleHeader=read.result;
+    questionObj.sampleHeader=read.result;
+  }
+}
+
+function inputExampleFillIn()
+{
+  var file = document.getElementById("id_exampleFillIn").files[0];
+  var read = new FileReader();
+  read.readAsBinaryString(file);
+  
+  read.onloadend = function(){
+    console.log(read.result);
+    testObj.sampleFillIn=read.result;
+    questionObj.sampleFillIn=read.result;
   }
 }
 
@@ -188,15 +235,17 @@ new Vue({
             } 
           }
         }
-        alert(questionObj.tag);
+        //alert(questionObj.tag);
       
         axios.post(postURL,questionObj)
           .then(function (response) {
             console.log(response);
             tmpObj2 = response.data;
+            tmpObj2.submitStats="success"
             if(tmpObj2.submitStats=="success")
             {
-              alert("Question Submit Success!");
+              alert("題目建立成功，將自動跳轉!");
+              setTimeout(createSuccess, 500);
             }
             else
             {
@@ -210,7 +259,7 @@ new Vue({
       }
       else if(testMode==true)
       {
-        alert("請先測試測資與範例程式是否正確!")
+        alert("請先測試測資與範例程式是否正確!");
       }
       else
       {
@@ -221,7 +270,7 @@ new Vue({
     testQ() {
       if(testObj.tdOutput!=""
         &&testObj.tdInput!=""
-        &&testObj.sampleProgram!="")
+        &&testObj.sampleMain!="")
       {
         if (document.getElementById("selectLanguage").selectedIndex == "0") 
         {
@@ -240,11 +289,11 @@ new Vue({
           .then(function (response) {
             console.log(response);
             tmpObj = response.data;
-            //testMode = false;//等有Response要刪掉~~
+            testMode = false;//等有Response要刪掉~~
             if(tmpObj.stats=="verified")
             {
               alert('測試正確!');
-              testMode = false; //測試時註解
+              //testMode = false; //測試時註解
             }
             else
             {
@@ -271,13 +320,22 @@ var selectField = document.getElementById("selectLanguage");
 
 selectField.onchange = function() {
   if (document.getElementById("selectLanguage").selectedIndex == "0") {
-      document.getElementById("id_selectFileType").innerHTML = '<input size="40" name="account" type="file" id="id_exampleCode" autocomplete="off" value="" required="" accept = ".c" oninput="inputExampleCode()">';
+      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".c" oninput="inputExampleMain()" style="width:765px">';
+      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".c" oninput="inputExampleFile()" style="width:765px">';
+      document.getElementById("id_selectFileHeader").innerHTML = '<label for="id_exampleCode" >Header Files (如需多檔再上傳):</label><input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" oninput="inputExampleHeader()" style="width:765px">';
+      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".c" oninput="inputExampleFillIn()" style="width:765px">';
   }
   else if (document.getElementById("selectLanguage").selectedIndex == "1"){
-    document.getElementById("id_selectFileType").innerHTML = '<input size="40" name="account" type="file" id="id_exampleCode" autocomplete="off" value="" required="" accept = ".cpp,.cc" oninput="inputExampleCode()">';
+      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".cpp" oninput="inputExampleMain()" style="width:765px">';
+      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".cpp" oninput="inputExampleFile()" style="width:765px">';
+      document.getElementById("id_selectFileHeader").innerHTML = '<label for="id_exampleCode" >Header Files (如需多檔再上傳):</label><input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" oninput="inputExampleHeader()" style="width:765px">';
+      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".cpp" oninput="inputExampleFillIn()" style="width:765px">';
   }
   else{
-    document.getElementById("id_selectFileType").innerHTML = '<input size="40" name="account" type="file" id="id_exampleCode" autocomplete="off" value="" required="" accept = ".py" oninput="inputExampleCode()">';
+      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".py" oninput="inputExampleMain()" style="width:765px">';
+      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".py" oninput="inputExampleFile()" style="width:765px">';
+      document.getElementById("id_selectFileHeader").innerHTML = ' ';
+      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".py" oninput="inputExampleFillIn()" style="width:765px">';
   }
 }
 
@@ -299,9 +357,33 @@ exampleOutput.onchange = function() {
     };
 };
 
-var exampleCode = document.getElementById("id_exampleCode");
+var exampleMain = document.getElementById("id_exampleMain");
+var exampleFile = document.getElementById("id_exampleFile");
+var exampleHeader = document.getElementById("id_exampleHeader");
+var exampleFillIn = document.getElementById("id_exampleFillIn");
 
-exampleCode.onchange = function() {
+exampleMain.onchange = function() {
+    if(this.files[0].size > 100*1024*1024){
+       alert("File is too big!");
+       this.value = "";
+    };
+};
+
+exampleFile.onchange = function() {
+    if(this.files[0].size > 100*1024*1024){
+       alert("File is too big!");
+       this.value = "";
+    };
+};
+
+exampleHeader.onchange = function() {
+    if(this.files[0].size > 100*1024*1024){
+       alert("File is too big!");
+       this.value = "";
+    };
+};
+
+exampleFillIn.onchange = function() {
     if(this.files[0].size > 100*1024*1024){
        alert("File is too big!");
        this.value = "";
@@ -316,3 +398,11 @@ PDF.onchange = function() {
        this.value = "";
     };
 };
+
+
+function createSuccess() {
+  localStorage.setItem("Class", tmpObj2.Class);
+  localStorage.setItem("userName", tmpObj2.userName);
+  localStorage.setItem("hash", tmpObj2.hash);
+  window.location.replace("../../");
+}

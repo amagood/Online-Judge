@@ -5,7 +5,7 @@ var registerObj = {
   "password" : "",
   "email" : ""
 }
-var postURL = ""; //<--URL
+var postURL = "https://httpbin.org/response-headers?freeform="; //<--URL
 var tmpObj = {};
 
 new Vue({
@@ -49,7 +49,17 @@ new Vue({
           	.then(function (response) {
             	console.log(response);
             	tmpObj = response.data;
-            	alert(tmpObj.stats);
+            	if(tmpObj.stats=='success')
+            	{
+            		alert('註冊成功，將自動跳轉到主畫面!');
+            		setTimeout(RregisterSuccess, 500);
+            	}
+            	else
+            	{
+            		alert(tmpObj.err_msg);
+            		alert('請稍後再試');
+            	}
+            	
           	})
           	.catch(function (error) {
             	alert("連線錯誤! 請再試一次~");
@@ -65,7 +75,23 @@ new Vue({
     }
     else
     {
-    	alert('表格沒填完!!');
+    	if(!document.getElementById("id_account").validity.valid)
+    	{
+    		alert('帳號格式錯誤(8~20英數字)');
+    	}
+    	else if(!document.getElementById("id_password").validity.valid)
+    	{
+    		alert('密碼格式錯誤(8~20英數字)');
+    	}
+      	else if(!document.getElementById("id_email").validity.valid)
+      	{
+      		alert('電子郵件信箱格式錯誤');
+      	}
+      	else
+      	{
+      		alert('表格沒填完!!');
+      	}
+
     }
 }
   }
@@ -73,4 +99,8 @@ new Vue({
 )
 
 
-
+function registerSuccess() {
+  localStorage.setItem("who", registerObj.who);
+  localStorage.setItem("userName", registerObj.account);
+  window.location.replace("../");
+}

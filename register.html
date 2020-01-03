@@ -6,28 +6,28 @@
     <title>Register</title>
     <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
     <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
-    {%load static %}
-    <link rel="stylesheet" href= {% static "css/register.css" %}>
+    {% load static %}
+    <link rel="stylesheet" href= {% static "css/register.css" %} >
   </head>
 
   <body>
         <!-- navbar -->
   <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href="index.html">GreenTeam</a>
+      <a class="navbar-brand" href="../">GreenTeam</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html"><img class="navbarimage" src={% static "image/home.svg" %}/> Home</a>
+            <a class="nav-link" href="../"><img class="navbarimage" src= {% static "image/home.svg" %}/> Home</a>
           </li>
         </ul>
         <ul class="navbar-nav">
-            <a class="nav-link" v-show="regIsShow" href="register.html"><img class="navbarimage" src={% static "image/address-book-regular.svg" %}/> Register<span class="sr-only">(current)</span></a>
+            <a class="nav-link" v-show="regIsShow" href=""><img class="navbarimage" src= {% static "image/address-book-regular.svg" %}/> Register<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login.html"><img class="navbarimage" src={% static "image/sign-in-alt-solid.svg" %}/> Login</a>
+            <a class="nav-link" href="../login/"><img class="navbarimage" src= {% static "image/sign-in-alt-solid.svg" %} /> Login</a>
           </li>
 
         </ul>
@@ -44,9 +44,9 @@
           <form class="form-horizontal" data-toggle="validator" role="form" method="post" novalidate="true">
 
             <div class="form-group">
-              <label for="id_username" class="col-sm-10 control-label">帳號(名稱) :</label>
+              <label for="id_username" class="col-sm-10 control-label">帳號(名稱)(8~20個英文字母與數字) :</label>
                 <div class="col-sm-10">
-                  <input size="40" name="account" type="text" id="id_account" autocomplete="off" value=""required>
+                  <input size="40" name="account" type="text" id="id_account" autocomplete="off" value="" minlength="8" maxlength="20" pattern="[a-zA-Z0-9]{8,}" required>
                   <input type="hidden" name="CSRF_KEY" value="2050849946">
                 </div>
             </div>
@@ -54,14 +54,14 @@
             <div class="form-group">
               <label for="id_password" class="col-sm-10 control-label">密碼(8~20個英文字母與數字) :</label>
                 <div class="col-sm-10">
-                  <input size="40" name="password" type="password" id="id_password" autocomplete="off" value="" required>
-                </div>
+                  <input size="40" name="password" type="password" id="id_password" autocomplete="off" minlength="8" maxlength="20" value="" required>
+              </div>
             </div>
 
             <div class="form-group">
               <label for="id_comfirm_password" class="col-sm-10 control-label">確認密碼 :</label>
                 <div class="col-sm-10">
-                  <input size="40" name="confirm_password" type="password" id="id_confirm_password" autocomplete="off" value="" required>
+                  <input size="40" name="confirm_password" type="password" id="id_confirm_password" autocomplete="off" minlength="8" maxlength="20" value="" required>
                 </div>
             </div>
 
@@ -102,6 +102,6 @@
     <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
     <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src={% static "js/register.js" %}></script>
+    <script src= {% static "js/register.js" %} ></script>
 
 </html>
