@@ -1,33 +1,33 @@
 var navapp = new Vue({
-	delimiters : ['${', '}'],
-	el : "#navapp",
-	data : {
-		userid : "",
-		name : "",
-		isShow : false, //題目庫顯示
-		whichShow : "",
-	},
-	created() {
-		this.chooseProblems()
-	},
-	methods: {
-		chooseProblems(){
-			let self = this
-			self.name = localStorage.getItem("userName")
-			self.userid = localStorage.getItem("who")
-			if(self.userid === "admin"||self.userid === "teacher"){
-				self.isShow = true
-				self.whichShow = "teacher"
-			}
-			else if(self.userid === "student"){
-				self.isShow = true
-				self.whichShow = "student"
-			}
-		},
-		clearStorage(){
-			localStorage.clear();
-		},
-	},
+  delimiters: ['${', '}'],
+  el: "#navapp",
+  data: {
+    userid: "",
+    name: "",
+    isShow: false, //題目庫顯示
+    whichShow: "",
+  },
+  created() {
+    this.chooseProblems()
+  },
+  methods: {
+    chooseProblems() {
+      let self = this
+      self.name = localStorage.getItem("userName")
+      self.userid = localStorage.getItem("who")
+      if (self.userid === "admin" || self.userid === "teacher") {
+        self.isShow = true
+        self.whichShow = "teacher"
+      }
+      else if (self.userid === "student") {
+        self.isShow = true
+        self.whichShow = "student"
+      }
+    },
+    clearStorage() {
+      localStorage.clear();
+    },
+  },
 })
 
 //題目庫資料 request
@@ -49,53 +49,53 @@ var postURL = ""
 
 //tag 列表
 var tagListObj = {
-  "action" : "getTagList",
-  "Class":"CSIE110",
-  "userName" : "amagood",
-  "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
+  "action": "getTagList",
+  "Class": "CSIE110",
+  "userName": "amagood",
+  "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
-var tagTmpobj={}
-var tagPostURL=""
+var tagTmpobj = {}
+var tagPostURL = ""
 //test tagPostURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22tagList%22%3A%5B%20%20%20%20%20%7B%22tag%22%3A%22loop%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22if%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22array%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22string%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22pointer%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22binary%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22Treesort%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22dp%22%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%3A%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
 
 //使用者所有班級 class列表
-var classListObj={
-  "action" : "getClassList",
-  "userName" : "amagood",
-  "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
+var classListObj = {
+  "action": "getClassList",
+  "userName": "amagood",
+  "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
-var classTmpobj={}
-var classPostURL=""
+var classTmpobj = {}
+var classPostURL = ""
 //test classPostURL="https://httpbin.org/response-headers?freeform=%20%20%7B%20%20%20%20%20%22classList%22%3A%5B%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%20%20%7D"
 
 //加題目至班級
-var addQuestionToClass ={
-  "action" : "addQuestionToClass",
-  "addQuestionId" : [],
-  "userName" : "amagood",
-  "Class" : "",
-  "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
+var addQuestionToClass = {
+  "action": "addQuestionToClass",
+  "addQuestionId": [],
+  "userName": "amagood",
+  "Class": "",
+  "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
-var addQuesPostURL=""
+var addQuesPostURL = ""
 
 //刪除班級題目
-var deleteQuestion ={
-  "action" : "deleteQuestion",
-  "deleteQuestionId" : [],
-  "userName" : "amagood",
-  "Class" : "",
-  "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
+var deleteQuestion = {
+  "action": "deleteQuestion",
+  "deleteQuestionId": [],
+  "userName": "amagood",
+  "Class": "",
+  "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
-var deleteQuesPostURL=""
+var deleteQuesPostURL = ""
 
 //創班級
-var createClass={
-  "action":"createClass",
-  "Class":"",
-  "userName":"amagood",
-  "hash":"A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
+var createClass = {
+  "action": "createClass",
+  "Class": "",
+  "userName": "amagood",
+  "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
-var createClassPostURL=""
+var createClassPostURL = ""
 
 
 var probapp = new Vue({
@@ -103,13 +103,13 @@ var probapp = new Vue({
   el: "#probapp",
   data: {
     //isSelected:false,判斷目前有無選擇
-    createClassName:'',//create new class存放新班名字
-    classList:[],//存class name list
+    createClassName: '',//create new class存放新班名字
+    classList: [],//存class name list
     classButtonText: "Class",
-    rowItemId:'',//click row item + - 
-    showDeleteButton:false,//All Problem時false
+    rowItemId: '',//click row item + - 
+    showDeleteButton: false,//All Problem時false
     //add class
-    tagList:[],//存tag list
+    tagList: [],//存tag list
     tagButtonText: "tag",//Tag: "tag",//for dropdown buttom
     //get tag
     degreeButtonText: "degree",//Degree: "degree",//for dropdown buttom
@@ -161,7 +161,7 @@ var probapp = new Vue({
       },
       {
         key: "selected",
-        label:" ",//add class
+        label: " ",//add class
         sortable: false
       }
     ],
@@ -225,16 +225,16 @@ var probapp = new Vue({
           tmpobj = response.data
           probapp.items = tmpobj.questionLib
           /*set problem link*/
-          for(i=0;i<tmpobj.questionLib.length;i++){//可能會'length' undefined-->response直接傳link
-            probapp.items[i]={
-              "id":tmpobj.questionLib[i].id,
-              "title":tmpobj.questionLib[i].title,
-              "target":tmpobj.questionLib[i].target,
-              "degree":tmpobj.questionLib[i].degree,
-              "percentagePassing":tmpobj.questionLib[i].percentagePassing,
-              "respondent":tmpobj.questionLib[i].respondent,
-              "inputTime":tmpobj.questionLib[i].inputTime,
-              "link":"problem/"+tmpobj.questionLib[i].id+".html"
+          for (i = 0; i < tmpobj.questionLib.length; i++) {//可能會'length' undefined-->response直接傳link
+            probapp.items[i] = {
+              "id": tmpobj.questionLib[i].id,
+              "title": tmpobj.questionLib[i].title,
+              "target": tmpobj.questionLib[i].target,
+              "degree": tmpobj.questionLib[i].degree,
+              "percentagePassing": tmpobj.questionLib[i].percentagePassing,
+              "respondent": tmpobj.questionLib[i].respondent,
+              "inputTime": tmpobj.questionLib[i].inputTime,
+              "link": "problem/" + tmpobj.questionLib[i].id + ".html"
             }
           }
           //console.log(probapp.items)
@@ -253,14 +253,14 @@ var probapp = new Vue({
       return `${value}`
     },
     //html dropdown buttom(block 1)
-    getTagList(){
+    getTagList() {
       axios
         .post(tagPostURL, tagListObj)
         .then(function (response) {
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          tagTmpobj =response.data
-          probapp.tagList=tagTmpobj.tagList
+          tagTmpobj = response.data
+          probapp.tagList = tagTmpobj.tagList
           //console.log(probapp.tagList)
           console.log("get tag list from tagPostURL")
         })
@@ -299,14 +299,14 @@ var probapp = new Vue({
       this.currentPage = 1
     },
     //class V2
-    getClassList(){
+    getClassList() {
       axios
         .post(classPostURL, classListObj)
         .then(function (response) {
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          classTmpobj =response.data
-          probapp.classList=classTmpobj.classList
+          classTmpobj = response.data
+          probapp.classList = classTmpobj.classList
           //console.log(probapp.classList)
           console.log("get class list from classPostURL")
         })
@@ -314,23 +314,23 @@ var probapp = new Vue({
           console.log(error);
         })
     },
-    showAddToModal(item){
+    showAddToModal(item) {
       this.$refs['addToModal'].show()
-      this.rowItemId=item.id//存取當前題目資料
+      this.rowItemId = item.id//存取當前題目資料
     },
-    clickCreate(evt){//creat new class
+    clickCreate(evt) {//creat new class
       evt.preventDefault()
       //console.log(evt,probapp.rowItemId)
       this.$refs['addToModal'].hide()
-      createClass.Class=probapp.createClassName
+      createClass.Class = probapp.createClassName
       //console.log("request createClass",createClass)
       axios
         .post(createClassPostURL, createClass)
         .then(function (response) {
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          if(response.data.stats == "success"){
-            probapp.$bvToast.toast(`Create class <`+probapp.createClassName+`> success !`, {
+          if (response.data.stats == "success") {
+            probapp.$bvToast.toast(`Create class <` + probapp.createClassName + `> success !`, {
               title: 'Success',
               autoHideDelay: 8000,//8 sec
               variant: "warning",
@@ -339,14 +339,14 @@ var probapp = new Vue({
             probapp.getClassList()
             probapp.clickAddToClass(probapp.createClassName)
           }
-          else{
-            probapp.$bvToast.toast(`Create class <`+probapp.createClassName+`> is fail... Please try again !`, {
-            title: 'Error',
-            autoHideDelay: 8000,//8 sec
-            variant: "danger",
-            toaster: "b-toaster-top-center"
+          else {
+            probapp.$bvToast.toast(`Create class <` + probapp.createClassName + `> is fail... Please try again !`, {
+              title: 'Error',
+              autoHideDelay: 8000,//8 sec
+              variant: "danger",
+              toaster: "b-toaster-top-center"
             })
-            probapp.createClassName=''
+            probapp.createClassName = ''
           }
         })
         .catch(function (error) {
@@ -365,10 +365,10 @@ var probapp = new Vue({
           addQuestionToClass.Class = chooseClass
           //班級不能有重複名字//id 一次傳一個
           //跳出for
-          nofindClass=false
+          nofindClass = false
         }
       }
-      if(nofindClass){
+      if (nofindClass) {
         console.log("error,didn't find class")
         probapp.$bvToast.toast(`Add promlem to class <` + chooseClass + `> fail... Please try again !`, {
           title: 'Error',
@@ -377,39 +377,39 @@ var probapp = new Vue({
           toaster: "b-toaster-top-center"
         })
       }
-      else{
-      //console.log("request addQuestionToClass",addQuestionToClass)
-      axios
-        .post(addQuesPostURL, addQuestionToClass)
-        .then(function (response) {
-          //console.log(response.data)
-          //console.log(JSON.parse(response.data.freeform))//test
-          if (response.data.stats == "success") {
-            probapp.$bvToast.toast(`Add problem to class <` + chooseClass + `> success !`, {
-              title: 'Success',
-              autoHideDelay: 8000,//8 sec
-              variant: "success",
-              toaster: "b-toaster-top-center"
-            })
-          }
-          else {
-            probapp.$bvToast.toast(`Add promlem to class <` + chooseClass + `> fail... Please try again !`, {
-              title: 'Error',
-              autoHideDelay: 8000,//8 sec
-              variant: "danger",
-              toaster: "b-toaster-top-center"
-            })
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
+      else {
+        //console.log("request addQuestionToClass",addQuestionToClass)
+        axios
+          .post(addQuesPostURL, addQuestionToClass)
+          .then(function (response) {
+            //console.log(response.data)
+            //console.log(JSON.parse(response.data.freeform))//test
+            if (response.data.stats == "success") {
+              probapp.$bvToast.toast(`Add problem to class <` + chooseClass + `> success !`, {
+                title: 'Success',
+                autoHideDelay: 8000,//8 sec
+                variant: "success",
+                toaster: "b-toaster-top-center"
+              })
+            }
+            else {
+              probapp.$bvToast.toast(`Add promlem to class <` + chooseClass + `> fail... Please try again !`, {
+                title: 'Error',
+                autoHideDelay: 8000,//8 sec
+                variant: "danger",
+                toaster: "b-toaster-top-center"
+              })
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
       }
-      
+
     },
-    showDeleteModal(item){
-      this.rowItemId=item.id//存取當前題目資料
-      this.$bvModal.msgBoxConfirm('Please confirm that you want to delete <'+item.id+'>'+item.title, {
+    showDeleteModal(item) {
+      this.rowItemId = item.id//存取當前題目資料
+      this.$bvModal.msgBoxConfirm('Please confirm that you want to delete <' + item.id + '>' + item.title, {
         title: 'Please Confirm',
         size: 'sm',
         buttonSize: 'sm',
@@ -417,21 +417,21 @@ var probapp = new Vue({
         okTitle: 'Yes',
         cancelVariant: 'secondary',
         cancelTitle: 'Cancel',
-        headerBgVariant:'secondary',
-        headerTextVariant:'light',
-        footerBgVariant:'light'
+        headerBgVariant: 'secondary',
+        headerTextVariant: 'light',
+        footerBgVariant: 'light'
       })
-      .then(value => {//true:ok/false:cancel
-        if(value){
-          this.noGetData = true
-          probapp.deleteProblem()
-          probapp.getQuestionData()
-          console.log("class delete problem get data")
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      })
+        .then(value => {//true:ok/false:cancel
+          if (value) {
+            this.noGetData = true
+            probapp.deleteProblem()
+            probapp.getQuestionData()
+            console.log("class delete problem get data")
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        })
     },
     deleteProblem() {//刪除班級題目
       var chooseProblemId = []
@@ -464,22 +464,22 @@ var probapp = new Vue({
           console.log(error);
         })
     },
-    clickClass(chooseClass){
+    clickClass(chooseClass) {
       //console.log(chooseClass)//傳入班級
       if (chooseClass != "All Problem") {
         probapp.classButtonText = chooseClass
-        questionLibObj.Class= chooseClass
+        questionLibObj.Class = chooseClass
         probapp.noGetData = true
-        probapp.showDeleteButton=true
+        probapp.showDeleteButton = true
         //console.log("request changeClass",questionLibObj)
         probapp.getQuestionData()
         console.log("class get class data")
       }
-      else{//chooseClass=="All Problem"
+      else {//chooseClass=="All Problem"
         probapp.noGetData = true
-        probapp.showDeleteButton=false
+        probapp.showDeleteButton = false
         probapp.classButtonText = "Class"
-        questionLibObj.Class= chooseClass
+        questionLibObj.Class = chooseClass
         //console.log("request changeClass",questionLibObj)
         probapp.getQuestionData()
         console.log("clear class,get all data")
