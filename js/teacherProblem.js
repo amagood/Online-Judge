@@ -44,8 +44,8 @@ var questionLibObj = {//加辨別身分?
   "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
 var tmpobj = {}
-//var postURL = ""
-var postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title02%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title03%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title04%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title05%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
+var postURL = ""
+//test postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22Level%2001%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title02%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22Level%2002%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title03%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22Level%2003%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title04%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22Level%2001%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title05%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22Level%2010%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
 
 //tag 列表
 var tagListObj = {
@@ -54,19 +54,19 @@ var tagListObj = {
   "userName" : "amagood",
   "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
-//var tagPostURL=""
-var tagPostURL="https://httpbin.org/response-headers?freeform=%20%20%7B%20%20%20%20%20%22classList%22%3A%5B%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%20%20%7D"
 var tagTmpobj={}
+var tagPostURL=""
+//test tagPostURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22tagList%22%3A%5B%20%20%20%20%20%7B%22tag%22%3A%22loop%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22if%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22array%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22string%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22pointer%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22binary%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22Treesort%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22dp%22%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%3A%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
 
-//使用者所有班級
+//使用者所有班級 class列表
 var classListObj={
   "action" : "getClassList",
   "userName" : "amagood",
   "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
-//var classPostURL=""
-var classPostURL="https://httpbin.org/response-headers?freeform=%20%20%7B%20%20%20%20%20%22classList%22%3A%5B%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%20%20%7D"
 var classTmpobj={}
+var classPostURL=""
+//test classPostURL="https://httpbin.org/response-headers?freeform=%20%20%7B%20%20%20%20%20%22classList%22%3A%5B%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%20%20%7D"
 
 //加題目至班級
 var addQuestionToClass ={
@@ -222,7 +222,7 @@ var probapp = new Vue({
         .then(function (response) {
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          tmpobj =JSON.parse(response.data.freeform)
+          tmpobj = response.data
           probapp.items = tmpobj.questionLib
           /*set problem link*/
           for(i=0;i<tmpobj.questionLib.length;i++){//可能會'length' undefined-->response直接傳link
@@ -237,10 +237,9 @@ var probapp = new Vue({
               "link":"problem/"+tmpobj.questionLib[i].id+".html"
             }
           }
-          console.log(probapp.items)
+          //console.log(probapp.items)
           // Set the initial number of items、totalRows
           probapp.totalRows = probapp.items.length
-          //console.log(questionLibObj)
           console.log("get new data from postURL")
 
           //determine get data due to loading
@@ -260,19 +259,9 @@ var probapp = new Vue({
         .then(function (response) {
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          tagTmpobj =JSON.parse(response.data.freeform)
-          probapp.tagList=tagTmpobj.classList
-          probapp.tagList=[
-            {"tag":"loop"},
-            {"tag":"if"},
-            {"tag":"array"},
-            {"tag":"string"},
-            {"tag":"pointer"},
-            {"tag":"binary"},
-            {"tag":"Treesort"},
-            {"tag":"dp"}
-          ]
-          console.log(probapp.tagList)
+          tagTmpobj =response.data
+          probapp.tagList=tagTmpobj.tagList
+          //console.log(probapp.tagList)
           console.log("get tag list from tagPostURL")
         })
         .catch(function (error) {
@@ -316,14 +305,9 @@ var probapp = new Vue({
         .then(function (response) {
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          classTmpobj =JSON.parse(response.data.freeform)
+          classTmpobj =response.data
           probapp.classList=classTmpobj.classList
-          probapp.classList=[
-            {"class":"CSIE111"},
-            {"class":"CSIE112"},
-            {"class":"CSIE113"}
-          ]//test
-          console.log(probapp.classList)
+          //console.log(probapp.classList)
           console.log("get class list from classPostURL")
         })
         .catch(function (error) {
@@ -339,15 +323,13 @@ var probapp = new Vue({
       //console.log(evt,probapp.rowItemId)
       this.$refs['addToModal'].hide()
       createClass.Class=probapp.createClassName
-      createClassPostURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22stats%22%3A%22success%22%2C%20%20%20%22classList%22%3A%5B%20%20%20%20%20%7B%22class%22%3A%22CSIE111%22%7D%2C%20%20%20%20%20%7B%22class%22%3A%22CSIE112%22%7D%2C%20%20%20%20%20%7B%22class%22%3A%22CSIE113%22%7D%20%20%20%5D%2C%20%20%20%22userName%22%3A%22amagood%22%2C%20%20%20%22hash%22%3A%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
-      //test postURL
-      console.log("request createClass",createClass)
+      //console.log("request createClass",createClass)
       axios
         .post(createClassPostURL, createClass)
         .then(function (response) {
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          if(JSON.parse(response.data.freeform).stats == "success"){
+          if(response.data.stats == "success"){
             probapp.$bvToast.toast(`Create class <`+probapp.createClassName+`> success !`, {
               title: 'Success',
               autoHideDelay: 8000,//8 sec
@@ -356,7 +338,7 @@ var probapp = new Vue({
             })
             probapp.getClassList()
             probapp.clickAddToClass(probapp.createClassName)
-            probapp.createClassName=''
+            probapp.createClassName=''///////bug///////
           }
           else{
             probapp.$bvToast.toast(`Create class <`+probapp.createClassName+`> is fail... Please try again !`, {
@@ -379,7 +361,6 @@ var probapp = new Vue({
         if (this.classList[i].class == chooseClass) {
           var chooseProblemId = []
           chooseProblemId[0] = probapp.rowItemId
-          console.log(chooseProblemId[0] , probapp.rowItemId)
           addQuestionToClass.addQuestionId = chooseProblemId
           addQuestionToClass.Class = chooseClass
           //班級不能有重複名字//id 一次傳一個
@@ -397,16 +378,13 @@ var probapp = new Vue({
         })
       }
       else{
-        addQuesPostURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22stats%22%20%3A%20%22success%22%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE112%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
-      //test postURL (success post)
-      console.log("request addQuestionToClass",addQuestionToClass)
+      //console.log("request addQuestionToClass",addQuestionToClass)
       axios
         .post(addQuesPostURL, addQuestionToClass)
         .then(function (response) {
-          //console.log(addQuestionToClass)
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          if (JSON.parse(response.data.freeform).stats == "success") {
+          if (response.data.stats == "success") {
             probapp.$bvToast.toast(`Add problem to class <` + chooseClass + `> success !`, {
               title: 'Success',
               autoHideDelay: 8000,//8 sec
@@ -459,16 +437,13 @@ var probapp = new Vue({
       var chooseProblemId = []
       chooseProblemId[0] = probapp.rowItemId//id 一次傳一個
       deleteQuestion.deleteQuestionId = chooseProblemId
-      deleteQuesPostURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22stats%22%20%3A%20%22success%22%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE112%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
-
-      //test postURL (success post)
-      console.log("request deleteQuestion",deleteQuestion)
+      //console.log("request deleteQuestion",deleteQuestion)
       axios
         .post(deleteQuesPostURL, deleteQuestion)
         .then(function (response) {
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          if (JSON.parse(response.data.freeform).stats == "success") {
+          if (response.data.stats == "success") {
             probapp.$bvToast.toast(`Delete success !`, {
               title: 'Delete',
               autoHideDelay: 8000,//8 sec
@@ -490,26 +465,22 @@ var probapp = new Vue({
         })
     },
     clickClass(chooseClass){
-      console.log(chooseClass)//傳入班級
+      //console.log(chooseClass)//傳入班級
       if (chooseClass != "All Problem") {
         probapp.classButtonText = chooseClass
         questionLibObj.Class= chooseClass
         probapp.noGetData = true
         probapp.showDeleteButton=true
-        //postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title03%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%20%20%20%20%20%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%20%20%7D"
-        //test postURL (class problem)
-        console.log("request changeClass",questionLibObj)
+        //console.log("request changeClass",questionLibObj)
         probapp.getQuestionData()
         console.log("class get class data")
       }
-      else{
+      else{//chooseClass=="All Problem"
         probapp.noGetData = true
         probapp.showDeleteButton=false
         probapp.classButtonText = "Class"
         questionLibObj.Class= chooseClass
-        //postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title02%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title03%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title04%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title05%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
-        //test postURL (all problem)
-        console.log("request changeClass",questionLibObj)
+        //console.log("request changeClass",questionLibObj)
         probapp.getQuestionData()
         console.log("clear class,get all data")
       }

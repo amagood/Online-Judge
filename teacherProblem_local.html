@@ -1,4 +1,7 @@
-<!--20200102-->
+<!--20200104 
+    version 1 : questionLibObj, get tag list
+    version 2 : create class, add problem to class, delete class problem, get class list-->
+    
 <!doctype html>
 <html lang="zh-Hant-TW">
 
@@ -21,25 +24,32 @@
 
   <body>
     <!--navbar-->
-    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset"
+      style="border-bottom: 4px solid MediumSeaGreen">
       <a class="navbar-brand" href="index.html"><img class="img-home" src="image/logo.png" /></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home<span class="sr-only">(current)</span></a>
+            <a class="nav-link active" href="index.html"><img class="navbarimage" src="image/home.svg" /> Home<span
+                class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img class="navbarimage" src="image/file.svg" /> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img class="navbarimage"
+                src="image/file.svg" /> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img class="navbarimage"
+                src="image/file.svg" /> Problems</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-show="isShow" href="ranking.html"><img class="navbarimage" src="image/list-ordered.svg" /> Ranking</a>
+            <a class="nav-link" v-show="isShow" href="ranking.html"><img class="navbarimage"
+                src="image/list-ordered.svg" /> Ranking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-show="isShow" href="comments.html"><img class="navbarimage" src="image/comments-regular.svg" /> Comments</a>
+            <a class="nav-link" v-show="isShow" href="comments.html"><img class="navbarimage"
+                src="image/comments-regular.svg" /> Comments</a>
           </li>
         </ul>
         <ul class="navbar-nav">
@@ -47,117 +57,138 @@
             <span id="username" v-show="isShow">Hello! ${ name } &nbsp</span>
           </li>
           <li class="nav-item">
-              <a class="nav-link" v-on:click="clearStorage()" href="index.html"><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
+            <a class="nav-link" v-on:click="clearStorage()" href="index.html"><img class="navbarimage"
+                src="image/sign-out-alt-solid.svg" /> Logout</a>
           </li>
         </ul>
       </div>
     </nav>
     <!--navbar end-->
 
-      <div id="probapp" class="problemLib">
-        <!--block 1 sortMenu-->
-        <b-row>
-          <b-col>
-            <b-dropdown v-bind:text="tagButtonText" variant="secondary">
-              <b-dropdown-item @click="filter = ''" v-on:click="clickTag('tag')"><b class="text-info">all</b></b-dropdown-item>
-              <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item v-for="i in tagList" :key="'dyn-tab-' + tagList.lenght" @click="filter = 'i.tag'" v-on:click="clickClass(i.tag)">${i.tag}</b-dropdown-item>
-            </b-dropdown>
-            <b-dropdown v-bind:text="degreeButtonText" variant="secondary" class="dropdown">
-              <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('degree')"><b class="text-info">all</b></b-dropdown-item>
-              <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item @click="filter = 'Level 01'" v-on:click="clickDegree('Level 01')">Level 01</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'Level 02'" v-on:click="clickDegree('Level 02')">Level 02</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'Level 03'" v-on:click="clickDegree('Level 03')">Level 03</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'Level 04'" v-on:click="clickDegree('Level 04')">Level 04</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'Level 05'" v-on:click="clickDegree('Level 05')">Level 05</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'Level 06'" v-on:click="clickDegree('Level 06')">Level 06</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'Level 07'" v-on:click="clickDegree('Level 07')">Level 07</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'Level 08'" v-on:click="clickDegree('Level 08')">Level 08</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'Level 09'" v-on:click="clickDegree('Level 09')">Level 09</b-dropdown-item>
-              <b-dropdown-item @click="filter = 'Level 10'" v-on:click="clickDegree('Level 10')">Level 10</b-dropdown-item>
-            </b-dropdown>
-            <b-dropdown v-bind:text="classButtonText" variant="outline-secondary" class="dropdown">
-              <b-dropdown-item v-on:click="clickClass('All Problem')" @click="filter = ''"><b class="text-info">All Problem</b></b-dropdown-item>
-              <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-text style="width: 240px;" v-if="!classList.length">
-                There is no class.</br>
-                Create new class using the <b class="text-warning">Add</b> -> <b class="text-danger">Add Problem To Class</b> button .
-              </b-dropdown-text>
-              <b-dropdown-header v-else >Class</b-dropdown-header>
-              <b-dropdown-item v-for="i in classList" :key="'dyn-tab-' + classList.lenght" v-on:click="clickClass(i.class)" @click="filter = ''">${i.class} </b-dropdown-item>
-            </b-dropdown>
-            <b-button href="createQuestion.html" v-b-tooltip.hover title="Create a new question" variant="outline-info" class="dropdown"><b>Create Problem</b></b-button>
-          </b-col>
-          <!--search/filter bar-->
-          <b-col sm="5">
-            <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput" class="mb-0">
-              <b-input-group size="">
-                <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
-                </b-form-input>
-                <b-input-group-append>
-                  <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
-                </b-input-group-append>
-              </b-input-group>
-            </b-form-group>
-          </b-col>
-        </b-row>
+    <div id="probapp" class="problemLib">
+      <!--block 1 sortMenu-->
+      <b-row>
+        <b-col>
+          <b-dropdown v-bind:text="tagButtonText" variant="secondary">
+            <b-dropdown-item @click="filter = ''" v-on:click="clickTag('tag')"><b class="text-info">all</b>
+            </b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item v-for="i in tagList" :key="'dyn-tab-' + tagList.lenght" @click="filter = 'i.tag'"
+              v-on:click="clickClass(i.tag)">${i.tag}</b-dropdown-item>
+          </b-dropdown>
+          <b-dropdown v-bind:text="degreeButtonText" variant="secondary" class="dropdown">
+            <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('degree')"><b class="text-info">all</b>
+            </b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item @click="filter = 'Level 01'" v-on:click="clickDegree('Level 01')">Level 01
+            </b-dropdown-item>
+            <b-dropdown-item @click="filter = 'Level 02'" v-on:click="clickDegree('Level 02')">Level 02
+            </b-dropdown-item>
+            <b-dropdown-item @click="filter = 'Level 03'" v-on:click="clickDegree('Level 03')">Level 03
+            </b-dropdown-item>
+            <b-dropdown-item @click="filter = 'Level 04'" v-on:click="clickDegree('Level 04')">Level 04
+            </b-dropdown-item>
+            <b-dropdown-item @click="filter = 'Level 05'" v-on:click="clickDegree('Level 05')">Level 05
+            </b-dropdown-item>
+            <b-dropdown-item @click="filter = 'Level 06'" v-on:click="clickDegree('Level 06')">Level 06
+            </b-dropdown-item>
+            <b-dropdown-item @click="filter = 'Level 07'" v-on:click="clickDegree('Level 07')">Level 07
+            </b-dropdown-item>
+            <b-dropdown-item @click="filter = 'Level 08'" v-on:click="clickDegree('Level 08')">Level 08
+            </b-dropdown-item>
+            <b-dropdown-item @click="filter = 'Level 09'" v-on:click="clickDegree('Level 09')">Level 09
+            </b-dropdown-item>
+            <b-dropdown-item @click="filter = 'Level 10'" v-on:click="clickDegree('Level 10')">Level 10
+            </b-dropdown-item>
+          </b-dropdown>
+          <b-dropdown v-bind:text="classButtonText" variant="outline-secondary" class="dropdown">
+            <b-dropdown-item v-on:click="clickClass('All Problem')" @click="filter = ''"><b class="text-info">All
+                Problem</b></b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-text style="width: 240px;" v-if="!classList.length">
+              There is no class.</br>
+              Create new class using the <b class="text-warning">Add</b> -> <b class="text-danger">Add Problem To
+                Class</b> button .
+            </b-dropdown-text>
+            <b-dropdown-header v-else>Class</b-dropdown-header>
+            <b-dropdown-item v-for="i in classList" :key="'dyn-tab-' + classList.lenght"
+              v-on:click="clickClass(i.class)" @click="filter = ''">${i.class} </b-dropdown-item>
+          </b-dropdown>
+          <b-button href="createQuestion.html" v-b-tooltip.hover title="Create a new question" variant="outline-info"
+            class="dropdown"><b>Create Problem</b></b-button>
+        </b-col>
+        <!--search/filter bar-->
+        <b-col sm="5">
+          <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput" class="mb-0">
+            <b-input-group size="">
+              <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
+              </b-form-input>
+              <b-input-group-append>
+                <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+              </b-input-group-append>
+            </b-input-group>
+          </b-form-group>
+        </b-col>
+      </b-row>
 
-        <!--block 2 Problem-->
-        <div class="table0">
-          <b-table sticky hover responsive id="problemTable" :items="items" :fields="fields"
-            :per-page="questionLibObj.questionNum" :current-page="currentPage" :filter="filter" @filtered="onFiltered"
-            :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :busy="noGetData" >
-            <!--loading-->
-            <template v-slot:table-busy>
-              <div class="text-center text-success " style="margin-top:30px">
-                <b-spinner class="align-middle" style="width: 3rem; height: 3rem; "></b-spinner>
-                <strong> Loading... </strong>
+      <!--block 2 Problem-->
+      <div class="table0">
+        <b-table sticky hover responsive id="problemTable" :items="items" :fields="fields"
+          :per-page="questionLibObj.questionNum" :current-page="currentPage" :filter="filter" @filtered="onFiltered"
+          :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :busy="noGetData">
+          <!--loading-->
+          <template v-slot:table-busy>
+            <div class="text-center text-success " style="margin-top:30px">
+              <b-spinner class="align-middle" style="width: 3rem; height: 3rem; "></b-spinner>
+              <strong> Loading... </strong>
+            </div>
+          </template>
+          <!--problemLink-->
+          <template v-slot:cell(title)="data">
+            <a :href="data.item.link"><b class="text-info">${ data.item.title }</b></a>
+          </template>
+          <template v-slot:cell(percentagePassing)="data">
+            ${ data.item.percentagePassing } %
+          </template>
+          <!--select problem-->
+          <template v-slot:cell(selected)="data">
+            <b-button size="sm" variant="outline-success" pill @click="showAddToModal(data.item)"
+              class="selectedButton">+</b-button>
+            <b-modal scrollable ref="addToModal" title="Add To" :header-bg-variant="'secondary'"
+              :header-text-variant="'light'" :footer-bg-variant="'light'">
+              <div v-if="!classList.length">
+                There are no class.
+                <br />
+                Please create class first！
               </div>
-            </template>
-            <!--problemLink-->
-            <template v-slot:cell(title)="data">
-              <a :href="data.item.link"><b class="text-info">${ data.item.title }</b></a>
-            </template>
-            <template v-slot:cell(percentagePassing)="data">
-              ${ data.item.percentagePassing } %
-            </template>
-            <!--select problem-->
-            <template v-slot:cell(selected)="data">
-              <b-button size="sm" variant="outline-success" pill @click="showAddToModal(data.item)" class="selectedButton">+</b-button>
-              <b-modal scrollable ref="addToModal" title="Add To" :header-bg-variant="'secondary'" :header-text-variant="'light'"
-                  :footer-bg-variant="'light'">
-                  <div v-if="!classList.length">
-                    There are no class.
-                    <br/>
-                    Please create class first！
-                  </div>
-                  <b-list-group v-else>
-                    <b-list-group-item button v-for="i in classList" :key="'dyn-tab-' + classList.lenght" @click="clickAddToClass(i.class)">${i.class}</b-list-group-item>
-                  </b-list-group>
-                  <template v-slot:modal-footer>
-                    <div class="w-100">
-                      <b-form @submit="clickCreate">
-                        <b-form-group label="Create New Class :">
-                        <b-form-input v-model="createClassName" placeholder="Input class name" required></b-form-input>
-                        </b-form-group>
-                        <b-button pill variant="info" class="float-right" type="submit">Create</b-button>
-                      </b-form>
-                    </div>
-                  </template>
-              </b-modal>
-              <b-button size="sm" variant="outline-danger" pill @click="showDeleteModal(data.item)" class="selectedButton" v-if="showDeleteButton">-</b-button>
-            </template>
-          </b-table>
-        </div>
-
-        <!--block 3 Page-->
-        <div>
-          <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="questionLibObj.questionNum"
-            aria-controls="problemTable" align="center">
-          </b-pagination>
-        </div>
+              <b-list-group v-else>
+                <b-list-group-item button v-for="i in classList" :key="'dyn-tab-' + classList.lenght"
+                  @click="clickAddToClass(i.class)">${i.class}</b-list-group-item>
+              </b-list-group>
+              <template v-slot:modal-footer>
+                <div class="w-100">
+                  <b-form @submit="clickCreate">
+                    <b-form-group label="Create New Class :">
+                      <b-form-input v-model="createClassName" placeholder="Input class name" required></b-form-input>
+                    </b-form-group>
+                    <b-button pill variant="info" class="float-right" type="submit">Create</b-button>
+                  </b-form>
+                </div>
+              </template>
+            </b-modal>
+            <b-button size="sm" variant="outline-danger" pill @click="showDeleteModal(data.item)" class="selectedButton"
+              v-if="showDeleteButton">-</b-button>
+          </template>
+        </b-table>
       </div>
+
+      <!--block 3 Page-->
+      <div>
+        <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="questionLibObj.questionNum"
+          aria-controls="problemTable" align="center">
+        </b-pagination>
+      </div>
+    </div>
   </body>
 
   <!-- Optional JavaScript -->
