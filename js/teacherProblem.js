@@ -338,7 +338,6 @@ var probapp = new Vue({
             })
             probapp.getClassList()
             probapp.clickAddToClass(probapp.createClassName)
-            probapp.createClassName=''///////bug///////
           }
           else{
             probapp.$bvToast.toast(`Create class <`+probapp.createClassName+`> is fail... Please try again !`, {
@@ -347,6 +346,7 @@ var probapp = new Vue({
             variant: "danger",
             toaster: "b-toaster-top-center"
             })
+            probapp.createClassName=''
           }
         })
         .catch(function (error) {
