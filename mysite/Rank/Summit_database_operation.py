@@ -1,24 +1,24 @@
 from DataBase.models import User, Question, Summit, Summary, Rank
 ''' --- will require model version 2.3 (check your model.py) --- '''
 
-def DataBase_Operation(Summited_Question_ID, Summited_User_Name, Summited_Output, Summited_Runtime):
+def DataBase_Operation(Summited_Question_ID, Summited_User_Name, Summited_Output, Summited_Runtime, Summited_Language):
     ''' ---getting User and Question--- '''
     Current_Question = Question.objects.filter(Question_ID = Summited_Question_ID)
     Current_User = User.objects.filter(User_Name = Summited_User_Name)
     
     ''' ---adding Summit History to DB--- '''
-    Summit(Summit_User = Current_User[0], Summit_Question = Current_Question[0], Summit_Output = Summited_Output, Summit_Runtime = Summited_Runtime).save()
+    Summit(Summit_User = Current_User[0], Summit_Question = Current_Question[0], Summit_Output = Summited_Output, Summit_Runtime = Summited_Runtime, Summit_Language = Summited_Language).save()
     
     ''' ---updating Summary in DB--- '''
     Current_Summary = Summary.objects.filter(Summary_User__User_Name = Summited_User_Name, Summary_Question__Question_ID = Summited_Question_ID)
     if len(Current_Summary) == 0:   # if is the first time Summit this Question
-        Summary(Summary_User = Current_User[0], Summary_Question = Current_Question[0], Summary_AC_Count = 1 if Summited_Output == 'AC' else 0, Summary_Runtime = Summited_Runtime).save()
+        Summary(Summary_User = Current_User[0], Summary_Question = Current_Question[0], Summary_AC_Count = 1 if Summited_Output == 'AC' else 0, Summary_Runtime = Summited_Runtime, Summary_Language = Summited_Language).save()
     else:
         Current_Count = Current_Summary[0].Summary_Count
         Current_AC_Count = Current_Summary[0].Summary_AC_Count
         Current_Summary.update(Summary_Count = Current_Count + 1, Summary_AC_Count = Current_AC_Count + (1 if Summited_Output == 'AC' else 0))
         if(Current_Summary[0].Summary_Runtime > Summited_Runtime and Summited_Runtime >= 0):
-            Current_Summary.update(Summary_Runtime = Summited_Runtime)
+            Current_Summary.update(Summary_Runtime = Summited_Runtime, Summary_Language = Summited_Language)
     
     ''' ---Checking Rank Order--- '''
     Rank.objects.filter(Rank_Question__Question_ID = Summited_Question_ID).delete()

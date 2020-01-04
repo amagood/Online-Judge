@@ -20,11 +20,12 @@ def Single_Rank(Current_Rank):
             "ACTimes" : Current_AcTime,
             "CommitTimes" : Current_CommitTime,
             "rank" : Current_Rank_No,
-            "passTime" : Current_Summary.Summary_Runtime
+            "passTime" : Current_Summary.Summary_Runtime,
+            "language" : Current_Summary.Summary_Language
         }
     return Rank_Single_Json
 
-def Rank_json(Request_Question, UserName, UserHash):
+def Rank_json(Request_Question, UserName, UserHash, UserClass):
     Return_Data = {}
     search_Question = Question.objects.filter(Question_ID = Request_Question)
     if len(search_Question) != 0:
@@ -39,16 +40,18 @@ def Rank_json(Request_Question, UserName, UserHash):
         Return_Data['userData'] = tmp
         Return_Data['userName'] = UserName
         Return_Data['hash'] = UserHash
+        Return_Data['Class'] = UserClass
     #data = json.dumps(Return_data)
     return Return_Data
 
 ''' for rank attent '''
 
-def Rank_Attend_json(Request_Question, if_attend, UserName, UserHash):
+def Rank_Attend_json(Request_Question, if_attend, UserName, UserHash, UserClass):
     User_Summary = Summary.objects.filter(Summary_Question__Question_ID = Request_Question, Summary_User__User_Name = UserName)
     Return_Data = {}
     Return_Data['userName'] = UserName
     Return_Data['hash'] = UserHash
+    Return_Data['Class'] = UserClass
     if len(User_Summary) != 0:
         if if_attend == 'attend':
             User_Summary.update(Summary_Attend = True)
@@ -68,14 +71,12 @@ def RankRequest(request):
     if request.method == "POST":
         req = json.loads(request.body.decode('utf-8'))
         print(req)
+        data = 0
         if req['action'] == 'rank':
-            data = Rank_json(req['questionNum'], req['userName'], req['hash'])
+            data = Rank_json(req['questionNum'], req['userName'], req['hash'], req['Class'])
         elif req['action'] == 'attend_rank':
-            data = Rank_Attend_json(req['questionNum'], req['attendStatus'], req['userName'], req['hash'])
+            data = Rank_Attend_json(req['questionNum'], req['attendStatus'], req['userName'], req['hash'], req['Class'])
         print(data)
-        
-        #DataBase_Operation('a002','amamamagood','AC',10)
-        
         data = json.dumps(data)
     #return render(data,'ranking.html',{})
         return HttpResponse(data)
