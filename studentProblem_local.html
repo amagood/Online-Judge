@@ -1,6 +1,5 @@
 <!--20200104 
-    version 1 : questionLibObj, get tag list
-    version 2 : get class list-->
+    version 1 : questionLibObj, get tag list-->
 
 <!doctype html>
 <html lang="zh-Hant-TW">
@@ -99,17 +98,6 @@
             </b-dropdown-item>
             <b-dropdown-item @click="filter = 'Level 10'" v-on:click="clickDegree('Level 10')">Level 10
             </b-dropdown-item>
-          </b-dropdown>
-          <b-dropdown v-bind:text="classButtonText" variant="outline-secondary" class="dropdown">
-            <b-dropdown-item v-on:click="clickClass('All Problem')" @click="filter = ''"><b class="text-info">All
-                Problem</b></b-dropdown-item>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-text style="width: 240px;" v-if="!classList.length">
-              There is no class.
-            </b-dropdown-text>
-            <b-dropdown-header v-else>Class</b-dropdown-header>
-            <b-dropdown-item v-for="i in classList" :key="'dyn-tab-' + classList.lenght"
-              v-on:click="clickClass(i.class)" @click="filter = ''">${i.class} </b-dropdown-item>
           </b-dropdown>
         </b-col>
         <!--search/filter bar-->

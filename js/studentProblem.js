@@ -58,24 +58,11 @@ var tagTmpobj = {}
 var tagPostURL = ""
 //test tagPostURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22tagList%22%3A%5B%20%20%20%20%20%7B%22tag%22%3A%22loop%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22if%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22array%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22string%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22pointer%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22binary%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22Treesort%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22dp%22%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%3A%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
 
-//使用者所有班級 class列表
-var classListObj = {
-  "action": "getClassList",
-  "userName": "amagood",
-  "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
-}
-var classTmpobj = {}
-var classPostURL = ""
-//test classPostURL="https://httpbin.org/response-headers?freeform=%20%20%7B%20%20%20%20%20%22classList%22%3A%5B%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%20%20%7D"
-
 
 var probapp = new Vue({
   delimiters: ['${', '}'],
   el: "#probapp",
   data: {
-    classList: [],//存class name list
-    classButtonText: "Class",
-    //class version2
     tagList: [],//存tag list
     tagButtonText: "tag",//Tag: "tag",//for dropdown buttom
     //get tag
@@ -140,7 +127,6 @@ var probapp = new Vue({
   },//computed end
   created() {
     this.getQuestionData()
-    this.getClassList()
     this.getTagList()
   },//created end
   updated() {
@@ -260,40 +246,6 @@ var probapp = new Vue({
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
       this.currentPage = 1
-    },
-    getClassList() {
-      axios
-        .post(classPostURL, classListObj)
-        .then(function (response) {
-          //console.log(response.data)
-          //console.log(JSON.parse(response.data.freeform))//test
-          classTmpobj = response.data
-          probapp.classList = classTmpobj.classList
-          //console.log(probapp.classList)
-          console.log("get class list from classPostURL")
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-    },
-    clickClass(chooseClass) {
-      console.log(chooseClass)//傳入班級
-      if (chooseClass != "All Problem") {
-        probapp.classButtonText = chooseClass
-        questionLibObj.Class = chooseClass
-        probapp.noGetData = true
-        //console.log("request",questionLibObj)
-        probapp.getQuestionData()
-        console.log("class get class data")
-      }
-      else {
-        probapp.noGetData = true
-        probapp.classButtonText = "Class"
-        questionLibObj.Class = chooseClass
-        //console.log("request",questionLibObj)
-        probapp.getQuestionData()
-        console.log("clear class,get all data")
-      }
     }
   },//methods end
 })
