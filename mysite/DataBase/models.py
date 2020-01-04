@@ -4,7 +4,7 @@ from django.db import models
     Before using new version of models.py is better to flush the original database data (if you have any) to decrease the problem you might meet
     
     Version Note:
-    Current Version: V2.5
+    Current Version: V2.6
     
     Version 1
         V1.0 inital release for V.1 judge demo with no group functionality
@@ -25,7 +25,7 @@ from django.db import models
              adding Summary Runtime for future function -> save the shortest runtime you have in a Question
         V2.4 adding Chat_Date_str and Data_Time_str with string to match API
         V2.5 Change Summary and Summit Rumtime imto int to encounter negetive number for not AC result
-        V2.6 adding Summary Language and Summit Lauguage for fucking stupid reason...
+        V2.6 adding Summary Language and Summit Lauguage for fucking stupid reason......
     
     If you encounter any problem you can't solve or want to change anything please contact me
     

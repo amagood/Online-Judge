@@ -25,7 +25,7 @@ from django.db import models
              adding Summary Runtime for future function -> save the shortest runtime you have in a Question
         V2.4 adding Chat_Date_str and Data_Time_str with string to match API
         V2.5 Change Summary and Summit Rumtime imto int to encounter negetive number for not AC result
-        V2.6 adding Summary Language and Summit Lauguage for fucking stupid reason...
+        V2.6 adding Summary Language and Summit Lauguage for fucking stupid reason......
     
     If you encounter any problem you can't solve or want to change anything please contact me
     
