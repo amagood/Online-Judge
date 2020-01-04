@@ -30,10 +30,9 @@ var testObj = {
   "userName" : "",
   "Class" : "",
   "hash" : ""
-
 }
-var postURL = ""; //<--建立題目URL
-var testURL = ""; //<--測試測資URL
+var postURL = "https://httpbin.org/response-headers?freeform="; //<--建立題目URL
+var testURL = "https://httpbin.org/response-headers?freeform="; //<--測試測資URL
 var tmpObj = {};
 var tmpObj2 = {};
 
@@ -110,6 +109,7 @@ function inputPDF()
 function inputExampleMain()
 {
   questionObj.sampleMain='';
+  testObj.sampleMain='';
   var file = document.getElementById("id_exampleMain").files[0];
   var read = new FileReader();
   read.readAsBinaryString(file);
@@ -125,6 +125,7 @@ function inputExampleMain()
 function inputExampleFile()
 {
   questionObj.sampleFile='';
+  testObj.sampleFile='';
   var file = document.getElementById("id_exampleFile").files[0];
   var read = new FileReader();
   read.readAsBinaryString(file);
@@ -140,6 +141,7 @@ function inputExampleFile()
 function inputExampleHeader()
 {
   questionObj.sampleHeader='';
+  testObj.sampleHeader='';
   var file = document.getElementById("id_exampleHeader").files[0];
   var read = new FileReader();
   read.readAsBinaryString(file);
@@ -155,6 +157,7 @@ function inputExampleHeader()
 function inputExampleFillIn()
 {
   questionObj.sampleFillIn='';
+  testObj.sampleFillIn='';
   var file = document.getElementById("id_exampleFillIn").files[0];
   var read = new FileReader();
   read.readAsBinaryString(file);
@@ -169,6 +172,7 @@ function inputExampleFillIn()
 function inputInput()
 {
   questionObj.input='';
+  testObj.tdInput='';
   var file = document.getElementById("id_Input").files[0];
   var read = new FileReader();
   read.readAsBinaryString(file);
@@ -184,6 +188,7 @@ function inputInput()
 function inputOutput()
 {
   questionObj.output='';
+  testObj.tdOutput='';
   var file = document.getElementById("id_Output").files[0];
   var read = new FileReader();
   read.readAsBinaryString(file);
@@ -337,11 +342,11 @@ new Vue({
           .then(function (response) {
             console.log(response);
             tmpObj = response.data;
-            testMode = false;//等有Response要刪掉~~
+            //testMode = false;//等有Response要刪掉~~
             if(tmpObj.stats=="verified")
             {
               alert('測試正確!');
-              //testMode = false; //測試時註解
+              testMode = false; //測試時註解
             }
             else
             {
@@ -355,13 +360,11 @@ new Vue({
       }
       else
       {
-        alert('請上傳檔案後重試');
+        alert('請重新上傳正確檔案後再試一次');
       }
     }
   }
-  
 })
-
 
 
 var selectField = document.getElementById("selectLanguage");
@@ -446,6 +449,7 @@ exampleMain.onchange = function() {
     if(this.files[0].size > 100*1024*1024){
        alert("File is too big!");
        this.value = "";
+       testMode = true;
     }
     else
     {
@@ -457,6 +461,7 @@ exampleFile.onchange = function() {
     if(this.files[0].size > 100*1024*1024){
        alert("File is too big!");
        this.value = "";
+       testMode = true;
     }
     else
     {
@@ -468,6 +473,7 @@ exampleHeader.onchange = function() {
     if(this.files[0].size > 100*1024*1024){
        alert("File is too big!");
        this.value = "";
+       testMode = true;
     }
     else
     {
