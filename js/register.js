@@ -5,7 +5,7 @@ var registerObj = {
   "password" : "",
   "email" : ""
 }
-var postURL = "https://httpbin.org/response-headers?freeform="; //<--URL
+var postURL = ""; //<--URL
 var tmpObj = {};
 
 new Vue({

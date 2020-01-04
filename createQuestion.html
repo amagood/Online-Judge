@@ -1,17 +1,18 @@
-﻿<!-- 20191225 -->
+﻿<!-- 20200104 -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
   	<meta charset="UTF-8">
+  	<title>Create Question</title>
     <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
     <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
-
-    <link rel="stylesheet" href= {% static "css/createQuestion.css" %} >
+    {% load static %}
+    <link rel="stylesheet" href= {% static "css/createQuestion.css" %}>
   </head>
 
   <body>
     <!-- navbar -->
-    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+        <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
       <a class="navbar-brand" href="../../">GreenTeam</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -62,26 +63,43 @@
                   <input type="hidden" name="CSRF_KEY" value="2050849946">
                </div>
             </div>
+
+          <div class="form-group">
+          	<div class="col-sm-10">
+              <label for="id_selectDescriptionType" >題目敘述方式(題目描述與範例測資) :</label>
+              <select name="Description" id="selectDescriptionType">
+　         		<option value="0">輸入文字</option>
+　         		<option value="1">上傳PDF檔</option>
+          		</select>
+            </div>
+         </div>
           
           <div class="form-group">
               <div class="col-sm-10">
-                 <label for="id_questionPDF">題目敘述PDF :</label>
+              	<div id="PDFType">
+                 <!--<label for="id_questionPDF">題目敘述PDF :</label>
                  <br>
-                 <input name="pdf" type="file" id="id_pdf" autocomplete="off" value="" required="" accept = ".pdf" style="width:765px" oninput="inputPDF()">
+                 <input name="pdf" type="file" id="id_pdf" autocomplete="off" value="" required="required" accept = ".pdf" style="width:765px">-->
+                </div>
               </div>
           </div>
           
           <div class="form-group">
             <div class="col-sm-10">
-              <label for="id_Content">題目敘述 :</label>
-              <br>
-              <textarea id="id_questionContent" style="width:760px;height:310px;border:6px black double;" required></textarea>
+              <div id="textType">
+                <label for="id_Content">題目敘述 :</label>
+                <br>
+                <textarea id="id_questionContent" style="width:760px;height:310px;border:6px black double;" required></textarea>
               <!--<textarea name="editor1" required="required"></textarea>
                 <script>
                    CKEDITOR.replace( 'editor1' );
                 </script>-->
+         	  </div>
             </div>
           </div>
+
+         <br>
+         <br>
 
          <div class="form-group">
           	<div class="col-sm-10">
@@ -104,7 +122,7 @@
            <div class="col-sm-10">
                <label for="id_exampleCode" >Main (一定要有):</label>
                <div id="id_selectFileMain">
-                	<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".c" oninput="inputExampleMain()" style="width:765px">
+                	<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".c" style="width:765px">
                </div>
            </div>
         </div>
@@ -113,7 +131,7 @@
            <div class="col-sm-10">
                <label for="id_exampleCode" >Files (如需多檔再上傳):</label>
                <div id="id_selectFileFile">
-                  <input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".c" oninput="inputExampleFile()" style="width:765px">
+                  <input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".c" style="width:765px">
                </div>
            </div>
         </div>
@@ -122,7 +140,7 @@
            <div class="col-sm-10">     
                <div id="id_selectFileHeader">
                 <label for="id_exampleCode" >Header Files (如需多檔再上傳):</label>
-                 <input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" oninput="inputExampleHeader()" style="width:765px">
+                 <input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" style="width:765px">
                </div>
            </div>
         </div>
@@ -131,7 +149,7 @@
            <div class="col-sm-10">
            	<label for="id_exampleCode" >填空題目程式碼 (如果要設計為填空題再上傳) :</label>
               <div id="id_selectFileFillIn">
-                  <input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".c" oninput="inputExampleFillIn()" style="width:765px">
+                  <input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".c" style="width:765px">
                </div>
            </div>
         </div>
@@ -153,21 +171,26 @@
     </div>
   -->
 
-         <div class="form-group">
-           <div class="col-sm-10">
+  		<br>
+  		<br>
+
+        <div class="form-group">
+          <div class="col-sm-10">
+           <div id="textType2">
             <label for="id_exampleTestdata" >範例測資 :</label>
             <br>
             <textarea id="id_exampleInput" style="width:385px;height:200px;border:4px black double;" placeholder="範例測資輸入" required></textarea>
             <textarea id="id_exampleOutput" style="width:385px;height:200px;border:4px black double;" placeholder="範例測資輸出" required></textarea>
           </div>
          </div>
+        </div>
 
 
           <div class="form-group">
               <div class="col-sm-10">
                 <label for="id_testdataInput" >測試資料輸入 :</label>
                 <br>
-                <input name="Input" type="file" id="id_Input" autocomplete="off" value="" required="required" oninput="inputInput()" style="width:765px" accept=".txt">
+                <input name="Input" type="file" id="id_Input" autocomplete="off" value="" required="required" style="width:765px" accept=".txt">
               </div>
           </div>
 
@@ -175,10 +198,10 @@
               <div class="col-sm-10">
                 <label for="id_testdataOutput">測試資料輸出 :</label>
                 <br>
-                <input name="Output" type="file" id="id_Output" autocomplete="off" value="" required="required" oninput="inputOutput()" style="width:765px"accept=".txt">
+                <input name="Output" type="file" id="id_Output" autocomplete="off" value="" required="required" style="width:765px"accept=".txt">
               </div>
           </div>
-
+        
           <div class="form-group">
             <div class="col-sm-10">
               <input name="submit" class="btn btn-primary disabled" id="submitBtn" type="button" value="測試測資與範例程式" 
@@ -236,7 +259,7 @@
     <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
     <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src= {% static "js/createQuestion.js" %} ></script>
+    <script src= {% static "js/createQuestion.js" %}></script>
 
 </html>
 <!-- <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script> -->

@@ -32,13 +32,15 @@ var testObj = {
   "hash" : ""
 
 }
-var postURL = "https://httpbin.org/response-headers?freeform="; //<--建立題目URL
-var testURL = "https://httpbin.org/response-headers?freeform="; //<--測試測資URL
+var postURL = ""; //<--建立題目URL
+var testURL = ""; //<--測試測資URL
 var tmpObj = {};
 var tmpObj2 = {};
 
 var testMode = true;
 var PDFin = false;
+var descriptionType = 0;
+var descriptionFin = false;
 
 //NAV BAR
 var navapp = new Vue({
@@ -83,20 +85,31 @@ var navapp = new Vue({
 
 function inputPDF()
 {
+  questionObj.PDF='';
   var file = document.getElementById("id_pdf").files[0];
-  var read = new FileReader();
-  read.readAsBinaryString(file);
-  
-  read.onloadend = function(){
-    //console.log(read.result);
-    //console.log(btoa(read.result));
-    PDFin = true;
-    questionObj.PDF=btoa(read.result);
+
+  if(file.size>5*1024*1024)
+  {
+    alert("File is too big!");
+    document.getElementById("id_pdf").value = "";
+  }
+  else
+  {
+    var read = new FileReader();
+    read.readAsBinaryString(file);
+
+    read.onloadend = function(){
+      //console.log(read.result);
+      //console.log(btoa(read.result));
+      PDFin = true;
+      questionObj.PDF=btoa(read.result);
+    }
   }
 }
 
 function inputExampleMain()
 {
+  questionObj.sampleMain='';
   var file = document.getElementById("id_exampleMain").files[0];
   var read = new FileReader();
   read.readAsBinaryString(file);
@@ -111,6 +124,7 @@ function inputExampleMain()
 
 function inputExampleFile()
 {
+  questionObj.sampleFile='';
   var file = document.getElementById("id_exampleFile").files[0];
   var read = new FileReader();
   read.readAsBinaryString(file);
@@ -125,6 +139,7 @@ function inputExampleFile()
 
 function inputExampleHeader()
 {
+  questionObj.sampleHeader='';
   var file = document.getElementById("id_exampleHeader").files[0];
   var read = new FileReader();
   read.readAsBinaryString(file);
@@ -139,6 +154,7 @@ function inputExampleHeader()
 
 function inputExampleFillIn()
 {
+  questionObj.sampleFillIn='';
   var file = document.getElementById("id_exampleFillIn").files[0];
   var read = new FileReader();
   read.readAsBinaryString(file);
@@ -152,6 +168,7 @@ function inputExampleFillIn()
 
 function inputInput()
 {
+  questionObj.input='';
   var file = document.getElementById("id_Input").files[0];
   var read = new FileReader();
   read.readAsBinaryString(file);
@@ -166,6 +183,7 @@ function inputInput()
 
 function inputOutput()
 {
+  questionObj.output='';
   var file = document.getElementById("id_Output").files[0];
   var read = new FileReader();
   read.readAsBinaryString(file);
@@ -187,19 +205,45 @@ new Vue({
   },
   methods: {
     submitQ() {
-      console.log(PDFin);
-      console.log(testMode);
+      //console.log(PDFin);
+      //console.log(testMode);
+      if(descriptionType==1)
+      {
+        if(PDFin==true)
+        {
+          descriptionFin=true;
+        }
+        else
+        {
+          descriptionFin=false;
+          alert('請上傳題目敘述PDF!');
+        }
+      }
+      else
+      {
+        if(document.getElementById("id_questionContent").validity.valid
+          &&document.getElementById("id_exampleInput").validity.valid
+          &&document.getElementById("id_exampleOutput").validity.valid)
+        {
+          descriptionFin=true;
+        }
+        else
+        {
+          descriptionFin=false;
+          alert('請填寫題目敘述與範例測資!');
+        }
+      }
       if(document.getElementById("id_questionName").validity.valid
-        &&document.getElementById("id_questionContent").validity.valid
-        &&document.getElementById("id_exampleInput").validity.valid
-        &&document.getElementById("id_exampleOutput").validity.valid
-        &&PDFin==true
+        &&descriptionFin==true
         &&testMode==false)
       {
         questionObj.questionName = document.getElementById("id_questionName").value;
-        questionObj.questionContent = document.getElementById("id_questionContent").value;
-        questionObj.exampleInput = document.getElementById("id_exampleInput").value;
-        questionObj.exampleOutput = document.getElementById("id_exampleOutput").value;
+        if(descriptionType==0)
+        {
+          questionObj.questionContent = document.getElementById("id_questionContent").value;
+          questionObj.exampleInput = document.getElementById("id_exampleInput").value;
+          questionObj.exampleOutput = document.getElementById("id_exampleOutput").value;
+        }
         if (document.getElementById("selectLanguage").selectedIndex == "0") 
         {
           questionObj.language = "c";
@@ -261,6 +305,10 @@ new Vue({
       {
         alert("請先測試測資與範例程式是否正確!");
       }
+      else if(descriptionFin==false)
+      {
+
+      }
       else
       {
         alert("請填寫所有空格!");
@@ -320,24 +368,48 @@ var selectField = document.getElementById("selectLanguage");
 
 selectField.onchange = function() {
   if (document.getElementById("selectLanguage").selectedIndex == "0") {
-      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".c" oninput="inputExampleMain()" style="width:765px">';
-      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".c" oninput="inputExampleFile()" style="width:765px">';
-      document.getElementById("id_selectFileHeader").innerHTML = '<label for="id_exampleCode" >Header Files (如需多檔再上傳):</label><input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" oninput="inputExampleHeader()" style="width:765px">';
-      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".c" oninput="inputExampleFillIn()" style="width:765px">';
+      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".c" style="width:765px">';
+      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".c" style="width:765px">';
+      document.getElementById("id_selectFileHeader").innerHTML = '<label for="id_exampleCode" >Header Files (如需多檔再上傳):</label><input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" style="width:765px">';
+      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".c" style="width:765px">';
   }
   else if (document.getElementById("selectLanguage").selectedIndex == "1"){
-      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".cpp" oninput="inputExampleMain()" style="width:765px">';
-      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".cpp" oninput="inputExampleFile()" style="width:765px">';
-      document.getElementById("id_selectFileHeader").innerHTML = '<label for="id_exampleCode" >Header Files (如需多檔再上傳):</label><input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" oninput="inputExampleHeader()" style="width:765px">';
-      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".cpp" oninput="inputExampleFillIn()" style="width:765px">';
+      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".cpp" style="width:765px">';
+      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".cpp" style="width:765px">';
+      document.getElementById("id_selectFileHeader").innerHTML = '<label for="id_exampleCode" >Header Files (如需多檔再上傳):</label><input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" style="width:765px">';
+      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".cpp" style="width:765px">';
   }
   else{
-      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".py" oninput="inputExampleMain()" style="width:765px">';
-      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".py" oninput="inputExampleFile()" style="width:765px">';
+      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".py" style="width:765px">';
+      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".py" style="width:765px">';
       document.getElementById("id_selectFileHeader").innerHTML = ' ';
-      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".py" oninput="inputExampleFillIn()" style="width:765px">';
+      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".py" style="width:765px">';
   }
 }
+
+var selectDescription = document.getElementById("selectDescriptionType");
+
+selectDescription.onchange = function() {
+  if (document.getElementById("selectDescriptionType").selectedIndex == "0") {
+      questionObj.PDF='';
+      descriptionType = 0;
+      PDFin=false;
+      document.getElementById("PDFType").innerHTML = '';
+      document.getElementById("textType").innerHTML = '<label for="id_Content">題目敘述 :</label><br><textarea id="id_questionContent" style="width:760px;height:310px;border:6px black double;" required></textarea>';
+      document.getElementById("textType2").innerHTML = '<label for="id_exampleTestdata" >範例測資 :</label><br><textarea id="id_exampleInput" style="width:385px;height:200px;border:4px black double;" placeholder="範例測資輸入" required></textarea><textarea id="id_exampleOutput" style="width:385px;height:200px;border:4px black double;" placeholder="範例測資輸出" required></textarea>';
+  }
+  else{
+      questionObj.questionContent = '';
+      questionObj.exampleInput = '';
+      questionObj.exampleOutput = '';
+      descriptionType = 1;
+      document.getElementById("PDFType").innerHTML = '<label for="id_questionPDF">題目敘述PDF :</label><br><input name="pdf" type="file" id="id_pdf" autocomplete="off" value="" required="required" accept = ".pdf" style="width:765px" oninput="inputPDF()">';
+      document.getElementById("textType").innerHTML = '';
+      document.getElementById("textType2").innerHTML = '';
+  }
+}
+
+
 
 var exampleInput = document.getElementById("id_Input");
 
@@ -345,7 +417,11 @@ exampleInput.onchange = function() {
     if(this.files[0].size > 10*1024*1024){
        alert("File is too big!");
        this.value = "";
-    };
+    }
+    else
+    {
+      inputInput();
+    }
 };
 
 var exampleOutput = document.getElementById("id_Output");
@@ -354,7 +430,11 @@ exampleOutput.onchange = function() {
     if(this.files[0].size > 10*1024*1024){
        alert("File is too big!");
        this.value = "";
-    };
+    }
+    else
+    {
+      inputOutput();
+    }
 };
 
 var exampleMain = document.getElementById("id_exampleMain");
@@ -366,38 +446,46 @@ exampleMain.onchange = function() {
     if(this.files[0].size > 100*1024*1024){
        alert("File is too big!");
        this.value = "";
-    };
+    }
+    else
+    {
+      inputExampleMain();
+    }
 };
 
 exampleFile.onchange = function() {
     if(this.files[0].size > 100*1024*1024){
        alert("File is too big!");
        this.value = "";
-    };
+    }
+    else
+    {
+      inputExampleFile();
+    }
 };
 
 exampleHeader.onchange = function() {
     if(this.files[0].size > 100*1024*1024){
        alert("File is too big!");
        this.value = "";
-    };
+    }
+    else
+    {
+      inputExampleHeader();
+    }
 };
 
 exampleFillIn.onchange = function() {
     if(this.files[0].size > 100*1024*1024){
        alert("File is too big!");
        this.value = "";
-    };
+    }
+    else
+    {
+      inputExampleFillIn();
+    }
 };
 
-var PDF = document.getElementById("id_pdf");
-
-PDF.onchange = function() {
-    if(this.files[0].size > 1024*1024){
-       alert("File is too big!");
-       this.value = "";
-    };
-};
 
 
 function createSuccess() {
