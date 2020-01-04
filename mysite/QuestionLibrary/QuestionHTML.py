@@ -11,7 +11,7 @@ class Question_Library():
         self.QuestionID = QuestionID
         if not os.path.isdir(self.path):
             os.mkdir(self.path)
-    def addQuestion(self,Title,Tags,Description,SampleInput,SampleOut,SampleCode,FileNameExtention,pdf):
+    def addQuestion(self,Title,Tags,Description,SampleInput,SampleOut,sampleMain,sampleFile,sampleHeader,sampleFillIn,FileNameExtention,pdf,qinput,qoutput):
         p_path=self.path+'/{}'.format(self.QuestionID)
         if not os.path.isdir(p_path):
             os.mkdir(p_path)
@@ -81,7 +81,7 @@ class Question_Library():
         for tag in Tags:
             html_str+='#{} '.format(tag)
         html_str+='''</p>'''
-        if True:#pdf==''
+        if pdf=='':#True
             html_str+='''<p class="smallTitle">Description</p>
     <p class="content">'''
             html_str+=Description
@@ -105,8 +105,13 @@ class Question_Library():
         else:
             html_str+='<iframe src="{}pdf.pdf" style="width: 100%; height: 800px;"></iframe>'.format(self.QuestionID)
             c_path=p_path+'/{}pdf.pdf'.format(self.QuestionID)
-            f2=open(c_path,"w")
-            f2.write(pdf)
+            from base64 import b64decode#
+            b64 = pdf#
+            bytes = b64decode(b64, validate=True)#
+            if bytes[0:4] != b'%PDF':#
+                raise ValueError('Missing the PDF file signature')#
+            f2=open(c_path,"wb")
+            f2.write(bytes)
             f2.close()
         html_str+='''</div>
   <!-- mainBlock1 end -->
@@ -274,8 +279,12 @@ class Question_Library():
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ext-language_tools.js" integrity="sha256-5GsAp93HE/XYlhrUPMw4VBAoawG9n3c7+DbQE4tRwW0=" crossorigin="anonymous"></script>
   <script src={% static "QuestionData/js/problem.js" %}></script>
   <script>
-    var qID = "p000";
-    var initCode = ``;
+    var qID = "'''
+        html_str+=self.QuestionID
+        html_str+='''";
+    var initCode = `'''
+        html_str+=sampleFillIn
+        html_str+='''`;
   </script>
 </body>
 
@@ -284,7 +293,15 @@ class Question_Library():
         f.close()
         c_path=p_path+'/{}exampleCode.{}'.format(self.QuestionID,FileNameExtention)
         f=open(c_path,"w")
-        f.write(SampleCode)
+        f.write(sampleMain)
+        f.close()
+        c_path=p_path+'/{}_input.txt'.format(self.QuestionID)
+        f=open(c_path,"w")
+        f.write(qinput)
+        f.close()
+        c_path=p_path+'/{}_output.txt'.format(self.QuestionID)
+        f=open(c_path,"w")
+        f.write(qoutput)
         f.close()
     def deleteQuestion(self,QuestionID):
         self.QuestionID = QuestionID
@@ -295,33 +312,3 @@ class Question_Library():
                 f_path=p_path+'/'+file
                 os.remove(f_path)
             os.rmdir(p_path)
-        #delete html&code
-
-# folder PATH:
-# ./QuestionData/"QuestionID"/"QuestionID".html
-#                             "QuestionID"exampleCode.c
-#                             "QuestionID"exampleCode.cpp
-#                             "QuestionID"exampleCode.py
-#               /css
-#               /js
-#               /image
-
-#Question_Lirbrary(str: QuestionID)
-#question.addQuestion(str:title, list(str1,str2,...):tags, str:description, str:sample input description, str:sample output description, str:exampleCode, str:FileNameExtension)
-#question.deleteQuestion(str: QuestionID)
-
-#####TestUnderWTFLine#####
-
-# a=Question_Lirbrary('p00001')#start a question 'a' which id is 'p00001'
-# input_title='myTitle'                       #here is title
-# input_tags=['myTag1', 'myTag2', 'myTag3']   #Tags
-# input_description='Here is description.'    #problem description
-# input_sampleinput='1 2'                     #sample input
-# input_sampleoutput='3'                      #sample output
-#                                             #sample code
-# input_samplecode='''import os
-# print(\'a\')
-# '''
-# input_filenameextension='py'                #filename extension
-# a.addQuestion(input_title,input_tags,input_description,input_sampleinput,input_sampleoutput,input_samplecode,input_filenameextension)#create problem a
-# #a.deleteQuestion('p00001')#delete problem a's folder

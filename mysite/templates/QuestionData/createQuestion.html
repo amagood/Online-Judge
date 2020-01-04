@@ -1,35 +1,36 @@
-﻿<!-- 20191225 -->
+﻿<!-- 20200104 -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
   	<meta charset="UTF-8">
+  	<title>Create Question</title>
     <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
     <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
-    {%load static %}
-    <link rel="stylesheet" href={% static "QuestionData/css/createQuestion.css" %} >
+    {% load static %}
+    <link rel="stylesheet" href= {% static "QuestionData/css/createQuestion.css" %}>
   </head>
 
   <body>
     <!-- navbar -->
         <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href="index.html">GreenTeam</a>
+      <a class="navbar-brand" href="../../">GreenTeam</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html"><img class="navbarimage" src={% static "QuestionData/image/home.svg" %} /> Home</a>
+            <a class="nav-link" href="../../"><img class="navbarimage" src= {% static "QuestionData/image/home.svg" %}  /> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img class="navbarimage" src={% static "QuestionData/image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href="../teacherProblem/"><img class="navbarimage" src= {% static "QuestionData/image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href="../studentProblem/"><img class="navbarimage" src= {% static "QuestionData/image/file.svg" %} /> Problems</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="ranking.html"><img class="navbarimage" src={% static "QuestionData/image/list-ordered.svg" %} /> Ranking</a>
+            <a class="nav-link" href="../../Rank/"><img class="navbarimage" src= {% static "QuestionData/image/list-ordered.svg" %} /> Ranking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="comments.html"><img class="navbarimage" src={% static "QuestionData/image/comments-regular.svg" %} /> Comments</a>
+            <a class="nav-link" href="../../message/"><img class="navbarimage" src= {% static "QuestionData/image/comments-regular.svg" %} /> Comments</a>
           </li>
         </ul>
         <ul class="navbar-nav">
@@ -37,7 +38,7 @@
             <span id="username">${ name } &nbsp</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-on:click="clearStorage()" href="index.html"><img class="navbarimage" src={% static "QuestionData/image/sign-out-alt-solid.svg" %}/> Logout</a>
+            <a class="nav-link" v-on:click="clearStorage()" href="../../"><img class="navbarimage" src= {% static "QuestionData/image/sign-out-alt-solid.svg" %}/> Logout</a>
           </li>
         </ul>
       </div>
@@ -58,30 +59,47 @@
                <div class="col-sm-10">
                   <label for="id_name">題目名稱 :</label>
                   <br>
-                  <input size="36" name="questionname" type="text" id="id_questionName" autocomplete="off" value="" required="required" maxlength="30">
+                  <input name="questionname" type="text" id="id_questionName" autocomplete="off" value="" required="required" maxlength="30" style="width:765px">
                   <input type="hidden" name="CSRF_KEY" value="2050849946">
                </div>
             </div>
+
+          <div class="form-group">
+          	<div class="col-sm-10">
+              <label for="id_selectDescriptionType" >題目敘述方式(題目描述與範例測資) :</label>
+              <select name="Description" id="selectDescriptionType">
+　         		<option value="0">輸入文字</option>
+　         		<option value="1">上傳PDF檔</option>
+          		</select>
+            </div>
+         </div>
           
           <div class="form-group">
               <div class="col-sm-10">
-                 <label for="id_questionPDF">題目敘述PDF :</label>
+              	<div id="PDFType">
+                 <!--<label for="id_questionPDF">題目敘述PDF :</label>
                  <br>
-                 <input name="pdf" type="file" id="id_pdf" autocomplete="off" value="" required="" accept = ".pdf" oninput="inputPDF()">
+                 <input name="pdf" type="file" id="id_pdf" autocomplete="off" value="" required="required" accept = ".pdf" style="width:765px">-->
+                </div>
               </div>
           </div>
           
           <div class="form-group">
             <div class="col-sm-10">
-              <label for="id_Content">題目敘述 :</label>
-              <br>
-              <textarea id="id_questionContent" style="width:760px;height:310px;border:6px black double;" required></textarea>
+              <div id="textType">
+                <label for="id_Content">題目敘述 :</label>
+                <br>
+                <textarea id="id_questionContent" style="width:760px;height:310px;border:6px black double;" required></textarea>
               <!--<textarea name="editor1" required="required"></textarea>
                 <script>
                    CKEDITOR.replace( 'editor1' );
                 </script>-->
+         	  </div>
             </div>
           </div>
+
+         <br>
+         <br>
 
          <div class="form-group">
           	<div class="col-sm-10">
@@ -95,30 +113,84 @@
          </div>
 
 
+
+         <div class="col-sm-10">
+           <label for="id_exampleCode" >上傳範例程式檔 :</label>
+         </div>
+
          <div class="form-group">
            <div class="col-sm-10">
-               <label for="id_exampleCode" >範例程式檔 :</label>
-               <div id="id_selectFileType">
-                	<input size="40" name="exampleCode" type="file" id="id_exampleCode" autocomplete="off" value="" required="required" accept = ".c" oninput="inputExampleCode()">
+               <label for="id_exampleCode" >Main (一定要有):</label>
+               <div id="id_selectFileMain">
+                	<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".c" style="width:765px" oninput="inputExampleMain()">
                </div>
            </div>
         </div>
 
-         <div class="form-group">
+        <div class="form-group">
            <div class="col-sm-10">
+               <label for="id_exampleCode" >Files (如需多檔再上傳):</label>
+               <div id="id_selectFileFile">
+                  <input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".c" style="width:765px" oninput="inputExampleFile()">
+               </div>
+           </div>
+        </div>
+
+        <div class="form-group">
+           <div class="col-sm-10">     
+               <div id="id_selectFileHeader">
+                <label for="id_exampleCode" >Header Files (如需多檔再上傳):</label>
+                 <input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" style="width:765px" oninput="inputExampleHeader()">
+               </div>
+           </div>
+        </div>
+
+        <div class="form-group">
+           <div class="col-sm-10">
+           	<label for="id_exampleCode" >填空題目程式碼 (如果要設計為填空題再上傳) :</label>
+              <div id="id_selectFileFillIn">
+                  <input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".c" style="width:765px" oninput="inputExampleFillIn()">
+               </div>
+           </div>
+        </div>
+
+    <!--
+        <div id="uploadFileTab" class="tabContent">
+      <div id="uploadFileApp" class="uploadFileBlock">
+        <span class="fileTypeTitle">Main</span>
+        <b-form-file id="file-default" v-model="mainFile" v-on:input="checkMainFile" accept=".c, .cpp, .py"></b-form-file>
+        <span class="fileTypeTitle">Files</span><span>(Please named as code1.cpp/c/py, code2.cpp/c/py, code3.cpp/c/py...)</span>
+        <b-form-file id="file-default" v-model="implementFile" v-on:input="checkImplementFiles" accept=".c, .cpp, .py" multiple></b-form-file>
+        <div v-show="showHeaderFile">
+          <span class="fileTypeTitle">Header files</span><span>(Please named as code1.h, code2.h, code3.h)</span>
+          <b-form-file id="file-default" v-model="headerFile" v-on:input="checkHeaderFiles" accept=".h" multiple></b-form-file>
+        </div>
+        <span v-show="showImplementFilesInvalidMsg" style="color: red;">${ implementFilesInvalidMsg }</span>
+        <span v-show="showHeaderFilesInvalidMsg" style="color: red;">${ headerFilesInvalidMsg }</span>
+      </div>
+    </div>
+  -->
+
+  		<br>
+  		<br>
+
+        <div class="form-group">
+          <div class="col-sm-10">
+           <div id="textType2">
             <label for="id_exampleTestdata" >範例測資 :</label>
             <br>
             <textarea id="id_exampleInput" style="width:385px;height:200px;border:4px black double;" placeholder="範例測資輸入" required></textarea>
             <textarea id="id_exampleOutput" style="width:385px;height:200px;border:4px black double;" placeholder="範例測資輸出" required></textarea>
           </div>
          </div>
+        </div>
 
 
           <div class="form-group">
               <div class="col-sm-10">
                 <label for="id_testdataInput" >測試資料輸入 :</label>
                 <br>
-                <input name="Input" type="file" id="id_Input" autocomplete="off" value="" required="required" oninput="inputInput()" accept=".txt">
+                <input name="Input" type="file" id="id_Input" autocomplete="off" value="" required="required" style="width:765px" accept=".txt" oninput="inputInput()">
               </div>
           </div>
 
@@ -126,10 +198,10 @@
               <div class="col-sm-10">
                 <label for="id_testdataOutput">測試資料輸出 :</label>
                 <br>
-                <input name="Output" type="file" id="id_Output" autocomplete="off" value="" required="required" oninput="inputOutput()" accept=".txt">
+                <input name="Output" type="file" id="id_Output" autocomplete="off" value="" required="required" style="width:765px"accept=".txt" oninput="inputOutput()">
               </div>
           </div>
-
+        
           <div class="form-group">
             <div class="col-sm-10">
               <input name="submit" class="btn btn-primary disabled" id="submitBtn" type="button" value="測試測資與範例程式" 
@@ -158,20 +230,13 @@
 
           <div class="form-group">
             <div class="col-sm-10">
-              <label for="difficulty">題目難度(1~10) :</label>
+              <label for="difficulty">題目難度:</label>
               <br>
-              1 &ensp;&ensp;2 &ensp;&ensp;3 &ensp;&ensp;4 &ensp;&ensp;5 &ensp;&ensp;6 &ensp;&ensp;7 &ensp;&ensp;8 &ensp;&ensp;9 &ensp;&nbsp;10
+              簡單 &ensp;&ensp;中等 &ensp;&ensp;困難
               <br>
-              <input name="difficulty" type="radio" id="id_difficulty_1" value="1" checked="true" required>
-              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_2" value="2" required>
-              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_3" value="3" required>
-              &nbsp;&nbsp; &nbsp;<input name="difficulty" type="radio" id="id_difficulty_4" value="4" required>
-              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_5" value="5" required>
-              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_6" value="6" required>
-              &nbsp;&nbsp; &nbsp;<input name="difficulty" type="radio" id="id_difficulty_7" value="7" required>
-              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_8" value="8" required>
-              &nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_9" value="9" required>
-              &nbsp;&nbsp; &nbsp;<input name="difficulty" type="radio" id="id_difficulty_10" value="10" required>
+              &nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_1" value="easy" checked="true" required>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_2" value="medium" required>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="difficulty" type="radio" id="id_difficulty_3" value="hard" required>
             </div>
           </div>
             
@@ -194,7 +259,7 @@
     <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
     <script src='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.js'></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src={% static "QuestionData/js/createQuestion.js" %}></script>
+    <script src= {% static "QuestionData/js/createQuestion.js" %}></script>
 
 </html>
 <!-- <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script> -->

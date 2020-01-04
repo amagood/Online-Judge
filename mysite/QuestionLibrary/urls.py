@@ -27,5 +27,5 @@ urlpatterns = [
     #path('studentProblem.html', studentProblem ),
     path('createQuestion.html', responseCreateQuestion ),
     path('problem/p<int:num>.html', problemDetail ),
-    path('problem/p<int:num>.pdf', pdfDetail ),
+    path('problem/p<int:num>pdf.pdf', pdfDetail ),
 ]

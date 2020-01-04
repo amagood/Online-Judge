@@ -24,6 +24,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),#admin
     path('QuestionLibrary/', include('QuestionLibrary.urls')),
+    path('IDE/', include('QuestionLibrary.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

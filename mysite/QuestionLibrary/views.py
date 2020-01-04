@@ -1,7 +1,6 @@
 from django.shortcuts import render
-
 from django.http import HttpResponse
-from DataBase.models import Question
+from DataBase.models import Question,Category
 import QuestionLibrary.GetQuestion
 import QuestionLibrary.CreateQuestion
 import hashlib
@@ -13,9 +12,29 @@ def responseGetQuestion(request):
         req=json.loads(request.body.decode('utf-8'))
         action=req['action']
         if action=='questionLib':
+            print(req['target'])#debug
             qLib=QuestionLibrary.GetQuestion.responseGetQuestion(req['questionNum'],req['questionPage'],req['sequence'],req['target'],req['degree'],req['Class'],req['sortDesc'])
             data={
                 "questionLib" : qLib,
+                "userName" : req['userName'],
+                "Class" : req['Class'],
+                "hash" : req['hash'],
+            }
+            return HttpResponse(json.dumps(data))
+        elif action=='getTagList':
+            qLib=[]
+            CList=Category.objects.all()
+            counteachi=1
+            for eachC in CList:
+                if eachC.Category_Name!='null':
+                    #strkey='tag{:03d}'.format(counteachi)
+                    strkey='tag'
+                    adict={strkey: eachC.Category_Name}
+                    counteachi+=1
+                    qLib.append(adict)
+            data={
+                "tagList" : qLib,
+                #"size" : str(counteachi-1),
                 "userName" : req['userName'],
                 "Class" : req['Class'],
                 "hash" : req['hash'],
@@ -33,7 +52,7 @@ def responseCreateQuestion(request):
         req=json.loads(request.body.decode('utf-8'))
         action=req['action']
         if action=='createQ':
-            submitStats=QuestionLibrary.CreateQuestion.responseCreateQuestion(req['questionName'],req['PDF'],req['questionContent'],req['language'],req['sampleProgram'],req['exampleInput'],req['exampleOutput'],req['input'],req['output'],req['tag'],req['difficulty'])
+            submitStats=QuestionLibrary.CreateQuestion.responseCreateQuestion(req['questionName'],req['PDF'],req['questionContent'],req['language'],req['sampleMain'],req['sampleFile'],req['sampleHeader'],req['sampleFillIn'],req['exampleInput'],req['exampleOutput'],req['input'],req['output'],req['tag'],req['difficulty'])
             data={
                 "submitStats" : submitStats,
                 "userName" : req['userName'],
@@ -42,7 +61,7 @@ def responseCreateQuestion(request):
             }
             return HttpResponse(json.dumps(data))
         elif action=='verify_td':
-            verifyStats=QuestionLibrary.CreateQuestion.responseVerifyStats(req['language'],req['sampleProgram'],req['tdInput'],req['tdOutput'])
+            verifyStats=QuestionLibrary.CreateQuestion.responseVerifyStats(req['language'],req['sampleMain'],req['sampleFile'],req['sampleHeader'],req['sampleFillIn'],req['tdInput'],req['tdOutput'])
             data={
                 "stats" : verifyStats,
                 "userName" : req['userName'],

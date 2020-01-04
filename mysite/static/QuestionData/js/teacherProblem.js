@@ -1,36 +1,37 @@
 var navapp = new Vue({
-	delimiters : ['${', '}'],
-	el : "#navapp",
-	data : {
-		userid : "",
-		name : "",
-		isShow : false, //題目庫顯示
-		whichShow : "",
-	},
-	created() {
-		this.chooseProblems()
-	},
-	methods: {
-		chooseProblems(){
-			let self = this
-			self.name = localStorage.getItem("userName")
-			self.userid = localStorage.getItem("who")
-			if(self.userid === "admin"||self.userid === "teacher"){
-				self.isShow = true
-				self.whichShow = "teacher"
-			}
-			else if(self.userid === "student"){
-				self.isShow = true
-				self.whichShow = "student"
-			}
-		},
-		clearStorage(){
-			localStorage.clear();
-		},
-	},
+  delimiters: ['${', '}'],
+  el: "#navapp",
+  data: {
+    userid: "",
+    name: "",
+    isShow: false, //題目庫顯示
+    whichShow: "",
+  },
+  created() {
+    this.chooseProblems()
+  },
+  methods: {
+    chooseProblems() {
+      let self = this
+      self.name = localStorage.getItem("userName")
+      self.userid = localStorage.getItem("who")
+      if (self.userid === "admin" || self.userid === "teacher") {
+        self.isShow = true
+        self.whichShow = "teacher"
+      }
+      else if (self.userid === "student") {
+        self.isShow = true
+        self.whichShow = "student"
+      }
+    },
+    clearStorage() {
+      localStorage.clear();
+    },
+  },
 })
 
-var questionLibObj = {
+//題目庫資料 request
+var questionLibObj = {//加辨別身分?
   "action": "questionLib",
   "questionNum": "20",//there are twenty question in one page. 
   "questionPage": "1",//1 means select the top 20 question
@@ -44,26 +45,37 @@ var questionLibObj = {
 }
 var tmpobj = {}
 var postURL = ""
-//test postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title02%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title03%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title04%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title05%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
+//test postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22Level%2001%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title02%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22Level%2002%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title03%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22Level%2003%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title04%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22Level%2001%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title05%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22Level%2010%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
+
+//tag 列表
+var tagListObj = {
+  "action": "getTagList",
+  "Class": "CSIE110",
+  "userName": "amagood",
+  "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
+}
+var tagTmpobj = {}
+var tagPostURL = ""
+//test tagPostURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22tagList%22%3A%5B%20%20%20%20%20%7B%22tag%22%3A%22loop%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22if%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22array%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22string%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22pointer%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22binary%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22Treesort%22%7D%2C%20%20%20%20%20%7B%22tag%22%3A%22dp%22%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%3A%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
+
 
 var probapp = new Vue({
   delimiters: ['${', '}'],
   el: "#probapp",
   data: {
+    tagList: [],//存tag list
+    tagButtonText: "tag",//Tag: "tag",//for dropdown buttom
+    //get tag
+    degreeButtonText: "degree",//Degree: "degree",//for dropdown buttom
     noGetData: true,//loading
-    noFilterData: false,//判斷filter
-    Tag: "tag",//for dropdown buttom
-    Degree: "degree",//for dropdown buttom
+    filterData: false,//判斷filter
     filter: null,//text in filter
     sortBy: "id",//排序方式
     sortDesc: false,//false:升序
     //perPage: 20,//一頁幾行
     currentPage: 1,//當前頁數
     totalRows: 1,//總行數
-    selectMode: 'range',//選擇模式
-    //showDismissibleAlert: false,//add class bar 
-    //modes: ['multi', 'single', 'range'],選擇模式多選、一次一行、shirt/ctrl選範圍
-    //pageOptions: [5,10, 15],//使用者選擇當前頁數
+    //selectMode: 'multi',選擇模式['multi', 'single', 'range']<b-table :select-mode="selectMode">
     fields: [//table 每列項目,用來取整列值
       {
         key: "id",
@@ -100,10 +112,6 @@ var probapp = new Vue({
         key: "inputTime",
         label: "Input Time",
         sortable: true
-      },
-      {
-        key: "selected",
-        sortable: false
       }
     ],
     items: [],//每行內容
@@ -121,6 +129,7 @@ var probapp = new Vue({
   },//computed end
   created() {
     this.getQuestionData()
+    this.getTagList()
   },
   updated() {
     //---updata questionLibObj for changePage---
@@ -141,16 +150,16 @@ var probapp = new Vue({
     }
 
     //---clear filter---
-    if (!this.filter && this.noFilterData) {
+    if (!this.filter && this.filterData) {
       this.noGetData = true
-      this.Degree = "degree"
-      this.Tag = "tag"
-      questionLibObj.target = this.Tag
-      questionLibObj.degree = this.Degree
+      this.degreeButtonText = "degree"
+      this.tagButtonText = "tag"
+      questionLibObj.target = this.tagButtonText
+      questionLibObj.degree = this.degreeButtonText
       //console.log(questionLibObj)
       this.getQuestionData()
       console.log("clear,get all data")
-      this.noFilterData = false
+      this.filterData = false
     }
   },//updated end
   methods: {
@@ -161,25 +170,24 @@ var probapp = new Vue({
         .then(function (response) {
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          tmpobj =response.data
+          tmpobj = response.data
           probapp.items = tmpobj.questionLib
           /*set problem link*/
-          for(i=0;i<tmpobj.questionLib.length;i++){
-            probapp.items[i]={
-              "id":tmpobj.questionLib[i].id,
-              "title":tmpobj.questionLib[i].title,
-              "target":tmpobj.questionLib[i].target,
-              "degree":tmpobj.questionLib[i].degree,
-              "percentagePassing":tmpobj.questionLib[i].percentagePassing,
-              "respondent":tmpobj.questionLib[i].respondent,
-              "inputTime":tmpobj.questionLib[i].inputTime,
-              "link":"problem/"+tmpobj.questionLib[i].id+".html"
+          for (i = 0; i < tmpobj.questionLib.length; i++) {//可能會'length' undefined-->response直接傳link
+            probapp.items[i] = {
+              "id": tmpobj.questionLib[i].id,
+              "title": tmpobj.questionLib[i].title,
+              "target": tmpobj.questionLib[i].target,
+              "degree": tmpobj.questionLib[i].degree,
+              "percentagePassing": tmpobj.questionLib[i].percentagePassing,
+              "respondent": tmpobj.questionLib[i].respondent,
+              "inputTime": tmpobj.questionLib[i].inputTime,
+              "link": "problem/" + tmpobj.questionLib[i].id + ".html"
             }
           }
-          console.log(probapp.items)
+          //console.log(probapp.items)
           // Set the initial number of items、totalRows
           probapp.totalRows = probapp.items.length
-          //console.log(questionLibObj)
           console.log("get new data from postURL")
 
           //determine get data due to loading
@@ -193,27 +201,42 @@ var probapp = new Vue({
       return `${value}`
     },
     //html dropdown buttom(block 1)
+    getTagList() {
+      axios
+        .post(tagPostURL, tagListObj)
+        .then(function (response) {
+          //console.log(response.data)
+          //console.log(JSON.parse(response.data.freeform))//test
+          tagTmpobj = response.data
+          probapp.tagList = tagTmpobj.tagList
+          //console.log(probapp.tagList)
+          console.log("get tag list from tagPostURL")
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    },
     clickTag(Tag) {
-      this.Tag = Tag
-      questionLibObj.target = this.Tag
-      this.Degree = "degree"
+      this.tagButtonText = Tag
+      questionLibObj.target = this.tagButtonText
+      this.degreeButtonText = "degree"
       questionLibObj.degree = "degree"
       if (Tag != "tag") {
+        this.filter=Tag
         this.noGetData = true
-        this.noFilterData = true
-        //postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22p000%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22tag%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
+        this.filterData = true
         this.getQuestionData()
         console.log("tag sort get data")
       }
     },
     clickDegree(Degree) {
-      this.Degree = Degree
-      questionLibObj.degree = this.Degree
-      this.Tag = "tag"
+      this.degreeButtonText = Degree
+      questionLibObj.degree = Degree
+      this.tagButtonText = "tag"
       questionLibObj.target = "tag"
       if (Degree != "degree") {
         this.noGetData = true
-        this.noFilterData = true
+        this.filterData = true
         this.getQuestionData()
         console.log("degree sort get data")
       }
@@ -225,11 +248,10 @@ var probapp = new Vue({
       this.currentPage = 1
     }
   },//method end
-
 })
 
 
 window.onload = () => {
-  document.getElementById("problemLib").className = "problemLib w3-animate-opacity";
+  document.getElementById("probapp").className = "problemLib w3-animate-opacity";
   document.getElementsByTagName("html")[0].style.visibility = "visible";
 }

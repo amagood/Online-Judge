@@ -36,8 +36,11 @@ def responseGetQuestion(questionNum,questionPage,questionSequence,questionTarget
     #print(questionSequence)
     if questionSequence=='':
         questionSequence='title'
-    retQuesData = sorted(retQuesData, key=lambda k: k[questionSequence], reverse=resv)
-    '''qpage=int(questionPage) # return all
+    if questionSequence=='percentagePassing':
+        retQuesData = sorted(retQuesData, key=lambda k: float(k[questionSequence][:-1]), reverse=resv)
+    else:
+        retQuesData = sorted(retQuesData, key=lambda k: k[questionSequence], reverse=resv)
+    '''qpage=int(questionPage) # return one page
     qnum=int(questionNum)
     qlistlen=len(retQuesData)
     if qlistlen<qnum*(qpage-1) or qpage<=0:
