@@ -59,9 +59,6 @@ p{
   width: 28px;/*no set*/
 }
 
-.table-primary, .table-primary>td, .table-primary>th {
-  background-color: #ffffff;/*b8daff*/
-}
 .modal-content {
   position: relative;
   display: flex;
@@ -74,6 +71,8 @@ p{
   border-radius: .5rem;
   outline: 0;
 }
+
+/*change page*/
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;

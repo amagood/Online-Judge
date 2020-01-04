@@ -52,6 +52,7 @@ p{
   min-height: 450px;
 }
 
+/*change page*/
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;
