@@ -31,8 +31,8 @@ var testObj = {
   "Class" : "",
   "hash" : ""
 }
-var postURL = "https://httpbin.org/response-headers?freeform="; //<--建立題目URL
-var testURL = "https://httpbin.org/response-headers?freeform="; //<--測試測資URL
+var postURL = ""; //<--建立題目URL
+var testURL = ""; //<--測試測資URL
 var tmpObj = {};
 var tmpObj2 = {};
 
@@ -106,19 +106,29 @@ function inputPDF()
   }
 }
 
+
 function inputExampleMain()
 {
   questionObj.sampleMain='';
   testObj.sampleMain='';
   var file = document.getElementById("id_exampleMain").files[0];
-  var read = new FileReader();
-  read.readAsBinaryString(file);
-  
-  read.onloadend = function(){
+
+  if(file.size > 100*1024*1024){
+    alert("File is too big!");
+    document.getElementById("id_exampleMain").value = "";
     testMode = true;
-    console.log(read.result);
-    testObj.sampleMain=read.result;
-    questionObj.sampleMain=read.result;
+  }
+  else
+  {
+    var read = new FileReader();
+    read.readAsBinaryString(file);
+  
+    read.onloadend = function(){
+      testMode = true;
+      console.log(read.result);
+      testObj.sampleMain=read.result;
+      questionObj.sampleMain=read.result;
+    }
   }
 }
 
@@ -127,15 +137,25 @@ function inputExampleFile()
   questionObj.sampleFile='';
   testObj.sampleFile='';
   var file = document.getElementById("id_exampleFile").files[0];
-  var read = new FileReader();
-  read.readAsBinaryString(file);
-  
-  read.onloadend = function(){
+
+  if(file.size > 100*1024*1024){
+    alert("File is too big!");
+    document.getElementById("id_exampleFile").value = "";
     testMode = true;
-    console.log(read.result);
-    testObj.sampleFile=read.result;
-    questionObj.sampleFile=read.result;
   }
+  else
+  {
+    var read = new FileReader();
+    read.readAsBinaryString(file);
+  
+    read.onloadend = function(){
+      testMode = true;
+      console.log(read.result);
+      testObj.sampleFile=read.result;
+      questionObj.sampleFile=read.result;
+    }
+  }
+  
 }
 
 function inputExampleHeader()
@@ -143,14 +163,23 @@ function inputExampleHeader()
   questionObj.sampleHeader='';
   testObj.sampleHeader='';
   var file = document.getElementById("id_exampleHeader").files[0];
-  var read = new FileReader();
-  read.readAsBinaryString(file);
-  
-  read.onloadend = function(){
+
+  if(file.size > 100*1024*1024){
+    alert("File is too big!");
+    document.getElementById("id_exampleHeader").value = "";
     testMode = true;
-    console.log(read.result);
-    testObj.sampleHeader=read.result;
-    questionObj.sampleHeader=read.result;
+  }
+  else
+  {
+    var read = new FileReader();
+    read.readAsBinaryString(file);
+  
+    read.onloadend = function(){
+      testMode = true;
+      console.log(read.result);
+      testObj.sampleHeader=read.result;
+      questionObj.sampleHeader=read.result;
+    }
   }
 }
 
@@ -159,13 +188,22 @@ function inputExampleFillIn()
   questionObj.sampleFillIn='';
   testObj.sampleFillIn='';
   var file = document.getElementById("id_exampleFillIn").files[0];
-  var read = new FileReader();
-  read.readAsBinaryString(file);
+
+  if(file.size > 100*1024*1024){
+    alert("File is too big!");
+    document.getElementById("id_exampleFillIn").value = "";
+    testMode = true;
+  }
+  else
+  {
+    var read = new FileReader();
+    read.readAsBinaryString(file);
   
-  read.onloadend = function(){
-    console.log(read.result);
-    testObj.sampleFillIn=read.result;
-    questionObj.sampleFillIn=read.result;
+    read.onloadend = function(){
+      console.log(read.result);
+      testObj.sampleFillIn=read.result;
+      questionObj.sampleFillIn=read.result;
+    }
   }
 }
 
@@ -174,15 +212,25 @@ function inputInput()
   questionObj.input='';
   testObj.tdInput='';
   var file = document.getElementById("id_Input").files[0];
-  var read = new FileReader();
-  read.readAsBinaryString(file);
-  
-  read.onloadend = function(){
+
+  if(file.size > 10*1024*1024){
+    alert("File is too big!");
+    document.getElementById("id_Input").value = "";
     testMode = true;
-    console.log(read.result);
-    testObj.tdInput=read.result;
-    questionObj.input=read.result;
   }
+  else
+  {
+    var read = new FileReader();
+    read.readAsBinaryString(file);
+  
+    read.onloadend = function(){
+      testMode = true;
+      console.log(read.result);
+      testObj.tdInput=read.result;
+      questionObj.input=read.result;
+    }
+  }
+  
 }
 
 function inputOutput()
@@ -190,15 +238,25 @@ function inputOutput()
   questionObj.output='';
   testObj.tdOutput='';
   var file = document.getElementById("id_Output").files[0];
-  var read = new FileReader();
-  read.readAsBinaryString(file);
-  
-  read.onloadend = function(){
+
+  if(file.size > 10*1024*1024){
+    alert("File is too big!");
+    document.getElementById("id_Input").value = "";
     testMode = true;
-    console.log(read.result);
-    testObj.tdOutput=read.result;
-    questionObj.output=read.result;
   }
+  else
+  {
+    var read = new FileReader();
+    read.readAsBinaryString(file);
+  
+    read.onloadend = function(){
+      testMode = true;
+      console.log(read.result);
+      testObj.tdOutput=read.result;
+      questionObj.output=read.result;
+    }
+  }
+
 }
 
 
@@ -371,22 +429,22 @@ var selectField = document.getElementById("selectLanguage");
 
 selectField.onchange = function() {
   if (document.getElementById("selectLanguage").selectedIndex == "0") {
-      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".c" style="width:765px">';
-      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".c" style="width:765px">';
-      document.getElementById("id_selectFileHeader").innerHTML = '<label for="id_exampleCode" >Header Files (如需多檔再上傳):</label><input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" style="width:765px">';
-      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".c" style="width:765px">';
+      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".c" style="width:765px" oninput="inputExampleMain()">';
+      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".c" style="width:765px" oninput="inputExampleFile()">';
+      document.getElementById("id_selectFileHeader").innerHTML = '<label for="id_exampleCode" >Header Files (如需多檔再上傳):</label><input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" style="width:765px" oninput="inputExampleHeader()">';
+      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".c" style="width:765px" oninput="inputExampleFillIn()">';
   }
   else if (document.getElementById("selectLanguage").selectedIndex == "1"){
-      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".cpp" style="width:765px">';
-      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".cpp" style="width:765px">';
-      document.getElementById("id_selectFileHeader").innerHTML = '<label for="id_exampleCode" >Header Files (如需多檔再上傳):</label><input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" style="width:765px">';
-      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".cpp" style="width:765px">';
+      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".cpp" style="width:765px" oninput="inputExampleMain()">';
+      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".cpp" style="width:765px" oninput="inputExampleFile()">';
+      document.getElementById("id_selectFileHeader").innerHTML = '<label for="id_exampleCode" >Header Files (如需多檔再上傳):</label><input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" style="width:765px" oninput="inputExampleHeader()">';
+      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".cpp" style="width:765px" oninput="inputExampleFillIn()">';
   }
   else{
-      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".py" style="width:765px">';
-      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".py" style="width:765px">';
+      document.getElementById("id_selectFileMain").innerHTML = '<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".py" style="width:765px" oninput="inputExampleMain()">';
+      document.getElementById("id_selectFileFile").innerHTML = '<input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".py" style="width:765px" oninput="inputExampleFile()">';
       document.getElementById("id_selectFileHeader").innerHTML = ' ';
-      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".py" style="width:765px">';
+      document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".py" style="width:765px" oninput="inputExampleFillIn()">';
   }
 }
 
@@ -439,60 +497,6 @@ exampleOutput.onchange = function() {
       inputOutput();
     }
 };
-
-var exampleMain = document.getElementById("id_exampleMain");
-var exampleFile = document.getElementById("id_exampleFile");
-var exampleHeader = document.getElementById("id_exampleHeader");
-var exampleFillIn = document.getElementById("id_exampleFillIn");
-
-exampleMain.onchange = function() {
-    if(this.files[0].size > 100*1024*1024){
-       alert("File is too big!");
-       this.value = "";
-       testMode = true;
-    }
-    else
-    {
-      inputExampleMain();
-    }
-};
-
-exampleFile.onchange = function() {
-    if(this.files[0].size > 100*1024*1024){
-       alert("File is too big!");
-       this.value = "";
-       testMode = true;
-    }
-    else
-    {
-      inputExampleFile();
-    }
-};
-
-exampleHeader.onchange = function() {
-    if(this.files[0].size > 100*1024*1024){
-       alert("File is too big!");
-       this.value = "";
-       testMode = true;
-    }
-    else
-    {
-      inputExampleHeader();
-    }
-};
-
-exampleFillIn.onchange = function() {
-    if(this.files[0].size > 100*1024*1024){
-       alert("File is too big!");
-       this.value = "";
-    }
-    else
-    {
-      inputExampleFillIn();
-    }
-};
-
-
 
 function createSuccess() {
   localStorage.setItem("Class", tmpObj2.Class);

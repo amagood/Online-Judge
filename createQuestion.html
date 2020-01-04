@@ -122,7 +122,7 @@
            <div class="col-sm-10">
                <label for="id_exampleCode" >Main (一定要有):</label>
                <div id="id_selectFileMain">
-                	<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".c" style="width:765px">
+                	<input name="exampleMain" type="file" id="id_exampleMain" autocomplete="off" value="" required="required" accept = ".c" style="width:765px" oninput="inputExampleMain()">
                </div>
            </div>
         </div>
@@ -131,7 +131,7 @@
            <div class="col-sm-10">
                <label for="id_exampleCode" >Files (如需多檔再上傳):</label>
                <div id="id_selectFileFile">
-                  <input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".c" style="width:765px">
+                  <input name="exampleFile" type="file" id="id_exampleFile" autocomplete="off" value="" required="required" accept = ".c" style="width:765px" oninput="inputExampleFile()">
                </div>
            </div>
         </div>
@@ -140,7 +140,7 @@
            <div class="col-sm-10">     
                <div id="id_selectFileHeader">
                 <label for="id_exampleCode" >Header Files (如需多檔再上傳):</label>
-                 <input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" style="width:765px">
+                 <input name="exampleHeader" type="file" id="id_exampleHeader" autocomplete="off" value="" required="required" accept = ".h" style="width:765px" oninput="inputExampleHeader()">
                </div>
            </div>
         </div>
@@ -149,7 +149,7 @@
            <div class="col-sm-10">
            	<label for="id_exampleCode" >填空題目程式碼 (如果要設計為填空題再上傳) :</label>
               <div id="id_selectFileFillIn">
-                  <input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".c" style="width:765px">
+                  <input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".c" style="width:765px" oninput="inputExampleFillIn()">
                </div>
            </div>
         </div>
@@ -190,7 +190,7 @@
               <div class="col-sm-10">
                 <label for="id_testdataInput" >測試資料輸入 :</label>
                 <br>
-                <input name="Input" type="file" id="id_Input" autocomplete="off" value="" required="required" style="width:765px" accept=".txt">
+                <input name="Input" type="file" id="id_Input" autocomplete="off" value="" required="required" style="width:765px" accept=".txt" oninput="inputInput()">
               </div>
           </div>
 
@@ -198,7 +198,7 @@
               <div class="col-sm-10">
                 <label for="id_testdataOutput">測試資料輸出 :</label>
                 <br>
-                <input name="Output" type="file" id="id_Output" autocomplete="off" value="" required="required" style="width:765px"accept=".txt">
+                <input name="Output" type="file" id="id_Output" autocomplete="off" value="" required="required" style="width:765px"accept=".txt" oninput="inputOutput()">
               </div>
           </div>
         
