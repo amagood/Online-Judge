@@ -1,6 +1,5 @@
 <!--20200104 
-    version 1 : questionLibObj, get tag list
-    version 2 : create class, add problem to class, delete class problem, get class list-->
+    version 1 : questionLibObj, get tag list-->
 
 <!doctype html>
 <html lang="zh-Hant-TW">
@@ -101,19 +100,6 @@
             <b-dropdown-item @click="filter = 'Level 10'" v-on:click="clickDegree('Level 10')">Level 10
             </b-dropdown-item>
           </b-dropdown>
-          <b-dropdown v-bind:text="classButtonText" variant="outline-secondary" class="dropdown">
-            <b-dropdown-item v-on:click="clickClass('All Problem')" @click="filter = ''"><b class="text-info">All
-                Problem</b></b-dropdown-item>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-text style="width: 240px;" v-if="!classList.length">
-              There is no class.</br>
-              Create new class using the <b class="text-warning">Add</b> -> <b class="text-danger">Add Problem To
-                Class</b> button .
-            </b-dropdown-text>
-            <b-dropdown-header v-else>Class</b-dropdown-header>
-            <b-dropdown-item v-for="i in classList" :key="'dyn-tab-' + classList.lenght"
-              v-on:click="clickClass(i.class)" @click="filter = ''">${i.class} </b-dropdown-item>
-          </b-dropdown>
           <b-button href="createQuestion.html" v-b-tooltip.hover title="Create a new question" variant="outline-info"
             class="dropdown"><b>Create Problem</b></b-button>
         </b-col>
@@ -149,35 +135,6 @@
           </template>
           <template v-slot:cell(percentagePassing)="data">
             ${ data.item.percentagePassing } %
-          </template>
-          <!--select problem-->
-          <template v-slot:cell(selected)="data">
-            <b-button size="sm" variant="outline-success" pill @click="showAddToModal(data.item)"
-              class="selectedButton">+</b-button>
-            <b-modal scrollable ref="addToModal" title="Add To" :header-bg-variant="'secondary'"
-              :header-text-variant="'light'" :footer-bg-variant="'light'">
-              <div v-if="!classList.length">
-                There are no class.
-                <br />
-                Please create class first！
-              </div>
-              <b-list-group v-else>
-                <b-list-group-item button v-for="i in classList" :key="'dyn-tab-' + classList.lenght"
-                  @click="clickAddToClass(i.class)">${i.class}</b-list-group-item>
-              </b-list-group>
-              <template v-slot:modal-footer>
-                <div class="w-100">
-                  <b-form @submit="clickCreate">
-                    <b-form-group label="Create New Class :">
-                      <b-form-input v-model="createClassName" placeholder="Input class name" required></b-form-input>
-                    </b-form-group>
-                    <b-button pill variant="info" class="float-right" type="submit">Create</b-button>
-                  </b-form>
-                </div>
-              </template>
-            </b-modal>
-            <b-button size="sm" variant="outline-danger" pill @click="showDeleteModal(data.item)" class="selectedButton"
-              v-if="showDeleteButton">-</b-button>
           </template>
         </b-table>
       </div>
