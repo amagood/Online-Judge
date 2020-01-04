@@ -66,13 +66,14 @@
     <div id="probapp" class="problemLib">
       <!--block 1 sortMenu-->
       <b-row>
-        <b-col class="my-1" lg="6" >
+        <b-col class="my-1" lg="6">
           <b-dropdown v-bind:text="tagButtonText" variant="secondary">
             <b-dropdown-item @click="filter = ''" v-on:click="clickTag('tag')"><b class="text-info">all</b>
             </b-dropdown-item>
             <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item v-for="i in tagList" :key="'dyn-tab-' + tagList.lenght" @click="filter = 'i.tag'"
-              v-on:click="clickClass(i.tag)">${i.tag}</b-dropdown-item>
+            <b-dropdown-item v-for="i in tagList" :key="'dyn-tab-' + tagList.lenght" v-on:click="clickTag(i.tag)">
+              ${i.tag}
+            </b-dropdown-item>
           </b-dropdown>
           <b-dropdown v-bind:text="degreeButtonText" variant="secondary" class="dropdown">
             <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('degree')"><b class="text-info">all</b>

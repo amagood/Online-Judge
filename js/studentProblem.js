@@ -223,6 +223,7 @@ var probapp = new Vue({
       this.degreeButtonText = "degree"
       questionLibObj.degree = "degree"
       if (Tag != "tag") {
+        this.filter=Tag
         this.noGetData = true
         this.filterData = true
         this.getQuestionData()
