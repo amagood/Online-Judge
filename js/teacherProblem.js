@@ -47,8 +47,19 @@ var tmpobj = {}
 //var postURL = ""
 var postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title02%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title03%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title04%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title05%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
 
+//tag 列表
+var tagListObj = {
+  "action" : "getTagList",
+  "Class":"CSIE110",
+  "userName" : "amagood",
+  "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
+}
+//var tagPostURL=""
+var tagPostURL="https://httpbin.org/response-headers?freeform=%20%20%7B%20%20%20%20%20%22classList%22%3A%5B%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%20%20%7D"
+var tagTmpobj={}
+
 //使用者所有班級
-var classList={
+var classListObj={
   "action" : "getClassList",
   "userName" : "amagood",
   "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
@@ -98,10 +109,12 @@ var probapp = new Vue({
     rowItemId:'',//click row item + - 
     showDeleteButton:false,//All Problem時false
     //add class
+    tagList:[],//存tag list
+    tagButtonText: "tag",//Tag: "tag",//for dropdown buttom
+    //get tag
+    degreeButtonText: "degree",//Degree: "degree",//for dropdown buttom
     noGetData: true,//loading
     filterData: false,//判斷filter
-    Tag: "tag",//for dropdown buttom
-    Degree: "degree",//for dropdown buttom
     filter: null,//text in filter
     sortBy: "id",//排序方式
     sortDesc: false,//false:升序
@@ -168,6 +181,7 @@ var probapp = new Vue({
   created() {
     this.getQuestionData()
     this.getClassList()
+    this.getTagList()
   },
   updated() {
     //---updata questionLibObj for changePage---
@@ -190,10 +204,10 @@ var probapp = new Vue({
     //---clear filter---
     if (!this.filter && this.filterData) {
       this.noGetData = true
-      this.Degree = "degree"
-      this.Tag = "tag"
-      questionLibObj.target = this.Tag
-      questionLibObj.degree = this.Degree
+      this.degreeButtonText = "degree"
+      this.tagButtonText = "tag"
+      questionLibObj.target = this.tagButtonText
+      questionLibObj.degree = this.degreeButtonText
       //console.log(questionLibObj)
       this.getQuestionData()
       console.log("clear,get all data")
@@ -240,10 +254,35 @@ var probapp = new Vue({
       return `${value}`
     },
     //html dropdown buttom(block 1)
+    getTagList(){
+      axios
+        .post(tagPostURL, tagListObj)
+        .then(function (response) {
+          //console.log(response.data)
+          //console.log(JSON.parse(response.data.freeform))//test
+          tagTmpobj =JSON.parse(response.data.freeform)
+          probapp.tagList=tagTmpobj.classList
+          probapp.tagList=[
+            {"tag":"loop"},
+            {"tag":"if"},
+            {"tag":"array"},
+            {"tag":"string"},
+            {"tag":"pointer"},
+            {"tag":"binary"},
+            {"tag":"Treesort"},
+            {"tag":"dp"}
+          ]
+          console.log(probapp.tagList)
+          console.log("get tag list from tagPostURL")
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    },
     clickTag(Tag) {
-      this.Tag = Tag
-      questionLibObj.target = this.Tag
-      this.Degree = "degree"
+      this.tagButtonText = Tag
+      questionLibObj.target = this.tagButtonText
+      this.degreeButtonText = "degree"
       questionLibObj.degree = "degree"
       if (Tag != "tag") {
         this.noGetData = true
@@ -253,9 +292,9 @@ var probapp = new Vue({
       }
     },
     clickDegree(Degree) {
-      this.Degree = Degree
-      questionLibObj.degree = this.Degree
-      this.Tag = "tag"
+      this.degreeButtonText = Degree
+      questionLibObj.degree = Degree
+      this.tagButtonText = "tag"
       questionLibObj.target = "tag"
       if (Degree != "degree") {
         this.noGetData = true
@@ -273,7 +312,7 @@ var probapp = new Vue({
     //class V2
     getClassList(){
       axios
-        .post(classPostURL, classList)
+        .post(classPostURL, classListObj)
         .then(function (response) {
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
@@ -283,7 +322,7 @@ var probapp = new Vue({
             {"class":"CSIE111"},
             {"class":"CSIE112"},
             {"class":"CSIE113"}
-          ]
+          ]//test
           console.log(probapp.classList)
           console.log("get class list from classPostURL")
         })
