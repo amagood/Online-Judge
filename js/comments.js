@@ -1,3 +1,5 @@
+var postURL = ""
+
 //選擇班級後送出
 var showMessageAction = {
 	"action" : "show_message",
@@ -130,7 +132,7 @@ var app1 = new Vue({
 		},
 		setClass(){   //取得使用者參加之班級
 			let self = this
-			axios.post("https://httpbin.org/post",collectClass)
+			axios.post(postURL,collectClass)  //"https://httpbin.org/post"
 				.then(function(response){
 					console.log(response.data)
 					console.log(response.status)
@@ -147,7 +149,7 @@ var app1 = new Vue({
 			let self = this
 			console.log(self.selectedClass)
 			showMessageAction.Class = self.selectedClass
-			axios.post("https://httpbin.org/post",showMessageAction)
+			axios.post(postURL,showMessageAction) //"https://httpbin.org/post"
 				.then(function(response){
 					console.log(response.data)
 					console.log(response.status)
@@ -241,7 +243,7 @@ var app1 = new Vue({
 			else{
 				console.log(self.selectedClass)
 				sendMsg.Class = self.selectedClass
-				axios.post("https://httpbin.org/post",sendMsg)
+				axios.post(postURL,sendMsg) //"https://httpbin.org/post"
 				.then(function(response){
 					console.log(response.data)
 					console.log(response.status)

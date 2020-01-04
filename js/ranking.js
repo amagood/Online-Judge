@@ -1,3 +1,5 @@
+var postURL = ""
+
 //選擇參加後送出
 var attendRank = {
   action : "attend_rank",
@@ -143,7 +145,7 @@ var app1 = new Vue({
 		},
     setClass(){//取得使用者參加之班級
 			let self = this
-			axios.post("https://httpbin.org/post",collectClass)
+			axios.post(postURL,collectClass) //"https://httpbin.org/post"
 				.then(function(response){
 					console.log(response.data)
 					console.log(response.status)
@@ -188,10 +190,10 @@ var app1 = new Vue({
         this.isSearch = true
         this.enterQSNum = this.qsNumber.trim()
       }
-      if(this.selectedClass === "" && this.callFromBack === false){
-        alert("Please choose your class.")
-        return
-      }
+      // if(this.selectedClass === "" && this.callFromBack === false){
+      //   alert("Please choose your class.")
+      //   return
+      // }
       if(this.qsNumber.trim() === "" && this.callFromBack === false){
         alert("Please enter questionID.")
         return
@@ -215,7 +217,7 @@ var app1 = new Vue({
       rankAction.questionNum = verifiedQsNum
       notAttendRank.questionNum = verifiedQsNum
       attendRank.questionNum = verifiedQsNum
-      axios.post("https://httpbin.org/post",rankAction)
+      axios.post(postURL,rankAction) //"https://httpbin.org/post"
         .then(function(response){
           console.log(response.data)
           console.log(response.status)
@@ -241,7 +243,7 @@ var app1 = new Vue({
     sendAttendMSG(){
       console.log(this.selectedClass)
       attendRank.Class = this.selectedClass
-      axios.post("https://httpbin.org/post",attendRank)
+      axios.post(postURL,attendRank) //"https://httpbin.org/post"
       .then(function(response){
         console.log(response.data)
         console.log(response.status)
@@ -264,7 +266,7 @@ var app1 = new Vue({
     sendNotAttendMSG(){
       console.log(this.selectedClass)
       notAttendRank.Class = this.selectedClass
-      axios.post("https://httpbin.org/post",notAttendRank)
+      axios.post(postURL,notAttendRank)  //"https://httpbin.org/post"
       .then(function(response){
         console.log(response.data)
         console.log(response.status)
