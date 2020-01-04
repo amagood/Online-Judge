@@ -44,8 +44,8 @@ var questionLibObj = {//加辨別身分?
   "hash": "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
 var tmpobj = {}
-var postURL = ""
-//test postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title02%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title03%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title04%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title05%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
+//var postURL = ""
+var postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title02%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title03%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title04%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title05%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
 
 //使用者所有班級
 var classList={
@@ -53,20 +53,29 @@ var classList={
   "userName" : "amagood",
   "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
-var classPostURL=""
-//test classPostURL="https://httpbin.org/response-headers?freeform=%20%20%7B%20%20%20%20%20%22classList%22%3A%5B%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%20%20%7D"
+//var classPostURL=""
+var classPostURL="https://httpbin.org/response-headers?freeform=%20%20%7B%20%20%20%20%20%22classList%22%3A%5B%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%20%20%7D"
 var classTmpobj={}
 
 //加題目至班級
 var addQuestionToClass ={
-  "action" : "addClass",
+  "action" : "addQuestionToClass",
   "addQuestionId" : [],
   "userName" : "amagood",
   "Class" : "",
   "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
 }
 var addQuesPostURL=""
-var objItems=[]//table選擇中的item //add class
+
+//刪除班級題目
+var deleteQuestion ={
+  "action" : "deleteQuestion",
+  "deleteQuestionId" : [],
+  "userName" : "amagood",
+  "Class" : "",
+  "hash" : "A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9"
+}
+var deleteQuesPostURL=""
 
 //創班級
 var createClass={
@@ -77,14 +86,17 @@ var createClass={
 }
 var createClassPostURL=""
 
+
 var probapp = new Vue({
   delimiters: ['${', '}'],
   el: "#probapp",
   data: {
-    isSelected:false,//判斷目前有無選擇
+    //isSelected:false,判斷目前有無選擇
     createClassName:'',//create new class存放新班名字
     classList:[],//存class name list
     classButtonText: "Class",
+    rowItemId:'',//click row item + - 
+    showDeleteButton:false,//All Problem時false
     //add class
     noGetData: true,//loading
     filterData: false,//判斷filter
@@ -96,7 +108,7 @@ var probapp = new Vue({
     //perPage: 20,//一頁幾行
     currentPage: 1,//當前頁數
     totalRows: 1,//總行數
-    selectMode: 'multi',//選擇模式['multi', 'single', 'range']
+    //selectMode: 'multi',選擇模式['multi', 'single', 'range']<b-table :select-mode="selectMode">
     fields: [//table 每列項目,用來取整列值
       {
         key: "id",
@@ -196,7 +208,7 @@ var probapp = new Vue({
         .then(function (response) {
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          tmpobj =response.data
+          tmpobj =JSON.parse(response.data.freeform)
           probapp.items = tmpobj.questionLib
           /*set problem link*/
           for(i=0;i<tmpobj.questionLib.length;i++){//可能會'length' undefined-->response直接傳link
@@ -258,15 +270,20 @@ var probapp = new Vue({
       this.totalRows = filteredItems.length
       this.currentPage = 1
     },
-    //add class
+    //class V2
     getClassList(){
       axios
         .post(classPostURL, classList)
         .then(function (response) {
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          classTmpobj =response.data
+          classTmpobj =JSON.parse(response.data.freeform)
           probapp.classList=classTmpobj.classList
+          probapp.classList=[
+            {"class":"CSIE111"},
+            {"class":"CSIE112"},
+            {"class":"CSIE113"}
+          ]
           console.log(probapp.classList)
           console.log("get class list from classPostURL")
         })
@@ -274,51 +291,38 @@ var probapp = new Vue({
           console.log(error);
         })
     },
-    whenRowSelected(items){//判斷目前有無選擇<b-table @row-selected="whenRowSelected">
-      if(items.length){
-        this.isSelected=true
-        objItems=items
-      }
-      else{
-        this.isSelected=false
-      }
-    },
-    showModal(){//有選擇-->open Add to modal
-      if(this.isSelected){
-        this.$refs["classModal"].show()
-      }
-      else{
-        this.$bvToast.toast(`Please choose the problem row first!`, {
-          title: 'Warning',
-          variant: "danger",
-          toaster: "b-toaster-top-center"
-        })
-      }
+    showAddToModal(item){
+      this.$refs['addToModal'].show()
+      this.rowItemId=item.id//存取當前題目資料
     },
     clickCreate(evt){//creat new class
       evt.preventDefault()
-      this.$refs['classModal'].hide()
+      //console.log(evt,probapp.rowItemId)
+      this.$refs['addToModal'].hide()
       createClass.Class=probapp.createClassName
-      //createClassPostURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22stats%22%3A%22success%22%2C%20%20%20%22classList%22%3A%5B%20%20%20%20%20%7B%22class%22%3A%22CSIE111%22%7D%2C%20%20%20%20%20%7B%22class%22%3A%22CSIE112%22%7D%2C%20%20%20%20%20%7B%22class%22%3A%22CSIE113%22%7D%20%20%20%5D%2C%20%20%20%22userName%22%3A%22amagood%22%2C%20%20%20%22hash%22%3A%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
+      createClassPostURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22stats%22%3A%22success%22%2C%20%20%20%22classList%22%3A%5B%20%20%20%20%20%7B%22class%22%3A%22CSIE111%22%7D%2C%20%20%20%20%20%7B%22class%22%3A%22CSIE112%22%7D%2C%20%20%20%20%20%7B%22class%22%3A%22CSIE113%22%7D%20%20%20%5D%2C%20%20%20%22userName%22%3A%22amagood%22%2C%20%20%20%22hash%22%3A%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
       //test postURL
+      console.log("request createClass",createClass)
       axios
         .post(createClassPostURL, createClass)
         .then(function (response) {
-          console.log(createClass)
           //console.log(response.data)
           //console.log(JSON.parse(response.data.freeform))//test
-          probapp.classList=response.data.classList
-          //console.log(probapp.classList)
-          if(response.data.stats == "success"){
+          if(JSON.parse(response.data.freeform).stats == "success"){
             probapp.$bvToast.toast(`Create class <`+probapp.createClassName+`> success !`, {
               title: 'Success',
+              autoHideDelay: 8000,//8 sec
               variant: "warning",
               toaster: "b-toaster-top-center"
             })
+            probapp.getClassList()
+            probapp.clickAddToClass(probapp.createClassName)
+            probapp.createClassName=''
           }
           else{
             probapp.$bvToast.toast(`Create class <`+probapp.createClassName+`> is fail... Please try again !`, {
-            title: 'Warning',
+            title: 'Error',
+            autoHideDelay: 8000,//8 sec
             variant: "danger",
             toaster: "b-toaster-top-center"
             })
@@ -327,8 +331,124 @@ var probapp = new Vue({
         .catch(function (error) {
           console.log(error);
         })
-        //objItems=目前已選取題目資料
-        probapp.clickAddToList(probapp.createClassName)
+    },
+    clickAddToClass(chooseClass) {//將選取題目加入目前已存在班級
+      this.$refs['addToModal'].hide()
+      //console.log(chooseClass,probapp.rowItemId)
+      var nofindClass = true
+      for (var i = 0; i < this.classList.length; i++) {
+        if (this.classList[i].class == chooseClass) {
+          var chooseProblemId = []
+          chooseProblemId[0] = probapp.rowItemId
+          console.log(chooseProblemId[0] , probapp.rowItemId)
+          addQuestionToClass.addQuestionId = chooseProblemId
+          addQuestionToClass.Class = chooseClass
+          //班級不能有重複名字//id 一次傳一個
+          //跳出for
+          nofindClass=false
+        }
+      }
+      if(nofindClass){
+        console.log("error,didn't find class")
+        probapp.$bvToast.toast(`Add promlem to class <` + chooseClass + `> fail... Please try again !`, {
+          title: 'Error',
+          autoHideDelay: 8000,//8 sec
+          variant: "danger",
+          toaster: "b-toaster-top-center"
+        })
+      }
+      else{
+        addQuesPostURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22stats%22%20%3A%20%22success%22%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE112%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
+      //test postURL (success post)
+      console.log("request addQuestionToClass",addQuestionToClass)
+      axios
+        .post(addQuesPostURL, addQuestionToClass)
+        .then(function (response) {
+          //console.log(addQuestionToClass)
+          //console.log(response.data)
+          //console.log(JSON.parse(response.data.freeform))//test
+          if (JSON.parse(response.data.freeform).stats == "success") {
+            probapp.$bvToast.toast(`Add problem to class <` + chooseClass + `> success !`, {
+              title: 'Success',
+              autoHideDelay: 8000,//8 sec
+              variant: "success",
+              toaster: "b-toaster-top-center"
+            })
+          }
+          else {
+            probapp.$bvToast.toast(`Add promlem to class <` + chooseClass + `> fail... Please try again !`, {
+              title: 'Error',
+              autoHideDelay: 8000,//8 sec
+              variant: "danger",
+              toaster: "b-toaster-top-center"
+            })
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+      }
+      
+    },
+    showDeleteModal(item){
+      this.rowItemId=item.id//存取當前題目資料
+      this.$bvModal.msgBoxConfirm('Please confirm that you want to delete <'+item.id+'>'+item.title, {
+        title: 'Please Confirm',
+        size: 'sm',
+        buttonSize: 'sm',
+        okVariant: 'danger',
+        okTitle: 'Yes',
+        cancelVariant: 'secondary',
+        cancelTitle: 'Cancel',
+        headerBgVariant:'secondary',
+        headerTextVariant:'light',
+        footerBgVariant:'light'
+      })
+      .then(value => {//true:ok/false:cancel
+        if(value){
+          this.noGetData = true
+          probapp.deleteProblem()
+          probapp.getQuestionData()
+          console.log("class delete problem get data")
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    },
+    deleteProblem() {//刪除班級題目
+      var chooseProblemId = []
+      chooseProblemId[0] = probapp.rowItemId//id 一次傳一個
+      deleteQuestion.deleteQuestionId = chooseProblemId
+      deleteQuesPostURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22stats%22%20%3A%20%22success%22%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE112%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
+
+      //test postURL (success post)
+      console.log("request deleteQuestion",deleteQuestion)
+      axios
+        .post(deleteQuesPostURL, deleteQuestion)
+        .then(function (response) {
+          //console.log(response.data)
+          //console.log(JSON.parse(response.data.freeform))//test
+          if (JSON.parse(response.data.freeform).stats == "success") {
+            probapp.$bvToast.toast(`Delete success !`, {
+              title: 'Delete',
+              autoHideDelay: 8000,//8 sec
+              variant: "warning",
+              toaster: "b-toaster-top-center"
+            })
+          }
+          else {
+            probapp.$bvToast.toast(`Delete fail... Please try again !`, {
+              title: 'Error',
+              autoHideDelay: 8000,//8 sec
+              variant: "danger",
+              toaster: "b-toaster-top-center"
+            })
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
     },
     clickClass(chooseClass){
       console.log(chooseClass)//傳入班級
@@ -336,77 +456,24 @@ var probapp = new Vue({
         probapp.classButtonText = chooseClass
         questionLibObj.Class= chooseClass
         probapp.noGetData = true
+        probapp.showDeleteButton=true
         //postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title03%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%20%20%20%20%20%5D%2C%20%20%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%20%20%7D"
         //test postURL (class problem)
-        //console.log(questionLibObj)
+        console.log("request changeClass",questionLibObj)
         probapp.getQuestionData()
         console.log("class get class data")
       }
       else{
         probapp.noGetData = true
+        probapp.showDeleteButton=false
         probapp.classButtonText = "Class"
         questionLibObj.Class= chooseClass
         //postURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22questionLib%22%3A%20%5B%20%20%20%20%20%7B%20%22id%22%3A%20%22a001%22%2C%20%22title%22%3A%20%22title01%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%22100%22%2C%20%22inputTime%22%3A%20%2220190101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a002%22%2C%20%22title%22%3A%20%22title02%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%220%22%2C%20%22inputTime%22%3A%20%2220180101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a003%22%2C%20%22title%22%3A%20%22title03%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22easy%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2250%22%2C%20%22inputTime%22%3A%20%2220170101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a004%22%2C%20%22title%22%3A%20%22title04%22%2C%20%22target%22%3A%20%22array%22%2C%20%22degree%22%3A%20%22hard%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%2211%22%2C%20%22inputTime%22%3A%20%2220160101%22%20%7D%2C%20%20%20%20%20%7B%20%22id%22%3A%20%22a005%22%2C%20%22title%22%3A%20%22title05%22%2C%20%22target%22%3A%20%22loop%22%2C%20%22degree%22%3A%20%22mid%22%2C%20%22percentagePassing%22%3A%20%2250%22%2C%20%22respondent%22%3A%20%221%22%2C%20%22inputTime%22%3A%20%2220150101%22%20%7D%20%20%20%5D%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE110%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
         //test postURL (all problem)
-        //console.log(questionLibObj)
+        console.log("request changeClass",questionLibObj)
         probapp.getQuestionData()
         console.log("clear class,get all data")
       }
-    },
-    clickAddToList(chooseClass){//將選取題目加入目前已存在班級
-      this.$refs['classModal'].hide()
-      //console.log(chooseClass)
-      for(var i=0;i<this.classList.length;i++)
-      {
-        if(this.classList[i].class==chooseClass){
-          //console.log(objItems)//目前選取的題目的資料
-          var chooseProblemId = []
-          for(var j=0;j<objItems.length;j++){
-            chooseProblemId[j]=objItems[j].id
-          }
-          //console.log(chooseProblemId)
-          addQuestionToClass.Class=chooseClass
-          addQuestionToClass.addQuestionId=chooseProblemId
-          //班級不能有重複名字
-          //跳出for
-        }
-      }
-      //addQuesPostURL="https://httpbin.org/response-headers?freeform=%7B%20%20%20%22stats%22%20%3A%20%22success%22%2C%20%20%20%22userName%22%20%3A%20%22amagood%22%2C%20%20%20%22Class%22%20%3A%20%22CSIE112%22%2C%20%20%20%22hash%22%20%3A%20%22A7FCFC6B5269BDCCE571798D618EA219A68B96CB87A0E21080C2E758D23E4CE9%22%20%7D"
-      //test postURL (success post)
-      axios
-        .post(addQuesPostURL, addQuestionToClass)
-        .then(function (response) {
-          //console.log(addQuestionToClass)
-          //console.log(response.data)
-          //console.log(JSON.parse(response.data.freeform))//test
-          if(response.data.stats == "success"){
-            objItems=[]
-            probapp.clearSelected()
-            probapp.makeToast()
-          }
-          else{
-            probapp.$bvToast.toast(`Add promlem to class <`+chooseClass+`> fail... Please try again !`, {
-            title: 'Warning',
-            variant: "danger",
-            toaster: "b-toaster-top-center"
-            })
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-    },
-    clearSelected() {//清空選取
-      this.$refs.selectableTable.clearSelected()//<b-table  ref="selectableTable">
-    },
-    makeToast(append = false) {//成功加入班級提醒
-      this.$bvToast.toast(`Add problem success !`, {
-        title: 'Success',
-        autoHideDelay: 2000,//2 sec
-        appendToast: append,
-        variant: "success",
-        toaster: "b-toaster-top-center"
-      })
     }
   },//method end
 

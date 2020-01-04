@@ -59,7 +59,7 @@
         <b-row>
           <b-col>
             <b-dropdown v-bind:text="Tag" variant="secondary">
-              <b-dropdown-item @click="filter = ''" v-on:click="clickTag('tag')">all</b-dropdown-item>
+              <b-dropdown-item @click="filter = ''" v-on:click="clickTag('tag')"><b class="text-info">all</b></b-dropdown-item>
               <b-dropdown-item @click="filter = 'loop'" v-on:click="clickTag('loop')">loop</b-dropdown-item>
               <b-dropdown-item @click="filter = 'if'" v-on:click="clickTag('if')">if</b-dropdown-item>
               <b-dropdown-item @click="filter = 'array'" v-on:click="clickTag('array')">array</b-dropdown-item>
@@ -70,7 +70,7 @@
               <b-dropdown-item @click="filter = 'dp'" v-on:click="clickTag('dp')">Dynamic programming</b-dropdown-item>
             </b-dropdown>
             <b-dropdown v-bind:text="Degree" variant="secondary" class="dropdown">
-              <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('degree')">all</b-dropdown-item>
+              <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('degree')"><b class="text-info">all</b></b-dropdown-item>
               <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
               <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
               <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
@@ -79,17 +79,13 @@
               <b-dropdown-item v-on:click="clickClass('All Problem')" @click="filter = ''"><b class="text-info">All Problem</b></b-dropdown-item>
               <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-text style="width: 240px;" v-if="!classList.length">
-                There are no class.
-                Open a new class using the <b class="text-danger">Class</b> button .
+                There is no class.</br>
+                Create new class using the <b class="text-warning">Add</b> -> <b class="text-danger">Add Problem To Class</b> button .
               </b-dropdown-text>
               <b-dropdown-header v-else >Class</b-dropdown-header>
               <b-dropdown-item v-for="i in classList" :key="'dyn-tab-' + classList.lenght" v-on:click="clickClass(i.class)" @click="filter = ''">${i.class} </b-dropdown-item>
             </b-dropdown>
-            <b-dropdown text="Add" variant="outline-secondary" class="dropdown">
-              <b-dropdown-item @click="showModal">Class</b-dropdown-item>
-              <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item href="createQuestion.html">Problem</b-dropdown-item>
-            </b-dropdown>
+            <b-button href="createQuestion.html" v-b-tooltip.hover title="Create a new question" variant="outline-info" class="dropdown"><b>Create Problem</b></b-button>
           </b-col>
           <!--search/filter bar-->
           <b-col sm="5">
@@ -107,10 +103,9 @@
 
         <!--block 2 Problem-->
         <div class="table0">
-          <b-table selectable sticky hover responsive id="problemTable" :items="items" :fields="fields"
+          <b-table sticky hover responsive id="problemTable" :items="items" :fields="fields"
             :per-page="questionLibObj.questionNum" :current-page="currentPage" :filter="filter" @filtered="onFiltered"
-            :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :busy="noGetData" :select-mode="selectMode"
-            @row-selected="whenRowSelected"  ref="selectableTable">
+            :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :busy="noGetData" >
             <!--loading-->
             <template v-slot:table-busy>
               <div class="text-center text-success " style="margin-top:30px">
@@ -126,12 +121,9 @@
               ${ data.item.percentagePassing } %
             </template>
             <!--select problem-->
-            <template v-slot:cell(selected)="{ rowSelected }">
-              <template v-if="rowSelected">
-                <span aria-hidden="true">&check;</span>
-                <span class="sr-only">Selected</span>
-                <!--Add to class modal-->
-                <b-modal ref="classModal" title="Add To" :header-bg-variant="'secondary'" :header-text-variant="'light'"
+            <template v-slot:cell(selected)="data">
+              <b-button size="sm" variant="outline-success" pill @click="showAddToModal(data.item)" class="selectedButton">+</b-button>
+              <b-modal scrollable ref="addToModal" title="Add To" :header-bg-variant="'secondary'" :header-text-variant="'light'"
                   :footer-bg-variant="'light'">
                   <div v-if="!classList.length">
                     There are no class.
@@ -139,7 +131,7 @@
                     Please create class first！
                   </div>
                   <b-list-group v-else>
-                    <b-list-group-item button v-for="i in classList" :key="'dyn-tab-' + classList.lenght" @click="clickAddToList(i.class)">${i.class}</b-list-group-item>
+                    <b-list-group-item button v-for="i in classList" :key="'dyn-tab-' + classList.lenght" @click="clickAddToClass(i.class)">${i.class}</b-list-group-item>
                   </b-list-group>
                   <template v-slot:modal-footer>
                     <div class="w-100">
@@ -151,12 +143,8 @@
                       </b-form>
                     </div>
                   </template>
-                </b-modal>
-              </template>
-              <template v-else>
-                <span aria-hidden="true">&nbsp;</span>
-                <span class="sr-only">Not selected</span>
-              </template>
+              </b-modal>
+              <b-button size="sm" variant="outline-danger" pill @click="showDeleteModal(data.item)" class="selectedButton" v-if="showDeleteButton">-</b-button>
             </template>
           </b-table>
         </div>
