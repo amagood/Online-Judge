@@ -79,26 +79,9 @@
             <b-dropdown-item @click="filter = ''" v-on:click="clickDegree('degree')"><b class="text-info">all</b>
             </b-dropdown-item>
             <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item @click="filter = 'Level 01'" v-on:click="clickDegree('Level 01')">Level 01
-            </b-dropdown-item>
-            <b-dropdown-item @click="filter = 'Level 02'" v-on:click="clickDegree('Level 02')">Level 02
-            </b-dropdown-item>
-            <b-dropdown-item @click="filter = 'Level 03'" v-on:click="clickDegree('Level 03')">Level 03
-            </b-dropdown-item>
-            <b-dropdown-item @click="filter = 'Level 04'" v-on:click="clickDegree('Level 04')">Level 04
-            </b-dropdown-item>
-            <b-dropdown-item @click="filter = 'Level 05'" v-on:click="clickDegree('Level 05')">Level 05
-            </b-dropdown-item>
-            <b-dropdown-item @click="filter = 'Level 06'" v-on:click="clickDegree('Level 06')">Level 06
-            </b-dropdown-item>
-            <b-dropdown-item @click="filter = 'Level 07'" v-on:click="clickDegree('Level 07')">Level 07
-            </b-dropdown-item>
-            <b-dropdown-item @click="filter = 'Level 08'" v-on:click="clickDegree('Level 08')">Level 08
-            </b-dropdown-item>
-            <b-dropdown-item @click="filter = 'Level 09'" v-on:click="clickDegree('Level 09')">Level 09
-            </b-dropdown-item>
-            <b-dropdown-item @click="filter = 'Level 10'" v-on:click="clickDegree('Level 10')">Level 10
-            </b-dropdown-item>
+            <b-dropdown-item @click="filter = 'easy'" v-on:click="clickDegree('easy')">easy</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'medium'" v-on:click="clickDegree('medium')">medium</b-dropdown-item>
+            <b-dropdown-item @click="filter = 'hard'" v-on:click="clickDegree('hard')">hard</b-dropdown-item>
           </b-dropdown>
           <b-button href="createQuestion.html" v-b-tooltip.hover title="Create a new question" variant="outline-info"
             class="dropdown"><b>Create Problem</b></b-button>
