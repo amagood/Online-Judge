@@ -52,7 +52,7 @@ new Vue({
             	if(tmpObj.stats=='success')
             	{
             		alert('註冊成功，將自動跳轉到主畫面!');
-            		setTimeout(RregisterSuccess, 500);
+            		setTimeout(registerSuccess, 500);
             	}
             	else
             	{
