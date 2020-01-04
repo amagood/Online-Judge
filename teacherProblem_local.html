@@ -67,7 +67,7 @@
     <div id="probapp" class="problemLib">
       <!--block 1 sortMenu-->
       <b-row>
-        <b-col>
+        <b-col class="my-1" lg="6">
           <b-dropdown v-bind:text="tagButtonText" variant="secondary">
             <b-dropdown-item @click="filter = ''" v-on:click="clickTag('tag')"><b class="text-info">all</b>
             </b-dropdown-item>
@@ -87,7 +87,7 @@
             class="dropdown"><b>Create Problem</b></b-button>
         </b-col>
         <!--search/filter bar-->
-        <b-col sm="5">
+        <b-col sm="5" lg="6" class="my-1">
           <b-form-group label="" label-cols="1" label-align="right" label-for="filterInput" class="mb-0">
             <b-input-group size="">
               <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
