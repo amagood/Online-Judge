@@ -1,4 +1,4 @@
-<!--20200104 
+<!--20200105 
     version 1 : questionLibObj, get tag list-->
 
 <!doctype html>
@@ -116,6 +116,9 @@
           <!--problemLink-->
           <template v-slot:cell(title)="data">
             <a :href="data.item.link">${ data.item.title }</a>
+          </template>
+          <template v-slot:cell(levelNum)="data">
+            ${ data.item.degree } 
           </template>
           <template v-slot:cell(percentagePassing)="data">
             ${ data.item.percentagePassing } %
