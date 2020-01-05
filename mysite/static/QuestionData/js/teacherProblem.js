@@ -94,7 +94,7 @@ var probapp = new Vue({
         sortable: true
       },
       {
-        key: "degree",
+        key: "levelNum",
         label: "Degree",
         sortable: true
       },
@@ -136,7 +136,7 @@ var probapp = new Vue({
     if (this.currentPage != parseInt(questionLibObj.questionPage)) {//轉數字
       questionLibObj.questionPage = this.currentPage.toString()//轉字串
       //console.log(questionLibObj)
-      console.log("update data for changePage ")
+      ///console.log("update data for changePage ")
     }
 
     //---update data for sort---
@@ -146,7 +146,7 @@ var probapp = new Vue({
       questionLibObj.sortDesc = this.sortDesc.toString()//轉字串
       //console.log(questionLibObj)
       this.getQuestionData()
-      console.log("update data for sort")
+      ///console.log("update data for sort")
     }
 
     //---clear filter---
@@ -158,7 +158,7 @@ var probapp = new Vue({
       questionLibObj.degree = this.degreeButtonText
       //console.log(questionLibObj)
       this.getQuestionData()
-      console.log("clear,get all data")
+      ///console.log("clear,get all data")
       this.filterData = false
     }
   },//updated end
@@ -172,8 +172,18 @@ var probapp = new Vue({
           //console.log(JSON.parse(response.data.freeform))//test
           tmpobj = response.data
           probapp.items = tmpobj.questionLib
-          /*set problem link*/
-          for (i = 0; i < tmpobj.questionLib.length; i++) {//可能會'length' undefined-->response直接傳link
+          /*set problem link,levelNum*/
+          for (i = 0; i < tmpobj.questionLib.length; i++) {
+            var level=""
+            if (tmpobj.questionLib[i].degree == "easy") {
+              level="1"
+            }
+            else if (tmpobj.questionLib[i].degree == "medium") {
+              level="2"
+            }
+            else if (tmpobj.questionLib[i].degree == "hard") {
+              level="3"
+            }
             probapp.items[i] = {
               "id": tmpobj.questionLib[i].id,
               "title": tmpobj.questionLib[i].title,
@@ -182,10 +192,11 @@ var probapp = new Vue({
               "percentagePassing": tmpobj.questionLib[i].percentagePassing,
               "respondent": tmpobj.questionLib[i].respondent,
               "inputTime": tmpobj.questionLib[i].inputTime,
-              "link": "problem/" + tmpobj.questionLib[i].id + ".html"
+              "link": "problem/" + tmpobj.questionLib[i].id + ".html",
+              "levelNum":level
             }
           }
-          //console.log(probapp.items)
+          ///console.log(probapp.items)
           // Set the initial number of items、totalRows
           probapp.totalRows = probapp.items.length
           console.log("get new data from postURL")
@@ -210,7 +221,7 @@ var probapp = new Vue({
           tagTmpobj = response.data
           probapp.tagList = tagTmpobj.tagList
           //console.log(probapp.tagList)
-          console.log("get tag list from tagPostURL")
+          ///console.log("get tag list from tagPostURL")
         })
         .catch(function (error) {
           console.log(error);
@@ -226,7 +237,7 @@ var probapp = new Vue({
         this.noGetData = true
         this.filterData = true
         this.getQuestionData()
-        console.log("tag sort get data")
+        ///console.log("tag sort get data")
       }
     },
     clickDegree(Degree) {
@@ -238,7 +249,7 @@ var probapp = new Vue({
         this.noGetData = true
         this.filterData = true
         this.getQuestionData()
-        console.log("degree sort get data")
+        ///console.log("degree sort get data")
       }
     },
     //html pagination(block3)

@@ -32,6 +32,8 @@ def responseCreateQuestion(questionName,PDF,questionContent,language,sampleMain,
 
 def responseVerifyStats(language,sampleMain,sampleFile,sampleHeader,sampleFillIn,tdInput,tdOutput):
     try:
+        if sampleMain=='' or tdInput=='' or tdOutput=='':
+            return 'wrong'
         return 'verified'
     except:
         return 'wrong'

@@ -19,12 +19,10 @@ from QuestionLibrary.views import responseCreateQuestion
 from QuestionLibrary.views import problemDetail
 from QuestionLibrary.views import pdfDetail
 from QuestionLibrary.views import teacherProblem
-#from QuestionLibrary.views import studentProblem
 
 urlpatterns = [
     path('studentProblem.html', responseGetQuestion ),
     path('teacherProblem.html', teacherProblem ),
-    #path('studentProblem.html', studentProblem ),
     path('createQuestion.html', responseCreateQuestion ),
     path('problem/p<int:num>.html', problemDetail ),
     path('problem/p<int:num>pdf.pdf', pdfDetail ),

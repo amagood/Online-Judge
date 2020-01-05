@@ -12,7 +12,6 @@ def responseGetQuestion(request):
         req=json.loads(request.body.decode('utf-8'))
         action=req['action']
         if action=='questionLib':
-            print(req['target'])#debug
             qLib=QuestionLibrary.GetQuestion.responseGetQuestion(req['questionNum'],req['questionPage'],req['sequence'],req['target'],req['degree'],req['Class'],req['sortDesc'])
             data={
                 "questionLib" : qLib,
@@ -27,14 +26,12 @@ def responseGetQuestion(request):
             counteachi=1
             for eachC in CList:
                 if eachC.Category_Name!='null':
-                    #strkey='tag{:03d}'.format(counteachi)
                     strkey='tag'
                     adict={strkey: eachC.Category_Name}
                     counteachi+=1
                     qLib.append(adict)
             data={
                 "tagList" : qLib,
-                #"size" : str(counteachi-1),
                 "userName" : req['userName'],
                 "Class" : req['Class'],
                 "hash" : req['hash'],

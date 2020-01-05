@@ -1,9 +1,3 @@
-# Question Library
-# +field: type
-# ----------
-# +addQuestion()
-# +deleteQuestion()
-
 import os
 class Question_Library():
     path='./templates/QuestionData'
@@ -104,15 +98,13 @@ class Question_Library():
     </div>'''
         else:
             html_str+='<iframe src="{}pdf.pdf" style="width: 100%; height: 800px;"></iframe>'.format(self.QuestionID)
-            c_path=p_path+'/{}pdf.pdf'.format(self.QuestionID)
-            from base64 import b64decode#
-            b64 = pdf#
-            bytes = b64decode(b64, validate=True)#
-            if bytes[0:4] != b'%PDF':#
-                raise ValueError('Missing the PDF file signature')#
-            f2=open(c_path,"wb")
-            f2.write(bytes)
-            f2.close()
+            #c_path=p_path+'/{}pdf.pdf'.format(self.QuestionID)##encode error
+            #import base64####################
+            #pdf = pdf.decode('bytes')########
+            #pdf = base64.b64decode(pdf)######
+            #f2=open(c_path,"wb")#############
+            #f2.write(pdf)####################
+            #f2.close()#######################
         html_str+='''</div>
   <!-- mainBlock1 end -->
   <!-- mainBlock2 -->
@@ -303,6 +295,16 @@ class Question_Library():
         f=open(c_path,"w")
         f.write(qoutput)
         f.close()
+        if sampleFile!='':
+            c_path=p_path+'/{}_sampleFile.{}'.format(self.QuestionID,FileNameExtention)
+            f=open(c_path,"w")
+            f.write(sampleFile)
+            f.close()
+        if sampleHeader!='':
+            c_path=p_path+'/{}_sampleHeader.h'.format(self.QuestionID)
+            f=open(c_path,"w")
+            f.write(sampleHeader)
+            f.close()
     def deleteQuestion(self,QuestionID):
         self.QuestionID = QuestionID
         p_path=self.path+'/{}'.format(self.QuestionID)

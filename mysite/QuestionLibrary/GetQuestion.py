@@ -11,12 +11,10 @@ def responseGetQuestion(questionNum,questionPage,questionSequence,questionTarget
     if questionDegree!='degree':
         questionList=questionList.filter(Question_difficulty__exact=questionDegree)
     retQuesData=[]
-    #print('retQuesData')#Debug
     for eachQues in questionList:
-        #print('in for loop')#Debug
-        passrate='0.00%'
+        passrate='0.00'
         if eachQues.Question_Summit_Time!=0:
-            passrate='{:.2%}'.format(eachQues.Question_AC_Count/eachQues.Question_Summit_Time)
+            passrate='{:.2f}'.format(100*eachQues.Question_AC_Count/eachQues.Question_Summit_Time)
         targetlist=[str(e) for e in eachQues.Question_Category.all()]
         targets=' '.join(targetlist)
         Qdata = {
@@ -33,11 +31,15 @@ def responseGetQuestion(questionNum,questionPage,questionSequence,questionTarget
     resv=False
     if sortDesc=='true':
         resv=True
-    #print(questionSequence)
     if questionSequence=='':
         questionSequence='title'
+    degreedict={'easy':1.0,'medium':2.0,'hard':3.0}
     if questionSequence=='percentagePassing':
-        retQuesData = sorted(retQuesData, key=lambda k: float(k[questionSequence][:-1]), reverse=resv)
+        retQuesData = sorted(retQuesData, key=lambda k: float(k['percentagePassing'][:-1]), reverse=resv)
+    elif questionSequence=='respondent':
+        retQuesData = sorted(retQuesData, key=lambda k: float(k['respondent']), reverse=resv)
+    elif questionSequence=='levelNum':
+        retQuesData = sorted(retQuesData, key=lambda k: k['degree'][3], reverse=not resv)
     else:
         retQuesData = sorted(retQuesData, key=lambda k: k[questionSequence], reverse=resv)
     '''qpage=int(questionPage) # return one page

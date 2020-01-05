@@ -1,16 +1,25 @@
 # path
-url: QuestionLibrary/problem/p00001.html
+url: IDE/problem/p00001.html
 (render 'QuestionData/p00001/p00001.html')
 ```
 /templates/QuestionData/"QuestionID"/"QuestionID".html
+
                                      "QuestionID"exampleCode.c
                                      "QuestionID"exampleCode.cpp
                                      "QuestionID"exampleCode.py
+
+                                     "QuestionID"_input.txt
+                                     "QuestionID"_output.txt
+
+                                     "QuestionID"_sampleFile.c
+                                     "QuestionID"_sampleFile.cpp
+                                     "QuestionID"_sampleFile.py
+
+                                     "QuestionID"_sampleHeader.h
+
 /static/QuestionData/css
                     /js
                     /image
-/home/green/OJ_answer/"QuestionID"_input.txt
-                      "QuestionID"_output.txt
 ```
 
 # API
@@ -22,7 +31,7 @@ request:
     "action" : "questionLib",
     "questionNum" : "20",//there are twenty question in one page. 
     "questionPage" : ex"1",//1 means select the top 20 question
-    "sequence" :"id"|| "target"||"degree"||"percentagePassing"||"respondent"||"inputTime",
+    "sequence" :"id"|| "target"||"levelNum"||"percentagePassing"||"respondent"||"inputTime",//levelNum: degree
     "sortDesc":"false"||"true",//false:升序,true:降序
     "target" : "tag"||"loop"||"if"||"array"||"string"||"pointer"||"binaryTree"||"sort"||"dp",//tag:沒有過濾的資料
     "degree" : "degree"||"easy"||"medium"||"hard",//degree:沒有過濾的資料
@@ -192,3 +201,13 @@ response:
     * student problem: difficulty filter
     * fix: sort-bug(percentage passing)
     * fix: difficulty diff
+  * v1.14 2020/01/05
+    * update api
+    * change: path
+    * fix: problem html: qID
+    * fix: sort-bug(respondent)
+    * fix: sort degree (medium & hard)
+    * fix: target filter(wrong request)
+    * create problem verify: check sampleMain tdInput tdOutput
+    * bug: pdf error
+    * bug: navbar error

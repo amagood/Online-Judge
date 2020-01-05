@@ -1,4 +1,4 @@
-<!--20200104 
+<!--20200105 
     version 1 : questionLibObj, get tag list-->
 
 <!doctype html>
@@ -38,7 +38,7 @@
               src={% static "/QuestionData/image/home.svg" %} /> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href={% static "/static/teacherProblem.html" %} /><img
+            <a class="nav-link" v-if="whichShow === 'teacher'" href={% static "/QuestionData/teacherProblem.html" %} /><img
               class="navbarimage" src={% static "/QuestionData/image/file.svg" %} /> Problems</a>
             <a class="nav-link" v-else-if="whichShow === 'student'"
               href={% static "/QuestionData/studentProblem.html" %} /><img class="navbarimage"
@@ -116,6 +116,9 @@
           <!--problemLink-->
           <template v-slot:cell(title)="data">
             <a :href="data.item.link">${ data.item.title }</a>
+          </template>
+          <template v-slot:cell(levelNum)="data">
+            ${ data.item.degree } 
           </template>
           <template v-slot:cell(percentagePassing)="data">
             ${ data.item.percentagePassing } %
