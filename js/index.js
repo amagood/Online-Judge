@@ -7,9 +7,10 @@ var app1 = new Vue({
 		isShow : false, //題目庫顯示
 		logIsShow : true, //登入頁顯示
 		whichShow : "",
+		isLogin : false, //是否登入
 	},
 	created() {
-		this.test()
+		//this.test()
 		this.chooseProblems()
 		this.canLogin()
 	},
@@ -38,10 +39,11 @@ var app1 = new Vue({
 			self.userid = localStorage.getItem("userName")
 			if(self.userid){
 				self.logIsShow = false
+				self.isLogin = true
 			}
 		},
 		clearStorage(){
-			localStorage.clear();
+			localStorage.clear()
 		},
 	},
 })

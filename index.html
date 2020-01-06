@@ -1,7 +1,7 @@
 <!-- 
   2019/12/29
-  version1.5
-    1.註冊頁面一直都顯示
+  version1.6
+    1.未登入不會顯示logout
  -->
 <!--
   這裡是首頁
@@ -66,7 +66,7 @@
               <a class="nav-link" v-show="logIsShow" href="../login"/><img class="navbarimage" src=" {% static "/static/image/sign-in-alt-solid.svg" %} "/> Login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" v-on:click="clearStorage()" href="../"/><img class="navbarimage" src=" {% static "/static/image/sign-out-alt-solid.svg" %} "/> Logout</a>
+                <a class="nav-link" v-show="isLogin" v-on:click="clearStorage()" href="../"/><img class="navbarimage" src=" {% static "/static/image/sign-out-alt-solid.svg" %} "/> Logout</a>
             </li>
           </ul>
         </div>
