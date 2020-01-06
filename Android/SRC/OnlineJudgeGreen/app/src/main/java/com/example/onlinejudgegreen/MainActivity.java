@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(webview);
         webview.setWebViewClient(new WebViewClient());
-        webview.loadUrl("http://ntnugreenoj.duckdns.org/login/");
+        webview.loadUrl("http://ntnugreenoj.duckdns.org/");
     }
 
 
