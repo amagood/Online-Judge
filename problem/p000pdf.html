@@ -1,4 +1,4 @@
-<!-- 20191231 -->
+<!-- 20200106 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,32 +18,32 @@
   <!-- navbar -->
   <div id="app1">
     <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href="/index"><img class="img-home" src= {% static "/IDE/image/logo.png" %} /></a>
+      <a class="navbar-brand" href="/"><img class="img-home" src= {% static "/IDE/image/logo.png" %} /></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/index"><img class="navbarimage" src= {% static "/IDE/image/home.svg" %}/> Home</a>
+            <a class="nav-link" href="/"><img class="navbarimage" src= {% static "/IDE/image/home.svg" %}/> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href="/teacherProblem"><img class="navbarimage" src= {% static "/IDE/image/file.svg" %} /> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href="/studentProblem"><img class="navbarimage" src= {% static "/IDE/image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href="/QuestionLibrary/teacherProblem.html"><img class="navbarimage" src= {% static "/IDE/image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href="/QuestionLibrary/studentProblem.html"><img class="navbarimage" src= {% static "/IDE/image/file.svg" %} /> Problems</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-show="isShow" href="/ranking"><img class="navbarimage" src= {% static "/IDE/image/list-ordered.svg" %} /> Ranking</a>
+            <a class="nav-link" v-show="isShow" href="/Rank"><img class="navbarimage" src= {% static "/IDE/image/list-ordered.svg" %} /> Ranking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-show="isShow" href="/comments"><img class="navbarimage" src= {% static "/IDE/image/comments-regular.svg" %} /> Comments</a>
+            <a class="nav-link" v-show="isShow" href="/message"><img class="navbarimage" src= {% static "/IDE/image/comments-regular.svg" %} /> Comments</a>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <span id="username" v-show="isShow">Hello! ${ name } &nbsp</span>
+            <span id="username" v-show="isShow">Hello! ${ name } &nbsp;</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-on:click="clearStorage()" href="/index"><img class="navbarimage" src= {% static "/IDE/image/sign-out-alt-solid.svg" %}/> Logout</a>
+            <a class="nav-link" v-on:click="clearStorage()" href="/"><img class="navbarimage" src= {% static "/IDE/image/sign-out-alt-solid.svg" %}/> Logout</a>
           </li>
         </ul>
       </div>

@@ -66,6 +66,8 @@ p000_local.html for local test
 }
 ```
 ----
+### 2020/01/06 Navbar href
+
 ### 2019/12/31 Navbar, tooltip, main file direction
 	html css js image
 	navbar update: front-end-charlie532 2019/12/30 comments,rank移除註冊和登入按鈕, 修正rank,index路徑連結
