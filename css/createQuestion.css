@@ -7,11 +7,37 @@
   grayBorderColor: #e9eaec
 */
 .navbarset{
-  background-color: #56fd96;
+  background-color: #CCFF99;
+}
+
+p{
+  font-size: 16px;
+}
+
+ul a {
+  color: #42b983;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul a:hover {
+  color: #42b983;
+  text-decoration: none;
 }
 
 .navbarimage{
   width: 23px;
+  height:40px;
+  max-width:100%;
+  max-height:100%;
+}
+
+.img-home{
+  width:130px;
+  height:40px;
+  max-width:100%;
+  max-height:100%;
 }
 
 .attendButton{
@@ -39,7 +65,7 @@
 
 #username{
   font-size: 20px;
-  line-height: 42px;
+  line-height: 52px;
 }
 
 ::selection {

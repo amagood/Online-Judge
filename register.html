@@ -7,13 +7,13 @@
     <link rel='stylesheet' href='http://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
     <link rel='stylesheet' href='http://unpkg.com/bootstrap-vue@2.0.2/dist/bootstrap-vue.css'>
     {% load static %}
-    <link rel="stylesheet" href= {% static "css/register.css" %} >
+    <link rel="stylesheet" href={% static "css/register.css" %} >
   </head>
 
   <body>
         <!-- navbar -->
   <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
-      <a class="navbar-brand" href="../">GreenTeam</a>
+      <a class="navbar-brand" href="../"><img class="img-home" src={% static "image/logo.png " %}/></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

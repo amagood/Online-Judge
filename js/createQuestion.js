@@ -82,7 +82,7 @@ var navapp = new Vue({
 //NAV BAR END
 
 
-function inputPDF()
+/*function inputPDF()
 {
   questionObj.PDF='';
   var file = document.getElementById("id_pdf").files[0];
@@ -104,7 +104,7 @@ function inputPDF()
       questionObj.PDF=btoa(read.result);
     }
   }
-}
+}*/
 
 
 function inputExampleMain()
@@ -268,6 +268,7 @@ new Vue({
   },
   methods: {
     submitQ() {
+      descriptionType=0;
       //console.log(PDFin);
       //console.log(testMode);
       if(descriptionType==1)
@@ -447,8 +448,8 @@ selectField.onchange = function() {
       document.getElementById("id_selectFileFillIn").innerHTML = '<input name="exampleFillIn" type="file" id="id_exampleFillIn" autocomplete="off" value="" required="required" accept = ".py" style="width:765px" oninput="inputExampleFillIn()">';
   }
 }
-
-var selectDescription = document.getElementById("selectDescriptionType");
+/*
+<var selectDescription = document.getElementById("selectDescriptionType");
 
 selectDescription.onchange = function() {
   if (document.getElementById("selectDescriptionType").selectedIndex == "0") {
@@ -468,7 +469,7 @@ selectDescription.onchange = function() {
       document.getElementById("textType").innerHTML = '';
       document.getElementById("textType2").innerHTML = '';
   }
-}
+}*/
 
 
 
