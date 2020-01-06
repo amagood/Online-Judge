@@ -23,8 +23,8 @@
             <a class="nav-link" href="../../"><img class="navbarimage" src= {% static "image/home.svg" %} /> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-if="whichShow === 'teacher'" href="../teacherProblem/"><img class="navbarimage" src= {% static "image/file.svg" %} /> Problems</a>
-            <a class="nav-link" v-else-if="whichShow === 'student'" href="../studentProblem/"><img class="navbarimage" src= {% static "image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"><img class="navbarimage" src= {% static "image/file.svg" %} /> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"><img class="navbarimage" src= {% static "image/file.svg" %} /> Problems</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="../../Rank/"><img class="navbarimage" src= {% static "image/list-ordered.svg" %} /> Ranking</a>
