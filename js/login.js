@@ -28,8 +28,7 @@ var app1 = new Vue({
       document.getElementById("loginBtn").setAttribute("disabled", "disabled");
       app1.showMsg = false;
       if (document.getElementById("inputAcct").validity.valid
-         && document.getElementById("inputPw").validity.valid)
-      {
+         && document.getElementById("inputPw").validity.valid) {
         app1.showSpinner = true;
         loginObj.account  = document.getElementById("inputAcct").value;
         loginObj.password = document.getElementById("inputPw").value;
@@ -40,14 +39,11 @@ var app1 = new Vue({
             if (testMode) tmpObj = JSON.parse(response.data.freeform);
             else tmpObj = response.data;
             console.log(tmpObj);
-            if (tmpObj.stats == "success")
-            {
+            if (tmpObj.stats == "success") {
               app1.msg = "Success!"
               app1.showMsg = true;
               setTimeout(loginSuccess, 500);
-            }
-            else
-            {
+            } else {
               app1.msg = "Account and password are incorrect!"
               app1.showMsg = true;
             }
@@ -58,9 +54,7 @@ var app1 = new Vue({
             app1.showMsg = true;
             console.log(error);
           })
-      }
-      else
-      {
+      } else {
         document.getElementById("loginBtn").className = "btn btn-dark btn-lg rounded-pill animated shake";
         app1.msg = "Input is invalid!"
         app1.showMsg = true;
@@ -69,26 +63,20 @@ var app1 = new Vue({
     },
     ValidateAcct() {
       var el = document.getElementById("inputAcct");
-      if (el.validity.valid)
-      {
+      if (el.validity.valid) {
         el.parentElement.style.borderColor = "#e6e6e6";
         this.focusAcctClass = "inputFocusGreen";
-      }
-      else
-      {
+      } else {
         el.parentElement.style.borderColor = "red";
         this.focusAcctClass = "inputFocusRed";
       }
     },
     ValidatePw() {
       var el = document.getElementById("inputPw");
-      if (el.validity.valid)
-      {
+      if (el.validity.valid) {
         el.parentElement.style.borderColor = "#e6e6e6";
         this.focusPwClass = "inputFocusGreen";
-      }
-      else
-      {
+      } else {
         el.parentElement.style.borderColor = "red";
         this.focusPwClass = "inputFocusRed";
       }
