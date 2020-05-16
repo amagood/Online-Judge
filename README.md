@@ -1,2 +1,2 @@
 # Online-Judge
-![snapshot](https://imgur.com/aLPF6Re)
+![snapshot](https://i.imgur.com/aLPF6Re.png)
