@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
+    />
+    <!--連接CSS-->
+    <link rel="stylesheet" type="text/css" href="css/ranking.css"/>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!--axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--vue.js-->
+    <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
+    <!--polyfill-->
+    <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
+    <title>GreenTeam Online-Judge</title>
+  </head>
+  <body>
+    <!--navbar, 格式設定在ranking.css檔中-->
+    <nav id="navapp" class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+      <a class="navbar-brand" href="index_local.html"/><img class="img-home" src="image/logo.png"/></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index_local.html"/><img class="navbarimage" src="image/home.svg"/> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-if="whichShow === 'teacher'" href="teacherProblem.html"/><img class="navbarimage" src="image/file.svg"/> Problems</a>
+            <a class="nav-link" v-else-if="whichShow === 'student'" href="studentProblem.html"/><img class="navbarimage" src="image/file.svg"/> Problems</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" v-show="isShow" href="ranking_local.html"/><img class="navbarimage" src="image/list-ordered.svg"/> Ranking<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-show="isShow" href="comment_local.html"/><img class="navbarimage" src="image/comments-regular.svg"/> Comments</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <span id="username" v-show="isShow">Hello! ${ name } &nbsp</span>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" v-on:click="clearStorage()" href="index_local.html"/><img class="navbarimage" src="image/sign-out-alt-solid.svg"/> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="app1">
+      <!--上方功能表-->
+      <div class="single-line" >
+        <div class="yes-or-no">
+          <button type="button" v-show="isShow" v-on:click="sendAttendMSG" class="btn btn-outline-success attendButton">
+            Attend Rank
+          </button>
+          <button type="button" v-show="isShow" v-on:click="sendNotAttendMSG" class="btn btn-outline-success attendButton">
+            Not Attend
+          </button>
+        </div>
+        <div class="input-area">
+          <div class="col1">
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">class</label>
+              <select v-model="selectedClass" class="form-control">
+                <option :selectedClass="classSet.Class" v-for="classSet in classSet">${ classSet.Class }</option>
+              </select>
+            </div>
+          </div>
+          <div class="col2">
+            <div id="search-btn" class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">SEARCH</span>
+              </div>
+              <input type="text" v-model="qsNumber" v-on:keyup.enter="createRankList" class="form-control" maxlength="10"  placeholder="question ID" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <div class="col3">
+            <button @click="createRankList" type="button" class="btn btn-outline-success">
+              <img class="search-img" src="image/search-solid.svg"/>
+            </button>
+					</div>
+					<!-- 顯示更新時間 -->
+          <!-- <div class="alert alert-success fade show" role="alert">
+            Refresh Time : <strong>${ clock }</strong>
+          </div> -->
+        </div>
+      </div>
+      <div class="search-block">
+        <span v-show="isSearch" class="search-rst" > Search Result: &nbsp ${ enterQSNum }</span>
+      </div>
+      <!--排名表區域-->
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Rate</th>
+              <th scope="col">AC/Commit</th>
+              <th scope="col">Time used</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template v-for="user in userdata">
+              <tr>
+                <th scope="row">${ user.rank }</th>
+                <td>${ user.name }</td>
+                <td>${ user.passRate } %</td>
+                <td>${ user.ACTimes } / ${ user.commitTimes }</td>
+                <td>${ user.passTime }s</td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!--js-->
+    <script src="js/ranking.js"/></script>
+  </body>
+</html>

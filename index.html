@@ -1,0 +1,127 @@
+<!-- 
+  2019/12/29
+  version1.4
+    1.登入才顯示名稱
+ -->
+<!--
+  這裡是首頁
+  圖片都放在image資料夾中
+-->
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <!--連接index.css-->
+    <link rel = "stylesheet" type="text/css" href=" {% static "/static/message/css/index.css" %} "/>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!--axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--vue.js-->
+    <script src='http://unpkg.com/vue@2.6.10/dist/vue.js'></script>
+    <!--polyfill-->
+    <script src='http://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
+    <title>GreenTeam Online-Judge</title>
+  </head>
+  <body>
+    <div id="app1">
+      <!--網頁上方的navbar, 格式設定在index.css檔中-->
+      <nav class="navbar navbar-expand-lg navbar-light navbarset" style="border-bottom: 4px solid MediumSeaGreen">
+        <a class="navbar-brand" href=" {% static "/static/index.html" %} "/><img class="img-home" src=" {% static "/static/image/logo.png" %} "/></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href=" {% static "/static/index.html" %} "/><img class="navbarimage" src=" {% static "/static/image/home.svg" %} "/> Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-if="whichShow === 'teacher'" href=" {% static "/static/teacherProblem.html" %} "/><img class="navbarimage" src=" {% static "/static/image/file.svg" %} "/> Problems</a>
+              <a class="nav-link" v-else-if="whichShow === 'student'" href=" {% static "/static/studentProblem.html" %} "/><img class="navbarimage" src=" {% static "/static/image/file.svg" %} "/> Problems</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-show="isShow" href="../Rank"/><img class="navbarimage" src=" {% static "/static/image/list-ordered.svg" %} "/> Ranking</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-show="isShow" href="../message"/><img class="navbarimage" src=" {% static "/static/image/comments-regular.svg" %} "/> Comments</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <span id="username" v-show="isShow">Hello! ${ name } &nbsp</span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-show="regIsShow" href="../register"/><img class="navbarimage" src=" {% static "/static/image/address-book-regular.svg" %} "/> Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-show="logIsShow" href="../login"/><img class="navbarimage" src=" {% static "/static/image/sign-in-alt-solid.svg" %} "/> Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" v-on:click="clearStorage()" href=" {% static "/static/index.html" %} "/><img class="navbarimage" src=" {% static "/static/image/sign-out-alt-solid.svg" %} "/> Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!--內文區域-->
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1>GreenTeam Online-Judge System</h1>      
+          <p><strong>${ name }</strong>, 歡迎來到綠隊的線上作答環境!</p>
+          <p>如果你是老師, 你可以在這邊盡情出題!</p>
+          <p>如果你是學生, 則可以在這邊享受解題的樂趣!</p>
+          <p>還在等甚麼趕緊註冊帳號開始吧!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- features of code editor -->
+    <div class="container">
+      <h3>Features of code editor</h3>
+      <ul style="line-height: 2;">
+        <li>live autocompletion</li>
+        <li>automatic indent and outdent</li>
+        <li>highlight matching parentheses</li>
+        <li>highlight selected word</li>
+        <li>multiple cursors and selections</li>
+        <li>indent guides</li>
+        <li>code folding</li>
+        <li>overscroll</li>
+        <li>search (regular expression, case sensitive, whole word, replace)</li>
+      </ul>
+      <h3>Shortcuts of code editor</h3>
+      <ul style="line-height: 2;">
+        <a href="https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts"><li>Shortcuts</li></a>
+        <li><span class="shortcutKey">Ctrl-+/=</span><span>increase font-size</span></li>
+        <li><span class="shortcutKey">Ctrl--</span><span>decrease font-size</span></li>
+        <li><span class="shortcutKey">F11</span><span>toggle FullScreen</span></li>
+        <li><span class="shortcutKey">Ctrl-/</span><span>comment or uncomment</span></li>
+        <li><span class="shortcutKey">Ctrl-D</span><span>remove line</span></li>
+        <li><span class="shortcutKey">Alt-Delete/Backspace</span><span>Remove to line end/start</span></li>
+        <li><span class="shortcutKey">Ctrl-Delete/Backspace</span><span>Remove word right/left</span></li>
+        <li><span class="shortcutKey">Ctrl-L</span><span>Go to line</span></li>
+        <li><span class="shortcutKey">Ctrl-Down/Up</span><span>Scroll line down/up</span></li>
+      </ul>
+      <h3>Multiple files</h3>
+      <ul style="line-height: 2;">
+        <li><span class="fileTypeTitle">Main</span>- Please include header files: code1.h, code2.h ... in cpp/c. Import code1.py, code2.py ... in python.</li>
+        <li><span class="fileTypeTitle">Files</span>- Please named as code1.cpp/c/py, code2.cpp/c/py, code3.cpp/c/py ... up to 10.</li>
+        <li><span class="fileTypeTitle">Header Files</span>- Please named as code1.h, code2.h, code3.h ... up to 10.</li>
+      </ul>
+    </div>
+
+    <div style="height: 30vh;"></div>
+
+    <!--js-->
+    <script src=" {% static "/static/message/js/index.js" %} "/></script>
+  </body>
+</html>
